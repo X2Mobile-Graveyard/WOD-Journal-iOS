@@ -1,0 +1,535 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE7B1E67185500A0F969 /* AppDelegate.swift */; };
+		4325BE7E1E67185500A0F969 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE7D1E67185500A0F969 /* ViewController.swift */; };
+		4325BE811E67185500A0F969 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4325BE7F1E67185500A0F969 /* Main.storyboard */; };
+		4325BE831E67185500A0F969 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4325BE821E67185500A0F969 /* Assets.xcassets */; };
+		4325BE861E67185500A0F969 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4325BE841E67185500A0F969 /* LaunchScreen.storyboard */; };
+		4325BE911E67185500A0F969 /* WodjarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE901E67185500A0F969 /* WodjarTests.swift */; };
+		4325BE9C1E67185500A0F969 /* WodjarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE9B1E67185500A0F969 /* WodjarUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4325BE8D1E67185500A0F969 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4325BE701E67185500A0F969 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4325BE771E67185500A0F969;
+			remoteInfo = Wodjar;
+		};
+		4325BE981E67185500A0F969 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4325BE701E67185500A0F969 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4325BE771E67185500A0F969;
+			remoteInfo = Wodjar;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4325BE781E67185500A0F969 /* Wodjar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wodjar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4325BE7B1E67185500A0F969 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4325BE7D1E67185500A0F969 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4325BE801E67185500A0F969 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4325BE821E67185500A0F969 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4325BE851E67185500A0F969 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4325BE871E67185500A0F969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4325BE8C1E67185500A0F969 /* WodjarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WodjarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4325BE901E67185500A0F969 /* WodjarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WodjarTests.swift; sourceTree = "<group>"; };
+		4325BE921E67185500A0F969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4325BE971E67185500A0F969 /* WodjarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WodjarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4325BE9B1E67185500A0F969 /* WodjarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WodjarUITests.swift; sourceTree = "<group>"; };
+		4325BE9D1E67185500A0F969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4325BE751E67185500A0F969 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4325BE891E67185500A0F969 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4325BE941E67185500A0F969 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4325BE6F1E67185500A0F969 = {
+			isa = PBXGroup;
+			children = (
+				4325BE7A1E67185500A0F969 /* Wodjar */,
+				4325BE8F1E67185500A0F969 /* WodjarTests */,
+				4325BE9A1E67185500A0F969 /* WodjarUITests */,
+				4325BE791E67185500A0F969 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4325BE791E67185500A0F969 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4325BE781E67185500A0F969 /* Wodjar.app */,
+				4325BE8C1E67185500A0F969 /* WodjarTests.xctest */,
+				4325BE971E67185500A0F969 /* WodjarUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4325BE7A1E67185500A0F969 /* Wodjar */ = {
+			isa = PBXGroup;
+			children = (
+				4325BE7B1E67185500A0F969 /* AppDelegate.swift */,
+				4325BE7D1E67185500A0F969 /* ViewController.swift */,
+				4325BE7F1E67185500A0F969 /* Main.storyboard */,
+				4325BE821E67185500A0F969 /* Assets.xcassets */,
+				4325BE841E67185500A0F969 /* LaunchScreen.storyboard */,
+				4325BE871E67185500A0F969 /* Info.plist */,
+			);
+			path = Wodjar;
+			sourceTree = "<group>";
+		};
+		4325BE8F1E67185500A0F969 /* WodjarTests */ = {
+			isa = PBXGroup;
+			children = (
+				4325BE901E67185500A0F969 /* WodjarTests.swift */,
+				4325BE921E67185500A0F969 /* Info.plist */,
+			);
+			path = WodjarTests;
+			sourceTree = "<group>";
+		};
+		4325BE9A1E67185500A0F969 /* WodjarUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4325BE9B1E67185500A0F969 /* WodjarUITests.swift */,
+				4325BE9D1E67185500A0F969 /* Info.plist */,
+			);
+			path = WodjarUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4325BE771E67185500A0F969 /* Wodjar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4325BEA01E67185500A0F969 /* Build configuration list for PBXNativeTarget "Wodjar" */;
+			buildPhases = (
+				4325BE741E67185500A0F969 /* Sources */,
+				4325BE751E67185500A0F969 /* Frameworks */,
+				4325BE761E67185500A0F969 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Wodjar;
+			productName = Wodjar;
+			productReference = 4325BE781E67185500A0F969 /* Wodjar.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4325BE8B1E67185500A0F969 /* WodjarTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4325BEA31E67185500A0F969 /* Build configuration list for PBXNativeTarget "WodjarTests" */;
+			buildPhases = (
+				4325BE881E67185500A0F969 /* Sources */,
+				4325BE891E67185500A0F969 /* Frameworks */,
+				4325BE8A1E67185500A0F969 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4325BE8E1E67185500A0F969 /* PBXTargetDependency */,
+			);
+			name = WodjarTests;
+			productName = WodjarTests;
+			productReference = 4325BE8C1E67185500A0F969 /* WodjarTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4325BE961E67185500A0F969 /* WodjarUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4325BEA61E67185500A0F969 /* Build configuration list for PBXNativeTarget "WodjarUITests" */;
+			buildPhases = (
+				4325BE931E67185500A0F969 /* Sources */,
+				4325BE941E67185500A0F969 /* Frameworks */,
+				4325BE951E67185500A0F969 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4325BE991E67185500A0F969 /* PBXTargetDependency */,
+			);
+			name = WodjarUITests;
+			productName = WodjarUITests;
+			productReference = 4325BE971E67185500A0F969 /* WodjarUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4325BE701E67185500A0F969 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = X2Mobile;
+				TargetAttributes = {
+					4325BE771E67185500A0F969 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = 39446JG6PB;
+						ProvisioningStyle = Automatic;
+					};
+					4325BE8B1E67185500A0F969 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = 39446JG6PB;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 4325BE771E67185500A0F969;
+					};
+					4325BE961E67185500A0F969 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = 39446JG6PB;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 4325BE771E67185500A0F969;
+					};
+				};
+			};
+			buildConfigurationList = 4325BE731E67185500A0F969 /* Build configuration list for PBXProject "Wodjar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4325BE6F1E67185500A0F969;
+			productRefGroup = 4325BE791E67185500A0F969 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4325BE771E67185500A0F969 /* Wodjar */,
+				4325BE8B1E67185500A0F969 /* WodjarTests */,
+				4325BE961E67185500A0F969 /* WodjarUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4325BE761E67185500A0F969 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4325BE861E67185500A0F969 /* LaunchScreen.storyboard in Resources */,
+				4325BE831E67185500A0F969 /* Assets.xcassets in Resources */,
+				4325BE811E67185500A0F969 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4325BE8A1E67185500A0F969 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4325BE951E67185500A0F969 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4325BE741E67185500A0F969 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4325BE7E1E67185500A0F969 /* ViewController.swift in Sources */,
+				4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4325BE881E67185500A0F969 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4325BE911E67185500A0F969 /* WodjarTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4325BE931E67185500A0F969 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4325BE9C1E67185500A0F969 /* WodjarUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4325BE8E1E67185500A0F969 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4325BE771E67185500A0F969 /* Wodjar */;
+			targetProxy = 4325BE8D1E67185500A0F969 /* PBXContainerItemProxy */;
+		};
+		4325BE991E67185500A0F969 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4325BE771E67185500A0F969 /* Wodjar */;
+			targetProxy = 4325BE981E67185500A0F969 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4325BE7F1E67185500A0F969 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4325BE801E67185500A0F969 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4325BE841E67185500A0F969 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4325BE851E67185500A0F969 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4325BE9E1E67185500A0F969 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4325BE9F1E67185500A0F969 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4325BEA11E67185500A0F969 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 39446JG6PB;
+				INFOPLIST_FILE = Wodjar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.X2Mobille.Wodjar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		4325BEA21E67185500A0F969 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 39446JG6PB;
+				INFOPLIST_FILE = Wodjar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.X2Mobille.Wodjar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		4325BEA41E67185500A0F969 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 39446JG6PB;
+				INFOPLIST_FILE = WodjarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.X2Mobille.WodjarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wodjar.app/Wodjar";
+			};
+			name = Debug;
+		};
+		4325BEA51E67185500A0F969 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 39446JG6PB;
+				INFOPLIST_FILE = WodjarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.X2Mobille.WodjarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wodjar.app/Wodjar";
+			};
+			name = Release;
+		};
+		4325BEA71E67185500A0F969 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 39446JG6PB;
+				INFOPLIST_FILE = WodjarUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.X2Mobille.WodjarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Wodjar;
+			};
+			name = Debug;
+		};
+		4325BEA81E67185500A0F969 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 39446JG6PB;
+				INFOPLIST_FILE = WodjarUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.X2Mobille.WodjarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Wodjar;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4325BE731E67185500A0F969 /* Build configuration list for PBXProject "Wodjar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4325BE9E1E67185500A0F969 /* Debug */,
+				4325BE9F1E67185500A0F969 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4325BEA01E67185500A0F969 /* Build configuration list for PBXNativeTarget "Wodjar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4325BEA11E67185500A0F969 /* Debug */,
+				4325BEA21E67185500A0F969 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4325BEA31E67185500A0F969 /* Build configuration list for PBXNativeTarget "WodjarTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4325BEA41E67185500A0F969 /* Debug */,
+				4325BEA51E67185500A0F969 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4325BEA61E67185500A0F969 /* Build configuration list for PBXNativeTarget "WodjarUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4325BEA71E67185500A0F969 /* Debug */,
+				4325BEA81E67185500A0F969 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4325BE701E67185500A0F969 /* Project object */;
+}
