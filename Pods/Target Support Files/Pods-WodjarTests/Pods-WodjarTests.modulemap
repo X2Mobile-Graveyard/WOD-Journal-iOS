@@ -1,0 +1,6 @@
+framework module Pods_WodjarTests {
+  umbrella header "Pods-WodjarTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -8,12 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE7B1E67185500A0F969 /* AppDelegate.swift */; };
-		4325BE7E1E67185500A0F969 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE7D1E67185500A0F969 /* ViewController.swift */; };
 		4325BE811E67185500A0F969 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4325BE7F1E67185500A0F969 /* Main.storyboard */; };
 		4325BE831E67185500A0F969 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4325BE821E67185500A0F969 /* Assets.xcassets */; };
 		4325BE861E67185500A0F969 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4325BE841E67185500A0F969 /* LaunchScreen.storyboard */; };
 		4325BE911E67185500A0F969 /* WodjarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE901E67185500A0F969 /* WodjarTests.swift */; };
 		4325BE9C1E67185500A0F969 /* WodjarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE9B1E67185500A0F969 /* WodjarUITests.swift */; };
+		7976EB68A7A18DB547AE3C58 /* Pods_Wodjar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD1E7DC81B0E81B25A0CA56 /* Pods_Wodjar.framework */; };
+		AE5985C73D8B16D340D78CDF /* Pods_WodjarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE88FC34463D554CAB60CE0F /* Pods_WodjarTests.framework */; };
+		C45451E5AE3974B6E620C067 /* Pods_WodjarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */; };
+		D310E5EB1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EA1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift */; };
+		D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */; };
+		D310E5F01E76C7C000AD6B74 /* WodJurnalNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EF1E76C7C000AD6B74 /* WodJurnalNavigationController.swift */; };
+		D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5F11E76C7DA00AD6B74 /* WodJurnalTabBarController.swift */; };
+		D3E695121E7936050060D9D2 /* WODTypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695111E7936050060D9D2 /* WODTypesTableViewController.swift */; };
+		D3E695141E7936430060D9D2 /* WODTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695131E7936430060D9D2 /* WODTypeTableViewCell.swift */; };
+		D3E695161E7936880060D9D2 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695151E7936880060D9D2 /* Workout.swift */; };
+		D3E695181E7937C00060D9D2 /* WorkoutList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695171E7937C00060D9D2 /* WorkoutList.swift */; };
+		D3E9C7C11E6DCDDF007E8296 /* PersonalRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E9C7C01E6DCDDF007E8296 /* PersonalRecordViewController.swift */; };
+		D3EB88F71E7050C80028F28A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB88F61E7050C80028F28A /* LoginViewController.swift */; };
+		D3EB88FA1E7061430028F28A /* DateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB88F91E7061430028F28A /* DateTextField.swift */; };
+		D3EB88FD1E7193CD0028F28A /* PersonalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB88FC1E7193CD0028F28A /* PersonalRecord.swift */; };
+		D3EB89031E729A910028F28A /* PersonalRecordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89021E729A910028F28A /* PersonalRecordService.swift */; };
+		D3EB89071E729AE30028F28A /* PersonalRecordRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89061E729AE30028F28A /* PersonalRecordRemoteService.swift */; };
+		D3EB890A1E729FD00028F28A /* PersonalRecordViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89091E729FD00028F28A /* PersonalRecordViewController+UI.swift */; };
+		D3EB890C1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB890B1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift */; };
+		D3EB890E1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB890D1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift */; };
+		D3EB89131E72E00E0028F28A /* PersonalRecordsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89121E72E00E0028F28A /* PersonalRecordsListViewController.swift */; };
+		D3EB89151E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89141E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift */; };
+		D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89161E72EF9D0028F28A /* PersonalRecordType.swift */; };
+		D3FD71411E6E00730047492D /* FullSizeImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FD71401E6E00730047492D /* FullSizeImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +57,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26030A9548D7EEFFD71BEFA3 /* Pods-Wodjar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wodjar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wodjar/Pods-Wodjar.debug.xcconfig"; sourceTree = "<group>"; };
+		3BD1E7DC81B0E81B25A0CA56 /* Pods_Wodjar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wodjar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4325BE781E67185500A0F969 /* Wodjar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wodjar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4325BE7B1E67185500A0F969 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4325BE7D1E67185500A0F969 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4325BE801E67185500A0F969 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4325BE821E67185500A0F969 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4325BE851E67185500A0F969 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +71,35 @@
 		4325BE971E67185500A0F969 /* WodjarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WodjarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4325BE9B1E67185500A0F969 /* WodjarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WodjarUITests.swift; sourceTree = "<group>"; };
 		4325BE9D1E67185500A0F969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		436736931E686C0E001659D7 /* Wodjar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Wodjar.entitlements; sourceTree = "<group>"; };
+		6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WodjarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98340F3818D9B7BA367DBDF6 /* Pods-WodjarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarUITests/Pods-WodjarUITests.release.xcconfig"; sourceTree = "<group>"; };
+		AE88FC34463D554CAB60CE0F /* Pods_WodjarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WodjarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCE78EDCCB4B31E473D07182 /* Pods-WodjarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests.release.xcconfig"; sourceTree = "<group>"; };
+		C1220ABC4B8853E1FB02BD04 /* Pods-WodjarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D310E5EA1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordDetailsListViewController.swift; sourceTree = "<group>"; };
+		D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordDetailTableViewCell.swift; sourceTree = "<group>"; };
+		D310E5EF1E76C7C000AD6B74 /* WodJurnalNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WodJurnalNavigationController.swift; sourceTree = "<group>"; };
+		D310E5F11E76C7DA00AD6B74 /* WodJurnalTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WodJurnalTabBarController.swift; sourceTree = "<group>"; };
+		D3E695111E7936050060D9D2 /* WODTypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypesTableViewController.swift; sourceTree = "<group>"; };
+		D3E695131E7936430060D9D2 /* WODTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypeTableViewCell.swift; sourceTree = "<group>"; };
+		D3E695151E7936880060D9D2 /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		D3E695171E7937C00060D9D2 /* WorkoutList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutList.swift; sourceTree = "<group>"; };
+		D3E9C7C01E6DCDDF007E8296 /* PersonalRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordViewController.swift; sourceTree = "<group>"; };
+		D3EB88F61E7050C80028F28A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D3EB88F91E7061430028F28A /* DateTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTextField.swift; sourceTree = "<group>"; };
+		D3EB88FC1E7193CD0028F28A /* PersonalRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecord.swift; sourceTree = "<group>"; };
+		D3EB89021E729A910028F28A /* PersonalRecordService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordService.swift; sourceTree = "<group>"; };
+		D3EB89061E729AE30028F28A /* PersonalRecordRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordRemoteService.swift; sourceTree = "<group>"; };
+		D3EB89091E729FD00028F28A /* PersonalRecordViewController+UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonalRecordViewController+UI.swift"; sourceTree = "<group>"; };
+		D3EB890B1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonalRecordViewController+ImagePicker.swift"; sourceTree = "<group>"; };
+		D3EB890D1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonalRecordViewController+TimePicker.swift"; sourceTree = "<group>"; };
+		D3EB89121E72E00E0028F28A /* PersonalRecordsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordsListViewController.swift; sourceTree = "<group>"; };
+		D3EB89141E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresonalRecordsListTableViewCell.swift; sourceTree = "<group>"; };
+		D3EB89161E72EF9D0028F28A /* PersonalRecordType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordType.swift; sourceTree = "<group>"; };
+		D3FD71401E6E00730047492D /* FullSizeImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullSizeImageViewController.swift; sourceTree = "<group>"; };
+		ECD97B1867118548A03461ED /* Pods-Wodjar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wodjar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wodjar/Pods-Wodjar.release.xcconfig"; sourceTree = "<group>"; };
+		F4F253F68B19059302B926F9 /* Pods-WodjarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarUITests/Pods-WodjarUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7976EB68A7A18DB547AE3C58 /* Pods_Wodjar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE5985C73D8B16D340D78CDF /* Pods_WodjarTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C45451E5AE3974B6E620C067 /* Pods_WodjarUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,10 +133,12 @@
 		4325BE6F1E67185500A0F969 = {
 			isa = PBXGroup;
 			children = (
-				4325BE7A1E67185500A0F969 /* Wodjar */,
+				4325BE7A1E67185500A0F969 /* WodJar */,
 				4325BE8F1E67185500A0F969 /* WodjarTests */,
 				4325BE9A1E67185500A0F969 /* WodjarUITests */,
 				4325BE791E67185500A0F969 /* Products */,
+				C9FB49C48F4DE12AAD481917 /* Pods */,
+				685B67A253EF450686AB3F73 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,16 +152,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4325BE7A1E67185500A0F969 /* Wodjar */ = {
+		4325BE7A1E67185500A0F969 /* WodJar */ = {
 			isa = PBXGroup;
 			children = (
+				436736931E686C0E001659D7 /* Wodjar.entitlements */,
+				D3EB89041E729ABB0028F28A /* RemoteServices */,
+				D3EB89011E729A590028F28A /* Services */,
+				D3EB88FB1E7193B30028F28A /* Models */,
+				D3EB88F81E7061230028F28A /* Views */,
+				4325BEA91E67190400A0F969 /* Controllers */,
 				4325BE7B1E67185500A0F969 /* AppDelegate.swift */,
-				4325BE7D1E67185500A0F969 /* ViewController.swift */,
 				4325BE7F1E67185500A0F969 /* Main.storyboard */,
 				4325BE821E67185500A0F969 /* Assets.xcassets */,
 				4325BE841E67185500A0F969 /* LaunchScreen.storyboard */,
 				4325BE871E67185500A0F969 /* Info.plist */,
 			);
+			name = WodJar;
 			path = Wodjar;
 			sourceTree = "<group>";
 		};
@@ -125,6 +189,149 @@
 			path = WodjarUITests;
 			sourceTree = "<group>";
 		};
+		4325BEA91E67190400A0F969 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D3E6950F1E7935B90060D9D2 /* WODs */,
+				D3E6950E1E7935A70060D9D2 /* PersonalRecord */,
+				D310E5EE1E76C78C00AD6B74 /* CustomBaseClasses */,
+				D3FD71401E6E00730047492D /* FullSizeImageViewController.swift */,
+				D3EB88F61E7050C80028F28A /* LoginViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		685B67A253EF450686AB3F73 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3BD1E7DC81B0E81B25A0CA56 /* Pods_Wodjar.framework */,
+				AE88FC34463D554CAB60CE0F /* Pods_WodjarTests.framework */,
+				6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C9FB49C48F4DE12AAD481917 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				26030A9548D7EEFFD71BEFA3 /* Pods-Wodjar.debug.xcconfig */,
+				ECD97B1867118548A03461ED /* Pods-Wodjar.release.xcconfig */,
+				C1220ABC4B8853E1FB02BD04 /* Pods-WodjarTests.debug.xcconfig */,
+				BCE78EDCCB4B31E473D07182 /* Pods-WodjarTests.release.xcconfig */,
+				F4F253F68B19059302B926F9 /* Pods-WodjarUITests.debug.xcconfig */,
+				98340F3818D9B7BA367DBDF6 /* Pods-WodjarUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D310E5E91E759EC300AD6B74 /* PersonalRecordsDetailsListController */ = {
+			isa = PBXGroup;
+			children = (
+				D310E5EA1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift */,
+				D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */,
+			);
+			name = PersonalRecordsDetailsListController;
+			sourceTree = "<group>";
+		};
+		D310E5EE1E76C78C00AD6B74 /* CustomBaseClasses */ = {
+			isa = PBXGroup;
+			children = (
+				D310E5EF1E76C7C000AD6B74 /* WodJurnalNavigationController.swift */,
+				D310E5F11E76C7DA00AD6B74 /* WodJurnalTabBarController.swift */,
+			);
+			name = CustomBaseClasses;
+			sourceTree = "<group>";
+		};
+		D3E6950E1E7935A70060D9D2 /* PersonalRecord */ = {
+			isa = PBXGroup;
+			children = (
+				D310E5E91E759EC300AD6B74 /* PersonalRecordsDetailsListController */,
+				D3EB890F1E72D0560028F28A /* PersonalRecordsListController */,
+				D3EB89081E729F8D0028F28A /* PersonalRecordViewController */,
+			);
+			name = PersonalRecord;
+			sourceTree = "<group>";
+		};
+		D3E6950F1E7935B90060D9D2 /* WODs */ = {
+			isa = PBXGroup;
+			children = (
+				D3E695101E7935CC0060D9D2 /* WODTypesController */,
+			);
+			name = WODs;
+			sourceTree = "<group>";
+		};
+		D3E695101E7935CC0060D9D2 /* WODTypesController */ = {
+			isa = PBXGroup;
+			children = (
+				D3E695111E7936050060D9D2 /* WODTypesTableViewController.swift */,
+				D3E695131E7936430060D9D2 /* WODTypeTableViewCell.swift */,
+			);
+			name = WODTypesController;
+			sourceTree = "<group>";
+		};
+		D3EB88F81E7061230028F28A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D3EB88F91E7061430028F28A /* DateTextField.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D3EB88FB1E7193B30028F28A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D3EB88FC1E7193CD0028F28A /* PersonalRecord.swift */,
+				D3EB89161E72EF9D0028F28A /* PersonalRecordType.swift */,
+				D3E695151E7936880060D9D2 /* Workout.swift */,
+				D3E695171E7937C00060D9D2 /* WorkoutList.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		D3EB89011E729A590028F28A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D3EB89021E729A910028F28A /* PersonalRecordService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		D3EB89041E729ABB0028F28A /* RemoteServices */ = {
+			isa = PBXGroup;
+			children = (
+				D3EB89051E729ACE0028F28A /* PersonalRecordRemoteServices */,
+			);
+			name = RemoteServices;
+			sourceTree = "<group>";
+		};
+		D3EB89051E729ACE0028F28A /* PersonalRecordRemoteServices */ = {
+			isa = PBXGroup;
+			children = (
+				D3EB89061E729AE30028F28A /* PersonalRecordRemoteService.swift */,
+			);
+			name = PersonalRecordRemoteServices;
+			sourceTree = "<group>";
+		};
+		D3EB89081E729F8D0028F28A /* PersonalRecordViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D3E9C7C01E6DCDDF007E8296 /* PersonalRecordViewController.swift */,
+				D3EB89091E729FD00028F28A /* PersonalRecordViewController+UI.swift */,
+				D3EB890B1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift */,
+				D3EB890D1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift */,
+			);
+			name = PersonalRecordViewController;
+			sourceTree = "<group>";
+		};
+		D3EB890F1E72D0560028F28A /* PersonalRecordsListController */ = {
+			isa = PBXGroup;
+			children = (
+				D3EB89121E72E00E0028F28A /* PersonalRecordsListViewController.swift */,
+				D3EB89141E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift */,
+			);
+			name = PersonalRecordsListController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +339,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4325BEA01E67185500A0F969 /* Build configuration list for PBXNativeTarget "Wodjar" */;
 			buildPhases = (
+				439F39E2FB6446EE32412C3B /* [CP] Check Pods Manifest.lock */,
 				4325BE741E67185500A0F969 /* Sources */,
 				4325BE751E67185500A0F969 /* Frameworks */,
 				4325BE761E67185500A0F969 /* Resources */,
+				781482562D9C555F95A0A6F4 /* [CP] Embed Pods Frameworks */,
+				F75B0DD46D766FC5CD8C829A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,9 +359,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4325BEA31E67185500A0F969 /* Build configuration list for PBXNativeTarget "WodjarTests" */;
 			buildPhases = (
+				1EAB4FE25452807C3E14B5B6 /* [CP] Check Pods Manifest.lock */,
 				4325BE881E67185500A0F969 /* Sources */,
 				4325BE891E67185500A0F969 /* Frameworks */,
 				4325BE8A1E67185500A0F969 /* Resources */,
+				8ADCBC19EC170C4CBC210A7E /* [CP] Embed Pods Frameworks */,
+				C679F0BD38D5419889A9E83B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +380,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4325BEA61E67185500A0F969 /* Build configuration list for PBXNativeTarget "WodjarUITests" */;
 			buildPhases = (
+				6D021226BE3A10C96B6CBF27 /* [CP] Check Pods Manifest.lock */,
 				4325BE931E67185500A0F969 /* Sources */,
 				4325BE941E67185500A0F969 /* Frameworks */,
 				4325BE951E67185500A0F969 /* Resources */,
+				A95B4658F6B1A0AEE5B7BB19 /* [CP] Embed Pods Frameworks */,
+				7210E11F630A456D70D73860 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -195,6 +411,11 @@
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 39446JG6PB;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					4325BE8B1E67185500A0F969 = {
 						CreatedOnToolsVersion = 8.2;
@@ -257,13 +478,171 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1EAB4FE25452807C3E14B5B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		439F39E2FB6446EE32412C3B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6D021226BE3A10C96B6CBF27 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7210E11F630A456D70D73860 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodjarUITests/Pods-WodjarUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		781482562D9C555F95A0A6F4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Wodjar/Pods-Wodjar-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8ADCBC19EC170C4CBC210A7E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A95B4658F6B1A0AEE5B7BB19 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodjarUITests/Pods-WodjarUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C679F0BD38D5419889A9E83B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F75B0DD46D766FC5CD8C829A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Wodjar/Pods-Wodjar-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4325BE741E67185500A0F969 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4325BE7E1E67185500A0F969 /* ViewController.swift in Sources */,
+				D3E695141E7936430060D9D2 /* WODTypeTableViewCell.swift in Sources */,
+				D3E695181E7937C00060D9D2 /* WorkoutList.swift in Sources */,
+				D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */,
+				D3E695161E7936880060D9D2 /* Workout.swift in Sources */,
+				D3EB88F71E7050C80028F28A /* LoginViewController.swift in Sources */,
+				D3EB89071E729AE30028F28A /* PersonalRecordRemoteService.swift in Sources */,
+				D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */,
 				4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */,
+				D3EB890A1E729FD00028F28A /* PersonalRecordViewController+UI.swift in Sources */,
+				D3EB89151E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift in Sources */,
+				D3EB89031E729A910028F28A /* PersonalRecordService.swift in Sources */,
+				D3E695121E7936050060D9D2 /* WODTypesTableViewController.swift in Sources */,
+				D310E5EB1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift in Sources */,
+				D310E5F01E76C7C000AD6B74 /* WodJurnalNavigationController.swift in Sources */,
+				D3E9C7C11E6DCDDF007E8296 /* PersonalRecordViewController.swift in Sources */,
+				D3EB890C1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift in Sources */,
+				D3EB88FA1E7061430028F28A /* DateTextField.swift in Sources */,
+				D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */,
+				D3EB88FD1E7193CD0028F28A /* PersonalRecord.swift in Sources */,
+				D3EB890E1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift in Sources */,
+				D3FD71411E6E00730047492D /* FullSizeImageViewController.swift in Sources */,
+				D3EB89131E72E00E0028F28A /* PersonalRecordsListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,9 +790,16 @@
 		};
 		4325BEA11E67185500A0F969 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 26030A9548D7EEFFD71BEFA3 /* Pods-Wodjar.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Wodjar/Wodjar.entitlements;
 				DEVELOPMENT_TEAM = 39446JG6PB;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Wodjar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.X2Mobille.Wodjar;
@@ -424,9 +810,16 @@
 		};
 		4325BEA21E67185500A0F969 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECD97B1867118548A03461ED /* Pods-Wodjar.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Wodjar/Wodjar.entitlements;
 				DEVELOPMENT_TEAM = 39446JG6PB;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Wodjar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.X2Mobille.Wodjar;
@@ -437,6 +830,7 @@
 		};
 		4325BEA41E67185500A0F969 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1220ABC4B8853E1FB02BD04 /* Pods-WodjarTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -452,6 +846,7 @@
 		};
 		4325BEA51E67185500A0F969 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BCE78EDCCB4B31E473D07182 /* Pods-WodjarTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -467,6 +862,7 @@
 		};
 		4325BEA71E67185500A0F969 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4F253F68B19059302B926F9 /* Pods-WodjarUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 39446JG6PB;
@@ -481,6 +877,7 @@
 		};
 		4325BEA81E67185500A0F969 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98340F3818D9B7BA367DBDF6 /* Pods-WodjarUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 39446JG6PB;
@@ -512,6 +909,7 @@
 				4325BEA21E67185500A0F969 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4325BEA31E67185500A0F969 /* Build configuration list for PBXNativeTarget "WodjarTests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +918,7 @@
 				4325BEA51E67185500A0F969 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4325BEA61E67185500A0F969 /* Build configuration list for PBXNativeTarget "WodjarUITests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +927,7 @@
 				4325BEA81E67185500A0F969 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
