@@ -8,23 +8,25 @@
 
 import UIKit
 
-enum WODType {
-    case girl
-    case hero
-    case challenge
-    case open
-    case custom
+enum WODType: String {
+    case girl = "Girls"
+    case hero = "Heroes"
+    case challenge = "Challenges"
+    case open = "Opens"
+    case custom = "Customs"
 }
 
 class Workout: NSObject {
 
     var type: WODType
     var name: String
-    var isFavvorite: Bool
+    var isFavorite: Bool
+    var isCompleted: Bool
     
-    init(type: WODType, name: String, favorite: Bool)   {
+    init(type: WODType, name: String, favorite: Bool, completed: Bool)   {
         self.type = type
         self.name = name
-        self.isFavvorite = favorite
+        self.isFavorite = favorite
+        self.isCompleted = completed
     }
 }

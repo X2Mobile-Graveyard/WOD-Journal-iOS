@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
        
         let tabBarController = window?.rootViewController as! UITabBarController
+        tabBarController.delegate = self
         let navigationController = tabBarController.viewControllers?[0] as! UINavigationController
         let listController = navigationController.topViewController as! PersonalRecordsListViewController
         
@@ -96,24 +97,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
+}
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+extension AppDelegate: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if let navController = viewController as? UINavigationController {
+            if let wodsController = navController.topViewController as? WODTypesTableViewController {
+                let girl1 = Workout(type: .girl, name: "Ana", favorite: true, completed: true)
+                let girl2 = Workout(type: .girl, name: "Lucretia", favorite: false, completed: false)
+                let girl3 = Workout(type: .girl, name: "Jessica", favorite: false, completed: false)
+                let girl4 = Workout(type: .girl, name: "Sara", favorite: true, completed: true)
+                
+                let hero1 = Workout(type: .hero, name: "Murf", favorite: true, completed: false)
+                let hero2 = Workout(type: .hero, name: "Joe", favorite: false, completed: true)
+                let hero3 = Workout(type: .hero, name: "Boy", favorite: false, completed: false)
+                let hero4 = Workout(type: .hero, name: "Cata", favorite: false, completed: true)
+                
+                let challenge1 = Workout(type: .challenge, name: "Mineriada", favorite: false, completed: false)
+                let challenge2 = Workout(type: .challenge, name: "Revolutia", favorite: false, completed: false)
+                let challenge3 = Workout(type: .challenge, name: "Razboi", favorite: true, completed: true)
+                let challenge4 = Workout(type: .challenge, name: "Butoi", favorite: false, completed: true)
+                
+                let open1 = Workout(type: .open, name: "17.1", favorite: false, completed: false)
+                let open2 = Workout(type: .open, name: "17.2", favorite: true, completed: false)
+                let open3 = Workout(type: .open, name: "17.3", favorite: false, completed: false)
+                
+                let cutom1 = Workout(type: .custom, name: "Minge", favorite: false, completed: true)
+                let custom2 = Workout(type: .custom, name: "Ninge", favorite: true, completed: true)
+                
+                let workoutList = WorkoutList(workouts: [girl1, girl2, girl3, girl4, hero1, hero2, hero3, hero4, challenge1, challenge2, challenge3, challenge4, open1, open2, open3, custom2, cutom1])
+                
+                wodsController.workouts = workoutList
+            }
+        }
     }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-
 }
 

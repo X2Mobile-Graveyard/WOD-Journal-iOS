@@ -17,17 +17,24 @@ class WODTypesTableViewController: UITableViewController {
     var resultSearchController = UISearchController()
     var filteredWorkouts = WorkoutList()
     
+    // @Constants
+    let wodTypeCellIdentifier = "WodTypeTableViewCellIdentifier"
+    let wodResultCellIdentifier = "WodResultTableViewCellIdentifier"
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSearchController()
     }
     
     // MARK: - UI Initalization
+    
     func setupSearchController() {
         definesPresentationContext = true
         resultSearchController = UISearchController(searchResultsController: nil)
         resultSearchController.searchResultsUpdater = self
         resultSearchController.dimsBackgroundDuringPresentation = false
+        resultSearchController.hidesNavigationBarDuringPresentation = false
         resultSearchController.searchBar.sizeToFit()
         
         navigationItem.titleView = resultSearchController.searchBar
@@ -37,7 +44,7 @@ class WODTypesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         if resultSearchController.isActive {
-            return filteredWorkouts.numberOfSections()
+            return filteredWorkouts.filteredSections().count
         } else {
             return 2
         }
@@ -45,7 +52,8 @@ class WODTypesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if resultSearchController.isActive {
-            return 0
+            let sectionType = filteredWorkouts.filteredSections()[section]
+            return filteredWorkouts.totalWods(for: sectionType)
         } else {
             if section == 0 {
                 return 4
@@ -54,62 +62,70 @@ class WODTypesTableViewController: UITableViewController {
             }
         }
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        if !resultSearchController.isActive {
+            let cell = tableView.dequeueReusableCell(withIdentifier: wodTypeCellIdentifier, for: indexPath) as! WODTypeTableViewCell
+            
+            switch indexPath.section {
+            case 0:
+                let wodType = workouts.wodTypesOrder[indexPath.row]
+                let totalWoods = workouts.totalWods(for: wodType)
+                let completed = workouts.completedWods(for: wodType)
+                cell.populate(with: wodType, completedWods: completed, totalWods: totalWoods)
+            case 1:
+                if indexPath.row == 0 {
+                    cell.populateFavorites(with: workouts.favorites.count)
+                } else {
+                    let completed = workouts.completedWods(for: .custom)
+                    cell.populate(with: .custom, completedWods: completed, totalWods: workouts.customs.count)
+                }
+            default:
+                break
+            }
+            
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: wodResultCellIdentifier, for: indexPath) as! PresonalRecordsListTableViewCell
+        let sectionType = filteredWorkouts.filteredSections()[indexPath.section]
+        let workout = filteredWorkouts.workout(with: sectionType, at: indexPath.row)
+        
+        cell.populate(with: workout.name, present: workout.isCompleted)
+        
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if resultSearchController.isActive {
+            return nil
+        }
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
+        view.backgroundColor = tableView.backgroundColor
+        
+        return view
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if !resultSearchController.isActive {
+            if section == 1 {
+                return 50
+            } else {
+                return 0
+            }
+        }
+        return 50
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if resultSearchController.isActive {
+            let type = filteredWorkouts.filteredSections()[section]
+            return type.rawValue
+        }
+        
+        return nil
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
 
 extension WODTypesTableViewController: UISearchResultsUpdating {
@@ -120,6 +136,10 @@ extension WODTypesTableViewController: UISearchResultsUpdating {
             return
         }
         
+        filteredWorkouts.workouts = workouts.workouts.filter {
+            return $0.name.lowercased().contains(textToSearchFor.lowercased())
+        }
         
+        tableView.reloadData()
     }
 }

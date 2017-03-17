@@ -17,4 +17,5 @@ class WodJurnalTabBarController: UITabBarController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
+    
 }
