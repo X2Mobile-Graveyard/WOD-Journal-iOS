@@ -15,7 +15,12 @@
 		4325BE9C1E67185500A0F969 /* WodjarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE9B1E67185500A0F969 /* WodjarUITests.swift */; };
 		7976EB68A7A18DB547AE3C58 /* Pods_Wodjar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD1E7DC81B0E81B25A0CA56 /* Pods_Wodjar.framework */; };
 		AE5985C73D8B16D340D78CDF /* Pods_WodjarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE88FC34463D554CAB60CE0F /* Pods_WodjarTests.framework */; };
-		BF5B42A61E8185AA001CA306 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5B42A51E8185AA001CA306 /* FeedbackView.swift */; };
+		BF5B42A61E8185AA001CA306 /* IBControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5B42A51E8185AA001CA306 /* IBControl.swift */; };
+		BFD44D801E82A57100170817 /* MoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD44D7F1E82A57100170817 /* MoreComponent.swift */; };
+		BFD44D821E82A58E00170817 /* MoreComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFD44D811E82A58E00170817 /* MoreComponent.xib */; };
+		BFD44D881E82ACF700170817 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD44D871E82ACF700170817 /* MoreViewController.swift */; };
+		BFD44D8B1E82B4C500170817 /* UnitsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD44D8A1E82B4C500170817 /* UnitsComponent.swift */; };
+		BFD44D8D1E82B4E900170817 /* UnitsComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFD44D8C1E82B4E900170817 /* UnitsComponent.xib */; };
 		C45451E5AE3974B6E620C067 /* Pods_WodjarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */; };
 		D310E5EB1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EA1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift */; };
 		D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */; };
@@ -77,7 +82,12 @@
 		98340F3818D9B7BA367DBDF6 /* Pods-WodjarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarUITests/Pods-WodjarUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AE88FC34463D554CAB60CE0F /* Pods_WodjarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WodjarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE78EDCCB4B31E473D07182 /* Pods-WodjarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests.release.xcconfig"; sourceTree = "<group>"; };
-		BF5B42A51E8185AA001CA306 /* FeedbackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedbackView.swift; path = Views/FeedbackView.swift; sourceTree = "<group>"; };
+		BF5B42A51E8185AA001CA306 /* IBControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IBControl.swift; path = Views/IBControl.swift; sourceTree = "<group>"; };
+		BFD44D7F1E82A57100170817 /* MoreComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreComponent.swift; path = Views/MoreComponent.swift; sourceTree = "<group>"; };
+		BFD44D811E82A58E00170817 /* MoreComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoreComponent.xib; path = Views/MoreComponent.xib; sourceTree = "<group>"; };
+		BFD44D871E82ACF700170817 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		BFD44D8A1E82B4C500170817 /* UnitsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnitsComponent.swift; path = Views/UnitsComponent.swift; sourceTree = "<group>"; };
+		BFD44D8C1E82B4E900170817 /* UnitsComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UnitsComponent.xib; path = Views/UnitsComponent.xib; sourceTree = "<group>"; };
 		C1220ABC4B8853E1FB02BD04 /* Pods-WodjarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D310E5EA1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordDetailsListViewController.swift; sourceTree = "<group>"; };
 		D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -194,6 +204,7 @@
 		4325BEA91E67190400A0F969 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BFD44D841E82AC6700170817 /* MoreTab */,
 				D3E6950F1E7935B90060D9D2 /* WODs */,
 				D3E6950E1E7935A70060D9D2 /* PersonalRecord */,
 				D310E5EE1E76C78C00AD6B74 /* CustomBaseClasses */,
@@ -211,6 +222,40 @@
 				6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BFD44D7E1E82A4D300170817 /* IBControl */ = {
+			isa = PBXGroup;
+			children = (
+				BF5B42A51E8185AA001CA306 /* IBControl.swift */,
+			);
+			name = IBControl;
+			sourceTree = "<group>";
+		};
+		BFD44D831E82A5A700170817 /* MoreComponent */ = {
+			isa = PBXGroup;
+			children = (
+				BFD44D7F1E82A57100170817 /* MoreComponent.swift */,
+				BFD44D811E82A58E00170817 /* MoreComponent.xib */,
+			);
+			name = MoreComponent;
+			sourceTree = "<group>";
+		};
+		BFD44D841E82AC6700170817 /* MoreTab */ = {
+			isa = PBXGroup;
+			children = (
+				BFD44D871E82ACF700170817 /* MoreViewController.swift */,
+			);
+			name = MoreTab;
+			sourceTree = "<group>";
+		};
+		BFD44D891E82B4A600170817 /* UnitsComponent */ = {
+			isa = PBXGroup;
+			children = (
+				BFD44D8A1E82B4C500170817 /* UnitsComponent.swift */,
+				BFD44D8C1E82B4E900170817 /* UnitsComponent.xib */,
+			);
+			name = UnitsComponent;
 			sourceTree = "<group>";
 		};
 		C9FB49C48F4DE12AAD481917 /* Pods */ = {
@@ -274,8 +319,10 @@
 		D3EB88F81E7061230028F28A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BFD44D7E1E82A4D300170817 /* IBControl */,
+				BFD44D891E82B4A600170817 /* UnitsComponent */,
+				BFD44D831E82A5A700170817 /* MoreComponent */,
 				D3EB88F91E7061430028F28A /* DateTextField.swift */,
-				BF5B42A51E8185AA001CA306 /* FeedbackView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -459,7 +506,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFD44D8D1E82B4E900170817 /* UnitsComponent.xib in Resources */,
 				4325BE861E67185500A0F969 /* LaunchScreen.storyboard in Resources */,
+				BFD44D821E82A58E00170817 /* MoreComponent.xib in Resources */,
 				4325BE831E67185500A0F969 /* Assets.xcassets in Resources */,
 				4325BE811E67185500A0F969 /* Main.storyboard in Resources */,
 			);
@@ -625,10 +674,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3E695141E7936430060D9D2 /* WODTypeTableViewCell.swift in Sources */,
+				BFD44D8B1E82B4C500170817 /* UnitsComponent.swift in Sources */,
+				BFD44D881E82ACF700170817 /* MoreViewController.swift in Sources */,
 				D3E695181E7937C00060D9D2 /* WorkoutList.swift in Sources */,
-				BF5B42A61E8185AA001CA306 /* FeedbackView.swift in Sources */,
+				BF5B42A61E8185AA001CA306 /* IBControl.swift in Sources */,
 				D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */,
 				D3E695161E7936880060D9D2 /* Workout.swift in Sources */,
+				BFD44D801E82A57100170817 /* MoreComponent.swift in Sources */,
 				D3EB88F71E7050C80028F28A /* LoginViewController.swift in Sources */,
 				D3EB89071E729AE30028F28A /* PersonalRecordRemoteService.swift in Sources */,
 				D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */,

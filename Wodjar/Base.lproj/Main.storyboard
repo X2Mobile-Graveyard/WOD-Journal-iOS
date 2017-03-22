@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -148,7 +147,7 @@
         <!--More-->
         <scene sceneID="1Wj-5L-kWY">
             <objects>
-                <viewController id="DZi-Lr-5K1" sceneMemberID="viewController">
+                <viewController id="DZi-Lr-5K1" customClass="MoreViewController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="obE-XP-Dik"/>
                         <viewControllerLayoutGuide type="bottom" id="suC-bW-RiZ"/>
@@ -158,14 +157,59 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XbX-5a-bUN">
-                                <rect key="frame" x="0.0" y="64" width="375" height="62"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="220"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mw4-K0-5PA">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Jl-A8-sZf" customClass="UnitsComponent" customModule="Wodjar" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="62" id="KnV-gE-ahz"/>
-                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Units"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="index">
+                                                <integer key="value" value="0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapUnitsComponent:" destination="DZi-Lr-5K1" eventType="valueChanged" id="cf4-mJ-Est"/>
+                                        </connections>
+                                    </view>
+                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mw4-K0-5PA" customClass="MoreComponent" customModule="Wodjar" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="88" width="375" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Feedback"/>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="feedback_icon"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapMoreComponent:" destination="DZi-Lr-5K1" eventType="touchUpInside" id="7V4-Ei-Oga"/>
+                                        </connections>
+                                    </view>
+                                    <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmE-Bg-8oT" customClass="MoreComponent" customModule="Wodjar" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="132" width="375" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Premium Subscription"/>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="premium_icon"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="imageViewHeightConstraintConstant">
+                                                <real key="value" value="28"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="centerImageViewConstraintConstant">
+                                                <real key="value" value="-8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapMoreComponent:" destination="DZi-Lr-5K1" eventType="touchUpInside" id="GnG-QB-GqL"/>
+                                        </connections>
+                                    </view>
+                                    <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ru-qd-YOS" customClass="MoreComponent" customModule="Wodjar" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="176" width="375" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Restore Purchases"/>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="restorepurchases_icon"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapMoreComponent:" destination="DZi-Lr-5K1" eventType="touchUpInside" id="0FL-lh-qwf"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                             </stackView>
@@ -644,7 +688,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxl-aA-dvt">
-                                <rect key="frame" x="87" y="546" width="200" height="44"/>
+                                <rect key="frame" x="87.5" y="546" width="200" height="44"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="PEy-NH-GkO"/>
@@ -778,42 +822,6 @@
             </objects>
             <point key="canvasLocation" x="5554" y="-1361"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="QGi-Yb-ffH">
-            <objects>
-                <viewController id="6f6-OT-e87" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Jht-BE-mc5"/>
-                        <viewControllerLayoutGuide type="bottom" id="qcg-xJ-1bU"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="m7T-W2-Y6b">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="z5g-VY-BtR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3591" y="1118"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="KKE-Y7-0ep">
-            <objects>
-                <viewController id="4g7-OM-wVB" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="h6p-vG-7Lt"/>
-                        <viewControllerLayoutGuide type="bottom" id="5xd-wM-bvX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Jfc-Pu-HSc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CEs-qJ-wIQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3590" y="1836"/>
-        </scene>
     </scenes>
     <resources>
         <image name="White_camera" width="27" height="21"/>
@@ -821,6 +829,9 @@
         <image name="black_pen" width="15" height="15"/>
         <image name="calendar" width="24" height="24"/>
         <image name="delete icon" width="15" height="19"/>
+        <image name="feedback_icon" width="54" height="48"/>
+        <image name="premium_icon" width="48" height="87"/>
+        <image name="restorepurchases_icon" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="OQJ-c8-YnF"/>
