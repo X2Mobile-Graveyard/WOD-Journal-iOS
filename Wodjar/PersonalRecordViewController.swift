@@ -43,7 +43,7 @@ class PersonalRecordViewController: UIViewController {
     var pickedDateFromDatePicker: Date?
     var pickedTimeFromTimePicker: Time = Time()
     var viewState: ViewControllerState = .withoutImage
-    var recordType: PersonalRecordResultType = .weight
+    var recordType: WODCategory = .weight
     var timePicker: UIPickerView?
     
     // @Constants
@@ -89,7 +89,7 @@ class PersonalRecordViewController: UIViewController {
         case 0:
             recordType = .weight
         case 1:
-            recordType = .repetitions
+            recordType = .amrap
         case 2:
             recordType = .time
         default:

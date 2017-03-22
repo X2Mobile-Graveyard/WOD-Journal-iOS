@@ -20,6 +20,18 @@
 		D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */; };
 		D310E5F01E76C7C000AD6B74 /* WodJurnalNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EF1E76C7C000AD6B74 /* WodJurnalNavigationController.swift */; };
 		D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5F11E76C7DA00AD6B74 /* WodJurnalTabBarController.swift */; };
+		D3BB36391E813E710078CE53 /* WODTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36381E813E710078CE53 /* WODTypeTableViewController.swift */; };
+		D3BB363B1E814B150078CE53 /* CustomWODTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB363A1E814B150078CE53 /* CustomWODTypeTableViewController.swift */; };
+		D3BB363D1E814B340078CE53 /* DefaultWODTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB363C1E814B340078CE53 /* DefaultWODTypeTableViewController.swift */; };
+		D3BB36421E8245860078CE53 /* WODDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36411E8245860078CE53 /* WODDetailsTableViewController.swift */; };
+		D3BB36461E8245BD0078CE53 /* CustomWODDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36451E8245BD0078CE53 /* CustomWODDetailsViewController.swift */; };
+		D3BB36481E8245D20078CE53 /* DefaultWODDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36471E8245D20078CE53 /* DefaultWODDetailsViewController.swift */; };
+		D3BB364C1E824B4F0078CE53 /* WODImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB364B1E824B4F0078CE53 /* WODImageTableViewCell.swift */; };
+		D3BB36501E824B790078CE53 /* WODDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB364F1E824B790078CE53 /* WODDescriptionTableViewCell.swift */; };
+		D3BB36541E824B9B0078CE53 /* WODVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36531E824B9B0078CE53 /* WODVideoTableViewCell.swift */; };
+		D3BB36561E824BC00078CE53 /* LogWODResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36551E824BC00078CE53 /* LogWODResultTableViewCell.swift */; };
+		D3BB36581E824BD50078CE53 /* WODResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36571E824BD50078CE53 /* WODResultTableViewCell.swift */; };
+		D3BB365E1E825FD50078CE53 /* WODResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB365D1E825FD50078CE53 /* WODResult.swift */; };
 		D3E695121E7936050060D9D2 /* WODTypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695111E7936050060D9D2 /* WODTypesTableViewController.swift */; };
 		D3E695141E7936430060D9D2 /* WODTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695131E7936430060D9D2 /* WODTypeTableViewCell.swift */; };
 		D3E695161E7936880060D9D2 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695151E7936880060D9D2 /* Workout.swift */; };
@@ -81,6 +93,18 @@
 		D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D310E5EF1E76C7C000AD6B74 /* WodJurnalNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WodJurnalNavigationController.swift; sourceTree = "<group>"; };
 		D310E5F11E76C7DA00AD6B74 /* WodJurnalTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WodJurnalTabBarController.swift; sourceTree = "<group>"; };
+		D3BB36381E813E710078CE53 /* WODTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypeTableViewController.swift; sourceTree = "<group>"; };
+		D3BB363A1E814B150078CE53 /* CustomWODTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWODTypeTableViewController.swift; sourceTree = "<group>"; };
+		D3BB363C1E814B340078CE53 /* DefaultWODTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWODTypeTableViewController.swift; sourceTree = "<group>"; };
+		D3BB36411E8245860078CE53 /* WODDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODDetailsTableViewController.swift; sourceTree = "<group>"; };
+		D3BB36451E8245BD0078CE53 /* CustomWODDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWODDetailsViewController.swift; sourceTree = "<group>"; };
+		D3BB36471E8245D20078CE53 /* DefaultWODDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWODDetailsViewController.swift; sourceTree = "<group>"; };
+		D3BB364B1E824B4F0078CE53 /* WODImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODImageTableViewCell.swift; sourceTree = "<group>"; };
+		D3BB364F1E824B790078CE53 /* WODDescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODDescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		D3BB36531E824B9B0078CE53 /* WODVideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODVideoTableViewCell.swift; sourceTree = "<group>"; };
+		D3BB36551E824BC00078CE53 /* LogWODResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWODResultTableViewCell.swift; sourceTree = "<group>"; };
+		D3BB36571E824BD50078CE53 /* WODResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODResultTableViewCell.swift; sourceTree = "<group>"; };
+		D3BB365D1E825FD50078CE53 /* WODResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODResult.swift; sourceTree = "<group>"; };
 		D3E695111E7936050060D9D2 /* WODTypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypesTableViewController.swift; sourceTree = "<group>"; };
 		D3E695131E7936430060D9D2 /* WODTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypeTableViewCell.swift; sourceTree = "<group>"; };
 		D3E695151E7936880060D9D2 /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
@@ -242,6 +266,39 @@
 			name = CustomBaseClasses;
 			sourceTree = "<group>";
 		};
+		D3BB36371E813E4E0078CE53 /* WODTypeController */ = {
+			isa = PBXGroup;
+			children = (
+				D3BB36381E813E710078CE53 /* WODTypeTableViewController.swift */,
+				D3BB363A1E814B150078CE53 /* CustomWODTypeTableViewController.swift */,
+				D3BB363C1E814B340078CE53 /* DefaultWODTypeTableViewController.swift */,
+			);
+			name = WODTypeController;
+			sourceTree = "<group>";
+		};
+		D3BB363E1E8244F50078CE53 /* WODDetailsController */ = {
+			isa = PBXGroup;
+			children = (
+				D3BB364A1E824B260078CE53 /* WODDetailsCells */,
+				D3BB36411E8245860078CE53 /* WODDetailsTableViewController.swift */,
+				D3BB36451E8245BD0078CE53 /* CustomWODDetailsViewController.swift */,
+				D3BB36471E8245D20078CE53 /* DefaultWODDetailsViewController.swift */,
+			);
+			name = WODDetailsController;
+			sourceTree = "<group>";
+		};
+		D3BB364A1E824B260078CE53 /* WODDetailsCells */ = {
+			isa = PBXGroup;
+			children = (
+				D3BB364B1E824B4F0078CE53 /* WODImageTableViewCell.swift */,
+				D3BB364F1E824B790078CE53 /* WODDescriptionTableViewCell.swift */,
+				D3BB36531E824B9B0078CE53 /* WODVideoTableViewCell.swift */,
+				D3BB36551E824BC00078CE53 /* LogWODResultTableViewCell.swift */,
+				D3BB36571E824BD50078CE53 /* WODResultTableViewCell.swift */,
+			);
+			name = WODDetailsCells;
+			sourceTree = "<group>";
+		};
 		D3E6950E1E7935A70060D9D2 /* PersonalRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +312,8 @@
 		D3E6950F1E7935B90060D9D2 /* WODs */ = {
 			isa = PBXGroup;
 			children = (
+				D3BB363E1E8244F50078CE53 /* WODDetailsController */,
+				D3BB36371E813E4E0078CE53 /* WODTypeController */,
 				D3E695101E7935CC0060D9D2 /* WODTypesController */,
 			);
 			name = WODs;
@@ -284,6 +343,7 @@
 				D3EB89161E72EF9D0028F28A /* PersonalRecordType.swift */,
 				D3E695151E7936880060D9D2 /* Workout.swift */,
 				D3E695171E7937C00060D9D2 /* WorkoutList.swift */,
+				D3BB365D1E825FD50078CE53 /* WODResult.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -625,24 +685,36 @@
 				D3E695181E7937C00060D9D2 /* WorkoutList.swift in Sources */,
 				D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */,
 				D3E695161E7936880060D9D2 /* Workout.swift in Sources */,
+				D3BB363D1E814B340078CE53 /* DefaultWODTypeTableViewController.swift in Sources */,
+				D3BB364C1E824B4F0078CE53 /* WODImageTableViewCell.swift in Sources */,
 				D3EB88F71E7050C80028F28A /* LoginViewController.swift in Sources */,
 				D3EB89071E729AE30028F28A /* PersonalRecordRemoteService.swift in Sources */,
 				D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */,
 				4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */,
+				D3BB36461E8245BD0078CE53 /* CustomWODDetailsViewController.swift in Sources */,
+				D3BB365E1E825FD50078CE53 /* WODResult.swift in Sources */,
 				D3EB890A1E729FD00028F28A /* PersonalRecordViewController+UI.swift in Sources */,
 				D3EB89151E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift in Sources */,
 				D3EB89031E729A910028F28A /* PersonalRecordService.swift in Sources */,
 				D3E695121E7936050060D9D2 /* WODTypesTableViewController.swift in Sources */,
 				D310E5EB1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift in Sources */,
+				D3BB36561E824BC00078CE53 /* LogWODResultTableViewCell.swift in Sources */,
+				D3BB36391E813E710078CE53 /* WODTypeTableViewController.swift in Sources */,
+				D3BB36481E8245D20078CE53 /* DefaultWODDetailsViewController.swift in Sources */,
 				D310E5F01E76C7C000AD6B74 /* WodJurnalNavigationController.swift in Sources */,
+				D3BB363B1E814B150078CE53 /* CustomWODTypeTableViewController.swift in Sources */,
+				D3BB36501E824B790078CE53 /* WODDescriptionTableViewCell.swift in Sources */,
 				D3E9C7C11E6DCDDF007E8296 /* PersonalRecordViewController.swift in Sources */,
 				D3EB890C1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift in Sources */,
 				D3EB88FA1E7061430028F28A /* DateTextField.swift in Sources */,
 				D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */,
+				D3BB36541E824B9B0078CE53 /* WODVideoTableViewCell.swift in Sources */,
 				D3EB88FD1E7193CD0028F28A /* PersonalRecord.swift in Sources */,
 				D3EB890E1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift in Sources */,
+				D3BB36421E8245860078CE53 /* WODDetailsTableViewController.swift in Sources */,
 				D3FD71411E6E00730047492D /* FullSizeImageViewController.swift in Sources */,
 				D3EB89131E72E00E0028F28A /* PersonalRecordsListViewController.swift in Sources */,
+				D3BB36581E824BD50078CE53 /* WODResultTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

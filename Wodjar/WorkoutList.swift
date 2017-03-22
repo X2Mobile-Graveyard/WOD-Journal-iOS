@@ -74,6 +74,21 @@ class WorkoutList: NSObject {
         return sectionsNames
     }
     
+    func getWorkouts(for wodType: WODType) -> [Workout] {
+        switch wodType {
+        case .challenge:
+            return chalanges
+        case .custom:
+            return customs
+        case .girl:
+            return girls
+        case .hero:
+            return heroes
+        case .open:
+            return opens
+        }
+    }
+    
     func workout(with type: WODType, at index: Int) -> Workout {
         switch type {
         case .girl:

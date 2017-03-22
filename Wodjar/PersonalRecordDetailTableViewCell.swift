@@ -24,10 +24,12 @@ class PersonalRecordDetailTableViewCell: UITableViewCell {
         switch personalRecord.resultType {
         case .weight:
             typeOfWorkout = "Weight:"
-        case .repetitions:
+        case .amrap:
             typeOfWorkout = "Repetition:"
         case .time:
             typeOfWorkout = "Time:"
+        default:
+            break
         }
         
         if personalRecord.result == nil {
