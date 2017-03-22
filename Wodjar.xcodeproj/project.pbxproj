@@ -21,6 +21,7 @@
 		BFD44D881E82ACF700170817 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD44D871E82ACF700170817 /* MoreViewController.swift */; };
 		BFD44D8B1E82B4C500170817 /* UnitsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD44D8A1E82B4C500170817 /* UnitsComponent.swift */; };
 		BFD44D8D1E82B4E900170817 /* UnitsComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFD44D8C1E82B4E900170817 /* UnitsComponent.xib */; };
+		BFD44D991E82D08E00170817 /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD44D981E82D08E00170817 /* UIButton+BackgroundColor.swift */; };
 		C45451E5AE3974B6E620C067 /* Pods_WodjarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */; };
 		D310E5EB1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EA1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift */; };
 		D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */; };
@@ -88,6 +89,7 @@
 		BFD44D871E82ACF700170817 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		BFD44D8A1E82B4C500170817 /* UnitsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnitsComponent.swift; path = Views/UnitsComponent.swift; sourceTree = "<group>"; };
 		BFD44D8C1E82B4E900170817 /* UnitsComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UnitsComponent.xib; path = Views/UnitsComponent.xib; sourceTree = "<group>"; };
+		BFD44D981E82D08E00170817 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+BackgroundColor.swift"; path = "Views/UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
 		C1220ABC4B8853E1FB02BD04 /* Pods-WodjarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D310E5EA1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordDetailsListViewController.swift; sourceTree = "<group>"; };
 		D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -258,6 +260,14 @@
 			name = UnitsComponent;
 			sourceTree = "<group>";
 		};
+		BFD44D971E82D05C00170817 /* UIButton+BackgroundColor */ = {
+			isa = PBXGroup;
+			children = (
+				BFD44D981E82D08E00170817 /* UIButton+BackgroundColor.swift */,
+			);
+			name = "UIButton+BackgroundColor";
+			sourceTree = "<group>";
+		};
 		C9FB49C48F4DE12AAD481917 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +329,7 @@
 		D3EB88F81E7061230028F28A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BFD44D971E82D05C00170817 /* UIButton+BackgroundColor */,
 				BFD44D7E1E82A4D300170817 /* IBControl */,
 				BFD44D891E82B4A600170817 /* UnitsComponent */,
 				BFD44D831E82A5A700170817 /* MoreComponent */,
@@ -684,6 +695,7 @@
 				D3EB88F71E7050C80028F28A /* LoginViewController.swift in Sources */,
 				D3EB89071E729AE30028F28A /* PersonalRecordRemoteService.swift in Sources */,
 				D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */,
+				BFD44D991E82D08E00170817 /* UIButton+BackgroundColor.swift in Sources */,
 				4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */,
 				D3EB890A1E729FD00028F28A /* PersonalRecordViewController+UI.swift in Sources */,
 				D3EB89151E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift in Sources */,

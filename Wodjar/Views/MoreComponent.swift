@@ -12,8 +12,15 @@ class MoreComponent: IBControl {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var button: UIButton!
+    
     @IBOutlet weak var imageViewCenterConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        button.setBackgroundColor(color: .gray, forState: .highlighted)
+    }
     
     @IBInspectable var title: String = "" {
         didSet {
@@ -27,15 +34,15 @@ class MoreComponent: IBControl {
         }
     }
     
-    @IBInspectable var centerImageViewConstraintConstant: CGFloat = 0 {
+    @IBInspectable var centerValue: CGFloat = 0 {
         didSet {
-            imageViewCenterConstraint.constant = centerImageViewConstraintConstant
+            imageViewCenterConstraint.constant = centerValue
         }
     }
     
-    @IBInspectable var imageViewHeightConstraintConstant: CGFloat = 0 {
+    @IBInspectable var heightValue: CGFloat = 0 {
         didSet {
-            imageViewHeightConstraint.constant = imageViewHeightConstraintConstant
+            imageViewHeightConstraint.constant = heightValue
         }
     }
     
