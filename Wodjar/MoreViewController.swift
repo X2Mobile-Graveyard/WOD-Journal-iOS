@@ -27,7 +27,7 @@ class MoreViewController: UIViewController {
     @IBAction func didTapMoreComponent(_ sender: UIView) {
         switch sender.tag {
         case 1:
-            print("feedback")
+            sendMail()
         case 2:
             print("premium subscription")
         case 3:

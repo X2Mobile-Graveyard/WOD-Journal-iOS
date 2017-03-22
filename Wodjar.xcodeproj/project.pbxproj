@@ -15,6 +15,8 @@
 		4325BE9C1E67185500A0F969 /* WodjarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE9B1E67185500A0F969 /* WodjarUITests.swift */; };
 		7976EB68A7A18DB547AE3C58 /* Pods_Wodjar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD1E7DC81B0E81B25A0CA56 /* Pods_Wodjar.framework */; };
 		AE5985C73D8B16D340D78CDF /* Pods_WodjarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE88FC34463D554CAB60CE0F /* Pods_WodjarTests.framework */; };
+		BF315FEB1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF315FEA1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift */; };
+		BF315FED1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF315FEC1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift */; };
 		BF5B42A61E8185AA001CA306 /* IBControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5B42A51E8185AA001CA306 /* IBControl.swift */; };
 		BFD44D801E82A57100170817 /* MoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD44D7F1E82A57100170817 /* MoreComponent.swift */; };
 		BFD44D821E82A58E00170817 /* MoreComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFD44D811E82A58E00170817 /* MoreComponent.xib */; };
@@ -83,6 +85,8 @@
 		98340F3818D9B7BA367DBDF6 /* Pods-WodjarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarUITests/Pods-WodjarUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AE88FC34463D554CAB60CE0F /* Pods_WodjarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WodjarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE78EDCCB4B31E473D07182 /* Pods-WodjarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests.release.xcconfig"; sourceTree = "<group>"; };
+		BF315FEA1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoreViewController+MFMailComposer.swift"; sourceTree = "<group>"; };
+		BF315FEC1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorHandler.swift"; sourceTree = "<group>"; };
 		BF5B42A51E8185AA001CA306 /* IBControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IBControl.swift; path = Views/IBControl.swift; sourceTree = "<group>"; };
 		BFD44D7F1E82A57100170817 /* MoreComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreComponent.swift; path = Views/MoreComponent.swift; sourceTree = "<group>"; };
 		BFD44D811E82A58E00170817 /* MoreComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoreComponent.xib; path = Views/MoreComponent.xib; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 				D310E5EE1E76C78C00AD6B74 /* CustomBaseClasses */,
 				D3FD71401E6E00730047492D /* FullSizeImageViewController.swift */,
 				D3EB88F61E7050C80028F28A /* LoginViewController.swift */,
+				BF315FEE1E82F064001C6E45 /* UIViewController+Extensions */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -224,6 +229,14 @@
 				6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF315FEE1E82F064001C6E45 /* UIViewController+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BF315FEC1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift */,
+			);
+			name = "UIViewController+Extensions";
 			sourceTree = "<group>";
 		};
 		BFD44D7E1E82A4D300170817 /* IBControl */ = {
@@ -247,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				BFD44D871E82ACF700170817 /* MoreViewController.swift */,
+				BF315FEA1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift */,
 			);
 			name = MoreTab;
 			sourceTree = "<group>";
@@ -686,6 +700,7 @@
 			files = (
 				D3E695141E7936430060D9D2 /* WODTypeTableViewCell.swift in Sources */,
 				BFD44D8B1E82B4C500170817 /* UnitsComponent.swift in Sources */,
+				BF315FED1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift in Sources */,
 				BFD44D881E82ACF700170817 /* MoreViewController.swift in Sources */,
 				D3E695181E7937C00060D9D2 /* WorkoutList.swift in Sources */,
 				BF5B42A61E8185AA001CA306 /* IBControl.swift in Sources */,
@@ -697,6 +712,7 @@
 				D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */,
 				BFD44D991E82D08E00170817 /* UIButton+BackgroundColor.swift in Sources */,
 				4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */,
+				BF315FEB1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift in Sources */,
 				D3EB890A1E729FD00028F28A /* PersonalRecordViewController+UI.swift in Sources */,
 				D3EB89151E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift in Sources */,
 				D3EB89031E729A910028F28A /* PersonalRecordService.swift in Sources */,
