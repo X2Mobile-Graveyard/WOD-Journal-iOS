@@ -29,7 +29,7 @@ extension MoreViewController: MFMailComposeViewControllerDelegate {
         
         if MFMailComposeViewController.canSendMail() {
             mailVC.mailComposeDelegate = self
-            mailVC.setToRecipients(["mihai.eros@x2mobile.net"])
+            mailVC.setToRecipients(["contact@x2mobile.net"])
             mailVC.setSubject("Feedback WOD Journal iOS App")
             
             present(mailVC, animated: true, completion: nil)
