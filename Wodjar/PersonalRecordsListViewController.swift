@@ -7,16 +7,58 @@
 //
 
 import UIKit
+import MBProgressHUD
+
+protocol PersonalRecordCreateDelegate {
+    func didCreate(personalRecord: PersonalRecord)
+}
+
+protocol PersonalRecordTypeDeleteDelegate  {
+    func didDelete(personalRecordType: PersonalRecordType)
+}
 
 class PersonalRecordsListViewController: UIViewController {
 
     // @IBOutlest
     @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var searchBarContainer: UIView!
     
     // @Properties
     var filteredRecordTypes = [PersonalRecordType]()
-    var resultSearchController = UISearchController()
     var selectedRecordType: PersonalRecordType?
+    lazy var resultSearchController: UISearchController = {
+        [unowned self] in
+        self.definesPresentationContext = true
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+        self.searchBarContainer.addSubview(searchController.searchBar)
+        
+        return searchController
+    }()
+    
+    lazy var defaultPRs:[PersonalRecordType] = {
+        var defaultPrs = [PersonalRecordType]()
+        if let path = Bundle.main.path(forResource: "defaultPRs", ofType: "plist"),
+            let dict = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
+            if let weightPersonalRecords = dict["Weight"] as? [String] {
+                for personalRecordName in weightPersonalRecords {
+                    let pr = PersonalRecordType(name: personalRecordName, present: false, defaultType: .weight)
+                    defaultPrs.append(pr)
+                }
+            }
+            
+            if let timePersonalRecords = dict["Time"] as? [String] {
+                for personalRecordName in timePersonalRecords {
+                    let pr = PersonalRecordType(name: personalRecordName, present: false, defaultType: .time)
+                    defaultPrs.append(pr)
+                }
+            }
+        }
+        
+        return defaultPrs
+    }()
     
     // @Constants
     let cellIdentifier = "PersonalRecordListCellIdentifier"
@@ -24,25 +66,36 @@ class PersonalRecordsListViewController: UIViewController {
     let newPersonalRecordIdentifier = "PersonalRecordSegueIdentifier"
     
     // @Injected
-    var recordTypes: [PersonalRecordType]!
+    var recordTypes = [PersonalRecordType]()
+    var service: PersonalRecordListService!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSearchController()
+        getPersonalRecordTypes()
     }
     
-    
-    // MARK: - UI Initialization
-    
-    func setupSearchController() {
-        definesPresentationContext = true
-        resultSearchController = UISearchController(searchResultsController: nil)
-        resultSearchController.searchResultsUpdater = self
-        resultSearchController.dimsBackgroundDuringPresentation = false
-        resultSearchController.searchBar.sizeToFit()
-        
-        tableView.tableHeaderView = resultSearchController.searchBar
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        recordTypes = service.merge(personalRecords: recordTypes, with: defaultPRs)
         tableView.reloadData()
+    }
+
+    
+    // MARK: - Initialization
+    
+    func getPersonalRecordTypes() {
+        MBProgressHUD.showAdded(to: tableView, animated: true)
+        service.getPersonalRecordTypes { (result) in
+            switch result {
+            case let .success(personalRecordTypes):
+                self.recordTypes = personalRecordTypes
+                self.tableView.reloadData()
+            case let .failure(error):
+                print(error)
+            }
+            
+            MBProgressHUD.hide(for: self.tableView, animated: true)
+        }
     }
     
     // MARK: - Navigation
@@ -56,13 +109,16 @@ class PersonalRecordsListViewController: UIViewController {
             if selectedRecordType == nil {
                 return
             }
-            
             let detailsListViewController = segue.destination as! PersonalRecordDetailsListViewController
             detailsListViewController.personalRecordType = selectedRecordType!
+            detailsListViewController.service = service
+            detailsListViewController.deleteTypeDelegate = self
         } else if identifier == newPersonalRecordIdentifier {
             let personalRecordViewController = segue.destination as! PersonalRecordViewController
             personalRecordViewController.controllerMode = .createMode
             personalRecordViewController.personalRecord = PersonalRecord()
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceTest())
+            personalRecordViewController.createRecordDelegate = self
         }
     }
 }
@@ -128,5 +184,22 @@ extension PersonalRecordsListViewController: UITableViewDataSource {
         
         return cell
     }
-    
+}
+
+extension PersonalRecordsListViewController: PersonalRecordCreateDelegate {
+    func didCreate(personalRecord: PersonalRecord) {
+        let newPersonalRecordType = PersonalRecordType(name: personalRecord.name!, present: true, defaultType: personalRecord.resultType)
+        newPersonalRecordType.records.append(personalRecord)
+        
+        recordTypes.append(newPersonalRecordType)
+    }
+}
+
+extension PersonalRecordsListViewController: PersonalRecordTypeDeleteDelegate {
+    func didDelete(personalRecordType: PersonalRecordType) {
+        if let indexToDelete = recordTypes.index(where: {$0.name! == personalRecordType.name!}) {
+            recordTypes.remove(at: indexToDelete)
+            tableView.reloadData()
+        }
+    }
 }

@@ -20,6 +20,7 @@ enum UnitType {
 }
 
 class PersonalRecord {
+    var id: Int?
     var name: String? = nil
     var rx: Bool = false
     var result: String? = nil
@@ -62,5 +63,32 @@ class PersonalRecord {
         self.notes = notes
         self.imageUrl = imageUrl
         self.date = date
+    }
+    
+    convenience init(personalRecord: PersonalRecord) {
+        self.init()
+        self.id = personalRecord.id
+        self.name = personalRecord.name
+        self.rx = personalRecord.rx
+        self.result = personalRecord.result
+        self.resultType = personalRecord.resultType
+        self.date = personalRecord.date
+        self.unitType = personalRecord.unitType
+        self.notes = personalRecord.notes
+        self.imageUrl = personalRecord.imageUrl
+        self.date = personalRecord.date
+    }
+    
+    func updateValues(from personalRecord: PersonalRecord) {
+        self.id = personalRecord.id
+        self.name = personalRecord.name
+        self.rx = personalRecord.rx
+        self.result = personalRecord.result
+        self.resultType = personalRecord.resultType
+        self.date = personalRecord.date
+        self.unitType = personalRecord.unitType
+        self.notes = personalRecord.notes
+        self.imageUrl = personalRecord.imageUrl
+        self.date = personalRecord.date
     }
 }

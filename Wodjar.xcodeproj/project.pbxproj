@@ -20,6 +20,16 @@
 		D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */; };
 		D310E5F01E76C7C000AD6B74 /* WodJurnalNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EF1E76C7C000AD6B74 /* WodJurnalNavigationController.swift */; };
 		D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5F11E76C7DA00AD6B74 /* WodJurnalTabBarController.swift */; };
+		D3BB36601E82A0470078CE53 /* PersonalRecordListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB365F1E82A0470078CE53 /* PersonalRecordListService.swift */; };
+		D3BB36631E82A0920078CE53 /* PersonalRecordListRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36621E82A0920078CE53 /* PersonalRecordListRemoteService.swift */; };
+		D3BB36651E82AFCF0078CE53 /* defaultPRs.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3BB36641E82AFCF0078CE53 /* defaultPRs.plist */; };
+		D3BB36671E840B120078CE53 /* NSError+LocalDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36661E840B120078CE53 /* NSError+LocalDomain.swift */; };
+		D3BB36691E840B4C0078CE53 /* UIViewController+Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36681E840B4C0078CE53 /* UIViewController+Result.swift */; };
+		D3BB366C1E840CD80078CE53 /* UIViewController+AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB366B1E840CD80078CE53 /* UIViewController+AlertController.swift */; };
+		D3BB366F1E843BD10078CE53 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB366E1E843BD10078CE53 /* BaseRequest.swift */; };
+		D3BB36711E8446740078CE53 /* PersonalRecordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36701E8446740078CE53 /* PersonalRecordService.swift */; };
+		D3BB36731E8446C80078CE53 /* PersonalRecordRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36721E8446C80078CE53 /* PersonalRecordRemoteService.swift */; };
+		D3BB36751E8530540078CE53 /* GetPersonalRecordsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36741E8530540078CE53 /* GetPersonalRecordsRequest.swift */; };
 		D3E695121E7936050060D9D2 /* WODTypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695111E7936050060D9D2 /* WODTypesTableViewController.swift */; };
 		D3E695141E7936430060D9D2 /* WODTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695131E7936430060D9D2 /* WODTypeTableViewCell.swift */; };
 		D3E695161E7936880060D9D2 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695151E7936880060D9D2 /* Workout.swift */; };
@@ -28,8 +38,6 @@
 		D3EB88F71E7050C80028F28A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB88F61E7050C80028F28A /* LoginViewController.swift */; };
 		D3EB88FA1E7061430028F28A /* DateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB88F91E7061430028F28A /* DateTextField.swift */; };
 		D3EB88FD1E7193CD0028F28A /* PersonalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB88FC1E7193CD0028F28A /* PersonalRecord.swift */; };
-		D3EB89031E729A910028F28A /* PersonalRecordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89021E729A910028F28A /* PersonalRecordService.swift */; };
-		D3EB89071E729AE30028F28A /* PersonalRecordRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89061E729AE30028F28A /* PersonalRecordRemoteService.swift */; };
 		D3EB890A1E729FD00028F28A /* PersonalRecordViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89091E729FD00028F28A /* PersonalRecordViewController+UI.swift */; };
 		D3EB890C1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB890B1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift */; };
 		D3EB890E1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB890D1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift */; };
@@ -81,6 +89,16 @@
 		D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D310E5EF1E76C7C000AD6B74 /* WodJurnalNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WodJurnalNavigationController.swift; sourceTree = "<group>"; };
 		D310E5F11E76C7DA00AD6B74 /* WodJurnalTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WodJurnalTabBarController.swift; sourceTree = "<group>"; };
+		D3BB365F1E82A0470078CE53 /* PersonalRecordListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordListService.swift; sourceTree = "<group>"; };
+		D3BB36621E82A0920078CE53 /* PersonalRecordListRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordListRemoteService.swift; sourceTree = "<group>"; };
+		D3BB36641E82AFCF0078CE53 /* defaultPRs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPRs.plist; sourceTree = "<group>"; };
+		D3BB36661E840B120078CE53 /* NSError+LocalDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+LocalDomain.swift"; sourceTree = "<group>"; };
+		D3BB36681E840B4C0078CE53 /* UIViewController+Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Result.swift"; sourceTree = "<group>"; };
+		D3BB366B1E840CD80078CE53 /* UIViewController+AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+AlertController.swift"; sourceTree = "<group>"; };
+		D3BB366E1E843BD10078CE53 /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
+		D3BB36701E8446740078CE53 /* PersonalRecordService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordService.swift; sourceTree = "<group>"; };
+		D3BB36721E8446C80078CE53 /* PersonalRecordRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordRemoteService.swift; sourceTree = "<group>"; };
+		D3BB36741E8530540078CE53 /* GetPersonalRecordsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPersonalRecordsRequest.swift; sourceTree = "<group>"; };
 		D3E695111E7936050060D9D2 /* WODTypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypesTableViewController.swift; sourceTree = "<group>"; };
 		D3E695131E7936430060D9D2 /* WODTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypeTableViewCell.swift; sourceTree = "<group>"; };
 		D3E695151E7936880060D9D2 /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
@@ -89,8 +107,6 @@
 		D3EB88F61E7050C80028F28A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D3EB88F91E7061430028F28A /* DateTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTextField.swift; sourceTree = "<group>"; };
 		D3EB88FC1E7193CD0028F28A /* PersonalRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecord.swift; sourceTree = "<group>"; };
-		D3EB89021E729A910028F28A /* PersonalRecordService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordService.swift; sourceTree = "<group>"; };
-		D3EB89061E729AE30028F28A /* PersonalRecordRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordRemoteService.swift; sourceTree = "<group>"; };
 		D3EB89091E729FD00028F28A /* PersonalRecordViewController+UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonalRecordViewController+UI.swift"; sourceTree = "<group>"; };
 		D3EB890B1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonalRecordViewController+ImagePicker.swift"; sourceTree = "<group>"; };
 		D3EB890D1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonalRecordViewController+TimePicker.swift"; sourceTree = "<group>"; };
@@ -156,8 +172,10 @@
 			isa = PBXGroup;
 			children = (
 				436736931E686C0E001659D7 /* Wodjar.entitlements */,
+				D3BB366D1E843B940078CE53 /* Requests */,
 				D3EB89041E729ABB0028F28A /* RemoteServices */,
 				D3EB89011E729A590028F28A /* Services */,
+				D3BB366A1E840CB80078CE53 /* Categories */,
 				D3EB88FB1E7193B30028F28A /* Models */,
 				D3EB88F81E7061230028F28A /* Views */,
 				4325BEA91E67190400A0F969 /* Controllers */,
@@ -166,6 +184,7 @@
 				4325BE821E67185500A0F969 /* Assets.xcassets */,
 				4325BE841E67185500A0F969 /* LaunchScreen.storyboard */,
 				4325BE871E67185500A0F969 /* Info.plist */,
+				D3BB36641E82AFCF0078CE53 /* defaultPRs.plist */,
 			);
 			name = WodJar;
 			path = Wodjar;
@@ -242,6 +261,25 @@
 			name = CustomBaseClasses;
 			sourceTree = "<group>";
 		};
+		D3BB366A1E840CB80078CE53 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				D3BB36661E840B120078CE53 /* NSError+LocalDomain.swift */,
+				D3BB36681E840B4C0078CE53 /* UIViewController+Result.swift */,
+				D3BB366B1E840CD80078CE53 /* UIViewController+AlertController.swift */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		D3BB366D1E843B940078CE53 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				D3BB366E1E843BD10078CE53 /* BaseRequest.swift */,
+				D3BB36741E8530540078CE53 /* GetPersonalRecordsRequest.swift */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
 		D3E6950E1E7935A70060D9D2 /* PersonalRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,7 +329,8 @@
 		D3EB89011E729A590028F28A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D3EB89021E729A910028F28A /* PersonalRecordService.swift */,
+				D3BB365F1E82A0470078CE53 /* PersonalRecordListService.swift */,
+				D3BB36701E8446740078CE53 /* PersonalRecordService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -299,17 +338,10 @@
 		D3EB89041E729ABB0028F28A /* RemoteServices */ = {
 			isa = PBXGroup;
 			children = (
-				D3EB89051E729ACE0028F28A /* PersonalRecordRemoteServices */,
+				D3BB36621E82A0920078CE53 /* PersonalRecordListRemoteService.swift */,
+				D3BB36721E8446C80078CE53 /* PersonalRecordRemoteService.swift */,
 			);
 			name = RemoteServices;
-			sourceTree = "<group>";
-		};
-		D3EB89051E729ACE0028F28A /* PersonalRecordRemoteServices */ = {
-			isa = PBXGroup;
-			children = (
-				D3EB89061E729AE30028F28A /* PersonalRecordRemoteService.swift */,
-			);
-			name = PersonalRecordRemoteServices;
 			sourceTree = "<group>";
 		};
 		D3EB89081E729F8D0028F28A /* PersonalRecordViewController */ = {
@@ -456,6 +488,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3BB36651E82AFCF0078CE53 /* defaultPRs.plist in Resources */,
 				4325BE861E67185500A0F969 /* LaunchScreen.storyboard in Resources */,
 				4325BE831E67185500A0F969 /* Assets.xcassets in Resources */,
 				4325BE811E67185500A0F969 /* Main.storyboard in Resources */,
@@ -622,27 +655,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3E695141E7936430060D9D2 /* WODTypeTableViewCell.swift in Sources */,
+				D3BB366C1E840CD80078CE53 /* UIViewController+AlertController.swift in Sources */,
 				D3E695181E7937C00060D9D2 /* WorkoutList.swift in Sources */,
 				D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */,
 				D3E695161E7936880060D9D2 /* Workout.swift in Sources */,
 				D3EB88F71E7050C80028F28A /* LoginViewController.swift in Sources */,
-				D3EB89071E729AE30028F28A /* PersonalRecordRemoteService.swift in Sources */,
+				D3BB36601E82A0470078CE53 /* PersonalRecordListService.swift in Sources */,
 				D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */,
 				4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */,
 				D3EB890A1E729FD00028F28A /* PersonalRecordViewController+UI.swift in Sources */,
+				D3BB36751E8530540078CE53 /* GetPersonalRecordsRequest.swift in Sources */,
 				D3EB89151E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift in Sources */,
-				D3EB89031E729A910028F28A /* PersonalRecordService.swift in Sources */,
+				D3BB36711E8446740078CE53 /* PersonalRecordService.swift in Sources */,
 				D3E695121E7936050060D9D2 /* WODTypesTableViewController.swift in Sources */,
 				D310E5EB1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift in Sources */,
+				D3BB36691E840B4C0078CE53 /* UIViewController+Result.swift in Sources */,
 				D310E5F01E76C7C000AD6B74 /* WodJurnalNavigationController.swift in Sources */,
 				D3E9C7C11E6DCDDF007E8296 /* PersonalRecordViewController.swift in Sources */,
 				D3EB890C1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift in Sources */,
 				D3EB88FA1E7061430028F28A /* DateTextField.swift in Sources */,
+				D3BB36631E82A0920078CE53 /* PersonalRecordListRemoteService.swift in Sources */,
 				D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */,
 				D3EB88FD1E7193CD0028F28A /* PersonalRecord.swift in Sources */,
 				D3EB890E1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift in Sources */,
 				D3FD71411E6E00730047492D /* FullSizeImageViewController.swift in Sources */,
+				D3BB36731E8446C80078CE53 /* PersonalRecordRemoteService.swift in Sources */,
 				D3EB89131E72E00E0028F28A /* PersonalRecordsListViewController.swift in Sources */,
+				D3BB366F1E843BD10078CE53 /* BaseRequest.swift in Sources */,
+				D3BB36671E840B120078CE53 /* NSError+LocalDomain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

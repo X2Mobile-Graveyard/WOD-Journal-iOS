@@ -1,4 +1,19 @@
 PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -18,33 +33,41 @@ PODS:
     - FacebookCore (~> 0.2)
     - FBSDKCoreKit (~> 4.15)
     - FBSDKShareKit (~> 4.15)
-  - FBSDKCoreKit (4.20.0):
+  - FBSDKCoreKit (4.20.2):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.20.0):
+  - FBSDKLoginKit (4.20.2):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.20.0):
+  - FBSDKShareKit (4.20.2):
     - FBSDKCoreKit
+  - MBProgressHUD (1.0.0)
+  - Result (3.2.1)
   - TPKeyboardAvoiding (1.3.1)
   - UITextView+Placeholder (1.2.0)
 
 DEPENDENCIES:
+  - AFNetworking (~> 3.1)
   - FacebookCore
   - FacebookLogin
   - FacebookShare
+  - MBProgressHUD (~> 1.0)
+  - Result (~> 3.2)
   - TPKeyboardAvoiding (~> 1.3)
   - UITextView+Placeholder
 
 SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FacebookShare: 8e9ee8ea06505e6a1d3d719b0cc63e840fb8aaeb
-  FBSDKCoreKit: 2d16979b28fe28c2b95af0d275ad5f9703c6c8de
-  FBSDKLoginKit: a9d9391506c687e2304a590bf9312837fce7f375
-  FBSDKShareKit: 1b91af62a603d67f392bc7fde63bc4a0705dde31
+  FBSDKCoreKit: 82eac696eb6157da5f4266c3a241f00e9bd72471
+  FBSDKLoginKit: 2211bede07c83391349eacc1fd86cf6d9289ce38
+  FBSDKShareKit: ca9b22264ea49a896dafb2467c1a4f72aa41996f
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
   TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
-PODFILE CHECKSUM: c72628a47ddd0b1582bfd6c2247685d00ebb18d5
+PODFILE CHECKSUM: 2d133c735147a95a64486487cc9f481a49f82bd5
 
 COCOAPODS: 1.2.0

@@ -21,69 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController.delegate = self
         let navigationController = tabBarController.viewControllers?[0] as! UINavigationController
         let listController = navigationController.topViewController as! PersonalRecordsListViewController
-        
-        let personalRecord1 = PersonalRecord(name: "Deadlift",
-                                             rx: true,
-                                             result: "59",
-                                             resultType: .weight,
-                                             unitType: .metric,
-                                             notes: "No notes ywe",
-                                             imageUrl: nil,
-                                             date: Date())
-        let personalRecord2 = PersonalRecord(name: "Deadlift",
-                                             rx: false,
-                                             result: "32",
-                                             resultType: .repetitions,
-                                             unitType: .imperial,
-                                             notes: nil,
-                                             imageUrl: nil,
-                                             date: Date())
-        let personalRecord3 = PersonalRecord(name: "Running",
-                                             rx: true,
-                                             result: "34:23",
-                                             resultType: .time,
-                                             unitType: .metric,
-                                             notes: "No notes ywe",
-                                             imageUrl: nil,
-                                             date: Date())
-        let personalRecord4 = PersonalRecord(name: "Running",
-                                             rx: false,
-                                             result: "43:23",
-                                             resultType: .time,
-                                             unitType: .imperial,
-                                             notes: nil,
-                                             imageUrl: nil,
-                                             date: Date())
-        let personalRecord5 = PersonalRecord(name: "Pushups",
-                                             rx: true,
-                                             result: "20",
-                                             resultType: .repetitions,
-                                             unitType: .metric,
-                                             notes: "No notes ywe",
-                                             imageUrl: nil,
-                                             date: Date())
-        let personalRecord6 = PersonalRecord(name: "Pushups",
-                                             rx: false,
-                                             result: "32",
-                                             resultType: .repetitions,
-                                             unitType: .imperial,
-                                             notes: nil,
-                                             imageUrl: nil,
-                                             date: Date())
-       
-        let personalRecordType1 = PersonalRecordType(name: "Deadlift", present: true)
-        personalRecordType1.add(personalRecord: personalRecord1)
-        personalRecordType1.add(personalRecord: personalRecord2)
-        
-        let personalRecordType2 = PersonalRecordType(name: "Running", present: false)
-        personalRecordType2.add(personalRecord: personalRecord3)
-        personalRecordType2.add(personalRecord: personalRecord4)
-        
-        let personalRecordType3 = PersonalRecordType(name: "Pushups", present: true)
-        personalRecordType3.add(personalRecord: personalRecord5)
-        personalRecordType3.add(personalRecord: personalRecord6)
-        
-        listController.recordTypes = [personalRecordType1, personalRecordType2, personalRecordType3];
+        let service = PersonalRecordListService(remoteService: PersonalRecordListRemoteImpl())
+        listController.service = service
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

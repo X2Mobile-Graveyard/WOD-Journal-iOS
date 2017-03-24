@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol UpdatePersonalRecordDelegate {
+    func didDelete(personalRecord: PersonalRecord)
+    func didAdd(personalRecord: PersonalRecord)
+}
+
 class PersonalRecordDetailsListViewController: UIViewController {
     
     // @IBOutlets
@@ -16,12 +21,16 @@ class PersonalRecordDetailsListViewController: UIViewController {
     
     // @Injected
     var personalRecordType: PersonalRecordType!
-    var selectedPersoanlRecord: PersonalRecord?
+    var service: PersonalRecordListService!
     
     // @Constants
     let personalRecordSegueIdentifier = "goToPersonalRecordIdentifier"
     let cellIdentifier = "personalRecordDetailCelldentifier"
     let newPersonalRecordSegueIdentifier = "goToNewPersonalRecordViewController"
+    
+    // @Properties
+    var selectedPersoanlRecord: PersonalRecord?
+    var deleteTypeDelegate: PersonalRecordTypeDeleteDelegate?
     
     // MARK: - View Controller Life Cycle
     
@@ -29,9 +38,32 @@ class PersonalRecordDetailsListViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupTitle()
+        getResultsForPersonalRecords()
     }
     
-    // MARK: - UIInitialization
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
+    // MARK: - Initialization
+    
+    private func getResultsForPersonalRecords() {
+        if !personalRecordType.present {
+            return
+        }
+        
+        service.getPersonalRecordResult(for: personalRecordType.name) { (result) in
+            switch result {
+            case let .success(prResults):
+                self.personalRecordType.records = prResults
+                self.personalRecordType.defaultResultType = prResults[0].resultType
+                self.tableView.reloadData()
+            case .failure(_):
+                self.handleError(result: result)
+            }
+        }
+    }
     
     private func setupTitle() {
         if personalRecordType.name != nil {
@@ -48,11 +80,13 @@ class PersonalRecordDetailsListViewController: UIViewController {
     // MARK: - Buttons Actions
     
     @IBAction func didTapLogNewPRButton(_ sender: Any) {
-        
+        // present Login screen here and call segue manually
     }
 
     @IBAction func didTapDeleteButton(_ sender: Any) {
-        
+        showAlert(with: "Warning", message: "This action will delete all registered records. Do you wish to continue?", actionButtonTitle: "Delete") { (action) in
+            self.deleteAllRecords()
+        }
     }
     
     @IBAction func didTapEditTitleButton(_ sender: Any) {
@@ -73,10 +107,50 @@ class PersonalRecordDetailsListViewController: UIViewController {
             let personalRecordViewController = segue.destination as! PersonalRecordViewController
             personalRecordViewController.personalRecord = selectedPersoanlRecord
             personalRecordViewController.controllerMode = .editMode
+            personalRecordViewController.updatePersonalRecordDelegate = self
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceTest())
         } else if identifier == newPersonalRecordSegueIdentifier {
             let personalRecordViewController = segue.destination as! PersonalRecordViewController
-            personalRecordViewController.personalRecord = PersonalRecord()
-            personalRecordViewController.controllerMode = .createMode
+            personalRecordViewController.personalRecord = PersonalRecord(name: personalRecordType.name,
+                                                                         rx: false,
+                                                                         result: nil,
+                                                                         resultType: personalRecordType.defaultResultType ?? .weight,
+                                                                         unitType: .metric,
+                                                                         notes: nil,
+                                                                         imageUrl: nil,
+                                                                         date: Date())
+            personalRecordViewController.updatePersonalRecordDelegate = self
+            personalRecordViewController.controllerMode = .editMode
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceTest())
+        }
+    }
+    
+    // MARK: - Service Calls
+    
+    func deleteAllRecords() {
+        service.deleteAllRecords(for: personalRecordType) { (result) in
+            switch result {
+            case .success():
+                self.deleteTypeDelegate?.didDelete(personalRecordType: self.personalRecordType)
+                self.personalRecordType.records = [PersonalRecord]()
+                self.tableView.reloadData()
+                _ = self.navigationController?.popViewController(animated: true)
+            case .failure(_):
+                self.handleError(result: result)
+            }
+        }
+    }
+    
+    func deletePersonalRecord(at index: Int) {
+        let personalRecordToDelete = personalRecordType.records[index]
+        service.deletePersonalRecord(with: personalRecordToDelete.id!) { (result) in
+            switch result {
+            case .success():
+                self.personalRecordType.records.remove(at: index)
+                self.tableView.reloadData()
+            case .failure(_):
+                self.handleError(result: result)
+            }
         }
     }
 
@@ -113,7 +187,8 @@ extension PersonalRecordDetailsListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            print("Did delete entry")
+            deletePersonalRecord(at: indexPath.row)
+            
         }
     }
     
@@ -127,10 +202,28 @@ extension PersonalRecordDetailsListViewController: UITableViewDelegate {
 extension PersonalRecordDetailsListViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == titleTextField {
+            if let newName = textField.text {
+                // make request
+                personalRecordType.name = newName
+            }
             titleTextField.resignFirstResponder()
         }
         
         return true
+    }
+}
+
+extension PersonalRecordDetailsListViewController: UpdatePersonalRecordDelegate {
+    func didDelete(personalRecord: PersonalRecord) {
+        if let indexToDelete = personalRecordType.records.index(where: {$0.id! == personalRecord.id!}) {
+            personalRecordType.records.remove(at: indexToDelete)
+            tableView.reloadData()
+        }
+    }
+    
+    func didAdd(personalRecord: PersonalRecord) {
+        personalRecordType.records.append(personalRecord)
+        tableView.reloadData()
     }
 }
 

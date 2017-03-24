@@ -12,10 +12,17 @@ class PersonalRecordType {
     var name: String? = "Unknown"
     var present: Bool = false
     var records: [PersonalRecord] = [PersonalRecord]()
+    var defaultResultType: PersonalRecordResultType?
     
     init(name: String, present: Bool) {
         self.name = name
         self.present = present
+    }
+    
+    init(name: String, present: Bool, defaultType: PersonalRecordResultType) {
+        self.name = name
+        self.present = present
+        self.defaultResultType = defaultType
     }
     
     func add(personalRecord: PersonalRecord) {

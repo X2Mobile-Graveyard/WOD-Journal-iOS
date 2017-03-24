@@ -10,6 +10,9 @@ target 'Wodjar' do
   pod 'FacebookShare'
   pod 'TPKeyboardAvoiding', '~> 1.3'
   pod 'UITextView+Placeholder'
+  pod 'AFNetworking', '~> 3.1'
+  pod 'Result', '~> 3.2'
+  pod 'MBProgressHUD', '~> 1.0'
   
   target 'WodjarTests' do
     inherit! :search_paths

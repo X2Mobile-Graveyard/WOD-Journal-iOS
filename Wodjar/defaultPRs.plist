@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Weight</key>
+	<array>
+		<string>Back Squat</string>
+		<string>Front Squat</string>
+		<string>Bench Press</string>
+		<string>Clean</string>
+		<string>Jerk</string>
+		<string>Clean &amp; Jerk</string>
+		<string>Power Clean</string>
+		<string>Snatch</string>
+		<string>Power Snatch</string>
+		<string>One Handed Snatch</string>
+		<string>Overhead Squat</string>
+		<string>Dead Lift</string>
+		<string>Push Press</string>
+		<string>Shoulder Press</string>
+		<string>Thruster</string>
+		<string>Turkish Get-up</string>
+		<string>Weighted Pull-up</string>
+		<string>Weighted Ring-Dip</string>
+	</array>
+	<key>Time</key>
+	<array>
+		<string>500 m Row</string>
+		<string>1000 m Row</string>
+		<string>2000 m Row </string>
+		<string>5000 m Row</string>
+		<string>100 m Run</string>
+		<string>1 km Run</string>
+		<string>3 km Run</string>
+		<string>5 km Run</string>
+		<string>10 km Run</string>
+		<string>1/2 marathon Run</string>
+		<string>1 marathon Run</string>
+	</array>
+</dict>
+</plist>

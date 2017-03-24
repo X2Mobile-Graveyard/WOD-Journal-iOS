@@ -89,6 +89,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/AFNetworking/AFNetworking.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit/FBSDKCoreKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit/FBSDKLoginKit.framework"
@@ -96,10 +97,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/FacebookCore/FacebookCore.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FacebookLogin/FacebookLogin.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FacebookShare/FacebookShare.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Result/Result.framework"
   install_framework "$BUILT_PRODUCTS_DIR/TPKeyboardAvoiding/TPKeyboardAvoiding.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UITextView+Placeholder/UITextView_Placeholder.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/AFNetworking/AFNetworking.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit/FBSDKCoreKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit/FBSDKLoginKit.framework"
@@ -107,6 +111,8 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/FacebookCore/FacebookCore.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FacebookLogin/FacebookLogin.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FacebookShare/FacebookShare.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Result/Result.framework"
   install_framework "$BUILT_PRODUCTS_DIR/TPKeyboardAvoiding/TPKeyboardAvoiding.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UITextView+Placeholder/UITextView_Placeholder.framework"
 fi

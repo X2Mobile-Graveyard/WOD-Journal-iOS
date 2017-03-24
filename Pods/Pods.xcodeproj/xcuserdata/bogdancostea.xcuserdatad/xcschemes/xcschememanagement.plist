@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -39,6 +44,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Wodjar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -50,6 +60,11 @@
 			<false/>
 		</dict>
 		<key>Pods-WodjarUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Result.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -67,17 +82,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>228C9B3FA2E4464A82F19CF721EDEB40</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>332F91393FB1DE033D370B4CEDDD5FCF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>44CAD6CE523055ED339E87154473A254</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4E572E5E8C667198ED8ACA8619BAE5E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,11 +117,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5CA07648766C90F823A98CBEE9C08554</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>7335E9C9689F3B8A16F063A884748533</key>
 		<dict>
 			<key>primary</key>
@@ -117,12 +132,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B6C94BE380A029587F680CFEAA712599</key>
+		<key>CED3AA671BBF0A8D3D3DAA57BA36D1C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CF671F7E57B92905F1CC91D036D6B4A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F185E52407CFA6FE1A8F06664F300061</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE34FE1ABA31E17D88BF394F443D1A01</key>
 		<dict>
 			<key>primary</key>
 			<true/>

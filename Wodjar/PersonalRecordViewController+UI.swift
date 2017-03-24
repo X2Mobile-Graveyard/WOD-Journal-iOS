@@ -13,6 +13,7 @@ extension PersonalRecordViewController {
     // MARK: - UI Initialization
     
     func initUI() {
+        setupResultTextField()
         setupSegmentedControl()
         setupTitleTextField()
         setupScrollView()
@@ -23,6 +24,17 @@ extension PersonalRecordViewController {
         setupCalendarTextField()
         setupGestureRecognizer()
         hideKeyboardWhenTappedAround()
+    }
+    
+    func setupResultTextField() {
+        if personalRecord.result != nil {
+            resultTextField.text = personalRecord.result
+        }
+    }
+    
+    func changeUIForEditMode() {
+        setupTitleTextField()
+        setupSegmentedControl()
     }
     
     func setupFirstResponder() {
@@ -96,7 +108,7 @@ extension PersonalRecordViewController {
     private func setupSegmentedControl() {
         segmentedControl.selectedSegmentIndex = personalRecord.resultType.hashValue
         recordType = personalRecord.resultType
-        if personalRecord.name != nil {
+        if controllerMode == .editMode {
             segmentedControl.isUserInteractionEnabled = false
             segmentedControl.isEnabled = false
         } else {
@@ -269,10 +281,10 @@ extension PersonalRecordViewController {
         let bottom = NSLayoutConstraint(item: userPictureView,
                                         attribute: .bottom,
                                         relatedBy: .equal,
-                                        toItem: contentView,
-                                        attribute: .bottom,
+                                        toItem: deleteButton,
+                                        attribute: .top,
                                         multiplier: 1,
-                                        constant: 20)
+                                        constant: -20)
         
         view.addConstraints([leading, trailing, height, top, bottom])
     }
