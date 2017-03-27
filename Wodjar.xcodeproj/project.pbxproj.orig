@@ -644,8 +644,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				D3BB36651E82AFCF0078CE53 /* defaultPRs.plist in Resources */,
+=======
 				BFD44D8D1E82B4E900170817 /* UnitsComponent.xib in Resources */,
+>>>>>>> more_tab
 				4325BE861E67185500A0F969 /* LaunchScreen.storyboard in Resources */,
 				BFD44D821E82A58E00170817 /* MoreComponent.xib in Resources */,
 				4325BE831E67185500A0F969 /* Assets.xcassets in Resources */,
@@ -812,11 +815,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				D3BB366C1E840CD80078CE53 /* UIViewController+AlertController.swift in Sources */,
+=======
 				D3E695141E7936430060D9D2 /* WODTypeTableViewCell.swift in Sources */,
 				BFD44D8B1E82B4C500170817 /* UnitsComponent.swift in Sources */,
 				BF315FED1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift in Sources */,
 				BFD44D881E82ACF700170817 /* MoreViewController.swift in Sources */,
+>>>>>>> more_tab
 				D3E695181E7937C00060D9D2 /* WorkoutList.swift in Sources */,
 				BF5B42A61E8185AA001CA306 /* IBControl.swift in Sources */,
 				D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */,
@@ -826,14 +832,18 @@
 				D3EB88F71E7050C80028F28A /* LoginViewController.swift in Sources */,
 				D3BB36601E82A0470078CE53 /* PersonalRecordListService.swift in Sources */,
 				D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */,
+<<<<<<< HEAD
 				D347A5D91E8946C400AE888E /* DefaultWODTypeTableViewController.swift in Sources */,
 				D347A5EA1E8946F100AE888E /* DefaultWODDetailsViewController.swift in Sources */,
 				D347A5E91E8946F100AE888E /* CustomWODDetailsViewController.swift in Sources */,
-				BFD44D991E82D08E00170817 /* UIButton+BackgroundColor.swift in Sources */,
 				4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */,
 				D347A5D21E8946BA00AE888E /* WODTypesTableViewController.swift in Sources */,
 				D347A5E11E8946E200AE888E /* WODDescriptionTableViewCell.swift in Sources */,
+=======
+				BFD44D991E82D08E00170817 /* UIButton+BackgroundColor.swift in Sources */,
+				4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */,
 				BF315FEB1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift in Sources */,
+>>>>>>> more_tab
 				D3EB890A1E729FD00028F28A /* PersonalRecordViewController+UI.swift in Sources */,
 				D347A5D31E8946BA00AE888E /* WODTypeTableViewCell.swift in Sources */,
 				D3BB36751E8530540078CE53 /* GetPersonalRecordsRequest.swift in Sources */,

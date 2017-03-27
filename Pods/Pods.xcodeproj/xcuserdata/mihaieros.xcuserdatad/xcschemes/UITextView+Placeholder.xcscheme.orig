@@ -14,9 +14,13 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6F69863B5CBBD32F85FCC832292ED1FE"
-               BuildableName = "TPKeyboardAvoiding.framework"
-               BlueprintName = "TPKeyboardAvoiding"
+<<<<<<< HEAD
+               BlueprintIdentifier = "DC4E24C14A4F6B569908B2213D9F855E"
+=======
+               BlueprintIdentifier = "228C9B3FA2E4464A82F19CF721EDEB40"
+>>>>>>> more_tab
+               BuildableName = "UITextView_Placeholder.framework"
+               BlueprintName = "UITextView+Placeholder"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +49,13 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B6C94BE380A029587F680CFEAA712599"
-            BuildableName = "TPKeyboardAvoiding.framework"
-            BlueprintName = "TPKeyboardAvoiding"
+<<<<<<< HEAD
+            BlueprintIdentifier = "DC4E24C14A4F6B569908B2213D9F855E"
+=======
+            BlueprintIdentifier = "228C9B3FA2E4464A82F19CF721EDEB40"
+>>>>>>> more_tab
+            BuildableName = "UITextView_Placeholder.framework"
+            BlueprintName = "UITextView+Placeholder"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +71,13 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6F69863B5CBBD32F85FCC832292ED1FE"
-            BuildableName = "TPKeyboardAvoiding.framework"
-            BlueprintName = "TPKeyboardAvoiding"
+<<<<<<< HEAD
+            BlueprintIdentifier = "DC4E24C14A4F6B569908B2213D9F855E"
+=======
+            BlueprintIdentifier = "228C9B3FA2E4464A82F19CF721EDEB40"
+>>>>>>> more_tab
+            BuildableName = "UITextView_Placeholder.framework"
+            BlueprintName = "UITextView+Placeholder"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -14,9 +14,13 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6F69863B5CBBD32F85FCC832292ED1FE"
-               BuildableName = "TPKeyboardAvoiding.framework"
-               BlueprintName = "TPKeyboardAvoiding"
+<<<<<<< HEAD
+               BlueprintIdentifier = "9AC6D35D074001564659A0FF99D9DB36"
+=======
+               BlueprintIdentifier = "5CA07648766C90F823A98CBEE9C08554"
+>>>>>>> more_tab
+               BuildableName = "Pods_Wodjar.framework"
+               BlueprintName = "Pods-Wodjar"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +49,13 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B6C94BE380A029587F680CFEAA712599"
-            BuildableName = "TPKeyboardAvoiding.framework"
-            BlueprintName = "TPKeyboardAvoiding"
+<<<<<<< HEAD
+            BlueprintIdentifier = "9AC6D35D074001564659A0FF99D9DB36"
+=======
+            BlueprintIdentifier = "5CA07648766C90F823A98CBEE9C08554"
+>>>>>>> more_tab
+            BuildableName = "Pods_Wodjar.framework"
+            BlueprintName = "Pods-Wodjar"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +71,13 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6F69863B5CBBD32F85FCC832292ED1FE"
-            BuildableName = "TPKeyboardAvoiding.framework"
-            BlueprintName = "TPKeyboardAvoiding"
+<<<<<<< HEAD
+            BlueprintIdentifier = "9AC6D35D074001564659A0FF99D9DB36"
+=======
+            BlueprintIdentifier = "5CA07648766C90F823A98CBEE9C08554"
+>>>>>>> more_tab
+            BuildableName = "Pods_Wodjar.framework"
+            BlueprintName = "Pods-Wodjar"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
