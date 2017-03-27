@@ -11,7 +11,7 @@ import UIKit
 class GetPersonalRecordsRequest: BaseRequest {
 
     override func headerParams() -> [String : String] {
-        return ["Authorization":"Token 66c168e57284db615f3c71c19a8d83e8"];
+        return ["Authorization":"Token b086fdf5351f30112654d08f83fb6eeb"];
     }
     
     override func requestURL() -> String {

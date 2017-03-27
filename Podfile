@@ -14,6 +14,8 @@ target 'Wodjar' do
   pod 'Result', '~> 3.2'
   pod 'MBProgressHUD', '~> 1.0'
   pod 'AWSS3'
+  pod 'SDWebImage', '~> 4.0'
+  pod 'XCDYouTubeKit', '~> 2.5'
 
   target 'WodjarTests' do
     inherit! :search_paths

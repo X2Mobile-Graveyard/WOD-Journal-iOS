@@ -9,7 +9,7 @@
 import UIKit
 
 class WorkoutList: NSObject {
-
+    
     var wodTypesOrder: [WODType] = [.girl, .hero, .challenge, .open]
     var workouts: [Workout] = []
     var girls: [Workout] {
@@ -74,6 +74,21 @@ class WorkoutList: NSObject {
         return sectionsNames
     }
     
+    func getWorkouts(for wodType: WODType) -> [Workout] {
+        switch wodType {
+        case .challenge:
+            return chalanges
+        case .custom:
+            return customs
+        case .girl:
+            return girls
+        case .hero:
+            return heroes
+        case .open:
+            return opens
+        }
+    }
+    
     func workout(with type: WODType, at index: Int) -> Workout {
         switch type {
         case .girl:
@@ -101,7 +116,7 @@ class WorkoutList: NSObject {
             return opens.count
         case .custom:
             return customs.count
-         
+            
         }
     }
     

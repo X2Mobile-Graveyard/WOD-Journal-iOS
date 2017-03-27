@@ -79,6 +79,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>TPKeyboardAvoiding.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -89,20 +94,20 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>XCDYouTubeKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>27ED22769183FD00C2C27EF70F4E3741</key>
+		<key>068A15EA1661D5FCC952F7F26C890AD8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>332F91393FB1DE033D370B4CEDDD5FCF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>33E187AD81010791EF93769F8FBD4091</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,17 +142,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>5DB1EA4F9AE862FA9F516BB4BFDAFEED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6F69863B5CBBD32F85FCC832292ED1FE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>7335E9C9689F3B8A16F063A884748533</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7949D03D91AEF5CD4C9F0294C90813A6</key>
+		<key>791C7487B31A6C3A288F6F6A9FD6CCC4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>7FD49A15BC28BECD1A659CB4410EED59</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9AC6D35D074001564659A0FF99D9DB36</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -167,12 +187,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
+		<key>DC4E24C14A4F6B569908B2213D9F855E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E256A134110E7472A9FAE6EB12C70268</key>
+		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

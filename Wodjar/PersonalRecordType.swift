@@ -12,14 +12,14 @@ class PersonalRecordType {
     var name: String? = "Unknown"
     var present: Bool = false
     var records: [PersonalRecord] = [PersonalRecord]()
-    var defaultResultType: PersonalRecordResultType?
+    var defaultResultType: WODCategory?
     
     init(name: String, present: Bool) {
         self.name = name
         self.present = present
     }
     
-    init(name: String, present: Bool, defaultType: PersonalRecordResultType) {
+    init(name: String, present: Bool, defaultType: WODCategory) {
         self.name = name
         self.present = present
         self.defaultResultType = defaultType

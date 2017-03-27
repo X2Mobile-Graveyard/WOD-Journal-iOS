@@ -20,6 +20,20 @@
 		D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */; };
 		D310E5F01E76C7C000AD6B74 /* WodJurnalNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EF1E76C7C000AD6B74 /* WodJurnalNavigationController.swift */; };
 		D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5F11E76C7DA00AD6B74 /* WodJurnalTabBarController.swift */; };
+		D347A5D21E8946BA00AE888E /* WODTypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5D01E8946BA00AE888E /* WODTypesTableViewController.swift */; };
+		D347A5D31E8946BA00AE888E /* WODTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5D11E8946BA00AE888E /* WODTypeTableViewCell.swift */; };
+		D347A5D71E8946C400AE888E /* WODTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5D41E8946C400AE888E /* WODTypeTableViewController.swift */; };
+		D347A5D81E8946C400AE888E /* CustomWODTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5D51E8946C400AE888E /* CustomWODTypeTableViewController.swift */; };
+		D347A5D91E8946C400AE888E /* DefaultWODTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5D61E8946C400AE888E /* DefaultWODTypeTableViewController.swift */; };
+		D347A5E01E8946E200AE888E /* WODImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5DB1E8946E200AE888E /* WODImageTableViewCell.swift */; };
+		D347A5E11E8946E200AE888E /* WODDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5DC1E8946E200AE888E /* WODDescriptionTableViewCell.swift */; };
+		D347A5E21E8946E200AE888E /* WODVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5DD1E8946E200AE888E /* WODVideoTableViewCell.swift */; };
+		D347A5E31E8946E200AE888E /* LogWODResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5DE1E8946E200AE888E /* LogWODResultTableViewCell.swift */; };
+		D347A5E41E8946E200AE888E /* WODResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5DF1E8946E200AE888E /* WODResultTableViewCell.swift */; };
+		D347A5E81E8946F100AE888E /* WODDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5E51E8946F100AE888E /* WODDetailsTableViewController.swift */; };
+		D347A5E91E8946F100AE888E /* CustomWODDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5E61E8946F100AE888E /* CustomWODDetailsViewController.swift */; };
+		D347A5EA1E8946F100AE888E /* DefaultWODDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5E71E8946F100AE888E /* DefaultWODDetailsViewController.swift */; };
+		D347A5EC1E89479800AE888E /* WODResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5EB1E89479800AE888E /* WODResult.swift */; };
 		D3BB36601E82A0470078CE53 /* PersonalRecordListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB365F1E82A0470078CE53 /* PersonalRecordListService.swift */; };
 		D3BB36631E82A0920078CE53 /* PersonalRecordListRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36621E82A0920078CE53 /* PersonalRecordListRemoteService.swift */; };
 		D3BB36651E82AFCF0078CE53 /* defaultPRs.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3BB36641E82AFCF0078CE53 /* defaultPRs.plist */; };
@@ -31,8 +45,6 @@
 		D3BB36731E8446C80078CE53 /* PersonalRecordRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36721E8446C80078CE53 /* PersonalRecordRemoteService.swift */; };
 		D3BB36751E8530540078CE53 /* GetPersonalRecordsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36741E8530540078CE53 /* GetPersonalRecordsRequest.swift */; };
 		D3C8B92C1E8562940040D12B /* UploadImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C8B92B1E8562930040D12B /* UploadImageRequest.swift */; };
-		D3E695121E7936050060D9D2 /* WODTypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695111E7936050060D9D2 /* WODTypesTableViewController.swift */; };
-		D3E695141E7936430060D9D2 /* WODTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695131E7936430060D9D2 /* WODTypeTableViewCell.swift */; };
 		D3E695161E7936880060D9D2 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695151E7936880060D9D2 /* Workout.swift */; };
 		D3E695181E7937C00060D9D2 /* WorkoutList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695171E7937C00060D9D2 /* WorkoutList.swift */; };
 		D3E9C7C11E6DCDDF007E8296 /* PersonalRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E9C7C01E6DCDDF007E8296 /* PersonalRecordViewController.swift */; };
@@ -90,6 +102,20 @@
 		D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D310E5EF1E76C7C000AD6B74 /* WodJurnalNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WodJurnalNavigationController.swift; sourceTree = "<group>"; };
 		D310E5F11E76C7DA00AD6B74 /* WodJurnalTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WodJurnalTabBarController.swift; sourceTree = "<group>"; };
+		D347A5D01E8946BA00AE888E /* WODTypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypesTableViewController.swift; sourceTree = "<group>"; };
+		D347A5D11E8946BA00AE888E /* WODTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypeTableViewCell.swift; sourceTree = "<group>"; };
+		D347A5D41E8946C400AE888E /* WODTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypeTableViewController.swift; sourceTree = "<group>"; };
+		D347A5D51E8946C400AE888E /* CustomWODTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWODTypeTableViewController.swift; sourceTree = "<group>"; };
+		D347A5D61E8946C400AE888E /* DefaultWODTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWODTypeTableViewController.swift; sourceTree = "<group>"; };
+		D347A5DB1E8946E200AE888E /* WODImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODImageTableViewCell.swift; sourceTree = "<group>"; };
+		D347A5DC1E8946E200AE888E /* WODDescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODDescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		D347A5DD1E8946E200AE888E /* WODVideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODVideoTableViewCell.swift; sourceTree = "<group>"; };
+		D347A5DE1E8946E200AE888E /* LogWODResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogWODResultTableViewCell.swift; sourceTree = "<group>"; };
+		D347A5DF1E8946E200AE888E /* WODResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODResultTableViewCell.swift; sourceTree = "<group>"; };
+		D347A5E51E8946F100AE888E /* WODDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODDetailsTableViewController.swift; sourceTree = "<group>"; };
+		D347A5E61E8946F100AE888E /* CustomWODDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWODDetailsViewController.swift; sourceTree = "<group>"; };
+		D347A5E71E8946F100AE888E /* DefaultWODDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWODDetailsViewController.swift; sourceTree = "<group>"; };
+		D347A5EB1E89479800AE888E /* WODResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODResult.swift; sourceTree = "<group>"; };
 		D3BB365F1E82A0470078CE53 /* PersonalRecordListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordListService.swift; sourceTree = "<group>"; };
 		D3BB36621E82A0920078CE53 /* PersonalRecordListRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordListRemoteService.swift; sourceTree = "<group>"; };
 		D3BB36641E82AFCF0078CE53 /* defaultPRs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPRs.plist; sourceTree = "<group>"; };
@@ -101,8 +127,6 @@
 		D3BB36721E8446C80078CE53 /* PersonalRecordRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordRemoteService.swift; sourceTree = "<group>"; };
 		D3BB36741E8530540078CE53 /* GetPersonalRecordsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPersonalRecordsRequest.swift; sourceTree = "<group>"; };
 		D3C8B92B1E8562930040D12B /* UploadImageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadImageRequest.swift; sourceTree = "<group>"; };
-		D3E695111E7936050060D9D2 /* WODTypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypesTableViewController.swift; sourceTree = "<group>"; };
-		D3E695131E7936430060D9D2 /* WODTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypeTableViewCell.swift; sourceTree = "<group>"; };
 		D3E695151E7936880060D9D2 /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		D3E695171E7937C00060D9D2 /* WorkoutList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutList.swift; sourceTree = "<group>"; };
 		D3E9C7C01E6DCDDF007E8296 /* PersonalRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordViewController.swift; sourceTree = "<group>"; };
@@ -263,6 +287,48 @@
 			name = CustomBaseClasses;
 			sourceTree = "<group>";
 		};
+		D347A5CD1E89469400AE888E /* WODDetailsController */ = {
+			isa = PBXGroup;
+			children = (
+				D347A5E51E8946F100AE888E /* WODDetailsTableViewController.swift */,
+				D347A5E61E8946F100AE888E /* CustomWODDetailsViewController.swift */,
+				D347A5E71E8946F100AE888E /* DefaultWODDetailsViewController.swift */,
+				D347A5DA1E8946CC00AE888E /* WODDetailsCells */,
+			);
+			name = WODDetailsController;
+			sourceTree = "<group>";
+		};
+		D347A5CE1E8946A000AE888E /* WODTypeController */ = {
+			isa = PBXGroup;
+			children = (
+				D347A5D41E8946C400AE888E /* WODTypeTableViewController.swift */,
+				D347A5D51E8946C400AE888E /* CustomWODTypeTableViewController.swift */,
+				D347A5D61E8946C400AE888E /* DefaultWODTypeTableViewController.swift */,
+			);
+			name = WODTypeController;
+			sourceTree = "<group>";
+		};
+		D347A5CF1E8946A800AE888E /* WODTypesController */ = {
+			isa = PBXGroup;
+			children = (
+				D347A5D01E8946BA00AE888E /* WODTypesTableViewController.swift */,
+				D347A5D11E8946BA00AE888E /* WODTypeTableViewCell.swift */,
+			);
+			name = WODTypesController;
+			sourceTree = "<group>";
+		};
+		D347A5DA1E8946CC00AE888E /* WODDetailsCells */ = {
+			isa = PBXGroup;
+			children = (
+				D347A5DB1E8946E200AE888E /* WODImageTableViewCell.swift */,
+				D347A5DC1E8946E200AE888E /* WODDescriptionTableViewCell.swift */,
+				D347A5DD1E8946E200AE888E /* WODVideoTableViewCell.swift */,
+				D347A5DE1E8946E200AE888E /* LogWODResultTableViewCell.swift */,
+				D347A5DF1E8946E200AE888E /* WODResultTableViewCell.swift */,
+			);
+			name = WODDetailsCells;
+			sourceTree = "<group>";
+		};
 		D3BB366A1E840CB80078CE53 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,18 +362,11 @@
 		D3E6950F1E7935B90060D9D2 /* WODs */ = {
 			isa = PBXGroup;
 			children = (
-				D3E695101E7935CC0060D9D2 /* WODTypesController */,
+				D347A5CF1E8946A800AE888E /* WODTypesController */,
+				D347A5CE1E8946A000AE888E /* WODTypeController */,
+				D347A5CD1E89469400AE888E /* WODDetailsController */,
 			);
 			name = WODs;
-			sourceTree = "<group>";
-		};
-		D3E695101E7935CC0060D9D2 /* WODTypesController */ = {
-			isa = PBXGroup;
-			children = (
-				D3E695111E7936050060D9D2 /* WODTypesTableViewController.swift */,
-				D3E695131E7936430060D9D2 /* WODTypeTableViewCell.swift */,
-			);
-			name = WODTypesController;
 			sourceTree = "<group>";
 		};
 		D3EB88F81E7061230028F28A /* Views */ = {
@@ -321,6 +380,7 @@
 		D3EB88FB1E7193B30028F28A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D347A5EB1E89479800AE888E /* WODResult.swift */,
 				D3EB88FC1E7193CD0028F28A /* PersonalRecord.swift */,
 				D3EB89161E72EF9D0028F28A /* PersonalRecordType.swift */,
 				D3E695151E7936880060D9D2 /* Workout.swift */,
@@ -657,33 +717,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3E695141E7936430060D9D2 /* WODTypeTableViewCell.swift in Sources */,
 				D3BB366C1E840CD80078CE53 /* UIViewController+AlertController.swift in Sources */,
 				D3E695181E7937C00060D9D2 /* WorkoutList.swift in Sources */,
 				D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */,
+				D347A5E41E8946E200AE888E /* WODResultTableViewCell.swift in Sources */,
 				D3E695161E7936880060D9D2 /* Workout.swift in Sources */,
 				D3EB88F71E7050C80028F28A /* LoginViewController.swift in Sources */,
 				D3BB36601E82A0470078CE53 /* PersonalRecordListService.swift in Sources */,
 				D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */,
+				D347A5D91E8946C400AE888E /* DefaultWODTypeTableViewController.swift in Sources */,
+				D347A5EA1E8946F100AE888E /* DefaultWODDetailsViewController.swift in Sources */,
+				D347A5E91E8946F100AE888E /* CustomWODDetailsViewController.swift in Sources */,
 				4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */,
+				D347A5D21E8946BA00AE888E /* WODTypesTableViewController.swift in Sources */,
+				D347A5E11E8946E200AE888E /* WODDescriptionTableViewCell.swift in Sources */,
 				D3EB890A1E729FD00028F28A /* PersonalRecordViewController+UI.swift in Sources */,
+				D347A5D31E8946BA00AE888E /* WODTypeTableViewCell.swift in Sources */,
 				D3BB36751E8530540078CE53 /* GetPersonalRecordsRequest.swift in Sources */,
+				D347A5E21E8946E200AE888E /* WODVideoTableViewCell.swift in Sources */,
 				D3EB89151E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift in Sources */,
 				D3BB36711E8446740078CE53 /* PersonalRecordService.swift in Sources */,
-				D3E695121E7936050060D9D2 /* WODTypesTableViewController.swift in Sources */,
 				D310E5EB1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift in Sources */,
+				D347A5D81E8946C400AE888E /* CustomWODTypeTableViewController.swift in Sources */,
 				D3BB36691E840B4C0078CE53 /* UIViewController+Result.swift in Sources */,
 				D310E5F01E76C7C000AD6B74 /* WodJurnalNavigationController.swift in Sources */,
 				D3E9C7C11E6DCDDF007E8296 /* PersonalRecordViewController.swift in Sources */,
+				D347A5E81E8946F100AE888E /* WODDetailsTableViewController.swift in Sources */,
 				D3EB890C1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift in Sources */,
 				D3EB88FA1E7061430028F28A /* DateTextField.swift in Sources */,
 				D3BB36631E82A0920078CE53 /* PersonalRecordListRemoteService.swift in Sources */,
 				D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */,
 				D3EB88FD1E7193CD0028F28A /* PersonalRecord.swift in Sources */,
+				D347A5D71E8946C400AE888E /* WODTypeTableViewController.swift in Sources */,
+				D347A5E31E8946E200AE888E /* LogWODResultTableViewCell.swift in Sources */,
 				D3EB890E1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift in Sources */,
 				D3FD71411E6E00730047492D /* FullSizeImageViewController.swift in Sources */,
+				D347A5EC1E89479800AE888E /* WODResult.swift in Sources */,
 				D3BB36731E8446C80078CE53 /* PersonalRecordRemoteService.swift in Sources */,
 				D3C8B92C1E8562940040D12B /* UploadImageRequest.swift in Sources */,
+				D347A5E01E8946E200AE888E /* WODImageTableViewCell.swift in Sources */,
 				D3EB89131E72E00E0028F28A /* PersonalRecordsListViewController.swift in Sources */,
 				D3BB366F1E843BD10078CE53 /* BaseRequest.swift in Sources */,
 				D3BB36671E840B120078CE53 /* NSError+LocalDomain.swift in Sources */,

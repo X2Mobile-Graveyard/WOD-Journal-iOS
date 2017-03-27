@@ -77,8 +77,10 @@ extension PersonalRecordViewController {
             }
             resultTextField.inputView = timePicker!
             resultTextField.inputAccessoryView = createKeyboardToolbarForTimePicker()
-        case .repetitions:
+        case .amrap:
             resultTextField.keyboardType = .numberPad
+        default:
+            break
         }
         
         setupResultTypeLabel()

@@ -97,7 +97,7 @@ class PersonalRecordListRemoteImpl: PersonalRecordListRemoteService {
         }
         
         request.error = { _, error in
-            print(error)
+            completion?(.failure(error))
         }
         
         request.runRequest()

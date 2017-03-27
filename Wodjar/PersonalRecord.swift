@@ -8,23 +8,12 @@
 
 import Foundation
 
-enum PersonalRecordResultType {
-    case weight
-    case repetitions
-    case time
-}
-
-enum UnitType {
-    case imperial
-    case metric
-}
-
 class PersonalRecord {
     var id: Int?
     var name: String? = nil
     var rx: Bool = false
     var result: String? = nil
-    var resultType: PersonalRecordResultType = .weight
+    var resultType: WODCategory = .weight
     var unitType: UnitType = .metric
     var measurementUnit: String {
         switch resultType {
@@ -36,8 +25,10 @@ class PersonalRecord {
             }
         case .time:
             return "Time (mm:ss)"
-        case .repetitions:
+        case .amrap:
             return "Repetition completed"
+        default:
+            return "Unknown"
         }
     }
     var notes: String? = nil
@@ -48,7 +39,7 @@ class PersonalRecord {
     convenience init(name: String?,
          rx: Bool,
          result: String?,
-         resultType: PersonalRecordResultType,
+         resultType: WODCategory,
          unitType: UnitType,
          notes: String?,
          imageUrl: String?,

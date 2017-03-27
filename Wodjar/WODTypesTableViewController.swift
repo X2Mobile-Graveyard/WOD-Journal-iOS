@@ -14,12 +14,17 @@ class WODTypesTableViewController: UITableViewController {
     var workouts: WorkoutList!
     
     // @Properties
-    var resultSearchController = UISearchController()
+    var resultSearchController: UISearchController!
     var filteredWorkouts = WorkoutList()
+    var selectedWorkouts = [Workout]()
+    var favoritesSelected = false
     
     // @Constants
     let wodTypeCellIdentifier = "WodTypeTableViewCellIdentifier"
     let wodResultCellIdentifier = "WodResultTableViewCellIdentifier"
+    let customWodsTableIdentifier = "CustomWodTypeViewControllerIdentifier"
+    let defaultWodsTableIdentifier = "DefaultWodTypeViewControllerIdentifier"
+    let headerHeight: CGFloat = 50
     
 
     override func viewDidLoad() {
@@ -64,34 +69,34 @@ class WODTypesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if !resultSearchController.isActive {
-            let cell = tableView.dequeueReusableCell(withIdentifier: wodTypeCellIdentifier, for: indexPath) as! WODTypeTableViewCell
+        if resultSearchController.isActive {
+            let cell = tableView.dequeueReusableCell(withIdentifier: wodResultCellIdentifier, for: indexPath) as! PresonalRecordsListTableViewCell
+            let sectionType = filteredWorkouts.filteredSections()[indexPath.section]
+            let workout = filteredWorkouts.workout(with: sectionType, at: indexPath.row)
             
-            switch indexPath.section {
-            case 0:
-                let wodType = workouts.wodTypesOrder[indexPath.row]
-                let totalWoods = workouts.totalWods(for: wodType)
-                let completed = workouts.completedWods(for: wodType)
-                cell.populate(with: wodType, completedWods: completed, totalWods: totalWoods)
-            case 1:
-                if indexPath.row == 0 {
-                    cell.populateFavorites(with: workouts.favorites.count)
-                } else {
-                    let completed = workouts.completedWods(for: .custom)
-                    cell.populate(with: .custom, completedWods: completed, totalWods: workouts.customs.count)
-                }
-            default:
-                break
-            }
+            cell.populate(with: workout.name, present: workout.isCompleted)
             
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: wodResultCellIdentifier, for: indexPath) as! PresonalRecordsListTableViewCell
-        let sectionType = filteredWorkouts.filteredSections()[indexPath.section]
-        let workout = filteredWorkouts.workout(with: sectionType, at: indexPath.row)
+        let cell = tableView.dequeueReusableCell(withIdentifier: wodTypeCellIdentifier, for: indexPath) as! WODTypeTableViewCell
         
-        cell.populate(with: workout.name, present: workout.isCompleted)
+        switch indexPath.section {
+        case 0:
+            let wodType = workouts.wodTypesOrder[indexPath.row]
+            let totalWoods = workouts.totalWods(for: wodType)
+            let completed = workouts.completedWods(for: wodType)
+            cell.populate(with: wodType, completedWods: completed, totalWods: totalWoods)
+        case 1:
+            if indexPath.row == 0 {
+                cell.populateFavorites(with: workouts.favorites.count)
+            } else {
+                let completed = workouts.completedWods(for: .custom)
+                cell.populate(with: .custom, completedWods: completed, totalWods: workouts.customs.count)
+            }
+        default:
+            break
+        }
         
         return cell
     }
@@ -109,12 +114,12 @@ class WODTypesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if !resultSearchController.isActive {
             if section == 1 {
-                return 50
+                return headerHeight
             } else {
                 return 0
             }
         }
-        return 50
+        return headerHeight
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -125,6 +130,61 @@ class WODTypesTableViewController: UITableViewController {
         
         return nil
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if resultSearchController.isActive {
+            return
+        }
+        
+        favoritesSelected = false
+        
+        var isCustom = false
+        switch indexPath.section {
+        case 0:
+            let wodType = workouts.wodTypesOrder[indexPath.row]
+            selectedWorkouts = workouts.getWorkouts(for: wodType)
+        case 1:
+            if indexPath.row == 0 {
+                selectedWorkouts = workouts.favorites
+                favoritesSelected = true
+            } else {
+                selectedWorkouts = workouts.getWorkouts(for: .custom)
+                isCustom = true
+            }
+        default:
+            break
+        }
+        
+        if isCustom {
+            performSegue(withIdentifier: customWodsTableIdentifier, sender: self)
+        } else {
+            performSegue(withIdentifier: defaultWodsTableIdentifier, sender: self)
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else {
+            return
+        }
+        
+        if identifier == customWodsTableIdentifier {
+            let customVC = segue.destination as! CustomWODTypeTableViewController
+            customVC.workouts = selectedWorkouts
+            customVC.isFavorite = favoritesSelected
+            return
+        }
+        
+        if identifier == defaultWodsTableIdentifier {
+            let defaultVC = segue.destination as! DefaultWODTypeTableViewController
+            defaultVC.workouts = selectedWorkouts
+            defaultVC.isFavorite = favoritesSelected
+            return
+        }
+    }
+    
     
 }
 

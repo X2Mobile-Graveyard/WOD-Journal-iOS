@@ -18,20 +18,17 @@ class WODTypeTableViewCell: UITableViewCell {
         switch wodType {
         case .hero:
             wodTypeImageView.image = #imageLiteral(resourceName: "heroes")
-            wodTypeLabel.text = "Heroes"
         case .challenge:
             wodTypeImageView.image = #imageLiteral(resourceName: "challenge")
-            wodTypeLabel.text = "Challenges"
         case .girl:
             wodTypeImageView.image = #imageLiteral(resourceName: "girl")
-            wodTypeLabel.text = "Girls"
         case .custom:
             wodTypeImageView.image = #imageLiteral(resourceName: "custom")
-            wodTypeLabel.text = "Custom"
         case .open:
             wodTypeImageView.image = #imageLiteral(resourceName: "crossFitGamesLogo")
-            wodTypeLabel.text = "Open"
         }
+        
+        wodTypeLabel.text = wodType.rawValue
         
         if wodType == .custom {
             wodsCompletedLabel.text = ""

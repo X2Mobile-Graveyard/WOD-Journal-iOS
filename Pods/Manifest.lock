@@ -44,8 +44,12 @@ PODS:
     - FBSDKCoreKit
   - MBProgressHUD (1.0.0)
   - Result (3.2.1)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
   - TPKeyboardAvoiding (1.3.1)
   - UITextView+Placeholder (1.2.0)
+  - XCDYouTubeKit (2.5.5)
 
 DEPENDENCIES:
   - AFNetworking
@@ -55,8 +59,10 @@ DEPENDENCIES:
   - FacebookShare
   - MBProgressHUD (~> 1.0)
   - Result (~> 3.2)
+  - SDWebImage (~> 4.0)
   - TPKeyboardAvoiding (~> 1.3)
   - UITextView+Placeholder
+  - XCDYouTubeKit (~> 2.5)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -71,9 +77,11 @@ SPEC CHECKSUMS:
   FBSDKShareKit: ca9b22264ea49a896dafb2467c1a4f72aa41996f
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
+  XCDYouTubeKit: 86f4e7a9c2baa7b7adf6abfc28ac3ab34927be2d
 
-PODFILE CHECKSUM: 615734f58969c7672e25fb9feb455df23fa1238e
+PODFILE CHECKSUM: 61ee369090e7a780ae289b2ce3bcc4b6d6c69ac2
 
 COCOAPODS: 1.2.0
