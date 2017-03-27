@@ -10,11 +10,11 @@ import UIKit
 
 class MoreViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+    public static let premiumSubscription = "com.x2mobile.Wodjar.premiumanualsub"
+    
+    fileprivate static let productIdentifiers: Set<ProductIdentifier> = [premiumSubscription]
+    
+    public static let store = IAPHelper(productIds: productIdentifiers)
     
     // MARK: - IBActions
     
@@ -27,9 +27,15 @@ class MoreViewController: UIViewController {
     @IBAction func didTapMoreComponent(_ sender: UIView) {
         switch sender.tag {
         case 1:
+            // send feedback email
             sendMail()
         case 2:
-            print("premium subscription")
+            // purchase premium subscription
+            MoreViewController.store.requestProducts(completionHandler: { success, products  in
+                if success {
+                    print("success")
+                }
+            })
         case 3:
             print("restore purchases")
         default:

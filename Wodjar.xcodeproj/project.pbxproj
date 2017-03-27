@@ -18,7 +18,6 @@
 		BF315FEB1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF315FEA1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift */; };
 		BF315FED1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF315FEC1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift */; };
 		BF5B42A61E8185AA001CA306 /* IBControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5B42A51E8185AA001CA306 /* IBControl.swift */; };
-		BFB4B06F1E840B230067F0A9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB4B06E1E840B230067F0A9 /* StoreKit.framework */; };
 		BFB4B0721E841E8E0067F0A9 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB4B0711E841E8E0067F0A9 /* IAPHelper.swift */; };
 		BFD44D801E82A57100170817 /* MoreComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD44D7F1E82A57100170817 /* MoreComponent.swift */; };
 		BFD44D821E82A58E00170817 /* MoreComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFD44D811E82A58E00170817 /* MoreComponent.xib */; };
@@ -26,6 +25,7 @@
 		BFD44D8B1E82B4C500170817 /* UnitsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD44D8A1E82B4C500170817 /* UnitsComponent.swift */; };
 		BFD44D8D1E82B4E900170817 /* UnitsComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFD44D8C1E82B4E900170817 /* UnitsComponent.xib */; };
 		BFD44D991E82D08E00170817 /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD44D981E82D08E00170817 /* UIButton+BackgroundColor.swift */; };
+		BFF444061E856AD8004B05AD /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF444051E856AD8004B05AD /* StoreKit.framework */; };
 		C45451E5AE3974B6E620C067 /* Pods_WodjarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */; };
 		D310E5EB1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EA1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift */; };
 		D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */; };
@@ -90,7 +90,6 @@
 		BF315FEA1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoreViewController+MFMailComposer.swift"; sourceTree = "<group>"; };
 		BF315FEC1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorHandler.swift"; sourceTree = "<group>"; };
 		BF5B42A51E8185AA001CA306 /* IBControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IBControl.swift; path = Views/IBControl.swift; sourceTree = "<group>"; };
-		BFB4B06E1E840B230067F0A9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BFB4B0711E841E8E0067F0A9 /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		BFD44D7F1E82A57100170817 /* MoreComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreComponent.swift; path = Views/MoreComponent.swift; sourceTree = "<group>"; };
 		BFD44D811E82A58E00170817 /* MoreComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoreComponent.xib; path = Views/MoreComponent.xib; sourceTree = "<group>"; };
@@ -98,6 +97,7 @@
 		BFD44D8A1E82B4C500170817 /* UnitsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnitsComponent.swift; path = Views/UnitsComponent.swift; sourceTree = "<group>"; };
 		BFD44D8C1E82B4E900170817 /* UnitsComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UnitsComponent.xib; path = Views/UnitsComponent.xib; sourceTree = "<group>"; };
 		BFD44D981E82D08E00170817 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+BackgroundColor.swift"; path = "Views/UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
+		BFF444051E856AD8004B05AD /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C1220ABC4B8853E1FB02BD04 /* Pods-WodjarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D310E5EA1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordDetailsListViewController.swift; sourceTree = "<group>"; };
 		D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7976EB68A7A18DB547AE3C58 /* Pods_Wodjar.framework in Frameworks */,
-				BFB4B06F1E840B230067F0A9 /* StoreKit.framework in Frameworks */,
+				BFF444061E856AD8004B05AD /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +230,7 @@
 		685B67A253EF450686AB3F73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BFB4B06E1E840B230067F0A9 /* StoreKit.framework */,
+				BFF444051E856AD8004B05AD /* StoreKit.framework */,
 				3BD1E7DC81B0E81B25A0CA56 /* Pods_Wodjar.framework */,
 				AE88FC34463D554CAB60CE0F /* Pods_WodjarTests.framework */,
 				6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */,
@@ -500,7 +500,7 @@
 					4325BE771E67185500A0F969 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 39446JG6PB;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -898,7 +898,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Wodjar/Wodjar.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 39446JG6PB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -906,10 +906,10 @@
 				);
 				INFOPLIST_FILE = Wodjar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.x2mobile.wodjardev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.x2mobile.Wodjar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ea269203-637a-439e-bc62-da7697f2a445";
-				PROVISIONING_PROFILE_SPECIFIER = "WodJar Development";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -921,7 +921,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Wodjar/Wodjar.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 39446JG6PB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -929,10 +929,10 @@
 				);
 				INFOPLIST_FILE = Wodjar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.x2mobile.wodjardev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.x2mobile.Wodjar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ea269203-637a-439e-bc62-da7697f2a445";
-				PROVISIONING_PROFILE_SPECIFIER = "WodJar Development";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
