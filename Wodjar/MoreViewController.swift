@@ -37,7 +37,10 @@ class MoreViewController: UIViewController {
                 }
             })
         case 3:
+            // restore premium subscription
             print("restore purchases")
+            MoreViewController.store.restorePurchases()
+            
         default:
             break
         }
