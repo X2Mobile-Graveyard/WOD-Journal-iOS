@@ -8,6 +8,8 @@
 
 import UIKit
 import FBSDKLoginKit
+import AWSCore
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let listController = navigationController.topViewController as! PersonalRecordsListViewController
         let service = PersonalRecordListService(remoteService: PersonalRecordListRemoteImpl())
         listController.service = service
+        
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.EUWest2,
+                                                                identityPoolId:"eu-west-2:a6b0223a-0d4f-41c2-903f-daf2b9097fb0")
+        
+        let configuration = AWSServiceConfiguration(region:.EUWest2, credentialsProvider:credentialsProvider)
+        
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

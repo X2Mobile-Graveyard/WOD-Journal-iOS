@@ -15,6 +15,20 @@ extension PersonalRecordViewController: UIImagePickerControllerDelegate, UINavig
             return
         }
         
+        if let uploadFileURL = info[UIImagePickerControllerReferenceURL] as? URL {
+            let uploadRequest = UploadImageRequest()
+            let imageName = uploadFileURL.lastPathComponent
+            let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as String
+            
+            // getting local path
+            let localPath = (documentDirectory as NSString).appendingPathComponent(imageName)
+
+            let data = UIImagePNGRepresentation(image)
+            try? data?.write(to: URL(fileURLWithPath: localPath))
+            
+//            uploadRequest.uploadFile(imageUrl: URL(fileURLWithPath: localPath))
+        }
+        
         userImage = image
         setUserImage()
         

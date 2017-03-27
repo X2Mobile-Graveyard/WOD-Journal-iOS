@@ -30,6 +30,7 @@
 		D3BB36711E8446740078CE53 /* PersonalRecordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36701E8446740078CE53 /* PersonalRecordService.swift */; };
 		D3BB36731E8446C80078CE53 /* PersonalRecordRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36721E8446C80078CE53 /* PersonalRecordRemoteService.swift */; };
 		D3BB36751E8530540078CE53 /* GetPersonalRecordsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36741E8530540078CE53 /* GetPersonalRecordsRequest.swift */; };
+		D3C8B92C1E8562940040D12B /* UploadImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C8B92B1E8562930040D12B /* UploadImageRequest.swift */; };
 		D3E695121E7936050060D9D2 /* WODTypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695111E7936050060D9D2 /* WODTypesTableViewController.swift */; };
 		D3E695141E7936430060D9D2 /* WODTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695131E7936430060D9D2 /* WODTypeTableViewCell.swift */; };
 		D3E695161E7936880060D9D2 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695151E7936880060D9D2 /* Workout.swift */; };
@@ -99,6 +100,7 @@
 		D3BB36701E8446740078CE53 /* PersonalRecordService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordService.swift; sourceTree = "<group>"; };
 		D3BB36721E8446C80078CE53 /* PersonalRecordRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordRemoteService.swift; sourceTree = "<group>"; };
 		D3BB36741E8530540078CE53 /* GetPersonalRecordsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPersonalRecordsRequest.swift; sourceTree = "<group>"; };
+		D3C8B92B1E8562930040D12B /* UploadImageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadImageRequest.swift; sourceTree = "<group>"; };
 		D3E695111E7936050060D9D2 /* WODTypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypesTableViewController.swift; sourceTree = "<group>"; };
 		D3E695131E7936430060D9D2 /* WODTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypeTableViewCell.swift; sourceTree = "<group>"; };
 		D3E695151E7936880060D9D2 /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			children = (
 				D3BB366E1E843BD10078CE53 /* BaseRequest.swift */,
 				D3BB36741E8530540078CE53 /* GetPersonalRecordsRequest.swift */,
+				D3C8B92B1E8562930040D12B /* UploadImageRequest.swift */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				D3EB890E1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift in Sources */,
 				D3FD71411E6E00730047492D /* FullSizeImageViewController.swift in Sources */,
 				D3BB36731E8446C80078CE53 /* PersonalRecordRemoteService.swift in Sources */,
+				D3C8B92C1E8562940040D12B /* UploadImageRequest.swift in Sources */,
 				D3EB89131E72E00E0028F28A /* PersonalRecordsListViewController.swift in Sources */,
 				D3BB366F1E843BD10078CE53 /* BaseRequest.swift in Sources */,
 				D3BB36671E840B120078CE53 /* NSError+LocalDomain.swift in Sources */,

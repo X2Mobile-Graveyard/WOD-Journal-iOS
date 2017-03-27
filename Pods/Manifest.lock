@@ -14,6 +14,9 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - AWSCore (2.5.2)
+  - AWSS3 (2.5.2):
+    - AWSCore (= 2.5.2)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -45,7 +48,8 @@ PODS:
   - UITextView+Placeholder (1.2.0)
 
 DEPENDENCIES:
-  - AFNetworking (~> 3.1)
+  - AFNetworking
+  - AWSS3
   - FacebookCore
   - FacebookLogin
   - FacebookShare
@@ -56,6 +60,8 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AWSCore: b2fe455c2c7d6653521238c5b0b0ddb67ec4f063
+  AWSS3: 1f53d780bae0a5949f11da99520c14684bc90af0
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
@@ -68,6 +74,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
-PODFILE CHECKSUM: 2d133c735147a95a64486487cc9f481a49f82bd5
+PODFILE CHECKSUM: 615734f58969c7672e25fb9feb455df23fa1238e
 
 COCOAPODS: 1.2.0

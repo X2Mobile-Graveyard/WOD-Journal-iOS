@@ -16,6 +16,13 @@ enum RequestMethod: Int {
     case RequestMethodDELETE
 }
 
+/*
+ 
+ Access key = AKIAI6TOL2SUOH4DVYMQ
+ Secret Key = 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
+ 
+ */
+
 typealias RequestSuccessBlock = (Any?, Any?) -> (Void)
 typealias RequestErrorBlock = (Any?, NSError) -> (Void)
 typealias RequestExceptionBlock = (AnyObject, NSException) -> (Void)
