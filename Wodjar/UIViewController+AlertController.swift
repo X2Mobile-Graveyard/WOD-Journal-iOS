@@ -19,7 +19,7 @@ extension UIViewController {
     
     func showAlert(with title: String, message: String, actionButtonTitle: String, actionHandler:((UIAlertAction) -> Void)?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: actionHandler)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let otherAction = UIAlertAction(title: actionButtonTitle, style: .default, handler: actionHandler)
         alertController.addAction(cancelAction)
         alertController.addAction(otherAction)

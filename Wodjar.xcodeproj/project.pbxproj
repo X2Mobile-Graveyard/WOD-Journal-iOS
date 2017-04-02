@@ -45,6 +45,14 @@
 		D347A5E91E8946F100AE888E /* CustomWODDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5E61E8946F100AE888E /* CustomWODDetailsViewController.swift */; };
 		D347A5EA1E8946F100AE888E /* DefaultWODDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5E71E8946F100AE888E /* DefaultWODDetailsViewController.swift */; };
 		D347A5EC1E89479800AE888E /* WODResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5EB1E89479800AE888E /* WODResult.swift */; };
+		D3A6EA5D1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A6EA5C1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift */; };
+		D3A6EA5F1E8E3D0C006CF6B1 /* CreatePersonalRecordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A6EA5E1E8E3D0C006CF6B1 /* CreatePersonalRecordRequest.swift */; };
+		D3A6EA611E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A6EA601E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift */; };
+		D3B487681E8BE0470042DE2A /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B487671E8BE0470042DE2A /* SessionManager.swift */; };
+		D3B4876A1E8BE2ED0042DE2A /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B487691E8BE2ED0042DE2A /* UserManager.swift */; };
+		D3B4876C1E8BF81A0042DE2A /* UIViewController+LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B4876B1E8BF81A0042DE2A /* UIViewController+LoginPresenter.swift */; };
+		D3B4876E1E8C13BD0042DE2A /* GetRecordsForNameRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B4876D1E8C13BD0042DE2A /* GetRecordsForNameRequest.swift */; };
+		D3B487701E8C28710042DE2A /* DeletePersonalRecordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B4876F1E8C28710042DE2A /* DeletePersonalRecordRequest.swift */; };
 		D3BB36601E82A0470078CE53 /* PersonalRecordListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB365F1E82A0470078CE53 /* PersonalRecordListService.swift */; };
 		D3BB36631E82A0920078CE53 /* PersonalRecordListRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36621E82A0920078CE53 /* PersonalRecordListRemoteService.swift */; };
 		D3BB36651E82AFCF0078CE53 /* defaultPRs.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3BB36641E82AFCF0078CE53 /* defaultPRs.plist */; };
@@ -55,7 +63,12 @@
 		D3BB36711E8446740078CE53 /* PersonalRecordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36701E8446740078CE53 /* PersonalRecordService.swift */; };
 		D3BB36731E8446C80078CE53 /* PersonalRecordRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36721E8446C80078CE53 /* PersonalRecordRemoteService.swift */; };
 		D3BB36751E8530540078CE53 /* GetPersonalRecordsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36741E8530540078CE53 /* GetPersonalRecordsRequest.swift */; };
-		D3C8B92C1E8562940040D12B /* UploadImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C8B92B1E8562930040D12B /* UploadImageRequest.swift */; };
+		D3C6EF001E8A8C9C00E1D9D1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6EEFF1E8A8C9C00E1D9D1 /* RegisterViewController.swift */; };
+		D3C6EF021E8A907100E1D9D1 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6EF011E8A907100E1D9D1 /* AuthenticationService.swift */; };
+		D3C6EF041E8A90E300E1D9D1 /* AuthenticationRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6EF031E8A90E300E1D9D1 /* AuthenticationRemoteService.swift */; };
+		D3C6EF061E8A982100E1D9D1 /* LoginWithFacebookRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6EF051E8A982100E1D9D1 /* LoginWithFacebookRequest.swift */; };
+		D3C6EF081E8A983100E1D9D1 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6EF071E8A983100E1D9D1 /* LoginRequest.swift */; };
+		D3C6EF0A1E8A984500E1D9D1 /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6EF091E8A984500E1D9D1 /* RegisterRequest.swift */; };
 		D3E695161E7936880060D9D2 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695151E7936880060D9D2 /* Workout.swift */; };
 		D3E695181E7937C00060D9D2 /* WorkoutList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E695171E7937C00060D9D2 /* WorkoutList.swift */; };
 		D3E9C7C11E6DCDDF007E8296 /* PersonalRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E9C7C01E6DCDDF007E8296 /* PersonalRecordViewController.swift */; };
@@ -138,6 +151,14 @@
 		D347A5E61E8946F100AE888E /* CustomWODDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWODDetailsViewController.swift; sourceTree = "<group>"; };
 		D347A5E71E8946F100AE888E /* DefaultWODDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWODDetailsViewController.swift; sourceTree = "<group>"; };
 		D347A5EB1E89479800AE888E /* WODResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODResult.swift; sourceTree = "<group>"; };
+		D3A6EA5C1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePersonalRecordRequest.swift; sourceTree = "<group>"; };
+		D3A6EA5E1E8E3D0C006CF6B1 /* CreatePersonalRecordRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePersonalRecordRequest.swift; sourceTree = "<group>"; };
+		D3A6EA601E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateRecordsNameRequest.swift; sourceTree = "<group>"; };
+		D3B487671E8BE0470042DE2A /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		D3B487691E8BE2ED0042DE2A /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		D3B4876B1E8BF81A0042DE2A /* UIViewController+LoginPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+LoginPresenter.swift"; sourceTree = "<group>"; };
+		D3B4876D1E8C13BD0042DE2A /* GetRecordsForNameRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetRecordsForNameRequest.swift; sourceTree = "<group>"; };
+		D3B4876F1E8C28710042DE2A /* DeletePersonalRecordRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletePersonalRecordRequest.swift; sourceTree = "<group>"; };
 		D3BB365F1E82A0470078CE53 /* PersonalRecordListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordListService.swift; sourceTree = "<group>"; };
 		D3BB36621E82A0920078CE53 /* PersonalRecordListRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordListRemoteService.swift; sourceTree = "<group>"; };
 		D3BB36641E82AFCF0078CE53 /* defaultPRs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPRs.plist; sourceTree = "<group>"; };
@@ -148,7 +169,12 @@
 		D3BB36701E8446740078CE53 /* PersonalRecordService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordService.swift; sourceTree = "<group>"; };
 		D3BB36721E8446C80078CE53 /* PersonalRecordRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordRemoteService.swift; sourceTree = "<group>"; };
 		D3BB36741E8530540078CE53 /* GetPersonalRecordsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPersonalRecordsRequest.swift; sourceTree = "<group>"; };
-		D3C8B92B1E8562930040D12B /* UploadImageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadImageRequest.swift; sourceTree = "<group>"; };
+		D3C6EEFF1E8A8C9C00E1D9D1 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		D3C6EF011E8A907100E1D9D1 /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		D3C6EF031E8A90E300E1D9D1 /* AuthenticationRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationRemoteService.swift; sourceTree = "<group>"; };
+		D3C6EF051E8A982100E1D9D1 /* LoginWithFacebookRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWithFacebookRequest.swift; sourceTree = "<group>"; };
+		D3C6EF071E8A983100E1D9D1 /* LoginRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		D3C6EF091E8A984500E1D9D1 /* RegisterRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterRequest.swift; sourceTree = "<group>"; };
 		D3E695151E7936880060D9D2 /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		D3E695171E7937C00060D9D2 /* WorkoutList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutList.swift; sourceTree = "<group>"; };
 		D3E9C7C01E6DCDDF007E8296 /* PersonalRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordViewController.swift; sourceTree = "<group>"; };
@@ -261,12 +287,12 @@
 		4325BEA91E67190400A0F969 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D3C6EEFE1E8A667100E1D9D1 /* Authentication */,
 				BFD44D841E82AC6700170817 /* MoreTab */,
 				D3E6950F1E7935B90060D9D2 /* WODs */,
 				D3E6950E1E7935A70060D9D2 /* PersonalRecord */,
 				D310E5EE1E76C78C00AD6B74 /* CustomBaseClasses */,
 				D3FD71401E6E00730047492D /* FullSizeImageViewController.swift */,
-				D3EB88F61E7050C80028F28A /* LoginViewController.swift */,
 				BF315FEE1E82F064001C6E45 /* UIViewController+Extensions */,
 			);
 			name = Controllers;
@@ -418,6 +444,7 @@
 		D3BB366A1E840CB80078CE53 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				D3B4876B1E8BF81A0042DE2A /* UIViewController+LoginPresenter.swift */,
 				D3BB36661E840B120078CE53 /* NSError+LocalDomain.swift */,
 				D3BB36681E840B4C0078CE53 /* UIViewController+Result.swift */,
 				D3BB366B1E840CD80078CE53 /* UIViewController+AlertController.swift */,
@@ -430,9 +457,25 @@
 			children = (
 				D3BB366E1E843BD10078CE53 /* BaseRequest.swift */,
 				D3BB36741E8530540078CE53 /* GetPersonalRecordsRequest.swift */,
-				D3C8B92B1E8562930040D12B /* UploadImageRequest.swift */,
+				D3C6EF051E8A982100E1D9D1 /* LoginWithFacebookRequest.swift */,
+				D3C6EF071E8A983100E1D9D1 /* LoginRequest.swift */,
+				D3C6EF091E8A984500E1D9D1 /* RegisterRequest.swift */,
+				D3B4876D1E8C13BD0042DE2A /* GetRecordsForNameRequest.swift */,
+				D3B4876F1E8C28710042DE2A /* DeletePersonalRecordRequest.swift */,
+				D3A6EA5C1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift */,
+				D3A6EA5E1E8E3D0C006CF6B1 /* CreatePersonalRecordRequest.swift */,
+				D3A6EA601E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift */,
 			);
 			name = Requests;
+			sourceTree = "<group>";
+		};
+		D3C6EEFE1E8A667100E1D9D1 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				D3EB88F61E7050C80028F28A /* LoginViewController.swift */,
+				D3C6EEFF1E8A8C9C00E1D9D1 /* RegisterViewController.swift */,
+			);
+			name = Authentication;
 			sourceTree = "<group>";
 		};
 		D3E6950E1E7935A70060D9D2 /* PersonalRecord */ = {
@@ -475,6 +518,8 @@
 				D3EB89161E72EF9D0028F28A /* PersonalRecordType.swift */,
 				D3E695151E7936880060D9D2 /* Workout.swift */,
 				D3E695171E7937C00060D9D2 /* WorkoutList.swift */,
+				D3B487671E8BE0470042DE2A /* SessionManager.swift */,
+				D3B487691E8BE2ED0042DE2A /* UserManager.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -484,6 +529,7 @@
 			children = (
 				D3BB365F1E82A0470078CE53 /* PersonalRecordListService.swift */,
 				D3BB36701E8446740078CE53 /* PersonalRecordService.swift */,
+				D3C6EF011E8A907100E1D9D1 /* AuthenticationService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -493,6 +539,7 @@
 			children = (
 				D3BB36621E82A0920078CE53 /* PersonalRecordListRemoteService.swift */,
 				D3BB36721E8446C80078CE53 /* PersonalRecordRemoteService.swift */,
+				D3C6EF031E8A90E300E1D9D1 /* AuthenticationRemoteService.swift */,
 			);
 			name = RemoteServices;
 			sourceTree = "<group>";
@@ -812,8 +859,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3B4876E1E8C13BD0042DE2A /* GetRecordsForNameRequest.swift in Sources */,
 				D3BB366C1E840CD80078CE53 /* UIViewController+AlertController.swift in Sources */,
-				D3E695141E7936430060D9D2 /* WODTypeTableViewCell.swift in Sources */,
 				BFD44D8B1E82B4C500170817 /* UnitsComponent.swift in Sources */,
 				BF315FED1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift in Sources */,
 				BFD44D881E82ACF700170817 /* MoreViewController.swift in Sources */,
@@ -824,10 +871,14 @@
 				D3E695161E7936880060D9D2 /* Workout.swift in Sources */,
 				BFD44D801E82A57100170817 /* MoreComponent.swift in Sources */,
 				D3EB88F71E7050C80028F28A /* LoginViewController.swift in Sources */,
+				D3C6EF021E8A907100E1D9D1 /* AuthenticationService.swift in Sources */,
+				D3B487701E8C28710042DE2A /* DeletePersonalRecordRequest.swift in Sources */,
 				D3BB36601E82A0470078CE53 /* PersonalRecordListService.swift in Sources */,
 				D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */,
 				D347A5D91E8946C400AE888E /* DefaultWODTypeTableViewController.swift in Sources */,
+				D3A6EA5F1E8E3D0C006CF6B1 /* CreatePersonalRecordRequest.swift in Sources */,
 				D347A5EA1E8946F100AE888E /* DefaultWODDetailsViewController.swift in Sources */,
+				D3B4876C1E8BF81A0042DE2A /* UIViewController+LoginPresenter.swift in Sources */,
 				D347A5E91E8946F100AE888E /* CustomWODDetailsViewController.swift in Sources */,
 				BFD44D991E82D08E00170817 /* UIButton+BackgroundColor.swift in Sources */,
 				4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */,
@@ -843,22 +894,30 @@
 				D310E5EB1E759EFE00AD6B74 /* PersonalRecordDetailsListViewController.swift in Sources */,
 				D347A5D81E8946C400AE888E /* CustomWODTypeTableViewController.swift in Sources */,
 				D3BB36691E840B4C0078CE53 /* UIViewController+Result.swift in Sources */,
+				D3C6EF001E8A8C9C00E1D9D1 /* RegisterViewController.swift in Sources */,
 				D310E5F01E76C7C000AD6B74 /* WodJurnalNavigationController.swift in Sources */,
 				D3E9C7C11E6DCDDF007E8296 /* PersonalRecordViewController.swift in Sources */,
 				D347A5E81E8946F100AE888E /* WODDetailsTableViewController.swift in Sources */,
 				D3EB890C1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift in Sources */,
+				D3B4876A1E8BE2ED0042DE2A /* UserManager.swift in Sources */,
+				D3C6EF041E8A90E300E1D9D1 /* AuthenticationRemoteService.swift in Sources */,
+				D3A6EA5D1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift in Sources */,
 				D3EB88FA1E7061430028F28A /* DateTextField.swift in Sources */,
 				D3BB36631E82A0920078CE53 /* PersonalRecordListRemoteService.swift in Sources */,
 				D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */,
 				BFB4B0721E841E8E0067F0A9 /* IAPHelper.swift in Sources */,
+				D3B487681E8BE0470042DE2A /* SessionManager.swift in Sources */,
 				D3EB88FD1E7193CD0028F28A /* PersonalRecord.swift in Sources */,
 				D347A5D71E8946C400AE888E /* WODTypeTableViewController.swift in Sources */,
+				D3C6EF081E8A983100E1D9D1 /* LoginRequest.swift in Sources */,
 				D347A5E31E8946E200AE888E /* LogWODResultTableViewCell.swift in Sources */,
 				D3EB890E1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift in Sources */,
+				D3C6EF0A1E8A984500E1D9D1 /* RegisterRequest.swift in Sources */,
 				D3FD71411E6E00730047492D /* FullSizeImageViewController.swift in Sources */,
 				D347A5EC1E89479800AE888E /* WODResult.swift in Sources */,
 				D3BB36731E8446C80078CE53 /* PersonalRecordRemoteService.swift in Sources */,
-				D3C8B92C1E8562940040D12B /* UploadImageRequest.swift in Sources */,
+				D3C6EF061E8A982100E1D9D1 /* LoginWithFacebookRequest.swift in Sources */,
+				D3A6EA611E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift in Sources */,
 				D347A5E01E8946E200AE888E /* WODImageTableViewCell.swift in Sources */,
 				D3EB89131E72E00E0028F28A /* PersonalRecordsListViewController.swift in Sources */,
 				D3BB366F1E843BD10078CE53 /* BaseRequest.swift in Sources */,

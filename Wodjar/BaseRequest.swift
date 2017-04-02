@@ -35,7 +35,7 @@ class BaseRequest: NSObject {
     var error: RequestErrorBlock!
     var exceptionBlock: RequestExceptionBlock!
     var requestSessionManager: AFHTTPSessionManager!
-    let ServerBaseURL = "http://wodjar.herokuapp.com/api/v1/"
+    let ServerBaseURL = SessionManager.sharedInstance.serverBase
     
     class func request() -> BaseRequest {
         return BaseRequest()
@@ -87,11 +87,8 @@ class BaseRequest: NSObject {
         self.requestSessionManager.responseSerializer = AFJSONResponseSerializer()
         self.requestSessionManager.requestSerializer = AFJSONRequestSerializer()
         
-        let headerParamsDict = headerParams()
-        for (key, value) in headerParamsDict {
-           self.requestSessionManager.requestSerializer.setValue(value, forHTTPHeaderField: key)
-        }
-        
+        setHeaderParams()
+
         
         let path = self.serverBase().appending((self.requestURL()))
         
@@ -110,6 +107,13 @@ class BaseRequest: NSObject {
         }
         
         self.sendRequestWithPath(path: path, successBlock: successBlock, failureBlock: failureBlock)
+    }
+    
+    private func setHeaderParams() {
+        let headerParamsDict = headerParams()
+        for (key, value) in headerParamsDict {
+            self.requestSessionManager.requestSerializer.setValue(value, forHTTPHeaderField: key)
+        }
     }
 }
 

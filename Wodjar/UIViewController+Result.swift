@@ -53,7 +53,7 @@ extension UIViewController {
         if (error.code == -1011) {
             return handleInternalServer(error: error)
         } else {
-            return error.description
+            return error.localizedDescription
         }
     }
     
@@ -69,10 +69,10 @@ extension UIViewController {
                 return handle(error: error, inArray: array)
             }
             
-            return error.description
+            return error.localizedDescription
         }
         
-        return error.description
+        return error.localizedDescription
     }
     
     private func handle(error: NSError, inDictionary dictionary: [String:Any]) -> String {
@@ -82,7 +82,7 @@ extension UIViewController {
         } else if let message = dictionary["detail"] as? String {
             return message
         } else {
-            return error.description
+            return error.localizedDescription
         }
     }
     
@@ -96,18 +96,19 @@ extension UIViewController {
             return message
             
         } else {
-            return error.description
+            return error.localizedDescription
         }
     }
     
     private func getErrorMessageFrom(messagesArray: [Any]) -> String {
         let message = messagesArray.reduce("") { (accumulator, element) -> String in
-            if let msgDict = element as? [String: AnyObject] {
-                if let singleMsg = msgDict["errors"] {
-                    return accumulator.appendingFormat("%@\n", singleMsg as! CVarArg)
-                } else {
-                    return accumulator.appending("\n")
-                }
+            if let errorMsg = element as? String {
+                return accumulator.appending(errorMsg + "\n")
+//                if let singleMsg = msgDict["errors"] {
+//                    return accumulator.appendingFormat("%@\n", singleMsg as! CVarArg)
+//                } else {
+//                    return accumulator.appending("\n")
+//                }
             } else {
                 return accumulator
             }

@@ -26,12 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let service = PersonalRecordListService(remoteService: PersonalRecordListRemoteImpl())
         listController.service = service
         
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.EUWest2,
-                                                                identityPoolId:"eu-west-2:a6b0223a-0d4f-41c2-903f-daf2b9097fb0")
-        
-        let configuration = AWSServiceConfiguration(region:.EUWest2, credentialsProvider:credentialsProvider)
-        
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        setupAmazonS3Capabilities()
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -44,6 +39,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
+    private func setupAmazonS3Capabilities() {
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.EUWest2,
+                                                                identityPoolId:"eu-west-2:a6b0223a-0d4f-41c2-903f-daf2b9097fb0")
+        
+        let configuration = AWSServiceConfiguration(region:.EUWest2, credentialsProvider:credentialsProvider)
+        
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+
     }
 }
 

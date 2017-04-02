@@ -8,6 +8,7 @@
 
 import UIKit
 import UITextView_Placeholder
+import MBProgressHUD
 
 enum ViewControllerState {
     case withImage
@@ -49,6 +50,7 @@ class PersonalRecordViewController: UIViewController {
     var personalRecordCopy: PersonalRecord!
     var createRecordDelegate: PersonalRecordCreateDelegate?
     var updatePersonalRecordDelegate: UpdatePersonalRecordDelegate?
+    var pickedImagePath: String?
     
     // @Constants
     let presentFullImageSegueIdentifier = "presentFullImageSegueIdentifier"
@@ -116,6 +118,7 @@ class PersonalRecordViewController: UIViewController {
     }
     
     @IBAction func didTapDeleteButton(_ sender: Any) {
+        MBProgressHUD.showAdded(to: view, animated: true)
         service.delete(personalRecord: personalRecordCopy) { (result) in
             switch result {
             case .success():
@@ -126,6 +129,7 @@ class PersonalRecordViewController: UIViewController {
             case .failure(_):
                 self.handleError(result: result)
             }
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     
@@ -186,30 +190,36 @@ class PersonalRecordViewController: UIViewController {
     // MARK: - Service Calls
     
     func updateRecord() {
-        service.update(personalRecord: personalRecordCopy, with: { (result) in
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.update(personalRecord: personalRecordCopy, with: pickedImagePath) { (result) in
             switch result {
             case .success():
                 self.personalRecord.updateValues(from: self.personalRecordCopy)
+                self.pickedImagePath = nil
             case .failure(_):
                 self.handleError(result: result)
             }
-        })
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
     }
     
     func createRecord() {
-        service.create(personalRecord: personalRecordCopy, with: { (result) in
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.create(personalRecord: personalRecordCopy, with: pickedImagePath) { (result) in
             switch result {
             case let .success(id):
+                self.personalRecordCopy.id = id
                 self.personalRecord.updateValues(from: self.personalRecordCopy)
-                self.personalRecord.id = id
                 self.createRecordDelegate?.didCreate(personalRecord: self.personalRecord)
                 self.updatePersonalRecordDelegate?.didAdd(personalRecord: self.personalRecord)
                 self.controllerMode = .editMode
                 self.changeUIForEditMode()
+                self.pickedImagePath = nil
             case .failure(_):
                 self.handleError(result: result)
             }
-        })
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
     }
     
     // MARK: - Modal Presentations

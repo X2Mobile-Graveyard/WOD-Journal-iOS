@@ -34,7 +34,31 @@ class PersonalRecord {
     var notes: String? = nil
     var imageUrl: String? = nil
     var date: Date = Date()
+    var updatedAt: Date? = nil
     
+    convenience init(with dictionary: [String: Any]) {
+        self.init()
+        
+        self.id = dictionary["id"] as? Int ?? nil
+        self.name = dictionary["name"] as? String ?? nil
+        self.rx = dictionary["ex"] as? Bool ?? false
+        self.result = dictionary["result"] as? String ?? nil
+        if let resultTypeInt = dictionary["result_type"] as? Int {
+            self.resultType = WODCategory.from(hashValue: resultTypeInt)
+        }
+        if let unitTypeInt = dictionary["unit_type"] as? Int {
+            self.unitType = UnitType(rawValue: unitTypeInt)!
+        }
+        self.notes = dictionary["notes"] as? String ?? nil
+        self.imageUrl = dictionary["image_url"] as? String ?? nil
+        if let lastUpdate = dictionary["updated_at"] as? String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            self.updatedAt = dateFormatter.date(from: lastUpdate)
+        } else {
+            self.updatedAt = nil
+        }
+    }
     
     convenience init(name: String?,
          rx: Bool,
@@ -81,5 +105,28 @@ class PersonalRecord {
         self.notes = personalRecord.notes
         self.imageUrl = personalRecord.imageUrl
         self.date = personalRecord.date
+    }
+    
+    func createUpdateDict() -> [String: Any] {
+        var updateDict = [String: Any]()
+        
+        updateDict["name"] = self.name!
+        updateDict["rx"] = self.rx
+        updateDict["result"] = self.result!
+        updateDict["result_type"] = self.resultType.hash()
+        updateDict["unit_type"] = self.unitType.hashValue
+        if let notes = self.notes {
+            updateDict["notes"] = notes
+        }
+        
+        if let url = imageUrl {
+            updateDict["image_url"] = url
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        updateDict["date"] = dateFormatter.string(from: self.date)
+        
+        return updateDict
     }
 }

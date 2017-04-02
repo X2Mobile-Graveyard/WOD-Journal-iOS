@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 extension PersonalRecordViewController {
     
@@ -24,6 +25,7 @@ extension PersonalRecordViewController {
         setupCalendarTextField()
         setupGestureRecognizer()
         hideKeyboardWhenTappedAround()
+        setupImageView()
     }
     
     func setupResultTextField() {
@@ -108,7 +110,7 @@ extension PersonalRecordViewController {
     }
     
     private func setupSegmentedControl() {
-        segmentedControl.selectedSegmentIndex = personalRecord.resultType.hashValue
+        segmentedControl.selectedSegmentIndex = personalRecord.resultType.hash()
         recordType = personalRecord.resultType
         if controllerMode == .editMode {
             segmentedControl.isUserInteractionEnabled = false
@@ -153,6 +155,18 @@ extension PersonalRecordViewController {
     private func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOutsideTextField))
         view.addGestureRecognizer(tap)
+    }
+    
+    private func setupImageView() {
+        guard let imageUrl = personalRecord.imageUrl else {
+            return
+        }
+        
+        imageView.sd_setImage(with: URL(string: imageUrl)) { (setImage, error, _, _) in
+            self.addUserPictureToView()
+            self.viewState = .withImage
+            self.addPictureButton.isHidden = true
+        }
     }
     
     // MARK: - Keyboard Toolbar

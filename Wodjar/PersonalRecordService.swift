@@ -13,7 +13,7 @@ struct PersonalRecordService {
     
     // MARK: - Public Methods
     
-    func update(personalRecord: PersonalRecord, with completion: UpdatePersonalRecordCompletion?) {
+    func update(personalRecord: PersonalRecord, with imagePath: String?, completion: UpdatePersonalRecordCompletion?) {
         if personalRecord.name == nil || personalRecord.name?.characters.count == 0 {
             completion?(.failure(NSError.localError(with: "The PR must have a name")))
             return
@@ -24,10 +24,54 @@ struct PersonalRecordService {
             return
         }
         
-        remoteService.update(personalRecord: personalRecord, with: completion)
+        guard let imagePath = imagePath else {
+            remoteService.update(personalRecord: personalRecord, with: completion)
+            return
+        }
+        
+        guard let url = URL(string: imagePath) else {
+            remoteService.update(personalRecord: personalRecord, with: completion)
+            return
+        }
+        
+        if personalRecord.imageUrl == nil {
+            remoteService.uploadImage(with: url, key: nil) { (result) in
+                switch result {
+                case let .success(s3Path):
+                    personalRecord.imageUrl = s3Path
+                case .failure(_):
+                    break
+                }
+                self.remoteService.update(personalRecord: personalRecord, with: completion)
+            }
+            
+            return
+        }
+        
+        if let key = personalRecord.imageUrl?.components(separatedBy: "/").last {
+            remoteService.uploadImage(with: url, key: key) { (result) in
+                switch result {
+                case let .success(s3Path):
+                    personalRecord.imageUrl = s3Path
+                case .failure(_):
+                    break
+                }
+                self.remoteService.update(personalRecord: personalRecord, with: completion)
+            }
+        } else {
+            remoteService.uploadImage(with: url, key: nil) { (result) in
+                switch result {
+                case let .success(s3Path):
+                    personalRecord.imageUrl = s3Path
+                case .failure(_):
+                    break
+                }
+                self.remoteService.update(personalRecord: personalRecord, with: completion)
+            }
+        }
     }
     
-    func create(personalRecord: PersonalRecord, with completion: CreatePersonalRecordCompletion?) {
+    func create(personalRecord: PersonalRecord, with imagePath: String?,  completion: CreatePersonalRecordCompletion?) {
         if personalRecord.name == nil || personalRecord.name?.characters.count == 0 {
             completion?(.failure(NSError.localError(with: "You must enter a name")))
             return
@@ -38,8 +82,26 @@ struct PersonalRecordService {
             return
         }
         
-        remoteService.create(personalRecord: personalRecord, with: completion)
+        if imagePath == nil {
+            remoteService.create(personalRecord: personalRecord, with: completion)
+            return
+        }
         
+        guard let url = URL(string: imagePath!) else {
+            remoteService.create(personalRecord: personalRecord, with: completion)
+            return
+        }
+        
+        remoteService.uploadImage(with: url, key: nil) { (result) in
+            switch result {
+            case let .success(s3Path):
+                personalRecord.imageUrl = s3Path
+            case .failure(_):
+                break
+            }
+            
+            self.remoteService.create(personalRecord: personalRecord, with: completion)
+        }
     }
     
     func delete(personalRecord: PersonalRecord, with completion: DeletePersonalRecordCompletion?) {
@@ -48,9 +110,15 @@ struct PersonalRecordService {
             return
         }
         
-        remoteService.deletePersonalRecord(with: personalRecord.id!, completion: completion)
+        if personalRecord.imageUrl == nil {
+            remoteService.deletePersonalRecord(with: personalRecord.id!, completion: completion)
+            return
+        }
+        
+        if let key = personalRecord.imageUrl?.components(separatedBy: "/").last {
+            remoteService.deleteImage(with: key, completion: { (result) in
+                self.remoteService.deletePersonalRecord(with: personalRecord.id!, completion: completion)
+            })
+        }
     }
-    
-    // MARK: - Private Methods
-    
 }

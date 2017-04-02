@@ -49,6 +49,13 @@ struct PersonalRecordListService {
         remoteService.deleteRecords(with: personalRecordsIds, completion: completion)
     }
     
+    func update(personalRecordsIds:[Int], with name: String, completion: UpdateRecordsNameCompletion?) {
+        if !UserManager.sharedInstance.isAuthenticated() {
+            completion?(.failure(NSError.localError(with: "Unable to complete operation. Please login")))
+            return
+        }
+        remoteService.update(recordsIds: personalRecordsIds, with: name, completion: completion)
+    }
     
     // MARK: - Private Methods
     

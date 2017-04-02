@@ -17,6 +17,10 @@ protocol PersonalRecordTypeDeleteDelegate  {
     func didDelete(personalRecordType: PersonalRecordType)
 }
 
+protocol LoginDelegate {
+    func didLogin()
+}
+
 class PersonalRecordsListViewController: UIViewController {
 
     // @IBOutlest
@@ -98,6 +102,20 @@ class PersonalRecordsListViewController: UIViewController {
         }
     }
     
+    // MARK: - Buttons Actions
+    
+    @IBAction func didTapAddPRButton(_ sender: Any) {
+        if UserManager.sharedInstance.isAuthenticated() {
+            performSegue(withIdentifier: newPersonalRecordIdentifier, sender: self)
+            return
+        }
+        
+        presentLoginScreen {
+            self.getPersonalRecordTypes()
+        }
+        
+    }
+    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -113,11 +131,12 @@ class PersonalRecordsListViewController: UIViewController {
             detailsListViewController.personalRecordType = selectedRecordType!
             detailsListViewController.service = service
             detailsListViewController.deleteTypeDelegate = self
+            detailsListViewController.loginDelegate = self
         } else if identifier == newPersonalRecordIdentifier {
             let personalRecordViewController = segue.destination as! PersonalRecordViewController
             personalRecordViewController.controllerMode = .createMode
             personalRecordViewController.personalRecord = PersonalRecord()
-            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceTest())
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl())
             personalRecordViewController.createRecordDelegate = self
         }
     }
@@ -201,5 +220,11 @@ extension PersonalRecordsListViewController: PersonalRecordTypeDeleteDelegate {
             recordTypes.remove(at: indexToDelete)
             tableView.reloadData()
         }
+    }
+}
+
+extension PersonalRecordsListViewController: LoginDelegate {
+    func didLogin() {
+        self.getPersonalRecordTypes()
     }
 }
