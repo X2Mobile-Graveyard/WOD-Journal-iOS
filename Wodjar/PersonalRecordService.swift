@@ -19,8 +19,8 @@ struct PersonalRecordService {
             return
         }
         
-        if personalRecord.result == nil || personalRecord.result?.characters.count == 0 {
-            completion?(.failure(NSError.localError(with: "Please eneter a record")))
+        if personalRecord.resultAsString() == nil || personalRecord.resultAsString()?.characters.count == 0 {
+            completion?(.failure(NSError.localError(with: "Please enter a record")))
             return
         }
         
@@ -77,8 +77,8 @@ struct PersonalRecordService {
             return
         }
         
-        if personalRecord.result == nil  || personalRecord.result?.characters.count == 0 {
-            completion?(.failure(NSError.localError(with: "Please eneter a record")))
+        if personalRecord.resultAsString() == nil || personalRecord.resultAsString()?.characters.count == 0 {
+            completion?(.failure(NSError.localError(with: "Please enter a record")))
             return
         }
         

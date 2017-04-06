@@ -54,7 +54,24 @@ struct PersonalRecordListService {
             completion?(.failure(NSError.localError(with: "Unable to complete operation. Please login")))
             return
         }
+        
+        if name.characters.count == 0 {
+            completion?(.failure(NSError.localError(with: "Invalid name entered.")))
+            return
+        }
+        
         remoteService.update(recordsIds: personalRecordsIds, with: name, completion: completion)
+    }
+    
+    func orderByUpdatedDate(recordTypes: [PersonalRecordType]) -> [PersonalRecordType] {
+        return recordTypes.sorted { (recordType1, recordType2) -> Bool in
+            
+            if recordType1.updatedAt.compare(recordType2.updatedAt) == .orderedAscending {
+                return false
+            }
+            
+            return true
+        }
     }
     
     // MARK: - Private Methods
@@ -63,16 +80,20 @@ struct PersonalRecordListService {
         var defaultPrs = [PersonalRecordType]()
         if let path = Bundle.main.path(forResource: "defaultPRs", ofType: "plist"),
             let dict = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
-            if let weightPersonalRecords = dict["Weight"] as? [String] {
-                for personalRecordName in weightPersonalRecords {
-                    let pr = PersonalRecordType(name: personalRecordName, present: false, defaultType: .weight)
+            if let weightPersonalRecords = dict["Weight"] as? [[String: String]] {
+                for personalRecordDict in weightPersonalRecords {
+                    let personalRecordName = personalRecordDict["name"]
+                    let updatedAt = personalRecordDict["date"]
+                    let pr = PersonalRecordType(name: personalRecordName!, present: false, defaultType: .weight, updatedAt: updatedAt!)
                     defaultPrs.append(pr)
                 }
             }
             
-            if let timePersonalRecords = dict["Time"] as? [String] {
-                for personalRecordName in timePersonalRecords {
-                    let pr = PersonalRecordType(name: personalRecordName, present: false, defaultType: .time)
+            if let timePersonalRecords = dict["Time"] as? [[String: String]] {
+                for personalRecordDict in timePersonalRecords {
+                    let personalRecordName = personalRecordDict["name"]
+                    let updatedAt = personalRecordDict["date"]
+                    let pr = PersonalRecordType(name: personalRecordName!, present: false, defaultType: .time, updatedAt: updatedAt!)
                     defaultPrs.append(pr)
                 }
             }

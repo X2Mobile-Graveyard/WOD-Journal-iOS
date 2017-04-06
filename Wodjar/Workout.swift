@@ -33,18 +33,18 @@ enum WODType: String {
 
 enum WODCategory: String {
     case time = "Time"
-    case amrap = "Repetitions"
+    case amrap = "Rounds/Reps"
     case weight = "Weight"
     case other = "Other"
     
     static func from(hashValue: Int) -> WODCategory {
         switch hashValue {
         case 0:
-            return .time
+            return .weight
         case 1:
             return .amrap
         case 2:
-            return .weight
+            return .time
         default:
             return .other
         }

@@ -21,22 +21,14 @@ class PersonalRecordDetailTableViewCell: UITableViewCell {
         dateLabel.text = dateFormatter.string(from: personalRecord.date)
         
         var typeOfWorkout = String()
-        switch personalRecord.resultType {
-        case .weight:
-            typeOfWorkout = "Weight:"
-        case .amrap:
-            typeOfWorkout = "Repetition:"
-        case .time:
-            typeOfWorkout = "Time:"
-        case .other:
-            typeOfWorkout = "Unknown:"
+        typeOfWorkout = personalRecord.resultType.rawValue
+        
+        if let result = personalRecord.resultAsString() {
+           contentLabel.text = typeOfWorkout + " " + result
+        } else {
+           contentLabel.text = typeOfWorkout
         }
         
-        if personalRecord.result == nil {
-            contentLabel.text = typeOfWorkout
-        } else {
-            contentLabel.text = typeOfWorkout + " " + personalRecord.result!
-        }
         
         rxLabel.isHidden = !personalRecord.rx
     }

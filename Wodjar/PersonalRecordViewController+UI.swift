@@ -29,9 +29,12 @@ extension PersonalRecordViewController {
     }
     
     func setupResultTextField() {
-        if personalRecord.result != nil {
-            resultTextField.text = personalRecord.result
+        resultTextField.placeholder = "Result"
+        if personalRecord.resultAsString() == nil{
+            return
         }
+        
+        resultTextField.text = personalRecord.resultAsString()
     }
     
     func changeUIForEditMode() {
@@ -70,14 +73,16 @@ extension PersonalRecordViewController {
     }
     
     func setupViewForRecordType() {
+        resultTextField.inputView = nil
+        resultTextField.inputAccessoryView = nil
         switch recordType {
         case .weight:
             resultTextField.keyboardType = .decimalPad
         case .time:
-            if timePicker == nil {
-                createPickerView()
+            if let resultTime = personalRecord.resultTime {
+                wodTimePicker.timeInterval = TimeInterval(resultTime)
             }
-            resultTextField.inputView = timePicker!
+            resultTextField.inputView = wodTimePicker
             resultTextField.inputAccessoryView = createKeyboardToolbarForTimePicker()
         case .amrap:
             resultTextField.keyboardType = .numberPad
@@ -103,20 +108,19 @@ extension PersonalRecordViewController {
         }
     }
     
-    private func createPickerView() {
-        timePicker = UIPickerView()
-        timePicker?.delegate = self
-        timePicker?.dataSource = self
-    }
-    
     private func setupSegmentedControl() {
         segmentedControl.selectedSegmentIndex = personalRecord.resultType.hash()
         recordType = personalRecord.resultType
         if controllerMode == .editMode {
-            segmentedControl.isUserInteractionEnabled = false
-            segmentedControl.isEnabled = false
+            return
         } else {
             segmentedControl.addTarget(self, action: #selector(didChangeSegmentControl(segmentControl:)), for: .valueChanged)
+        }
+    }
+    
+    func removeSegmentedControlIfNeeded() {
+        if controllerMode == .editMode {
+            removeSegmentedControll()
         }
     }
     
@@ -141,7 +145,7 @@ extension PersonalRecordViewController {
     
     private func setupCalendarTextField() {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy"
+        dateFormatter.dateFormat = " MMM dd, yyyy"
         calendarTextField.text = dateFormatter.string(from: personalRecord.date)
         pickedDateFromDatePicker = personalRecord.date
         
@@ -254,6 +258,21 @@ extension PersonalRecordViewController {
         contentView.addSubview(userPictureView)
         footerViewBottomConstraint.isActive = false
         addConstrainsForPictureView()
+    }
+    
+    private func removeSegmentedControll() {
+        segmentedControl.removeFromSuperview()
+        resultTypeLabel.translatesAutoresizingMaskIntoConstraints = false
+        resultTypeLabelTopConstraint.isActive = false
+        
+        let top = NSLayoutConstraint(item: resultTypeLabel,
+                                     attribute: .top,
+                                     relatedBy: .equal,
+                                     toItem: contentView,
+                                     attribute: .top,
+                                     multiplier: 1,
+                                     constant: viewInset)
+        view.addConstraint(top)
     }
     
     func addConstrainsForPictureView() {

@@ -127,7 +127,9 @@ extension IAPHelper: SKPaymentTransactionObserver {
     }
     
     private func restore(transaction: SKPaymentTransaction) {
-        guard let productIdentifier = transaction.original?.payment.productIdentifier else { return }
+        guard let productIdentifier = transaction.original?.payment.productIdentifier else {
+            return
+        }
         
         print("restore... \(productIdentifier)")
         deliverPurchaseNotificationFor(identifier: productIdentifier)
@@ -136,9 +138,9 @@ extension IAPHelper: SKPaymentTransactionObserver {
     
     private func fail(transaction: SKPaymentTransaction) {
         print("fail...")
-        if let transactionError = transaction.error as? NSError {
+        if let transactionError = transaction.error as NSError? {
             if transactionError.code != SKError.paymentCancelled.rawValue {
-                print("Transaction Error: \(transaction.error?.localizedDescription)")
+                print("Transaction Error: \(String(describing: transaction.error?.localizedDescription))")
             }
         }
         
@@ -146,7 +148,9 @@ extension IAPHelper: SKPaymentTransactionObserver {
     }
     
     private func deliverPurchaseNotificationFor(identifier: String?) {
-        guard let identifier = identifier else { return }
+        guard let identifier = identifier else {
+            return
+        }
         
         purchasedProductIdentifiers.insert(identifier)
         UserDefaults.standard.set(true, forKey: identifier)

@@ -10,8 +10,8 @@ import UIKit
 import MBProgressHUD
 
 protocol UpdatePersonalRecordDelegate {
-    func didDelete(personalRecord: PersonalRecord)
     func didAdd(personalRecord: PersonalRecord)
+    func didDelete(personalRecord: PersonalRecord)
 }
 
 class PersonalRecordDetailsListViewController: UIViewController {
@@ -69,6 +69,10 @@ class PersonalRecordDetailsListViewController: UIViewController {
     }
     
     private func setupTitle() {
+        if personalRecordType.name != nil {
+            titleTextField.text = personalRecordType.name!
+        }
+        
         if !UserManager.sharedInstance.isAuthenticated() {
             titleTextField.isEnabled = false
             editTitleButton.isHidden = true
@@ -103,10 +107,10 @@ class PersonalRecordDetailsListViewController: UIViewController {
     }
 
     @IBAction func didTapDeleteButton(_ sender: Any) {
-        showAlert(with: "Warning",
-                  message: "This action will delete all registered records. Do you wish to continue?",
-                  actionButtonTitle: "Delete") { (action) in
-            self.deleteAllRecords()
+        showDeleteAlert(with: "Warning",
+                        message: "This action will delete all registered records. Do you wish to continue?",
+                        actionButtonTitle: "Delete") { (action) in
+                self.deleteAllRecords()
         }
     }
     
@@ -119,6 +123,10 @@ class PersonalRecordDetailsListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else {
             return
+        }
+        
+        if titleTextField.isFirstResponder {
+            titleTextField.resignFirstResponder()
         }
         
         if identifier == personalRecordSegueIdentifier {
@@ -186,8 +194,10 @@ class PersonalRecordDetailsListViewController: UIViewController {
             switch result {
             case .success():
                 self.personalRecordType.name = name
+                self.personalRecordType.updatedAt = Date()
             case .failure(_):
                 self.handleError(result: result)
+                self.titleTextField.text = self.personalRecordType.name
             }
             MBProgressHUD.hide(for: self.view, animated: true)
         }
@@ -256,18 +266,12 @@ extension PersonalRecordDetailsListViewController: UpdatePersonalRecordDelegate 
     func didDelete(personalRecord: PersonalRecord) {
         if let indexToDelete = personalRecordType.records.index(where: {$0.id! == personalRecord.id!}) {
             personalRecordType.records.remove(at: indexToDelete)
-            if personalRecordType.records.count == 0 {
-                personalRecordType.present = false
-            }
             tableView.reloadData()
         }
     }
     
     func didAdd(personalRecord: PersonalRecord) {
-        personalRecordType.records.append(personalRecord)
-        if !personalRecordType.present {
-            personalRecordType.present = true
-        }
+        personalRecordType.add(personalRecord: personalRecord)
         tableView.reloadData()
     }
 }

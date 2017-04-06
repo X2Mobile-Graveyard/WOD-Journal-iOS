@@ -4,38 +4,177 @@
 <dict>
 	<key>Weight</key>
 	<array>
-		<string>Back Squat</string>
-		<string>Front Squat</string>
-		<string>Bench Press</string>
-		<string>Clean</string>
-		<string>Jerk</string>
-		<string>Clean &amp; Jerk</string>
-		<string>Power Clean</string>
-		<string>Snatch</string>
-		<string>Power Snatch</string>
-		<string>One Handed Snatch</string>
-		<string>Overhead Squat</string>
-		<string>Dead Lift</string>
-		<string>Push Press</string>
-		<string>Shoulder Press</string>
-		<string>Thruster</string>
-		<string>Turkish Get-up</string>
-		<string>Weighted Pull-up</string>
-		<string>Weighted Ring-Dip</string>
+		<dict>
+			<key>name</key>
+			<string>Back Squat</string>
+			<key>date</key>
+			<string>2014-01-31</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Front Squat</string>
+			<key>date</key>
+			<string>2014-01-30</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Bench Press</string>
+			<key>date</key>
+			<string>2014-01-29</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Clean</string>
+			<key>date</key>
+			<string>2014-01-28</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Jerk</string>
+			<key>date</key>
+			<string>2014-01-27</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Clean &amp; Jerk</string>
+			<key>date</key>
+			<string>2014-01-26</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Power Clean</string>
+			<key>date</key>
+			<string>2014-01-25</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Snatch</string>
+			<key>date</key>
+			<string>2014-01-24</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>One Handed Snatch</string>
+			<key>date</key>
+			<string>2014-01-23</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Overhead Squat</string>
+			<key>date</key>
+			<string>2014-01-22</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Dead Lift</string>
+			<key>date</key>
+			<string>2014-01-21</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Push Press</string>
+			<key>date</key>
+			<string>2014-01-20</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Shoulder Press</string>
+			<key>date</key>
+			<string>2014-01-19</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Thruster</string>
+			<key>date</key>
+			<string>2014-01-18</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Turkish Get-up</string>
+			<key>date</key>
+			<string>2014-01-17</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Weighted Pull-up</string>
+			<key>date</key>
+			<string>2014-01-16</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Weighted Ring-Dip</string>
+			<key>date</key>
+			<string>2014-01-15</string>
+		</dict>
 	</array>
 	<key>Time</key>
 	<array>
-		<string>500 m Row</string>
-		<string>1000 m Row</string>
-		<string>2000 m Row </string>
-		<string>5000 m Row</string>
-		<string>100 m Run</string>
-		<string>1 km Run</string>
-		<string>3 km Run</string>
-		<string>5 km Run</string>
-		<string>10 km Run</string>
-		<string>1/2 marathon Run</string>
-		<string>1 marathon Run</string>
+		<dict>
+			<key>name</key>
+			<string>500 m Row</string>
+			<key>date</key>
+			<string>2014-01-14</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>1000 m Row</string>
+			<key>date</key>
+			<string>2014-01-13</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>2000 m Row</string>
+			<key>date</key>
+			<string>2014-01-12</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>5000 m Row</string>
+			<key>date</key>
+			<string>2014-01-11</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>100 m Run</string>
+			<key>date</key>
+			<string>2014-01-10</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>1 km Run</string>
+			<key>date</key>
+			<string>2014-01-09</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>3 km Run</string>
+			<key>date</key>
+			<string>2014-01-08</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>5 km Run</string>
+			<key>date</key>
+			<string>2014-01-07</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>10 km Run</string>
+			<key>date</key>
+			<string>2014-01-06</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>1/2 marathon Run</string>
+			<key>date</key>
+			<string>2014-01-05</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>1 marathon Run</string>
+			<key>date</key>
+			<string>2014-01-04</string>
+		</dict>
 	</array>
 </dict>
 </plist>

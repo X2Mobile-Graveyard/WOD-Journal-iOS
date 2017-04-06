@@ -18,12 +18,6 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
     }
 
     
-    // MARK: - Buttons Actions
-    
-    @IBAction func didTapAddButton(_ sender: Any) {
-        
-    }
-    
     // MARK: - TableView Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -14,6 +14,7 @@ class WODImageTableViewCell: UITableViewCell {
     @IBOutlet weak var wodImageView: UIImageView!
     
     func populate(with imageURL: String) {
+        self.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
         wodImageView.sd_setImage(with: URL(string: imageURL))
     }
 }

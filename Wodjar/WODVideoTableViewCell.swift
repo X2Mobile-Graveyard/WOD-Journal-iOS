@@ -14,6 +14,7 @@ class WODVideoTableViewCell: UITableViewCell {
     @IBOutlet weak var videoView: UIView!
     
     func populate(with videoId: String) {
+        self.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
         let youtubeController = XCDYouTubeVideoPlayerViewController.init(videoIdentifier: videoId)
         youtubeController.present(in: videoView)
         youtubeController.moviePlayer.shouldAutoplay = false

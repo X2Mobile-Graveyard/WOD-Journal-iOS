@@ -46,28 +46,32 @@ class PersonalRecordsListViewController: UIViewController {
         var defaultPrs = [PersonalRecordType]()
         if let path = Bundle.main.path(forResource: "defaultPRs", ofType: "plist"),
             let dict = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
-            if let weightPersonalRecords = dict["Weight"] as? [String] {
-                for personalRecordName in weightPersonalRecords {
-                    let pr = PersonalRecordType(name: personalRecordName, present: false, defaultType: .weight)
+            if let weightPersonalRecords = dict["Weight"] as? [[String: String]] {
+                for personalRecordDict in weightPersonalRecords {
+                    let personalRecordName = personalRecordDict["name"]
+                    let updatedAt = personalRecordDict["date"]
+                    let pr = PersonalRecordType(name: personalRecordName!, present: false, defaultType: .weight, updatedAt: updatedAt!)
                     defaultPrs.append(pr)
                 }
             }
             
-            if let timePersonalRecords = dict["Time"] as? [String] {
-                for personalRecordName in timePersonalRecords {
-                    let pr = PersonalRecordType(name: personalRecordName, present: false, defaultType: .time)
+            if let timePersonalRecords = dict["Time"] as? [[String: String]] {
+                for personalRecordDict in timePersonalRecords {
+                    let personalRecordName = personalRecordDict["name"]
+                    let updatedAt = personalRecordDict["date"]
+                    let pr = PersonalRecordType(name: personalRecordName!, present: false, defaultType: .time, updatedAt: updatedAt!)
                     defaultPrs.append(pr)
                 }
             }
         }
-        
         return defaultPrs
     }()
     
     // @Constants
     let cellIdentifier = "PersonalRecordListCellIdentifier"
     let detailsListSequeIdentifier = "goToPersonalRecordDetailsIdentifier"
-    let newPersonalRecordIdentifier = "PersonalRecordSegueIdentifier"
+    let newPersonalRecordIdentifier = "NewPersonalRecordSegueIdentifier"
+    let addFirstRecordIdentifier = "FirstRecordIdentifier"
     
     // @Injected
     var recordTypes = [PersonalRecordType]()
@@ -81,6 +85,7 @@ class PersonalRecordsListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recordTypes = service.merge(personalRecords: recordTypes, with: defaultPRs)
+        recordTypes = service.orderByUpdatedDate(recordTypes: recordTypes)
         tableView.reloadData()
     }
 
@@ -92,7 +97,7 @@ class PersonalRecordsListViewController: UIViewController {
         service.getPersonalRecordTypes { (result) in
             switch result {
             case let .success(personalRecordTypes):
-                self.recordTypes = personalRecordTypes
+                self.recordTypes = self.service.orderByUpdatedDate(recordTypes: personalRecordTypes)
                 self.tableView.reloadData()
             case let .failure(error):
                 print(error)
@@ -113,7 +118,6 @@ class PersonalRecordsListViewController: UIViewController {
         presentLoginScreen {
             self.getPersonalRecordTypes()
         }
-        
     }
     
     // MARK: - Navigation
@@ -123,7 +127,8 @@ class PersonalRecordsListViewController: UIViewController {
             return
         }
         
-        if identifier == detailsListSequeIdentifier {
+        switch identifier {
+        case detailsListSequeIdentifier:
             if selectedRecordType == nil {
                 return
             }
@@ -132,12 +137,41 @@ class PersonalRecordsListViewController: UIViewController {
             detailsListViewController.service = service
             detailsListViewController.deleteTypeDelegate = self
             detailsListViewController.loginDelegate = self
-        } else if identifier == newPersonalRecordIdentifier {
+        case newPersonalRecordIdentifier:
             let personalRecordViewController = segue.destination as! PersonalRecordViewController
             personalRecordViewController.controllerMode = .createMode
             personalRecordViewController.personalRecord = PersonalRecord()
             personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl())
             personalRecordViewController.createRecordDelegate = self
+        case addFirstRecordIdentifier:
+            if selectedRecordType == nil {
+                return
+            }
+            let personalRecordViewController = segue.destination as! PersonalRecordViewController
+            personalRecordViewController.personalRecord = PersonalRecord(name: selectedRecordType!.name,
+                                                                         rx: false,
+                                                                         result: nil,
+                                                                         resultType: selectedRecordType!.defaultResultType ?? .weight,
+                                                                         unitType: .metric,
+                                                                         notes: nil,
+                                                                         imageUrl: nil,
+                                                                         date: Date())
+            personalRecordViewController.updatePersonalRecordDelegate = self
+            personalRecordViewController.controllerMode = .editMode
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl())
+        default:
+            break
+        }
+    }
+    
+    func addFirstRecordForSelectedRecordType() {
+        if UserManager.sharedInstance.isAuthenticated() {
+            performSegue(withIdentifier: addFirstRecordIdentifier, sender: self)
+            return
+        }
+        
+        presentLoginScreen { 
+            self.getPersonalRecordTypes()
         }
     }
 }
@@ -171,7 +205,13 @@ extension PersonalRecordsListViewController: UITableViewDelegate {
         } else {
             selectedRecordType = recordTypes[indexPath.row]
         }
-        performSegue(withIdentifier: detailsListSequeIdentifier, sender: self)
+        
+        if selectedRecordType!.present {
+            performSegue(withIdentifier: detailsListSequeIdentifier, sender: self)
+        } else {
+            addFirstRecordForSelectedRecordType()
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -207,9 +247,8 @@ extension PersonalRecordsListViewController: UITableViewDataSource {
 
 extension PersonalRecordsListViewController: PersonalRecordCreateDelegate {
     func didCreate(personalRecord: PersonalRecord) {
-        let newPersonalRecordType = PersonalRecordType(name: personalRecord.name!, present: true, defaultType: personalRecord.resultType)
+        let newPersonalRecordType = PersonalRecordType(name: personalRecord.name!, present: true, defaultType: personalRecord.resultType, updatedAt: nil)
         newPersonalRecordType.records.append(personalRecord)
-        
         recordTypes.append(newPersonalRecordType)
     }
 }
@@ -220,6 +259,21 @@ extension PersonalRecordsListViewController: PersonalRecordTypeDeleteDelegate {
             recordTypes.remove(at: indexToDelete)
             tableView.reloadData()
         }
+    }
+}
+
+extension PersonalRecordsListViewController: UpdatePersonalRecordDelegate {
+    func didAdd(personalRecord: PersonalRecord) {
+        guard let selectedType = selectedRecordType else {
+            return
+        }
+        
+        selectedType.add(personalRecord: personalRecord)
+        selectedType.updatedAt = Date()
+    }
+    
+    func didDelete(personalRecord: PersonalRecord) {
+        return
     }
 }
 

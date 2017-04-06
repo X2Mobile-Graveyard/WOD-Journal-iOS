@@ -13,6 +13,7 @@ class WODDescriptionTableViewCell: UITableViewCell {
     @IBOutlet weak var textView: UITextView!
     
     func populate(with wodDescription: String) {
+        self.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
         textView.text = wodDescription
     }
 

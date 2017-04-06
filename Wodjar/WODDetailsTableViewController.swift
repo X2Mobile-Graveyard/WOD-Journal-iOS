@@ -108,6 +108,10 @@ class WODDetailsTableViewController: UITableViewController {
             (cell as! WODVideoTableViewCell).populate(with: wod.videoId!)
         case .previousResultCell:
             (cell as! WODResultTableViewCell).populate(with: WODResult())
+        case .historyCell:
+            cell.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
+        case .deleteCell:
+            cell.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
         default:
             break
         }

@@ -39,6 +39,8 @@ class PersonalRecordViewController: UIViewController {
     @IBOutlet var rxSwitch: UISwitch!
     @IBOutlet weak var editTitleButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet var resultTypeLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet var wodTimePicker: WODTimeIntervalPicker!
     
     // @Properties
     var userImage: UIImage?
@@ -46,7 +48,6 @@ class PersonalRecordViewController: UIViewController {
     var pickedTimeFromTimePicker: Time = Time()
     var viewState: ViewControllerState = .withoutImage
     var recordType: WODCategory = .weight
-    var timePicker: UIPickerView?
     var personalRecordCopy: PersonalRecord!
     var createRecordDelegate: PersonalRecordCreateDelegate?
     var updatePersonalRecordDelegate: UpdatePersonalRecordDelegate?
@@ -55,7 +56,7 @@ class PersonalRecordViewController: UIViewController {
     // @Constants
     let presentFullImageSegueIdentifier = "presentFullImageSegueIdentifier"
     let viewInset: CGFloat = 16
-    let imageRatio: CGFloat = 0.679
+    let imageRatio: CGFloat = 0.75
     
     // @Injected
     var personalRecord: PersonalRecord!
@@ -76,6 +77,11 @@ class PersonalRecordViewController: UIViewController {
         setupFirstResponder()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        removeSegmentedControlIfNeeded()
+    }
+    
     // MARK: - Helper Methods
     
     func createWorkingCopy() {
@@ -90,10 +96,12 @@ class PersonalRecordViewController: UIViewController {
     }
     
     @IBAction func didTapTakeAPictureButton(_ sender: Any) {
+        endEditing()
         presentAlertControllerForTakingPicture()
     }
     
     @IBAction func didTapEditPictureButton(_ sender: Any) {
+        endEditing()
         presentAlertControllerForEditingPicture()
     }
     
@@ -102,8 +110,9 @@ class PersonalRecordViewController: UIViewController {
     }
     
     @IBAction func didTapSave(_ sender: Any) {
+        endEditing()
         personalRecordCopy.rx = rxSwitch.isOn
-        personalRecordCopy.result = resultTextField.text
+        personalRecordCopy.updateResult(from: resultTextField.text)
         personalRecordCopy.notes = notesTextView.text
         personalRecordCopy.name = titleTextField.text
         if controllerMode == .createMode {
@@ -118,19 +127,11 @@ class PersonalRecordViewController: UIViewController {
     }
     
     @IBAction func didTapDeleteButton(_ sender: Any) {
-        MBProgressHUD.showAdded(to: view, animated: true)
-        service.delete(personalRecord: personalRecordCopy) { (result) in
-            switch result {
-            case .success():
-                if self.personalRecordCopy.id != nil {
-                    self.updatePersonalRecordDelegate?.didDelete(personalRecord: self.personalRecordCopy)
-                }
-                _ = self.navigationController?.popViewController(animated: true)
-            case .failure(_):
-                self.handleError(result: result)
-            }
-            MBProgressHUD.hide(for: self.view, animated: true)
-        }
+        showDeleteAlert(with: "Warning",
+                        message: "This action will permanently delete this record.",
+                        actionButtonTitle: "Delete") { (action) in
+                            self.deleteRecord()
+                        }
     }
     
     // MARK: - UI Elements Actions
@@ -146,6 +147,8 @@ class PersonalRecordViewController: UIViewController {
         default:
             recordType = .weight
         }
+        resultTextField.text = ""
+        endEditing()
         personalRecordCopy.resultType = recordType
         setupViewForRecordType()
     }
@@ -161,13 +164,13 @@ class PersonalRecordViewController: UIViewController {
     
     func didTapDoneOnDatePicker() {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy"
+        dateFormatter.dateFormat = " MMM dd, yyyy"
         calendarTextField.text = dateFormatter.string(from: pickedDateFromDatePicker!)
         self.view.endEditing(true)
     }
     
     func didTapDoneOnTimePicker() {
-        resultTextField.text = pickedTimeFromTimePicker.getFormatedString()
+        resultTextField.text = wodTimePicker.timeIntervalAsHoursMinutesSeconds.getFormatedString()
         view.endEditing(true)
     }
     
@@ -196,6 +199,7 @@ class PersonalRecordViewController: UIViewController {
             case .success():
                 self.personalRecord.updateValues(from: self.personalRecordCopy)
                 self.pickedImagePath = nil
+                _ = self.navigationController?.popViewController(animated: true)
             case .failure(_):
                 self.handleError(result: result)
             }
@@ -215,6 +219,23 @@ class PersonalRecordViewController: UIViewController {
                 self.controllerMode = .editMode
                 self.changeUIForEditMode()
                 self.pickedImagePath = nil
+                _ = self.navigationController?.popViewController(animated: true)
+            case .failure(_):
+                self.handleError(result: result)
+            }
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
+    }
+    
+    func deleteRecord() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.delete(personalRecord: personalRecordCopy) { (result) in
+            switch result {
+            case .success():
+                if self.personalRecordCopy.id != nil {
+                    self.updatePersonalRecordDelegate?.didDelete(personalRecord: self.personalRecordCopy)
+                }
+                _ = self.navigationController?.popViewController(animated: true)
             case .failure(_):
                 self.handleError(result: result)
             }
@@ -256,17 +277,42 @@ class PersonalRecordViewController: UIViewController {
             }
         }
     }
+    
+    // MARK: - Helper Methods
+    
+    func endEditing() {
+        view.endEditing(true)
+        if titleTextField.isFirstResponder {
+            titleTextField.resignFirstResponder()
+        }
+    }
 }
 
 extension PersonalRecordViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView == notesTextView {
-            personalRecordCopy.notes = textView.text
+            
+            personalRecordCopy.notes = textView.text.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
+            textView.text = personalRecordCopy.notes
         }
     }
 }
 
 extension PersonalRecordViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == titleTextField {
+            if textField.text == nil {
+                return false
+            }
+            if textField.text!.characters.count > 0 {
+                textField.resignFirstResponder()
+                return true
+            }
+            return false
+        }
+        return true
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == titleTextField {
             if let enteredName = textField.text {
@@ -276,8 +322,26 @@ extension PersonalRecordViewController: UITextFieldDelegate {
         
         if textField == resultTextField {
             if let enteredResult = textField.text {
-                personalRecordCopy.result = enteredResult
+                personalRecordCopy.updateResult(from: enteredResult)
             }
         }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField != resultTextField {
+            return true
+        }
+        
+        if textField.keyboardType != .decimalPad {
+            return true
+        }
+        
+        let countdots = textField.text!.components(separatedBy: NSLocale.current.decimalSeparator!).count - 1
+        
+        if countdots > 0 && string.contains(NSLocale.current.decimalSeparator!) {
+            return false
+        }
+        
+        return true
     }
 }

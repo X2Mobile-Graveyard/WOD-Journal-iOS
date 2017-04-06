@@ -24,7 +24,7 @@ class WODTypesTableViewController: UITableViewController {
     let wodResultCellIdentifier = "WodResultTableViewCellIdentifier"
     let customWodsTableIdentifier = "CustomWodTypeViewControllerIdentifier"
     let defaultWodsTableIdentifier = "DefaultWodTypeViewControllerIdentifier"
-    let headerHeight: CGFloat = 50
+    let headerHeight: CGFloat = 20
     
 
     override func viewDidLoad() {
@@ -105,7 +105,7 @@ class WODTypesTableViewController: UITableViewController {
         if resultSearchController.isActive {
             return nil
         }
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: headerHeight))
         view.backgroundColor = tableView.backgroundColor
         
         return view
@@ -116,8 +116,12 @@ class WODTypesTableViewController: UITableViewController {
             if section == 1 {
                 return headerHeight
             } else {
-                return 0
+                return 0.1
             }
+        }
+    
+        if section == 0 {
+            return headerHeight + 20
         }
         return headerHeight
     }

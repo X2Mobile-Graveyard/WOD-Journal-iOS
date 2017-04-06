@@ -45,6 +45,9 @@
 		D347A5E91E8946F100AE888E /* CustomWODDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5E61E8946F100AE888E /* CustomWODDetailsViewController.swift */; };
 		D347A5EA1E8946F100AE888E /* DefaultWODDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5E71E8946F100AE888E /* DefaultWODDetailsViewController.swift */; };
 		D347A5EC1E89479800AE888E /* WODResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5EB1E89479800AE888E /* WODResult.swift */; };
+		D3643B9D1E93DEAD0002E98E /* CreateCustomWODViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3643B9C1E93DEAD0002E98E /* CreateCustomWODViewController.swift */; };
+		D3643B9F1E93DEBB0002E98E /* WODResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3643B9E1E93DEBB0002E98E /* WODResultViewController.swift */; };
+		D3643BA31E9652FE0002E98E /* WODTimeIntervalPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3643BA21E9652FE0002E98E /* WODTimeIntervalPicker.swift */; };
 		D3A6EA5D1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A6EA5C1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift */; };
 		D3A6EA5F1E8E3D0C006CF6B1 /* CreatePersonalRecordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A6EA5E1E8E3D0C006CF6B1 /* CreatePersonalRecordRequest.swift */; };
 		D3A6EA611E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A6EA601E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift */; };
@@ -77,7 +80,6 @@
 		D3EB88FD1E7193CD0028F28A /* PersonalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB88FC1E7193CD0028F28A /* PersonalRecord.swift */; };
 		D3EB890A1E729FD00028F28A /* PersonalRecordViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89091E729FD00028F28A /* PersonalRecordViewController+UI.swift */; };
 		D3EB890C1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB890B1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift */; };
-		D3EB890E1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB890D1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift */; };
 		D3EB89131E72E00E0028F28A /* PersonalRecordsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89121E72E00E0028F28A /* PersonalRecordsListViewController.swift */; };
 		D3EB89151E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89141E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift */; };
 		D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89161E72EF9D0028F28A /* PersonalRecordType.swift */; };
@@ -151,6 +153,9 @@
 		D347A5E61E8946F100AE888E /* CustomWODDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWODDetailsViewController.swift; sourceTree = "<group>"; };
 		D347A5E71E8946F100AE888E /* DefaultWODDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWODDetailsViewController.swift; sourceTree = "<group>"; };
 		D347A5EB1E89479800AE888E /* WODResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODResult.swift; sourceTree = "<group>"; };
+		D3643B9C1E93DEAD0002E98E /* CreateCustomWODViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCustomWODViewController.swift; sourceTree = "<group>"; };
+		D3643B9E1E93DEBB0002E98E /* WODResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODResultViewController.swift; sourceTree = "<group>"; };
+		D3643BA21E9652FE0002E98E /* WODTimeIntervalPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTimeIntervalPicker.swift; sourceTree = "<group>"; };
 		D3A6EA5C1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePersonalRecordRequest.swift; sourceTree = "<group>"; };
 		D3A6EA5E1E8E3D0C006CF6B1 /* CreatePersonalRecordRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePersonalRecordRequest.swift; sourceTree = "<group>"; };
 		D3A6EA601E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateRecordsNameRequest.swift; sourceTree = "<group>"; };
@@ -183,7 +188,6 @@
 		D3EB88FC1E7193CD0028F28A /* PersonalRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecord.swift; sourceTree = "<group>"; };
 		D3EB89091E729FD00028F28A /* PersonalRecordViewController+UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonalRecordViewController+UI.swift"; sourceTree = "<group>"; };
 		D3EB890B1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonalRecordViewController+ImagePicker.swift"; sourceTree = "<group>"; };
-		D3EB890D1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersonalRecordViewController+TimePicker.swift"; sourceTree = "<group>"; };
 		D3EB89121E72E00E0028F28A /* PersonalRecordsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordsListViewController.swift; sourceTree = "<group>"; };
 		D3EB89141E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresonalRecordsListTableViewCell.swift; sourceTree = "<group>"; };
 		D3EB89161E72EF9D0028F28A /* PersonalRecordType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordType.swift; sourceTree = "<group>"; };
@@ -441,6 +445,30 @@
 			name = WODDetailsCells;
 			sourceTree = "<group>";
 		};
+		D3643B981E93DE480002E98E /* CreateCustomWODController */ = {
+			isa = PBXGroup;
+			children = (
+				D3643B9C1E93DEAD0002E98E /* CreateCustomWODViewController.swift */,
+			);
+			name = CreateCustomWODController;
+			sourceTree = "<group>";
+		};
+		D3643B9B1E93DE820002E98E /* WODResultController */ = {
+			isa = PBXGroup;
+			children = (
+				D3643B9E1E93DEBB0002E98E /* WODResultViewController.swift */,
+			);
+			name = WODResultController;
+			sourceTree = "<group>";
+		};
+		D3643BA41E96678C0002E98E /* TimePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				D3643BA21E9652FE0002E98E /* WODTimeIntervalPicker.swift */,
+			);
+			name = TimePickerView;
+			sourceTree = "<group>";
+		};
 		D3BB366A1E840CB80078CE53 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +509,7 @@
 		D3E6950E1E7935A70060D9D2 /* PersonalRecord */ = {
 			isa = PBXGroup;
 			children = (
+				D3643BA41E96678C0002E98E /* TimePickerView */,
 				D310E5E91E759EC300AD6B74 /* PersonalRecordsDetailsListController */,
 				D3EB890F1E72D0560028F28A /* PersonalRecordsListController */,
 				D3EB89081E729F8D0028F28A /* PersonalRecordViewController */,
@@ -491,6 +520,8 @@
 		D3E6950F1E7935B90060D9D2 /* WODs */ = {
 			isa = PBXGroup;
 			children = (
+				D3643B9B1E93DE820002E98E /* WODResultController */,
+				D3643B981E93DE480002E98E /* CreateCustomWODController */,
 				D347A5CF1E8946A800AE888E /* WODTypesController */,
 				D347A5CE1E8946A000AE888E /* WODTypeController */,
 				D347A5CD1E89469400AE888E /* WODDetailsController */,
@@ -550,7 +581,6 @@
 				D3E9C7C01E6DCDDF007E8296 /* PersonalRecordViewController.swift */,
 				D3EB89091E729FD00028F28A /* PersonalRecordViewController+UI.swift */,
 				D3EB890B1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift */,
-				D3EB890D1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift */,
 			);
 			name = PersonalRecordViewController;
 			sourceTree = "<group>";
@@ -869,6 +899,7 @@
 				D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */,
 				D347A5E41E8946E200AE888E /* WODResultTableViewCell.swift in Sources */,
 				D3E695161E7936880060D9D2 /* Workout.swift in Sources */,
+				D3643BA31E9652FE0002E98E /* WODTimeIntervalPicker.swift in Sources */,
 				BFD44D801E82A57100170817 /* MoreComponent.swift in Sources */,
 				D3EB88F71E7050C80028F28A /* LoginViewController.swift in Sources */,
 				D3C6EF021E8A907100E1D9D1 /* AuthenticationService.swift in Sources */,
@@ -881,6 +912,7 @@
 				D3B4876C1E8BF81A0042DE2A /* UIViewController+LoginPresenter.swift in Sources */,
 				D347A5E91E8946F100AE888E /* CustomWODDetailsViewController.swift in Sources */,
 				BFD44D991E82D08E00170817 /* UIButton+BackgroundColor.swift in Sources */,
+				D3643B9F1E93DEBB0002E98E /* WODResultViewController.swift in Sources */,
 				4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */,
 				D347A5D21E8946BA00AE888E /* WODTypesTableViewController.swift in Sources */,
 				D347A5E11E8946E200AE888E /* WODDescriptionTableViewCell.swift in Sources */,
@@ -897,6 +929,7 @@
 				D3C6EF001E8A8C9C00E1D9D1 /* RegisterViewController.swift in Sources */,
 				D310E5F01E76C7C000AD6B74 /* WodJurnalNavigationController.swift in Sources */,
 				D3E9C7C11E6DCDDF007E8296 /* PersonalRecordViewController.swift in Sources */,
+				D3643B9D1E93DEAD0002E98E /* CreateCustomWODViewController.swift in Sources */,
 				D347A5E81E8946F100AE888E /* WODDetailsTableViewController.swift in Sources */,
 				D3EB890C1E72AD080028F28A /* PersonalRecordViewController+ImagePicker.swift in Sources */,
 				D3B4876A1E8BE2ED0042DE2A /* UserManager.swift in Sources */,
@@ -911,7 +944,6 @@
 				D347A5D71E8946C400AE888E /* WODTypeTableViewController.swift in Sources */,
 				D3C6EF081E8A983100E1D9D1 /* LoginRequest.swift in Sources */,
 				D347A5E31E8946E200AE888E /* LogWODResultTableViewCell.swift in Sources */,
-				D3EB890E1E72C3F70028F28A /* PersonalRecordViewController+TimePicker.swift in Sources */,
 				D3C6EF0A1E8A984500E1D9D1 /* RegisterRequest.swift in Sources */,
 				D3FD71411E6E00730047492D /* FullSizeImageViewController.swift in Sources */,
 				D347A5EC1E89479800AE888E /* WODResult.swift in Sources */,

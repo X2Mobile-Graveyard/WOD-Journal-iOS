@@ -24,8 +24,8 @@ protocol PersonalRecordListRemoteService {
 
 class PersonalRecordListRemoteServiceTest: PersonalRecordListRemoteService {
     func getPersonalRecordsNames(with completion: GetPersonalRecordsNamesCompletion?) {
-        let persRecord1 = PersonalRecordType(name: "Frecari pe cap", present: true)
-        let persRecord2 = PersonalRecordType(name: "Deadlift", present: true)
+        let persRecord1 = PersonalRecordType(name: "Frecari pe cap", present: true, updatedAt: "2015-01-10")
+        let persRecord2 = PersonalRecordType(name: "Deadlift", present: true, updatedAt: "2015-01-10")
         completion?(.success([persRecord1, persRecord2]))
     }
     
@@ -134,15 +134,15 @@ class PersonalRecordListRemoteImpl: PersonalRecordListRemoteService {
                 return
             }
             
-            guard let prs = dict["personal_records"] as? [String] else {
+            guard let prs = dict["personal_records"] as? [[String: String]] else {
                 completion?(.failure(NSError.localError(with: "Invalid JSON")))
                 return
             }
             
             
             var prTypes = [PersonalRecordType]()
-            for name in prs {
-                let prType = PersonalRecordType(name: name, present: true)
+            for prTypeDict in prs {
+                let prType = PersonalRecordType(with: prTypeDict)
                 prTypes.append(prType)
             }
             
