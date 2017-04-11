@@ -52,9 +52,9 @@ class PersonalRecordDetailsListViewController: UIViewController {
     // MARK: - Initialization
     
     private func getResultsForPersonalRecords() {
-        MBProgressHUD.showAdded(to: tableView, animated: true)
+        MBProgressHUD.showAdded(to: view, animated: true)
         service.getPersonalRecordResult(for: personalRecordType.name) { (result) in
-            MBProgressHUD.hide(for: self.tableView, animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
             switch result {
             case let .success(prResults):
                 self.personalRecordType.records = prResults

@@ -20,43 +20,32 @@ enum ControllerType {
     case createMode
 }
 
-class PersonalRecordViewController: UIViewController {
+class PersonalRecordViewController: WODJournalResultViewController {
 
     // @IBOutlets
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var resultTypeLabel: UILabel!
     @IBOutlet weak var resultTextField: UITextField!
     @IBOutlet weak var notesTextView: UITextView!
-    @IBOutlet weak var addPictureButton: UIButton!
     @IBOutlet weak var calendarTextField: DateTextField!
-    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet var userPictureView: UIView!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var footerView: UIView!
-    @IBOutlet var footerViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var rxSwitch: UISwitch!
     @IBOutlet weak var editTitleButton: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet var resultTypeLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet var wodTimePicker: WODTimeIntervalPicker!
     
     // @Properties
-    var userImage: UIImage?
     var pickedDateFromDatePicker: Date?
     var pickedTimeFromTimePicker: Time = Time()
-    var viewState: ViewControllerState = .withoutImage
     var recordType: WODCategory = .weight
     var personalRecordCopy: PersonalRecord!
     var createRecordDelegate: PersonalRecordCreateDelegate?
     var updatePersonalRecordDelegate: UpdatePersonalRecordDelegate?
-    var pickedImagePath: String?
     
     // @Constants
     let presentFullImageSegueIdentifier = "presentFullImageSegueIdentifier"
-    let viewInset: CGFloat = 16
-    let imageRatio: CGFloat = 0.75
+
     
     // @Injected
     var personalRecord: PersonalRecord!
@@ -80,12 +69,6 @@ class PersonalRecordViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         removeSegmentedControlIfNeeded()
-    }
-    
-    // MARK: - Helper Methods
-    
-    func createWorkingCopy() {
-        personalRecordCopy = PersonalRecord(personalRecord: personalRecord)
     }
     
     // MARK: - Buttons Actions
@@ -163,9 +146,7 @@ class PersonalRecordViewController: UIViewController {
     }
     
     func didTapDoneOnDatePicker() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = " MMM dd, yyyy"
-        calendarTextField.text = dateFormatter.string(from: pickedDateFromDatePicker!)
+        calendarTextField.text = pickedDateFromDatePicker?.getDateAsWodJournalString()
         self.view.endEditing(true)
     }
     
@@ -243,24 +224,6 @@ class PersonalRecordViewController: UIViewController {
         }
     }
     
-    // MARK: - Modal Presentations
-    
-    func presentAlertControllerForTakingPicture() {
-        let alertController = createAlertControllerForTakePhoto()
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    func presentAlertControllerForEditingPicture() {
-        let alertController = createAlertControllerForEditPhoto()
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    func presentErrorAlertController(with message: String){
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -286,6 +249,11 @@ class PersonalRecordViewController: UIViewController {
             titleTextField.resignFirstResponder()
         }
     }
+    
+    func createWorkingCopy() {
+        personalRecordCopy = PersonalRecord(personalRecord: personalRecord)
+    }
+    
 }
 
 extension PersonalRecordViewController: UITextViewDelegate {

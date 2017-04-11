@@ -104,11 +104,6 @@ extension UIViewController {
         let message = messagesArray.reduce("") { (accumulator, element) -> String in
             if let errorMsg = element as? String {
                 return accumulator.appending(errorMsg + "\n")
-//                if let singleMsg = msgDict["errors"] {
-//                    return accumulator.appendingFormat("%@\n", singleMsg as! CVarArg)
-//                } else {
-//                    return accumulator.appending("\n")
-//                }
             } else {
                 return accumulator
             }

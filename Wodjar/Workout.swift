@@ -15,6 +15,23 @@ enum WODType: String {
     case open = "Opens"
     case custom = "Customs"
     
+    static func from(hashValue: Int) -> WODType {
+        switch hashValue {
+        case 0:
+            return .girl
+        case 1:
+            return .hero
+        case 2:
+            return .challenge
+        case 3:
+            return .open
+        case 4:
+            return .custom
+        default:
+            return .custom
+        }
+    }
+    
     func hash() -> Int {
         switch self {
         case .girl:
@@ -71,25 +88,37 @@ enum UnitType: Int {
 
 class Workout: NSObject {
     
-    var id: Int
+    var id: Int?
     var wodDescription: String?
     var imageUrl: String?
     var history: String?
-    var type: WODType
-    var name: String
-    var isFavorite: Bool
-    var isCompleted: Bool
+    var type: WODType?
+    var name: String?
+    var isFavorite: Bool = false
+    var isCompleted: Bool = false
     var category: WODCategory?
     var videoId: String?
     var unit: UnitType?
     var results: [WODResult]?
     
-    init(id: Int, type: WODType, name: String, favorite: Bool, completed: Bool)   {
+    convenience init(id: Int, type: WODType, name: String, favorite: Bool, completed: Bool)   {
+        self.init()
         self.id = id
         self.type = type
         self.name = name
         self.isFavorite = favorite
         self.isCompleted = completed
+    }
+    
+    convenience init(from dictionary: [String: Any]) {
+        self.init()
+        self.id = dictionary["id"] as? Int ?? nil
+        self.name = dictionary["name"] as? String ?? nil
+        if let type = dictionary["category"] as? Int {
+            self.type = WODType.from(hashValue: type)
+        }
+        self.isCompleted = dictionary["completed"] as? Bool ?? false
+        self.isFavorite = dictionary["favorites"] as? Bool ?? false
     }
     
     func set(description: String, image: String?, history: String?, category: WODCategory, video: String?, unit: UnitType) {
@@ -100,4 +129,6 @@ class Workout: NSObject {
         self.videoId = video
         self.unit = unit
     }
+    
+    
 }

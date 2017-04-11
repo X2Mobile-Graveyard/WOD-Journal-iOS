@@ -50,9 +50,7 @@ class PersonalRecord {
         self.notes = dictionary["notes"] as? String ?? nil
         self.imageUrl = dictionary["image_url"] as? String ?? nil
         if let lastUpdate = dictionary["updated_at"] as? String {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-            self.updatedAt = dateFormatter.date(from: lastUpdate)
+            self.updatedAt = lastUpdate.getDateFromWodJournalFormatStyle()
         } else {
             self.updatedAt = nil
         }

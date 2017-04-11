@@ -17,6 +17,7 @@ class WODTypeTableViewController: UITableViewController {
     // @Injected
     var isFavorite: Bool = false
     var workouts: [Workout]!
+    var service: WODListService!
     
     // @Constants
     let workoutCellIdentifier = "WorkoutNameCellIdentifier"
@@ -25,6 +26,7 @@ class WODTypeTableViewController: UITableViewController {
         super.viewDidLoad()
         initWodType()
         initTitle()
+        tableView.tableFooterView = UIView()
     }
     
     // MARK: - Initialization

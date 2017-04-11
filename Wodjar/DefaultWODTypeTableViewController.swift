@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class DefaultWODTypeTableViewController: WODTypeTableViewController {
 
@@ -22,15 +23,13 @@ class DefaultWODTypeTableViewController: WODTypeTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedWOD = workouts[indexPath.row]
-        performSegue(withIdentifier: defaultWodDetailsSegueIdentifier, sender: self)
+        getResultsAndGoToDetails()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Navigation
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        selectedWOD?.set(description: "asfklkgagasdgj;", image: "https://pbs.twimg.com/profile_images/2449186867/549619_348620965213858_1616045858_n.jpeg", history: "asfasgags", category: .amrap, video: "9bZkp7q19f0", unit: .metric)
-        selectedWOD?.results = [WODResult(), WODResult(), WODResult(), WODResult()]
-        
         guard let identifier = segue.identifier else {
             return
         }
@@ -38,6 +37,25 @@ class DefaultWODTypeTableViewController: WODTypeTableViewController {
         if identifier == defaultWodDetailsSegueIdentifier {
             let defaultWodDetailsVC = segue.destination as! DefaultWODDetailsViewController
             defaultWodDetailsVC.wod = selectedWOD
+        }
+    }
+    
+    // MARK: - Service Calls
+    
+    func getResultsAndGoToDetails() {
+        guard let wod = selectedWOD else {
+            return
+        }
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.getResult(for: wod.id) { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            switch result {
+            case let .success(results):
+                self.selectedWOD?.results = results
+                self.performSegue(withIdentifier: self.defaultWodDetailsSegueIdentifier, sender: self)
+            case .failure(_):
+                self.handleError(result: result)
+            }
         }
     }
 }

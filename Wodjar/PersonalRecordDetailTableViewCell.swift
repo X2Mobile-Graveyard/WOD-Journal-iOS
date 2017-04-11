@@ -16,9 +16,7 @@ class PersonalRecordDetailTableViewCell: UITableViewCell {
     @IBOutlet var rxLabel: UILabel!
     
     func populate(with personalRecord: PersonalRecord) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy"
-        dateLabel.text = dateFormatter.string(from: personalRecord.date)
+        dateLabel.text = personalRecord.date.getDateAsWodJournalString()
         
         var typeOfWorkout = String()
         typeOfWorkout = personalRecord.resultType.rawValue

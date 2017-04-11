@@ -7,28 +7,34 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class WODTypesTableViewController: UITableViewController {
     
     // @Injected
-    var workouts: WorkoutList!
+    var service: WODListService!
     
     // @Properties
     var resultSearchController: UISearchController!
     var filteredWorkouts = WorkoutList()
     var selectedWorkouts = [Workout]()
+    var selectedWorkout: Workout?
     var favoritesSelected = false
+    var workouts: WorkoutList!
     
     // @Constants
     let wodTypeCellIdentifier = "WodTypeTableViewCellIdentifier"
     let wodResultCellIdentifier = "WodResultTableViewCellIdentifier"
     let customWodsTableIdentifier = "CustomWodTypeViewControllerIdentifier"
     let defaultWodsTableIdentifier = "DefaultWodTypeViewControllerIdentifier"
+    let defaultDetailsSegueIdetifier = "goToDefaultWodsIdentifier"
+    let customDetailsSegueIdentifier = "goToCustomWodsIdentifier"
     let headerHeight: CGFloat = 20
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getWods();
         setupSearchController()
     }
     
@@ -74,7 +80,7 @@ class WODTypesTableViewController: UITableViewController {
             let sectionType = filteredWorkouts.filteredSections()[indexPath.section]
             let workout = filteredWorkouts.workout(with: sectionType, at: indexPath.row)
             
-            cell.populate(with: workout.name, present: workout.isCompleted)
+            cell.populate(with: workout.name!, present: workout.isCompleted)
             
             return cell
         }
@@ -137,6 +143,17 @@ class WODTypesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if resultSearchController.isActive {
+            let sectionType = filteredWorkouts.filteredSections()[indexPath.section]
+            selectedWorkout = filteredWorkouts.workout(with: sectionType, at: indexPath.row)
+            
+            if sectionType == .custom {
+                getResultsAndGoToDetais(with: customDetailsSegueIdentifier)
+            } else {
+                getResultsAndGoToDetais(with: defaultDetailsSegueIdetifier)
+            }
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+            
             return
         }
         
@@ -174,22 +191,60 @@ class WODTypesTableViewController: UITableViewController {
             return
         }
         
-        if identifier == customWodsTableIdentifier {
+        switch identifier {
+        case customWodsTableIdentifier:
             let customVC = segue.destination as! CustomWODTypeTableViewController
             customVC.workouts = selectedWorkouts
             customVC.isFavorite = favoritesSelected
-            return
-        }
-        
-        if identifier == defaultWodsTableIdentifier {
+            customVC.service = service
+        case defaultWodsTableIdentifier:
             let defaultVC = segue.destination as! DefaultWODTypeTableViewController
             defaultVC.workouts = selectedWorkouts
             defaultVC.isFavorite = favoritesSelected
-            return
+            defaultVC.service = service
+        case customDetailsSegueIdentifier:
+            let customWodDetailViewController = segue.destination as! CustomWODDetailsViewController
+            customWodDetailViewController.wod = selectedWorkout!
+        case defaultDetailsSegueIdetifier:
+            let defaultWodDetaiViewController = segue.destination as! DefaultWODDetailsViewController
+            defaultWodDetaiViewController.wod = selectedWorkout!
+        default:
+            break
         }
     }
     
+    // MARK: - Service Calls
     
+    func getWods() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.getWods { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            switch result {
+            case let .success(wodsList):
+                self.workouts = wodsList
+            case .failure(_):
+                self.handleError(result: result)
+                self.workouts = WorkoutList()
+            }
+        }
+    }
+    
+    func getResultsAndGoToDetais(with segueIdentifier: String) {
+        guard let workout = selectedWorkout else {
+            return
+        }
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.getResult(for: workout.id) { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            switch result {
+            case let .success(results):
+                self.selectedWorkout?.results = results
+                self.performSegue(withIdentifier: segueIdentifier, sender: self)
+            case .failure(_):
+                self.handleError(result: result)
+            }
+        }
+    }
 }
 
 extension WODTypesTableViewController: UISearchResultsUpdating {
@@ -201,7 +256,7 @@ extension WODTypesTableViewController: UISearchResultsUpdating {
         }
         
         filteredWorkouts.workouts = workouts.workouts.filter {
-            return $0.name.lowercased().contains(textToSearchFor.lowercased())
+            return $0.name!.lowercased().contains(textToSearchFor.lowercased())
         }
         
         tableView.reloadData()

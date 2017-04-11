@@ -14,7 +14,20 @@ class WODDescriptionTableViewCell: UITableViewCell {
     
     func populate(with wodDescription: String) {
         self.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
-        textView.text = wodDescription
+        
+        let descriptionString = "Description\n\n\(wodDescription)"
+        let htmlDesciption = descriptionString.appending("<style>body{font-family: 'System'; font-size:17px;}</style>")
+        
+        guard let data = htmlDesciption.data(using: .utf8) else {
+            textView.text = descriptionString
+            return
+        }
+        
+        if let attrString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
+            textView.attributedText = attrString
+        } else {
+            textView.text = descriptionString
+        }
     }
 
 }

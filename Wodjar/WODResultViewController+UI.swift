@@ -1,21 +1,18 @@
 //
-//  PersonalRecordViewController+UI.swift
+//  WODResultViewController+UI.swift
 //  Wodjar
 //
-//  Created by Bogdan Costea on 3/10/17.
+//  Created by Bogdan Costea on 4/11/17.
 //  Copyright © 2017 X2Mobile. All rights reserved.
 //
 
 import UIKit
-import SDWebImage
 
-extension PersonalRecordViewController {
-    
+extension WODResultViewController {
     // MARK: - UI Initialization
     
     func initUI() {
         setupResultTextField()
-        setupSegmentedControl()
         setupTitleTextField()
         setupScrollView()
         setupRXSwitch()
@@ -23,45 +20,35 @@ extension PersonalRecordViewController {
         setupResultTypeLabel()
         setupNotesTextView()
         setupCalendarTextField()
-        setupGestureRecognizer()
         hideKeyboardWhenTappedAround()
         setupImageView()
+        setupDescription()
     }
     
     func setupResultTextField() {
         resultTextField.placeholder = "Result"
-        if personalRecord.resultAsString() == nil{
+        if result.resultAsString() == nil {
             return
         }
         
-        resultTextField.text = personalRecord.resultAsString()
+        resultTextField.text = result.resultAsString()
+    }
+    
+    func setupDescription() {
+        if wod.wodDescription == nil {
+            descriptionTextView.placeholder = "No description"
+            return
+        }
+        
+        descriptionTextView.text = wod.wodDescription!
     }
     
     func changeUIForEditMode() {
         setupTitleTextField()
-        setupSegmentedControl()
-    }
-    
-    func setupFirstResponder() {
-        if personalRecord.name == nil {
-            titleTextField.becomeFirstResponder()
-        } else {
-            resultTextField.becomeFirstResponder()
-        }
     }
     
     private func setupTitleTextField() {
-        if controllerMode == .editMode {
-            titleTextField.text = personalRecord.name!
-            titleTextField.isUserInteractionEnabled = false
-            editTitleButton.isHidden = true
-            editTitleButton.isUserInteractionEnabled = false
-            return
-        }
-        
-        if personalRecord.name != nil {
-            titleTextField.text = personalRecord.name!
-        }
+     navigationItem.title = wod.name
     }
     
     private func setupScrollView() {
@@ -69,17 +56,17 @@ extension PersonalRecordViewController {
     }
     
     private func setupRXSwitch() {
-        rxSwitch.isOn = personalRecord.rx
+        rxSwitch.isOn = result.rx
     }
     
     func setupViewForRecordType() {
         resultTextField.inputView = nil
         resultTextField.inputAccessoryView = nil
-        switch recordType {
+        switch result.resultType {
         case .weight:
             resultTextField.keyboardType = .decimalPad
         case .time:
-            if let resultTime = personalRecord.resultTime {
+            if let resultTime = result.resultTime {
                 wodTimePicker.timeInterval = TimeInterval(resultTime)
             }
             resultTextField.inputView = wodTimePicker
@@ -94,41 +81,18 @@ extension PersonalRecordViewController {
     }
     
     private func setupResultTypeLabel() {
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            if personalRecord.unitType == .imperial {
-                resultTypeLabel.text = "Weight Lifted (lb):"
+        switch result.resultType {
+        case .weight:
+            if UserManager.sharedInstance.unitType == .imperial {
+                resultDescriptionLabel.text = "Weight Lifted (lb):"
             } else {
-                resultTypeLabel.text = "Weight Lifted (kg):"
+                resultDescriptionLabel.text = "Weight Lifted (kg):"
             }
-        case 1:
-            resultTypeLabel.text = "Rounds/Reps completed:"
+        case .amrap:
+            resultDescriptionLabel.text = "Rounds/Reps completed:"
         default:
-            resultTypeLabel.text = "Time (mm:ss):"
+            resultDescriptionLabel.text = "Time (mm:ss):"
         }
-    }
-    
-    private func setupSegmentedControl() {
-        segmentedControl.selectedSegmentIndex = personalRecord.resultType.hash()
-        recordType = personalRecord.resultType
-        if controllerMode == .editMode {
-            return
-        } else {
-            segmentedControl.addTarget(self, action: #selector(didChangeSegmentControl(segmentControl:)), for: .valueChanged)
-        }
-    }
-    
-    func removeSegmentedControlIfNeeded() {
-        if controllerMode == .editMode {
-            removeSegmentedControll()
-        }
-    }
-    
-    private func setupGestureRecognizer() {
-        imageView.isUserInteractionEnabled = true
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(didTapPicture(recognizer:)))
-        singleTap.numberOfTapsRequired = 1
-        imageView.addGestureRecognizer(singleTap)
     }
     
     private func setupNotesTextView() {
@@ -137,21 +101,21 @@ extension PersonalRecordViewController {
         notesTextView.layer.borderWidth = 0.5
         notesTextView.layer.cornerRadius = 5
         notesTextView.placeholder = "Optional notes..."
-        if personalRecord.notes != nil {
-            notesTextView.text = personalRecord.notes
+        if result.notes != nil {
+            notesTextView.text = result.notes
         }
         addKeyboardToolbarTo(textView: notesTextView)
     }
     
     private func setupCalendarTextField() {
-        calendarTextField.text = personalRecord.date.getDateAsWodJournalString()
-        pickedDateFromDatePicker = personalRecord.date
+        dateTextField.text = result.date.getDateAsWodJournalString()
+        pickedDateFromDatePicker = result.date
         
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
-        calendarTextField.inputView = datePicker
+        dateTextField.inputView = datePicker
         datePicker.addTarget(self, action: #selector(didPickDate(datePicker:)), for: .valueChanged)
-        addKeyboardToolbarTo(textField: calendarTextField)
+        addKeyboardToolbarTo(textField: dateTextField)
     }
     
     private func hideKeyboardWhenTappedAround() {
@@ -160,7 +124,7 @@ extension PersonalRecordViewController {
     }
     
     private func setupImageView() {
-        guard let imageUrl = personalRecord.imageUrl else {
+        guard let imageUrl = result.photoUrl else {
             return
         }
         
@@ -223,24 +187,5 @@ extension PersonalRecordViewController {
         toolbar.sizeToFit()
         
         return toolbar
-    }
-    
-    // MARK: - Picture View Helper Methods
-    
-    
-    
-    private func removeSegmentedControll() {
-        segmentedControl.removeFromSuperview()
-        resultTypeLabel.translatesAutoresizingMaskIntoConstraints = false
-        resultTypeLabelTopConstraint.isActive = false
-        
-        let top = NSLayoutConstraint(item: resultTypeLabel,
-                                     attribute: .top,
-                                     relatedBy: .equal,
-                                     toItem: contentView,
-                                     attribute: .top,
-                                     multiplier: 1,
-                                     constant: viewInset)
-        view.addConstraint(top)
     }
 }

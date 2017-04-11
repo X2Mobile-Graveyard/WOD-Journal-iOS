@@ -16,11 +16,17 @@ class FullSizeImageViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     
     // @Injected
-    var image: UIImage!
+    var imageUrl: String?
+    var image: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView.image = image
+        if imageUrl != nil {
+            imageView.sd_setImage(with: URL(string: imageUrl!))
+        } else {
+            imageView.image = image
+        }
+        
         setZoomScale()
         setupGestureRecognizer()
     }

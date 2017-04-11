@@ -12,6 +12,7 @@ class UserManager {
     
     var userId: Int?
     var userToken: String?
+    var unitType: UnitType?
     
     static let sharedInstance = UserManager()
     

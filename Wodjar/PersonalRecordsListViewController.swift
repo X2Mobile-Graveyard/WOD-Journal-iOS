@@ -89,11 +89,10 @@ class PersonalRecordsListViewController: UIViewController {
         tableView.reloadData()
     }
 
-    
     // MARK: - Initialization
     
     func getPersonalRecordTypes() {
-        MBProgressHUD.showAdded(to: tableView, animated: true)
+        MBProgressHUD.showAdded(to: view, animated: true)
         service.getPersonalRecordTypes { (result) in
             switch result {
             case let .success(personalRecordTypes):
@@ -103,7 +102,7 @@ class PersonalRecordsListViewController: UIViewController {
                 print(error)
             }
             
-            MBProgressHUD.hide(for: self.tableView, animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     

@@ -14,7 +14,7 @@ class WODResultTableViewCell: UITableViewCell {
     @IBOutlet weak var resultLabel: UILabel!
     
     func populate(with result: WODResult) {
-        dateLabel.text = "Mar 03, 2017"
-        resultLabel.text = "12:32"
+        dateLabel.text = result.date.getDateAsWodJournalString()
+        resultLabel.text = result.resultAsString()
     }
 }

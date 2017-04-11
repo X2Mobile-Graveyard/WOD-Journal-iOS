@@ -56,31 +56,8 @@ extension AppDelegate: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if let navController = viewController as? UINavigationController {
             if let wodsController = navController.topViewController as? WODTypesTableViewController {
-                let girl1 = Workout(id: 1, type: .girl, name: "Ana", favorite: true, completed: true)
-                let girl2 = Workout(id: 2, type: .girl, name: "Lucretia", favorite: false, completed: false)
-                let girl3 = Workout(id: 3, type: .girl, name: "Jessica", favorite: false, completed: false)
-                let girl4 = Workout(id: 4, type: .girl, name: "Sara", favorite: true, completed: true)
                 
-                let hero1 = Workout(id: 5, type: .hero, name: "Murf", favorite: true, completed: false)
-                let hero2 = Workout(id: 6, type: .hero, name: "Joe", favorite: false, completed: true)
-                let hero3 = Workout(id: 7, type: .hero, name: "Boy", favorite: false, completed: false)
-                let hero4 = Workout(id: 8, type: .hero, name: "Cata", favorite: false, completed: true)
-                
-                let challenge1 = Workout(id: 9, type: .challenge, name: "Mineriada", favorite: false, completed: false)
-                let challenge2 = Workout(id: 10, type: .challenge, name: "Revolutia", favorite: false, completed: false)
-                let challenge3 = Workout(id: 11, type: .challenge, name: "Razboi", favorite: true, completed: true)
-                let challenge4 = Workout(id: 12, type: .challenge, name: "Butoi", favorite: false, completed: true)
-                
-                let open1 = Workout(id: 13, type: .open, name: "17.1", favorite: false, completed: false)
-                let open2 = Workout(id: 14, type: .open, name: "17.2", favorite: true, completed: false)
-                let open3 = Workout(id: 15, type: .open, name: "17.3", favorite: false, completed: false)
-                
-                let cutom1 = Workout(id: 16, type: .custom, name: "Minge", favorite: false, completed: true)
-                let custom2 = Workout(id: 17, type: .custom, name: "Ninge", favorite: true, completed: true)
-                
-                let workoutList = WorkoutList(workouts: [girl1, girl2, girl3, girl4, hero1, hero2, hero3, hero4, challenge1, challenge2, challenge3, challenge4, open1, open2, open3, custom2, cutom1])
-                
-                wodsController.workouts = workoutList
+                wodsController.service = WODListService(remote: WODListRemoteServiceTest())
 
             }
         }
