@@ -9,6 +9,8 @@
 import UIKit
 import FBSDKLoginKit
 import AWSCore
+import Fabric
+import Crashlytics
 
 
 @UIApplicationMain
@@ -27,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         listController.service = service
         
         setupAmazonS3Capabilities()
-        
+        Fabric.with([Crashlytics.self])
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

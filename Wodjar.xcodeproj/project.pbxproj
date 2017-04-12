@@ -690,6 +690,7 @@
 				4325BE761E67185500A0F969 /* Resources */,
 				781482562D9C555F95A0A6F4 /* [CP] Embed Pods Frameworks */,
 				F75B0DD46D766FC5CD8C829A /* [CP] Copy Pods Resources */,
+				D385210F1E9D50BA00AFB7C2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -949,6 +950,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		D385210F1E9D50BA00AFB7C2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" b05ef6ead238fa8ece4e830591708dca6f307e36 15c4b4bae29250582df9e8a2a1aa048a0d2fea6a8d63f965106fdfeacf63d63c";
 		};
 		F75B0DD46D766FC5CD8C829A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -420,8 +420,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XbX-5a-bUN">
-                                <rect key="frame" x="0.0" y="64" width="414" height="232"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XbX-5a-bUN">
+                                <rect key="frame" x="0.0" y="64" width="414" height="250"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Jl-A8-sZf" customClass="UnitsComponent" customModule="Wodjar" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -437,7 +437,7 @@
                                         </connections>
                                     </view>
                                     <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mw4-K0-5PA" customClass="MoreComponent" customModule="Wodjar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="100" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="100" width="414" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Feedback"/>
@@ -447,8 +447,8 @@
                                             <action selector="didTapMoreComponent:" destination="DZi-Lr-5K1" eventType="touchUpInside" id="7V4-Ei-Oga"/>
                                         </connections>
                                     </view>
-                                    <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmE-Bg-8oT" customClass="MoreComponent" customModule="Wodjar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="144" width="414" height="44"/>
+                                    <view tag="2" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hmE-Bg-8oT" customClass="MoreComponent" customModule="Wodjar" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="150" width="414" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Premium Subscription"/>
@@ -464,8 +464,8 @@
                                             <action selector="didTapMoreComponent:" destination="DZi-Lr-5K1" eventType="touchUpInside" id="GnG-QB-GqL"/>
                                         </connections>
                                     </view>
-                                    <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ru-qd-YOS" customClass="MoreComponent" customModule="Wodjar" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="188" width="414" height="44"/>
+                                    <view tag="3" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1ru-qd-YOS" customClass="MoreComponent" customModule="Wodjar" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="200" width="414" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Restore Purchases"/>
