@@ -9,6 +9,11 @@
 import UIKit
 import MBProgressHUD
 
+protocol WODTypeDelegate {
+    func didDelete(wod: Workout)
+    func didAdd(wod: Workout)
+}
+
 class WODTypesTableViewController: UITableViewController {
     
     // @Injected
@@ -34,8 +39,13 @@ class WODTypesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getWods();
         setupSearchController()
+        getWods();
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     // MARK: - UI Initalization
@@ -147,9 +157,9 @@ class WODTypesTableViewController: UITableViewController {
             selectedWorkout = filteredWorkouts.workout(with: sectionType, at: indexPath.row)
             
             if sectionType == .custom {
-                getResultsAndGoToDetais(with: customDetailsSegueIdentifier)
+                getResultsAndGoToDetails(with: customDetailsSegueIdentifier)
             } else {
-                getResultsAndGoToDetais(with: defaultDetailsSegueIdetifier)
+                getResultsAndGoToDetails(with: defaultDetailsSegueIdetifier)
             }
             
             tableView.deselectRow(at: indexPath, animated: true)
@@ -165,6 +175,13 @@ class WODTypesTableViewController: UITableViewController {
             let wodType = workouts.wodTypesOrder[indexPath.row]
             selectedWorkouts = workouts.getWorkouts(for: wodType)
         case 1:
+            if !UserManager.sharedInstance.isAuthenticated() {
+                presentLoginScreen(with: {
+                    self.getWods()
+                })
+                return
+            }
+            
             if indexPath.row == 0 {
                 selectedWorkouts = workouts.favorites
                 favoritesSelected = true
@@ -186,6 +203,7 @@ class WODTypesTableViewController: UITableViewController {
     }
     
     // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else {
             return
@@ -197,6 +215,7 @@ class WODTypesTableViewController: UITableViewController {
             customVC.workouts = selectedWorkouts
             customVC.isFavorite = favoritesSelected
             customVC.service = service
+            customVC.delegate = self
         case defaultWodsTableIdentifier:
             let defaultVC = segue.destination as! DefaultWODTypeTableViewController
             defaultVC.workouts = selectedWorkouts
@@ -205,6 +224,7 @@ class WODTypesTableViewController: UITableViewController {
         case customDetailsSegueIdentifier:
             let customWodDetailViewController = segue.destination as! CustomWODDetailsViewController
             customWodDetailViewController.wod = selectedWorkout!
+            customWodDetailViewController.service = WODService(remote: WODRemoteServiceTest(), s3Remote: S3RemoteService())
         case defaultDetailsSegueIdetifier:
             let defaultWodDetaiViewController = segue.destination as! DefaultWODDetailsViewController
             defaultWodDetaiViewController.wod = selectedWorkout!
@@ -222,6 +242,7 @@ class WODTypesTableViewController: UITableViewController {
             switch result {
             case let .success(wodsList):
                 self.workouts = wodsList
+                self.tableView.reloadData()
             case .failure(_):
                 self.handleError(result: result)
                 self.workouts = WorkoutList()
@@ -229,10 +250,16 @@ class WODTypesTableViewController: UITableViewController {
         }
     }
     
-    func getResultsAndGoToDetais(with segueIdentifier: String) {
+    func getResultsAndGoToDetails(with segueIdentifier: String) {
         guard let workout = selectedWorkout else {
             return
         }
+        
+        if !UserManager.sharedInstance.isAuthenticated() {
+            self.performSegue(withIdentifier: segueIdentifier, sender: self)
+            return
+        }
+        
         MBProgressHUD.showAdded(to: view, animated: true)
         service.getResult(for: workout.id) { (result) in
             MBProgressHUD.hide(for: self.view, animated: true)
@@ -244,6 +271,16 @@ class WODTypesTableViewController: UITableViewController {
                 self.handleError(result: result)
             }
         }
+    }
+}
+
+extension WODTypesTableViewController: WODTypeDelegate {
+    func didDelete(wod: Workout) {
+        workouts.workouts.remove(object: wod)
+    }
+    
+    func didAdd(wod: Workout) {
+        workouts.workouts.append(wod)
     }
 }
 

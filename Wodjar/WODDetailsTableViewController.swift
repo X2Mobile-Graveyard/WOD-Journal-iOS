@@ -17,6 +17,12 @@ enum WODDetailsCellType: String {
     case previousResultCell = "WodResultCell"
     case premiumCell = "GoPremiumCell"
     case deleteCell = "DeleteCell"
+    case addImageCell = "AddImageCell"
+}
+
+protocol WodResultDelegate {
+    func didCreate(result: WODResult)
+    func didDelete(result: WODResult)
 }
 
 class WODDetailsTableViewController: UITableViewController {
@@ -24,11 +30,14 @@ class WODDetailsTableViewController: UITableViewController {
     // @Constants
     let fullImageSegueIdentifier = "ShowFullImageSegueIdentifier"
     let logResultSegueIdentifier = "LogResultSegueIdentifier"
+    let historySegueIdentifier = "ShowHistorySegueIdentifier"
+    let editResultSegueIdentifier = "EditResultSegueIdentifier"
     
     // @Injected
     var wod: Workout!
     
     // @Properties
+    var selectedResult: WODResult?
     var cellsBeforeResult = 0
     var _cellTypesInOrder: [WODDetailsCellType]?
     var cellTypesInOrder: [WODDetailsCellType] {
@@ -37,9 +46,13 @@ class WODDetailsTableViewController: UITableViewController {
         }
         
         _cellTypesInOrder = [WODDetailsCellType]()
+        cellsBeforeResult = 0
         
         if wod.imageUrl != nil {
             _cellTypesInOrder!.append(.imageCell)
+            cellsBeforeResult += 1
+        } else if wod.type == .custom {
+            _cellTypesInOrder?.append(.addImageCell)
             cellsBeforeResult += 1
         }
         
@@ -61,15 +74,13 @@ class WODDetailsTableViewController: UITableViewController {
         _cellTypesInOrder!.append(.logResultCell)
         cellsBeforeResult += 1
         
-        if wod.results != nil {
-            if wod.results!.count > 0 {
+        if wod.results != nil && wod.results!.count > 0 {
+            if wod.results!.count <= 3 {
                 _cellTypesInOrder!.append(contentsOf: Array(repeating: .previousResultCell, count: wod.results!.count))
-            }
-            
-            if wod.results!.count > 2 {
+            } else {
+                _cellTypesInOrder!.append(contentsOf: Array(repeating: .previousResultCell, count: 3))
                 _cellTypesInOrder!.append(.premiumCell)
-            }
-            
+            }            
         }
         
         if wod.type == .custom {
@@ -89,6 +100,11 @@ class WODDetailsTableViewController: UITableViewController {
         navigationItem.title = wod.name!
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     // MARK: - Buttons Actions
     
     @IBAction func didTapImage(_ sender: Any) {
@@ -96,7 +112,29 @@ class WODDetailsTableViewController: UITableViewController {
     }
 
     @IBAction func didTapLogResultButton(_ sender: Any) {
+        if !UserManager.sharedInstance.isAuthenticated() {
+            presentLoginScreen(with: { 
+                self.returnToFirstScreen()
+            })
+            
+            return
+        }
+        
         performSegue(withIdentifier: logResultSegueIdentifier, sender: self)
+    }
+    
+    // MARK: - Table View Delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellType = cellTypesInOrder[indexPath.row]
+        if cellType != .previousResultCell {
+            return
+        }
+        
+        selectedResult = wod.results?[indexPath.row - cellsBeforeResult]
+        performSegue(withIdentifier: editResultSegueIdentifier, sender: self)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Table view data source
@@ -121,21 +159,45 @@ class WODDetailsTableViewController: UITableViewController {
     // MARK: - Helper Methods
     
     func populate(cell: UITableViewCell, for type: WODDetailsCellType, at index: Int) {
+        cell.selectionStyle = .none
         switch type {
         case .imageCell:
             (cell as! WODImageTableViewCell).populate(with: wod.imageUrl!)
         case .descriptionCell:
-            (cell as! WODDescriptionTableViewCell).populate(with: wod.wodDescription!)
+            var toolBar: UIToolbar? = nil
+            if wod.type == .custom {
+                toolBar = createKeyboardToolbar(with: "Done", selector: #selector(didChangeDescription))
+            }
+            (cell as! WODDescriptionTableViewCell).populate(with: wod.wodDescription!, for: wod.type!, toolbar: toolBar)
         case .videoCell:
             (cell as! WODVideoTableViewCell).populate(with: wod.videoId!)
         case .previousResultCell:
+            cell.selectionStyle = .default
             (cell as! WODResultTableViewCell).populate(with: wod.results![index - cellsBeforeResult])
         case .historyCell:
             cell.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
         case .deleteCell:
             cell.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
+        case .addImageCell:
+            cell.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
+        case .logResultCell:
+            cell.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
         default:
             break
+        }
+    }
+    
+    func didChangeDescription() {
+        view.endEditing(true)
+    }
+    
+    func returnToFirstScreen() {
+        for controller in (navigationController?.viewControllers)! {
+            if let typesController = controller as? WODTypesTableViewController {
+                typesController.getWods()
+                navigationController?.popToViewController(typesController, animated: true)
+                return
+            }
         }
     }
     
@@ -146,16 +208,46 @@ class WODDetailsTableViewController: UITableViewController {
             return
         }
         
-        if identifier == fullImageSegueIdentifier {
+        switch identifier {
+        case fullImageSegueIdentifier:
             let imageViewController = segue.destination as! FullSizeImageViewController
             imageViewController.imageUrl = wod.imageUrl!
-        } else if identifier == logResultSegueIdentifier {
+        case logResultSegueIdentifier:
             let resultViewController = segue.destination as! WODResultViewController
             resultViewController.result = WODResult()
             resultViewController.controllerMode = .createMode
-            resultViewController.service = WODResultService(remote: WODResultRemoteServiceTest())
+            resultViewController.service = WODResultService(remote: WODResultRemoteServiceTest(), s3Remote: S3RemoteService())
             resultViewController.wod = wod
+            resultViewController.wodResultDelegate = self
+        case historySegueIdentifier:
+            let historyViewController = segue.destination as! WODHistoryViewController
+            historyViewController.historyText = wod.history
+        case editResultSegueIdentifier:
+            if selectedResult == nil {
+                return
+            }
+            let resultViewController = segue.destination as! WODResultViewController
+            resultViewController.result = selectedResult!
+            resultViewController.controllerMode = .editMode
+            resultViewController.service = WODResultService(remote: WODResultRemoteServiceTest(), s3Remote: S3RemoteService())
+            resultViewController.wod = wod
+            resultViewController.wodResultDelegate = self
+        default:
+            break
         }
     }
+}
+
+extension WODDetailsTableViewController: WodResultDelegate {
+    func didCreate(result: WODResult) {
+         wod.results?.append(result)
+        _cellTypesInOrder = nil
+    }
     
+    func didDelete(result: WODResult) {
+        if let indexToDelete = wod.results?.index(where: {$0.id! == result.id!}) {
+            wod.results?.remove(at: indexToDelete)
+            _cellTypesInOrder = nil
+        }
+    }
 }

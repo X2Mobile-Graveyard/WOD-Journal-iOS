@@ -140,7 +140,7 @@ class PersonalRecordsListViewController: UIViewController {
             let personalRecordViewController = segue.destination as! PersonalRecordViewController
             personalRecordViewController.controllerMode = .createMode
             personalRecordViewController.personalRecord = PersonalRecord()
-            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl())
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService())
             personalRecordViewController.createRecordDelegate = self
         case addFirstRecordIdentifier:
             if selectedRecordType == nil {
@@ -157,7 +157,7 @@ class PersonalRecordsListViewController: UIViewController {
                                                                          date: Date())
             personalRecordViewController.updatePersonalRecordDelegate = self
             personalRecordViewController.controllerMode = .editMode
-            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl())
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService())
         default:
             break
         }

@@ -11,13 +11,13 @@ import FBSDKLoginKit
 import AWSCore
 import Fabric
 import Crashlytics
+import AVFoundation
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
        
@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let listController = navigationController.topViewController as! PersonalRecordsListViewController
         let service = PersonalRecordListService(remoteService: PersonalRecordListRemoteImpl())
         listController.service = service
+        
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         
         setupAmazonS3Capabilities()
         Fabric.with([Crashlytics.self])

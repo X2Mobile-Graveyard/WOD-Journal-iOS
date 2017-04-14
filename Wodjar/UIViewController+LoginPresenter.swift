@@ -15,7 +15,7 @@ extension UIViewController {
         }
     }
     
-    private func showLogin(with completion: (() -> Void)?) {
+    func showLogin(with completion: (() -> Void)?) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let navController = storyboard.instantiateViewController(withIdentifier: "authenticationScreensId") as? UINavigationController else {
             return

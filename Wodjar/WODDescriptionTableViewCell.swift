@@ -12,22 +12,17 @@ class WODDescriptionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var textView: UITextView!
     
-    func populate(with wodDescription: String) {
+    func populate(with wodDescription: String, for type: WODType, toolbar: UIToolbar?) {
         self.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
         
-        let descriptionString = "Description\n\n\(wodDescription)"
-        let htmlDesciption = descriptionString.appending("<style>body{font-family: 'System'; font-size:17px;}</style>")
-        
-        guard let data = htmlDesciption.data(using: .utf8) else {
-            textView.text = descriptionString
-            return
+        textView.text = wodDescription
+        textView.isEditable = false
+        if type == .custom {
+            textView.isEditable = true
         }
         
-        if let attrString = try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil) {
-            textView.attributedText = attrString
-        } else {
-            textView.text = descriptionString
+        if toolbar != nil {
+            textView.inputAccessoryView = toolbar
         }
     }
-
 }

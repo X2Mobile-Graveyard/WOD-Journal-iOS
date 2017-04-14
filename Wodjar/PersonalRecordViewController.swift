@@ -179,7 +179,6 @@ class PersonalRecordViewController: WODJournalResultViewController {
             switch result {
             case .success():
                 self.personalRecord.updateValues(from: self.personalRecordCopy)
-                self.pickedImagePath = nil
                 _ = self.navigationController?.popViewController(animated: true)
             case .failure(_):
                 self.handleError(result: result)
@@ -197,9 +196,6 @@ class PersonalRecordViewController: WODJournalResultViewController {
                 self.personalRecord.updateValues(from: self.personalRecordCopy)
                 self.createRecordDelegate?.didCreate(personalRecord: self.personalRecord)
                 self.updatePersonalRecordDelegate?.didAdd(personalRecord: self.personalRecord)
-                self.controllerMode = .editMode
-                self.changeUIForEditMode()
-                self.pickedImagePath = nil
                 _ = self.navigationController?.popViewController(animated: true)
             case .failure(_):
                 self.handleError(result: result)

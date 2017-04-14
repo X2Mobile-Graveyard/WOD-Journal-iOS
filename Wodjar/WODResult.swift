@@ -125,6 +125,25 @@ class WODResult: NSObject {
         return nil
     }
     
+    func updateResult(from result: String?) {
+        guard let result = result else {
+            return
+        }
+        
+        let numberFormatter = NumberFormatter()
+        switch resultType {
+        case .weight:
+            resultWeight = numberFormatter.number(from: result)?.floatValue
+        case .amrap:
+            resultRounds = numberFormatter.number(from: result)?.intValue
+        case .time:
+            resultTime = getSeconds(from: result)
+        default:
+            break
+        }
+    }
+
+    
     private func timeAsString() -> String {
         guard let timeInSeconds = resultTime else {
             return "0:0"

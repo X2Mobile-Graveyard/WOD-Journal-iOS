@@ -8,6 +8,7 @@
 
 import UIKit
 import TPKeyboardAvoiding
+import MBProgressHUD
 
 class WODResultViewController: WODJournalResultViewController {
     
@@ -31,6 +32,7 @@ class WODResultViewController: WODJournalResultViewController {
     var resultCopy: WODResult!
     var pickedDateFromDatePicker: Date?
     var pickedTimeFromTimePicker: Time = Time()
+    var wodResultDelegate: WodResultDelegate?
     
     // @Constants
     let fullImageSegueIdentifier = "DisplayFullImageSegueIdentifier"
@@ -64,7 +66,11 @@ class WODResultViewController: WODJournalResultViewController {
     }
     
     @IBAction func didTapDeleteResultButton(_ sender: Any) {
-        
+        showDeleteAlert(with: "Warning",
+                        message: "This action will permanently delete this result.",
+                        actionButtonTitle: "Delete") { (action) in
+                            self.deleteResult()
+        }
     }
     
     @IBAction func didTapImageView(_ sender: Any) {
@@ -77,7 +83,14 @@ class WODResultViewController: WODJournalResultViewController {
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {
-        
+        view.endEditing(true)
+        resultCopy.updateResult(from: resultTextField.text)
+        resultCopy.notes = notesTextView.text
+        if controllerMode == .createMode {
+            createResult()
+        } else {
+            updateResult()
+        }
     }
     
     @IBAction func didTapCancelButton(_ sender: Any) {
@@ -89,7 +102,7 @@ class WODResultViewController: WODJournalResultViewController {
     
     func didPickDate(datePicker: UIDatePicker) {
         pickedDateFromDatePicker = datePicker.date
-        result.date = pickedDateFromDatePicker!
+        resultCopy.date = pickedDateFromDatePicker!
     }
     
     func didTapOutsideTextField() {
@@ -118,9 +131,68 @@ class WODResultViewController: WODJournalResultViewController {
         }
         
         if identifier == fullImageSegueIdentifier {
+            guard let image = userImage else {
+                return
+            }
             let fullImageViewController = segue.destination as! FullSizeImageViewController
-            fullImageViewController.image = userImage
+            fullImageViewController.image = image
         }
     }
     
+    // MARK: - Service Calls
+    
+    func deleteResult() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.delete(wodResult: resultCopy) { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            switch result {
+            case .success(_):
+                if self.resultCopy.id != nil {
+                    self.wodResultDelegate?.didDelete(result: self.resultCopy)
+                }
+                _ = self.navigationController?.popViewController(animated: true)
+            case .failure(_):
+                self.handleError(result: result)
+            }
+        }
+    }
+    
+    func createResult() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.add(wodResult: resultCopy, with: pickedImagePath) { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            switch result {
+            case let .success(id):
+                self.resultCopy.id = id
+                self.result.updateValues(from: self.resultCopy)
+                self.wodResultDelegate?.didCreate(result: self.result)
+                _ = self.navigationController?.popViewController(animated: true)
+            case .failure(_):
+                self.handleError(result: result)
+            }
+        }
+    }
+    
+    func updateResult() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.update(wodResult: resultCopy, with: pickedImagePath) { (result) in
+            switch result {
+            case .success():
+                self.result.updateValues(from: self.resultCopy)
+                _ = self.navigationController?.popViewController(animated: true)
+            case .failure(_):
+                self.handleError(result: result)
+            }
+        }
+    }
+    
+}
+
+extension WODResultViewController: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView == notesTextView {
+            resultCopy.notes = textView.text.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
+            textView.text = resultCopy.notes
+        }
+    }
 }

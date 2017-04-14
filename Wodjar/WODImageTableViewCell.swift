@@ -15,6 +15,14 @@ class WODImageTableViewCell: UITableViewCell {
     
     func populate(with imageURL: String) {
         self.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
-        wodImageView.sd_setImage(with: URL(string: imageURL))
+        guard let url = URL(string: imageURL) else {
+            return
+        }
+        
+        if imageURL.isLocalFileUrl() {
+            wodImageView.sd_setImage(with:(URL(fileURLWithPath: imageURL)))
+        } else {
+            wodImageView.sd_setImage(with: url)
+        }
     }
 }

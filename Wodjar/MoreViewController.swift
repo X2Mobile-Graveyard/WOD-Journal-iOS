@@ -9,12 +9,23 @@
 import UIKit
 
 class MoreViewController: UIViewController {
+    
+    // @IBOutlets
+    @IBOutlet var authenticationButton: UIButton!
+    
 
     public static let premiumSubscription = "com.x2mobile.Wodjar.premiumanualsub"
     
     fileprivate static let productIdentifiers: Set<ProductIdentifier> = [premiumSubscription]
     
     public static let store = IAPHelper(productIds: productIdentifiers)
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if UserManager.sharedInstance.isAuthenticated() {
+            authenticationButton.setTitle("Logout", for: .normal)
+        }
+    }
     
     // MARK: - IBActions
     
@@ -34,6 +45,7 @@ class MoreViewController: UIViewController {
             MoreViewController.store.requestProducts(completionHandler: { success, products  in
                 if success {
                     print("success")
+                    UserManager.sharedInstance.hasPremiumSubscription = true
                 }
             })
         case 3:
@@ -45,4 +57,17 @@ class MoreViewController: UIViewController {
             break
         }
     }
+    
+    @IBAction func didTapLogin(_ sender: Any) {
+        if UserManager.sharedInstance.isAuthenticated() {
+            UserManager.sharedInstance.signOut()
+            authenticationButton.setTitle("Login", for: .normal)
+            return
+        }
+        
+        showLogin {
+            self.authenticationButton.setTitle("Logout", for: .normal)
+        }
+    }
+    
 }

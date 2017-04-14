@@ -83,7 +83,10 @@ extension PersonalRecordViewController {
                 wodTimePicker.timeInterval = TimeInterval(resultTime)
             }
             resultTextField.inputView = wodTimePicker
-            resultTextField.inputAccessoryView = createKeyboardToolbarForTimePicker()
+            resultTextField.inputAccessoryView = createKeyboardToolbar(cancelButton: "Cancel",
+                                                                       with: #selector(didTapCancelPicker),
+                                                                       doneButton: "Done",
+                                                                       doneSelector: #selector(didTapDoneOnTimePicker))
         case .amrap:
             resultTextField.keyboardType = .numberPad
         default:
@@ -140,7 +143,7 @@ extension PersonalRecordViewController {
         if personalRecord.notes != nil {
             notesTextView.text = personalRecord.notes
         }
-        addKeyboardToolbarTo(textView: notesTextView)
+        notesTextView.inputAccessoryView = createKeyboardToolbar(with: "Done", selector: #selector(didTapCancelPicker))
     }
     
     private func setupCalendarTextField() {
@@ -151,7 +154,10 @@ extension PersonalRecordViewController {
         datePicker.datePickerMode = .date
         calendarTextField.inputView = datePicker
         datePicker.addTarget(self, action: #selector(didPickDate(datePicker:)), for: .valueChanged)
-        addKeyboardToolbarTo(textField: calendarTextField)
+        calendarTextField.inputAccessoryView = createKeyboardToolbar(cancelButton: "Cancel",
+                                                                     with: #selector(didTapCancelPicker),
+                                                                     doneButton: "Done",
+                                                                     doneSelector: #selector(didTapDoneOnDatePicker))
     }
     
     private func hideKeyboardWhenTappedAround() {
@@ -169,60 +175,6 @@ extension PersonalRecordViewController {
             self.viewState = .withImage
             self.addPictureButton.isHidden = true
         }
-    }
-    
-    // MARK: - Keyboard Toolbar
-    
-    private func addKeyboardToolbarTo(textView:UITextView) {
-        let toolbarWithHideButton = createKeyboardToolbar(with: "Done")
-        textView.inputAccessoryView = toolbarWithHideButton
-        
-    }
-    
-    private func addKeyboardToolbarTo(textField: UITextField) {
-        let toolbar = createKeyboardToolbarForDatePicker()
-        textField.inputAccessoryView = toolbar
-    }
-    
-    private func createKeyboardToolbar(with hiddingOtion: String) -> UIToolbar {
-        let toolbar : UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 50))
-        toolbar.barStyle = UIBarStyle.default
-        let flexibelSpaceItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-        
-        let hideKeyboardItem = UIBarButtonItem(title: hiddingOtion,
-                                               style: .plain,
-                                               target: self,
-                                               action: #selector(didTapCancelPicker))
-        toolbar.items = [flexibelSpaceItem, hideKeyboardItem]
-        toolbar.sizeToFit()
-        
-        return toolbar
-    }
-    
-    private func createKeyboardToolbarForDatePicker() -> UIToolbar {
-        let toolbar = createKeyboardToolbar(with: "Cancel")
-        
-        let doneKeyboardItem = UIBarButtonItem(title: "Done",
-                                               style: .done,
-                                               target: self,
-                                               action: #selector(didTapDoneOnDatePicker))
-        toolbar.items?.append(doneKeyboardItem)
-        toolbar.sizeToFit()
-        
-        return toolbar
-    }
-    
-    private func createKeyboardToolbarForTimePicker() -> UIToolbar {
-        let toolbar = createKeyboardToolbar(with: "Cancel")
-        
-        let doneKeyboardItem = UIBarButtonItem(title: "Done",
-                                               style: .done,
-                                               target: self,
-                                               action: #selector(didTapDoneOnTimePicker))
-        toolbar.items?.append(doneKeyboardItem)
-        toolbar.sizeToFit()
-        
-        return toolbar
     }
     
     // MARK: - Picture View Helper Methods

@@ -10,6 +10,7 @@ import Foundation
 
 struct PersonalRecordService {
     let remoteService: PersonalRecordRemoteService
+    let s3RemoteService: S3RemoteService
     
     // MARK: - Public Methods
     
@@ -35,7 +36,7 @@ struct PersonalRecordService {
         }
         
         if personalRecord.imageUrl == nil {
-            remoteService.uploadImage(with: url, key: nil) { (result) in
+            s3RemoteService.uploadImage(with: url, key: nil) { (result) in
                 switch result {
                 case let .success(s3Path):
                     personalRecord.imageUrl = s3Path
@@ -49,7 +50,7 @@ struct PersonalRecordService {
         }
         
         if let key = personalRecord.imageUrl?.components(separatedBy: "/").last {
-            remoteService.uploadImage(with: url, key: key) { (result) in
+            s3RemoteService.uploadImage(with: url, key: key) { (result) in
                 switch result {
                 case let .success(s3Path):
                     personalRecord.imageUrl = s3Path
@@ -59,7 +60,7 @@ struct PersonalRecordService {
                 self.remoteService.update(personalRecord: personalRecord, with: completion)
             }
         } else {
-            remoteService.uploadImage(with: url, key: nil) { (result) in
+            s3RemoteService.uploadImage(with: url, key: nil) { (result) in
                 switch result {
                 case let .success(s3Path):
                     personalRecord.imageUrl = s3Path
@@ -92,7 +93,7 @@ struct PersonalRecordService {
             return
         }
         
-        remoteService.uploadImage(with: url, key: nil) { (result) in
+        s3RemoteService.uploadImage(with: url, key: nil) { (result) in
             switch result {
             case let .success(s3Path):
                 personalRecord.imageUrl = s3Path
@@ -116,7 +117,7 @@ struct PersonalRecordService {
         }
         
         if let key = personalRecord.imageUrl?.components(separatedBy: "/").last {
-            remoteService.deleteImage(with: key, completion: { (result) in
+            s3RemoteService.deleteImage(with: key, completion: { (result) in
                 self.remoteService.deletePersonalRecord(with: personalRecord.id!, completion: completion)
             })
         }

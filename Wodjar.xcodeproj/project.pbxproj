@@ -51,6 +51,8 @@
 		D347A5E91E8946F100AE888E /* CustomWODDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5E61E8946F100AE888E /* CustomWODDetailsViewController.swift */; };
 		D347A5EA1E8946F100AE888E /* DefaultWODDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5E71E8946F100AE888E /* DefaultWODDetailsViewController.swift */; };
 		D347A5EC1E89479800AE888E /* WODResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5EB1E89479800AE888E /* WODResult.swift */; };
+		D35638611E9E34D200ECC714 /* CreateCustomWODViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35638601E9E34D200ECC714 /* CreateCustomWODViewController+UI.swift */; };
+		D35638641E9E570600ECC714 /* WODHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35638631E9E570600ECC714 /* WODHistoryViewController.swift */; };
 		D3643B9D1E93DEAD0002E98E /* CreateCustomWODViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3643B9C1E93DEAD0002E98E /* CreateCustomWODViewController.swift */; };
 		D3643B9F1E93DEBB0002E98E /* WODResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3643B9E1E93DEBB0002E98E /* WODResultViewController.swift */; };
 		D3643BA31E9652FE0002E98E /* WODTimeIntervalPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3643BA21E9652FE0002E98E /* WODTimeIntervalPicker.swift */; };
@@ -58,6 +60,8 @@
 		D38521031E9CC52300AFB7C2 /* WODResultRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38521021E9CC52300AFB7C2 /* WODResultRemoteService.swift */; };
 		D38521051E9CC6CD00AFB7C2 /* WODResultViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38521041E9CC6CD00AFB7C2 /* WODResultViewController+UI.swift */; };
 		D385210E1E9D1B7500AFB7C2 /* WODJournalResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D385210D1E9D1B7500AFB7C2 /* WODJournalResultViewController.swift */; };
+		D3A279451E9FA493003E1ABE /* Array+RemoveByValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A279441E9FA493003E1ABE /* Array+RemoveByValue.swift */; };
+		D3A279471E9FB73A003E1ABE /* UIViewController+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A279461E9FB73A003E1ABE /* UIViewController+Toolbar.swift */; };
 		D3A6EA5D1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A6EA5C1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift */; };
 		D3A6EA5F1E8E3D0C006CF6B1 /* CreatePersonalRecordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A6EA5E1E8E3D0C006CF6B1 /* CreatePersonalRecordRequest.swift */; };
 		D3A6EA611E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A6EA601E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift */; };
@@ -66,6 +70,9 @@
 		D3B4876C1E8BF81A0042DE2A /* UIViewController+LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B4876B1E8BF81A0042DE2A /* UIViewController+LoginPresenter.swift */; };
 		D3B4876E1E8C13BD0042DE2A /* GetRecordsForNameRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B4876D1E8C13BD0042DE2A /* GetRecordsForNameRequest.swift */; };
 		D3B487701E8C28710042DE2A /* DeletePersonalRecordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B4876F1E8C28710042DE2A /* DeletePersonalRecordRequest.swift */; };
+		D3B8B1091E9EA047006CABC5 /* WODService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B8B1081E9EA047006CABC5 /* WODService.swift */; };
+		D3B8B10B1E9EA06A006CABC5 /* WODRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B8B10A1E9EA06A006CABC5 /* WODRemoteService.swift */; };
+		D3B8B10E1E9EA14A006CABC5 /* S3RemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B8B10D1E9EA14A006CABC5 /* S3RemoteService.swift */; };
 		D3BB36601E82A0470078CE53 /* PersonalRecordListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB365F1E82A0470078CE53 /* PersonalRecordListService.swift */; };
 		D3BB36631E82A0920078CE53 /* PersonalRecordListRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB36621E82A0920078CE53 /* PersonalRecordListRemoteService.swift */; };
 		D3BB36651E82AFCF0078CE53 /* defaultPRs.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3BB36641E82AFCF0078CE53 /* defaultPRs.plist */; };
@@ -168,6 +175,8 @@
 		D347A5E61E8946F100AE888E /* CustomWODDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWODDetailsViewController.swift; sourceTree = "<group>"; };
 		D347A5E71E8946F100AE888E /* DefaultWODDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWODDetailsViewController.swift; sourceTree = "<group>"; };
 		D347A5EB1E89479800AE888E /* WODResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODResult.swift; sourceTree = "<group>"; };
+		D35638601E9E34D200ECC714 /* CreateCustomWODViewController+UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CreateCustomWODViewController+UI.swift"; sourceTree = "<group>"; };
+		D35638631E9E570600ECC714 /* WODHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODHistoryViewController.swift; sourceTree = "<group>"; };
 		D3643B9C1E93DEAD0002E98E /* CreateCustomWODViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCustomWODViewController.swift; sourceTree = "<group>"; };
 		D3643B9E1E93DEBB0002E98E /* WODResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODResultViewController.swift; sourceTree = "<group>"; };
 		D3643BA21E9652FE0002E98E /* WODTimeIntervalPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTimeIntervalPicker.swift; sourceTree = "<group>"; };
@@ -175,6 +184,8 @@
 		D38521021E9CC52300AFB7C2 /* WODResultRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODResultRemoteService.swift; sourceTree = "<group>"; };
 		D38521041E9CC6CD00AFB7C2 /* WODResultViewController+UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WODResultViewController+UI.swift"; sourceTree = "<group>"; };
 		D385210D1E9D1B7500AFB7C2 /* WODJournalResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODJournalResultViewController.swift; sourceTree = "<group>"; };
+		D3A279441E9FA493003E1ABE /* Array+RemoveByValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+RemoveByValue.swift"; sourceTree = "<group>"; };
+		D3A279461E9FB73A003E1ABE /* UIViewController+Toolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Toolbar.swift"; sourceTree = "<group>"; };
 		D3A6EA5C1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePersonalRecordRequest.swift; sourceTree = "<group>"; };
 		D3A6EA5E1E8E3D0C006CF6B1 /* CreatePersonalRecordRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePersonalRecordRequest.swift; sourceTree = "<group>"; };
 		D3A6EA601E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateRecordsNameRequest.swift; sourceTree = "<group>"; };
@@ -183,6 +194,9 @@
 		D3B4876B1E8BF81A0042DE2A /* UIViewController+LoginPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+LoginPresenter.swift"; sourceTree = "<group>"; };
 		D3B4876D1E8C13BD0042DE2A /* GetRecordsForNameRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetRecordsForNameRequest.swift; sourceTree = "<group>"; };
 		D3B4876F1E8C28710042DE2A /* DeletePersonalRecordRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletePersonalRecordRequest.swift; sourceTree = "<group>"; };
+		D3B8B1081E9EA047006CABC5 /* WODService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODService.swift; sourceTree = "<group>"; };
+		D3B8B10A1E9EA06A006CABC5 /* WODRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODRemoteService.swift; sourceTree = "<group>"; };
+		D3B8B10D1E9EA14A006CABC5 /* S3RemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3RemoteService.swift; sourceTree = "<group>"; };
 		D3BB365F1E82A0470078CE53 /* PersonalRecordListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordListService.swift; sourceTree = "<group>"; };
 		D3BB36621E82A0920078CE53 /* PersonalRecordListRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordListRemoteService.swift; sourceTree = "<group>"; };
 		D3BB36641E82AFCF0078CE53 /* defaultPRs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPRs.plist; sourceTree = "<group>"; };
@@ -436,6 +450,7 @@
 			children = (
 				D31BCB171E97EFBE00A8FCB8 /* WodListService.swift */,
 				D38521001E9CC4F500AFB7C2 /* WODResultService.swift */,
+				D3B8B1081E9EA047006CABC5 /* WODService.swift */,
 			);
 			name = "WOD Services";
 			sourceTree = "<group>";
@@ -470,6 +485,7 @@
 			children = (
 				D31BCB1C1E97F01E00A8FCB8 /* WODListRemoteService.swift */,
 				D38521021E9CC52300AFB7C2 /* WODResultRemoteService.swift */,
+				D3B8B10A1E9EA06A006CABC5 /* WODRemoteService.swift */,
 			);
 			name = "WOD Remote Services";
 			sourceTree = "<group>";
@@ -516,10 +532,19 @@
 			name = WODDetailsCells;
 			sourceTree = "<group>";
 		};
+		D35638621E9E56E500ECC714 /* HistoryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D35638631E9E570600ECC714 /* WODHistoryViewController.swift */,
+			);
+			name = HistoryViewController;
+			sourceTree = "<group>";
+		};
 		D3643B981E93DE480002E98E /* CreateCustomWODController */ = {
 			isa = PBXGroup;
 			children = (
 				D3643B9C1E93DEAD0002E98E /* CreateCustomWODViewController.swift */,
+				D35638601E9E34D200ECC714 /* CreateCustomWODViewController+UI.swift */,
 			);
 			name = CreateCustomWODController;
 			sourceTree = "<group>";
@@ -549,6 +574,14 @@
 			name = SuperClasses;
 			sourceTree = "<group>";
 		};
+		D3B8B10C1E9EA12E006CABC5 /* S3 Remote Services */ = {
+			isa = PBXGroup;
+			children = (
+				D3B8B10D1E9EA14A006CABC5 /* S3RemoteService.swift */,
+			);
+			name = "S3 Remote Services";
+			sourceTree = "<group>";
+		};
 		D3BB366A1E840CB80078CE53 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -558,6 +591,8 @@
 				D3BB366B1E840CD80078CE53 /* UIViewController+AlertController.swift */,
 				D30348311E9BC364007E91A5 /* String+DateFormatter.swift */,
 				D30348331E9C00B1007E91A5 /* Date+DateFormatter.swift */,
+				D3A279441E9FA493003E1ABE /* Array+RemoveByValue.swift */,
+				D3A279461E9FB73A003E1ABE /* UIViewController+Toolbar.swift */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -604,6 +639,7 @@
 		D3E6950F1E7935B90060D9D2 /* WODs */ = {
 			isa = PBXGroup;
 			children = (
+				D35638621E9E56E500ECC714 /* HistoryViewController */,
 				D3643B9B1E93DE820002E98E /* WODResultController */,
 				D3643B981E93DE480002E98E /* CreateCustomWODController */,
 				D347A5CF1E8946A800AE888E /* WODTypesController */,
@@ -652,6 +688,7 @@
 		D3EB89041E729ABB0028F28A /* RemoteServices */ = {
 			isa = PBXGroup;
 			children = (
+				D3B8B10C1E9EA12E006CABC5 /* S3 Remote Services */,
 				D31BCB1B1E97F00200A8FCB8 /* WOD Remote Services */,
 				D31BCB1A1E97EFF400A8FCB8 /* Authentication Remote Services */,
 				D31BCB191E97EFE600A8FCB8 /* PR Remote Services */,
@@ -986,6 +1023,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3B8B10E1E9EA14A006CABC5 /* S3RemoteService.swift in Sources */,
 				D3B4876E1E8C13BD0042DE2A /* GetRecordsForNameRequest.swift in Sources */,
 				D3BB366C1E840CD80078CE53 /* UIViewController+AlertController.swift in Sources */,
 				BFD44D8B1E82B4C500170817 /* UnitsComponent.swift in Sources */,
@@ -998,12 +1036,14 @@
 				D385210E1E9D1B7500AFB7C2 /* WODJournalResultViewController.swift in Sources */,
 				D347A5E41E8946E200AE888E /* WODResultTableViewCell.swift in Sources */,
 				D3E695161E7936880060D9D2 /* Workout.swift in Sources */,
+				D3B8B10B1E9EA06A006CABC5 /* WODRemoteService.swift in Sources */,
 				D3643BA31E9652FE0002E98E /* WODTimeIntervalPicker.swift in Sources */,
 				BFD44D801E82A57100170817 /* MoreComponent.swift in Sources */,
 				D3EB88F71E7050C80028F28A /* LoginViewController.swift in Sources */,
 				D3C6EF021E8A907100E1D9D1 /* AuthenticationService.swift in Sources */,
 				D3B487701E8C28710042DE2A /* DeletePersonalRecordRequest.swift in Sources */,
 				D3BB36601E82A0470078CE53 /* PersonalRecordListService.swift in Sources */,
+				D3A279451E9FA493003E1ABE /* Array+RemoveByValue.swift in Sources */,
 				D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */,
 				D347A5D91E8946C400AE888E /* DefaultWODTypeTableViewController.swift in Sources */,
 				D3A6EA5F1E8E3D0C006CF6B1 /* CreatePersonalRecordRequest.swift in Sources */,
@@ -1018,6 +1058,7 @@
 				D347A5D21E8946BA00AE888E /* WODTypesTableViewController.swift in Sources */,
 				D31BCB181E97EFBE00A8FCB8 /* WodListService.swift in Sources */,
 				D347A5E11E8946E200AE888E /* WODDescriptionTableViewCell.swift in Sources */,
+				D35638641E9E570600ECC714 /* WODHistoryViewController.swift in Sources */,
 				D31BCB211E9982C100A8FCB8 /* GetWodsRequest.swift in Sources */,
 				BF315FEB1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift in Sources */,
 				D3EB890A1E729FD00028F28A /* PersonalRecordViewController+UI.swift in Sources */,
@@ -1037,6 +1078,8 @@
 				D347A5E81E8946F100AE888E /* WODDetailsTableViewController.swift in Sources */,
 				D3B4876A1E8BE2ED0042DE2A /* UserManager.swift in Sources */,
 				D3C6EF041E8A90E300E1D9D1 /* AuthenticationRemoteService.swift in Sources */,
+				D3A279471E9FB73A003E1ABE /* UIViewController+Toolbar.swift in Sources */,
+				D35638611E9E34D200ECC714 /* CreateCustomWODViewController+UI.swift in Sources */,
 				D3A6EA5D1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift in Sources */,
 				D3EB88FA1E7061430028F28A /* DateTextField.swift in Sources */,
 				D3BB36631E82A0920078CE53 /* PersonalRecordListRemoteService.swift in Sources */,
@@ -1056,6 +1099,7 @@
 				D3BB36731E8446C80078CE53 /* PersonalRecordRemoteService.swift in Sources */,
 				D3C6EF061E8A982100E1D9D1 /* LoginWithFacebookRequest.swift in Sources */,
 				D3A6EA611E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift in Sources */,
+				D3B8B1091E9EA047006CABC5 /* WODService.swift in Sources */,
 				D347A5E01E8946E200AE888E /* WODImageTableViewCell.swift in Sources */,
 				D3EB89131E72E00E0028F28A /* PersonalRecordsListViewController.swift in Sources */,
 				D3BB366F1E843BD10078CE53 /* BaseRequest.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class WODTypeTableViewController: UITableViewController {
     
@@ -67,5 +68,58 @@ class WODTypeTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: workoutCellIdentifier, for: indexPath)
         cell.textLabel?.text = workouts[indexPath.row].name;
         return cell
+    }
+    
+    // MARK: - Helper Methods
+    
+    func didTapFavoriteCell(action: UITableViewRowAction, at indexPath: IndexPath) {
+        let wod = workouts[indexPath.row]
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
+        if wod.isFavorite {
+            service.removeFromFavorite(wodId: wod.id, with: { (result) in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                switch result {
+                case .success():
+                    wod.isFavorite = false
+                    self.didChangeFavoriteStatus(at: indexPath)
+                case .failure(_):
+                    self.handleError(result: result)
+                }
+            })
+        } else {
+            service.addToFavorite(wodId: wod.id, with: { (result) in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                switch result {
+                case .success():
+                    wod.isFavorite = true
+                    self.didChangeFavoriteStatus(at: indexPath)
+                case .failure(_):
+                    self.handleError(result: result)
+                }
+            })
+        }
+    }
+    
+    func createFavoriteCellRowAction(for wod: Workout) -> UITableViewRowAction {
+        let favoriteAction = UITableViewRowAction.init(style: .normal, title: "Favorite") { (action, indexPath) in
+            self.didTapFavoriteCell(action: action, at: indexPath)
+        }
+        if wod.isFavorite {
+            favoriteAction.backgroundColor = UIColor.orange
+        } else {
+            favoriteAction.backgroundColor = UIColor.lightGray
+        }
+        
+        return favoriteAction
+    }
+    
+    func didChangeFavoriteStatus(at indexPath: IndexPath) {
+        if !isFavorite {
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+        } else {
+            workouts.remove(at: indexPath.row)
+            self.tableView.reloadData()
+        }
     }
 }

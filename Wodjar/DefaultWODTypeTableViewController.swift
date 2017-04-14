@@ -19,12 +19,24 @@ class DefaultWODTypeTableViewController: WODTypeTableViewController {
     }
     
     
-    // MARK: - Tableview delegate
+    // MARK: - TableView Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedWOD = workouts[indexPath.row]
         getResultsAndGoToDetails()
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    // MARK: - TableView Data Source
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if !UserManager.sharedInstance.isAuthenticated() {
+            return []
+        }
+        
+        let wod = workouts[indexPath.row]
+        let favoriteAction = createFavoriteCellRowAction(for: wod)
+        return [favoriteAction]
     }
     
     // MARK: - Navigation
@@ -46,6 +58,12 @@ class DefaultWODTypeTableViewController: WODTypeTableViewController {
         guard let wod = selectedWOD else {
             return
         }
+        
+        if !UserManager.sharedInstance.isAuthenticated() {
+            self.performSegue(withIdentifier: self.defaultWodDetailsSegueIdentifier, sender: self)
+            return
+        }
+        
         MBProgressHUD.showAdded(to: view, animated: true)
         service.getResult(for: wod.id) { (result) in
             MBProgressHUD.hide(for: self.view, animated: true)

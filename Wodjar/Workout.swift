@@ -100,6 +100,21 @@ class Workout: NSObject {
     var videoId: String?
     var unit: UnitType?
     var results: [WODResult]?
+    var lastResults: [WODResult]? {
+        if results == nil {
+            return nil
+        }
+        
+        if UserManager.sharedInstance.hasPremiumSubscription {
+            return results
+        }
+        
+        if results!.count <= 3 {
+            return results
+        }
+        
+        return Array((results!.prefix(3)))
+    }
     
     convenience init(id: Int, type: WODType, name: String, favorite: Bool, completed: Bool)   {
         self.init()
@@ -121,6 +136,37 @@ class Workout: NSObject {
         self.isFavorite = dictionary["favorites"] as? Bool ?? false
     }
     
+    convenience init(using wod: Workout) {
+        self.init()
+        self.id = wod.id
+        self.wodDescription = wod.wodDescription
+        self.imageUrl = wod.imageUrl
+        self.history = wod.history
+        self.type = wod.type
+        self.name = wod.name
+        self.isFavorite = wod.isFavorite
+        self.isCompleted = wod.isCompleted
+        self.category = wod.category
+        self.videoId = wod.videoId
+        self.unit = wod.unit
+        self.results = wod.results
+    }
+    
+    func updateValues(from wod: Workout) {
+        self.id = wod.id
+        self.wodDescription = wod.wodDescription
+        self.imageUrl = wod.imageUrl
+        self.history = wod.history
+        self.type = wod.type
+        self.name = wod.name
+        self.isFavorite = wod.isFavorite
+        self.isCompleted = wod.isCompleted
+        self.category = wod.category
+        self.videoId = wod.videoId
+        self.unit = wod.unit
+        self.results = wod.results
+    }
+    
     func set(description: String, image: String?, history: String?, category: WODCategory, video: String?, unit: UnitType) {
         self.wodDescription = description
         self.imageUrl = image
@@ -129,6 +175,4 @@ class Workout: NSObject {
         self.videoId = video
         self.unit = unit
     }
-    
-    
 }

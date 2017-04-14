@@ -137,7 +137,7 @@ class PersonalRecordDetailsListViewController: UIViewController {
             personalRecordViewController.personalRecord = selectedPersoanlRecord
             personalRecordViewController.controllerMode = .editMode
             personalRecordViewController.updatePersonalRecordDelegate = self
-            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl())
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService())
         } else if identifier == newPersonalRecordSegueIdentifier {
             let personalRecordViewController = segue.destination as! PersonalRecordViewController
             personalRecordViewController.personalRecord = PersonalRecord(name: personalRecordType.name,
@@ -150,7 +150,7 @@ class PersonalRecordDetailsListViewController: UIViewController {
                                                                          date: Date())
             personalRecordViewController.updatePersonalRecordDelegate = self
             personalRecordViewController.controllerMode = .editMode
-            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl())
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService())
         }
     }
     
@@ -266,13 +266,11 @@ extension PersonalRecordDetailsListViewController: UpdatePersonalRecordDelegate 
     func didDelete(personalRecord: PersonalRecord) {
         if let indexToDelete = personalRecordType.records.index(where: {$0.id! == personalRecord.id!}) {
             personalRecordType.records.remove(at: indexToDelete)
-            tableView.reloadData()
         }
     }
     
     func didAdd(personalRecord: PersonalRecord) {
         personalRecordType.add(personalRecord: personalRecord)
-        tableView.reloadData()
     }
 }
 

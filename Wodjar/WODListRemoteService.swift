@@ -11,10 +11,15 @@ import Result
 
 typealias GetWodsRequestCompletion = (Result<WorkoutList, NSError>) -> ()
 typealias GetResultsRequestCompletion = (Result<[WODResult], NSError>) -> ()
+typealias FavoriteCompletion = (Result<Void, NSError>) -> ()
+typealias DeleteWodCompletion = (Result<Void, NSError>) -> ()
 
 protocol WODListRemoteService {
     func getWodsList(with completion: GetWodsRequestCompletion?)
     func getResults(for wodId: Int, with completion: GetResultsRequestCompletion?)
+    func addToFavorite(wodId: Int, with completion: FavoriteCompletion?)
+    func removeFromFavorite(wodId: Int, with completion: FavoriteCompletion?)
+    func deleteWod(with wodId: Int, completion: DeleteWodCompletion?)
 }
 
 class WODListRemoteServiceTest: WODListRemoteService {
@@ -150,9 +155,30 @@ class WODListRemoteServiceTest: WODListRemoteService {
                     video: "9bZkp7q19f0",
                     unit: .imperial)
         
-        let workoutList = WorkoutList(workouts: [girl1, girl2, girl3, girl4, hero1, hero2, hero3, hero4, challenge1, challenge2, challenge3, challenge4, open1, open2, open3, custom2, custom1, custom3])
-
-        completion?(.success(workoutList))
+        
+        
+        if UserManager.sharedInstance.isAuthenticated() {
+            let workoutList = WorkoutList(workouts: [girl1, girl2, girl3, girl4, hero1, hero2, hero3, hero4, challenge1, challenge2, challenge3, challenge4, open1, open2, open3])
+            workoutList.workouts.append(contentsOf: [custom1, custom2, custom3])
+            completion?(.success(workoutList))
+            
+            return
+        }
+        
+        girl1.isFavorite = false
+        girl1.isCompleted = false
+        girl4.isCompleted = false
+        girl4.isFavorite = false
+        hero1.isFavorite = false
+        hero2.isCompleted = false
+        hero4.isCompleted = false
+        challenge3.isFavorite = false
+        challenge3.isCompleted = false
+        challenge4.isFavorite = false
+        challenge4.isCompleted = false
+        open2.isFavorite = false
+        
+        completion?(.success(WorkoutList(workouts: [girl1, girl2, girl3, girl4, hero1, hero2, hero3, hero4, challenge1, challenge2, challenge3, challenge4, open1, open2, open3])))
     }
     
     func getResults(for wodId: Int, with completion: GetResultsRequestCompletion?) {
@@ -166,7 +192,7 @@ class WODListRemoteServiceTest: WODListRemoteService {
                                     rx: true,
                                     photoUrl: nil,
                                     date: "2010-04-10T11:53:22.249Z",
-                                    updated_at: "2017-01-15T22:57:51.999")
+                                    updated_at: "2017-03-15T22:57:51.999")
             let result2 = WODResult(with: 2,
                                     notes: "asfasgas\nasasg\n",
                                     resultType: .weight,
@@ -186,8 +212,18 @@ class WODListRemoteServiceTest: WODListRemoteService {
                                     rx: false,
                                     photoUrl: "https://static1.squarespace.com/static/52744342e4b0a23a823b28aa/t/527965dbe4b0a1d3976126d3/1453143228095/WOD+Motivation+High-Res+copy.jpg",
                                     date: "2015-02-10T11:53:22.249Z",
-                                    updated_at: "2017-01-16T22:57:51.999")
-            completion?(.success([result1, result2, result3]))
+                                    updated_at: "2017-022-16T22:57:51.999")
+            let result4 = WODResult(with: 100,
+                                    notes: "asfasgas\nasasg\n",
+                                    resultType: .amrap,
+                                    time: nil,
+                                    weight: nil,
+                                    rounds: 700,
+                                    rx: false,
+                                    photoUrl: "https://static1.squarespace.com/static/52744342e4b0a23a823b28aa/t/527965dbe4b0a1d3976126d3/1453143228095/WOD+Motivation+High-Res+copy.jpg",
+                                    date: "2015-02-10T11:53:22.249Z",
+                                    updated_at: "2017-04-16T22:57:51.999")
+            completion?(.success([result1, result2, result3, result4]))
         } else if wodId % 3 == 1 {
             let result1 = WODResult(with: 4,
                                     notes: nil,
@@ -213,6 +249,18 @@ class WODListRemoteServiceTest: WODListRemoteService {
         } else {
            completion?(.success([]))
         }
+    }
+    
+    func addToFavorite(wodId: Int, with completion: FavoriteCompletion?) {
+        completion?(.success())
+    }
+    
+    func removeFromFavorite(wodId: Int, with completion: FavoriteCompletion?) {
+        completion?(.success())
+    }
+    
+    func deleteWod(with wodId: Int, completion: DeleteWodCompletion?) {
+        completion?(.success())
     }
 }
 
@@ -276,5 +324,17 @@ class WODListRemoteServiceImpl: WODListRemoteService {
         }
         
         request.runRequest()
+    }
+    
+    func addToFavorite(wodId: Int, with completion: FavoriteCompletion?) {
+        
+    }
+    
+    func removeFromFavorite(wodId: Int, with completion: FavoriteCompletion?) {
+        
+    }
+    
+    func deleteWod(with wodId: Int, completion: DeleteWodCompletion?) {
+        
     }
 }
