@@ -19,7 +19,8 @@ protocol PersonalRecordListRemoteService {
     func getPersonalRecords(for name: String, with completion: GetPersonalRecordsResultsCompletion?)
     func deletePersonalRecord(with id: Int, completion: DeletePersonalRecordCompletion?)
     func deleteRecords(with ids: [Int], completion: DeleteAllRecordsCompletion?)
-    func update(recordsIds:[Int], with: String, completion:UpdateRecordsNameCompletion?)
+    func update(recordsIds:[Int], with: String, completion: UpdateRecordsNameCompletion?)
+    func deletePersonalRecord(with name: String, completion: DeletePersonalRecordCompletion?)
 }
 
 class PersonalRecordListRemoteServiceTest: PersonalRecordListRemoteService {
@@ -49,6 +50,10 @@ class PersonalRecordListRemoteServiceTest: PersonalRecordListRemoteService {
     }
     
     func update(recordsIds: [Int], with: String, completion: UpdateRecordsNameCompletion?) {
+        completion?(.success())
+    }
+    
+    func deletePersonalRecord(with name: String, completion: DeletePersonalRecordCompletion?) {
         completion?(.success())
     }
 }
@@ -119,10 +124,23 @@ class PersonalRecordListRemoteImpl: PersonalRecordListRemoteService {
         request.runRequest()
     }
 
+    func deletePersonalRecord(with name: String, completion: DeletePersonalRecordCompletion?) {
+        let request = DeletePRByNameRequest(recordName: name)
+        
+        request.success = { _, _ in
+            completion?(.success())
+        }
+        
+        request.error = { _, error in
+            completion?(.failure(error))
+        }
+        
+        request.runRequest()
+    }
 
     func getPersonalRecordsNames(with completion: GetPersonalRecordsNamesCompletion?) {
         if !UserManager.sharedInstance.isAuthenticated() {
-            completion?(.success([]))
+            getDefaultRecords(with: completion)
             return
         }
         
@@ -134,7 +152,7 @@ class PersonalRecordListRemoteImpl: PersonalRecordListRemoteService {
                 return
             }
             
-            guard let prs = dict["personal_records"] as? [[String: String]] else {
+            guard let prs = dict["personal_records"] as? [[String: Any]] else {
                 completion?(.failure(NSError.localError(with: "Invalid JSON")))
                 return
             }
@@ -161,6 +179,37 @@ class PersonalRecordListRemoteImpl: PersonalRecordListRemoteService {
         
         request.success = { _, _ in
             completion?(.success())
+        }
+        
+        request.error = { _, error in
+            completion?(.failure(error))
+        }
+        
+        request.runRequest()
+    }
+    
+    private func getDefaultRecords(with completion: GetPersonalRecordsNamesCompletion?) {
+        let request = GetDefaultPersonalRecords()
+        
+        request.success = { _, result in
+            guard let dict = result as? [String: Any] else {
+                completion?(.failure(NSError.localError(with: "Invalid JSON")))
+                return
+            }
+            
+            guard let prs = dict["default_prs"] as? [[String: Any]] else {
+                completion?(.failure(NSError.localError(with: "Invalid JSON")))
+                return
+            }
+            
+            
+            var prTypes = [PersonalRecordType]()
+            for prTypeDict in prs {
+                let prType = PersonalRecordType(with: prTypeDict)
+                prTypes.append(prType)
+            }
+            
+            completion?(.success(prTypes))
         }
         
         request.error = { _, error in

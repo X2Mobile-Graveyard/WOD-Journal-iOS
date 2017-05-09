@@ -7,24 +7,49 @@
 //
 
 import UIKit
+import StoreKit
+import MBProgressHUD
+import SwiftyStoreKit
+
 
 class MoreViewController: UIViewController {
     
+    // @Constants
+    
+    let detailsSegueIdentifier = "PremiumSubscriptionDescriptionIdentifier"
+    
     // @IBOutlets
+    
     @IBOutlet var authenticationButton: UIButton!
-    
+    @IBOutlet var versionLabel: UILabel!
+    @IBOutlet var unitSystemComponent: UnitsComponent!
 
-    public static let premiumSubscription = "com.x2mobile.Wodjar.premiumanualsub"
+    public static let premiumAnualSubscription = "com.x2mobile.Wodjar.PremiumAnualSubs"
+    public static let premiumMonthlySubscription = "com.x2mobile.Wodjar.premiummonthlysubs"
     
-    fileprivate static let productIdentifiers: Set<ProductIdentifier> = [premiumSubscription]
+    fileprivate static let productIdentifiers: Set<ProductIdentifier> = [premiumAnualSubscription, premiumMonthlySubscription]
     
     public static let store = IAPHelper(productIds: productIdentifiers)
+    var products = [SKProduct]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initUI()
+    }
+    
+    // MARK: - UI Initialization
+    
+    func initUI() {
         if UserManager.sharedInstance.isAuthenticated() {
             authenticationButton.setTitle("Logout", for: .normal)
         }
+        
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+        
+        versionLabel.text = "v\(version)(\(build))"
+        
+        unitSystemComponent.index = UserManager.sharedInstance.unitType.rawValue
     }
     
     // MARK: - IBActions
@@ -32,7 +57,9 @@ class MoreViewController: UIViewController {
     @IBAction func didTapUnitsComponent(_ sender: Any) {
         let index = (sender as! UnitsComponent).index
         
-        print(index)
+        if UserManager.sharedInstance.isAuthenticated() {
+            UserManager.sharedInstance.unitType = UnitType(rawValue: index)!
+        }
     }
     
     @IBAction func didTapMoreComponent(_ sender: UIView) {
@@ -41,17 +68,37 @@ class MoreViewController: UIViewController {
             // send feedback email
             sendMail()
         case 2:
-            // purchase premium subscription
-            MoreViewController.store.requestProducts(completionHandler: { success, products  in
+            MBProgressHUD.showAdded(to: view, animated: true)
+            MoreViewController.store.requestProducts(completionHandler: { (success, products) in
+                MBProgressHUD.hide(for: self.view, animated: true)
                 if success {
-                    print("success")
-                    UserManager.sharedInstance.hasPremiumSubscription = true
+                    self.products = products!
+                    if self.products.count == 2
+                    {
+                        self.performSegue(withIdentifier: self.detailsSegueIdentifier, sender: self)
+                    }
                 }
             })
         case 3:
             // restore premium subscription
             print("restore purchases")
-            MoreViewController.store.restorePurchases()
+            SwiftyStoreKit.restorePurchases(atomically: false) { results in
+                if results.restoreFailedProducts.count > 0 {
+                    print("Restore Failed: \(results.restoreFailedProducts)")
+                }
+                else if results.restoredProducts.count > 0 {
+                    for product in results.restoredProducts {
+                        // fetch content from your server, then:
+                        if product.needsFinishTransaction {
+                            SwiftyStoreKit.finishTransaction(product.transaction)
+                        }
+                    }
+                    print("Restore Success: \(results.restoredProducts)")
+                }
+                else {
+                    print("Nothing to Restore")
+                }
+            }
             
         default:
             break
@@ -60,14 +107,70 @@ class MoreViewController: UIViewController {
     
     @IBAction func didTapLogin(_ sender: Any) {
         if UserManager.sharedInstance.isAuthenticated() {
-            UserManager.sharedInstance.signOut()
-            authenticationButton.setTitle("Login", for: .normal)
+            signOut()
             return
         }
         
         showLogin {
             self.authenticationButton.setTitle("Logout", for: .normal)
+            self.resetViewControllers()
         }
     }
     
+    private func resetViewControllers() {
+        for viewController in (tabBarController?.viewControllers)! {
+            if let navController = viewController as? UINavigationController {
+                if navController == navigationController {
+                    continue
+                }
+                
+                navController.popToRootViewController(animated: false)
+            }
+        }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Auth"), object: nil)
+
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else {
+            return
+        }
+        
+        if identifier == detailsSegueIdentifier {
+            let subsViewController = segue.destination as! ProSubscriptionViewController
+            for product in products {
+                if product.productIdentifier == MoreViewController.premiumAnualSubscription {
+                    subsViewController.annualProduct = product
+                }
+                
+                if product.productIdentifier == MoreViewController.premiumMonthlySubscription {
+                    subsViewController.mothlyProduct = product
+                }
+            }
+        }
+    }
+    
+    // MARK: - Service Calls
+    
+    func signOut() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        let request = LogoutRequest()
+        
+        request.success = { _, _ in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            UserManager.sharedInstance.signOut()
+            self.authenticationButton.setTitle("Login", for: .normal)
+            self.resetViewControllers()
+        }
+        
+        request.error = { _, error in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.handle(error)
+        }
+        
+        request.runRequest()
+    }
 }

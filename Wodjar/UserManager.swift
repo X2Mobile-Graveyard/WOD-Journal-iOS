@@ -11,6 +11,7 @@ import Foundation
 class UserManager {
     let userIdKey = "WODJournalUserdId"
     let userTokenKey = "WODJournalUserToken"
+    let unitSystemKey = "WODJournalUnitSystem"
     
     var userId: Int? {
         set {
@@ -38,8 +39,29 @@ class UserManager {
             return UserDefaults.standard.object(forKey: userTokenKey) as! String?
         }
     }
-    var unitType: UnitType?
-    var hasPremiumSubscription: Bool = false
+    var unitType: UnitType {
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: unitSystemKey)
+        }
+        
+        get {
+            if let type = UserDefaults.standard.object(forKey: unitSystemKey) as? Int {
+                return UnitType(rawValue: type)!
+            }
+            
+            if Locale.current.usesMetricSystem {
+                return .metric
+            } else {
+                return .imperial
+            }
+        }
+    }
+    var hasMonthlySubscription: Bool = false
+    var hasYearSubscription: Bool = false
+    var hasPremiumSubscription: Bool {
+        return hasMonthlySubscription || hasYearSubscription
+    }
+    var userName: String?
     
     static let sharedInstance = UserManager()
     

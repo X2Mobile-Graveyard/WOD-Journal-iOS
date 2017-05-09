@@ -87,6 +87,7 @@ class PersonalRecordDetailsListViewController: UIViewController {
     }
     
     private func setupTableView() {
+        tableView.tableFooterView = UIView()
         tableView.allowsMultipleSelectionDuringEditing = false
     }
     
@@ -137,7 +138,7 @@ class PersonalRecordDetailsListViewController: UIViewController {
             personalRecordViewController.personalRecord = selectedPersoanlRecord
             personalRecordViewController.controllerMode = .editMode
             personalRecordViewController.updatePersonalRecordDelegate = self
-            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService())
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService(), recordsNames: nil)
         } else if identifier == newPersonalRecordSegueIdentifier {
             let personalRecordViewController = segue.destination as! PersonalRecordViewController
             personalRecordViewController.personalRecord = PersonalRecord(name: personalRecordType.name,
@@ -150,7 +151,7 @@ class PersonalRecordDetailsListViewController: UIViewController {
                                                                          date: Date())
             personalRecordViewController.updatePersonalRecordDelegate = self
             personalRecordViewController.controllerMode = .editMode
-            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService())
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService(), recordsNames: nil)
         }
     }
     
@@ -273,15 +274,3 @@ extension PersonalRecordDetailsListViewController: UpdatePersonalRecordDelegate 
         personalRecordType.add(personalRecord: personalRecord)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-

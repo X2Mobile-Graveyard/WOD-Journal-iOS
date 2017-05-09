@@ -87,6 +87,8 @@ enum UnitType: Int {
 }
 
 class Workout: NSObject {
+    // @Constants
+    let noImageString = ""
     
     var id: Int?
     var wodDescription: String?
@@ -96,6 +98,7 @@ class Workout: NSObject {
     var name: String?
     var isFavorite: Bool = false
     var isCompleted: Bool = false
+    var isDefault: Bool = true
     var category: WODCategory?
     var videoId: String?
     var unit: UnitType?
@@ -129,11 +132,24 @@ class Workout: NSObject {
         self.init()
         self.id = dictionary["id"] as? Int ?? nil
         self.name = dictionary["name"] as? String ?? nil
-        if let type = dictionary["category"] as? Int {
+        if let type = dictionary["wod_type"] as? Int {
             self.type = WODType.from(hashValue: type)
         }
+        self.wodDescription = dictionary["description"] as? String ?? nil
+        self.imageUrl = dictionary["image"] as? String ?? nil
+        if imageUrl == noImageString {
+            self.imageUrl = nil
+        }
+        self.history = dictionary["history"] as? String ?? nil
+        if let category = dictionary["category"] as? Int {
+            self.category = WODCategory.from(hashValue: category)
+        } else {
+            print("ASdasd")
+        }
+        self.videoId = dictionary["video"] as? String ?? nil
         self.isCompleted = dictionary["completed"] as? Bool ?? false
         self.isFavorite = dictionary["favorites"] as? Bool ?? false
+        self.isDefault = dictionary["default"] as? Bool ?? true
     }
     
     convenience init(using wod: Workout) {
@@ -150,6 +166,7 @@ class Workout: NSObject {
         self.videoId = wod.videoId
         self.unit = wod.unit
         self.results = wod.results
+        self.isDefault = wod.isDefault
     }
     
     func updateValues(from wod: Workout) {
@@ -165,6 +182,7 @@ class Workout: NSObject {
         self.videoId = wod.videoId
         self.unit = wod.unit
         self.results = wod.results
+        self.isDefault = wod.isDefault
     }
     
     func set(description: String, image: String?, history: String?, category: WODCategory, video: String?, unit: UnitType) {
@@ -174,5 +192,36 @@ class Workout: NSObject {
         self.category = category
         self.videoId = video
         self.unit = unit
+    }
+    
+    func createUpdateDict() -> [String: Any] {
+        var updateDict = [String: Any]()
+        
+        updateDict["name"] = self.name!
+        updateDict["wod_type"] = self.type?.hash()
+        updateDict["description"] = self.wodDescription
+        if let url = imageUrl {
+            updateDict["image"] = url
+        } else {
+            updateDict["image"] = noImageString
+        }
+        updateDict["category"] = self.category?.hash()
+        return updateDict
+    }
+    
+    func orderResults() {
+        if results == nil {
+            return
+        }
+        if results!.count < 2 {
+            return
+        }
+        
+        results!.sort { (result1, result2) -> Bool in
+            if result1.updatedAt.compare(result2.updatedAt) == .orderedAscending {
+                return false
+            }
+            return true
+        }
     }
 }

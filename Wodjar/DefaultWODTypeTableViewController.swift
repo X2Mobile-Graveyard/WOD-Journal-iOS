@@ -13,6 +13,7 @@ class DefaultWODTypeTableViewController: WODTypeTableViewController {
 
     // @Constants
     let defaultWodDetailsSegueIdentifier = "DefaultWodDetails"
+    let customWodDetailsSegueIdentifier = "GoToCustomWodDetailsFromFavorites"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,13 @@ class DefaultWODTypeTableViewController: WODTypeTableViewController {
         if identifier == defaultWodDetailsSegueIdentifier {
             let defaultWodDetailsVC = segue.destination as! DefaultWODDetailsViewController
             defaultWodDetailsVC.wod = selectedWOD
+            defaultWodDetailsVC.resultService = WODResultService(remote: WODResultRemoteServiceImpl(), s3Remote: S3RemoteService())
+        } else if identifier == customWodDetailsSegueIdentifier {
+            let customWodDetailsVC = segue.destination as! CustomWODDetailsViewController
+            customWodDetailsVC.service = WODService(remote: WODRemoteServiceImpl(), s3Remote: S3RemoteService())
+            customWodDetailsVC.resultService = WODResultService(remote: WODResultRemoteServiceImpl(), s3Remote: S3RemoteService())
+            customWodDetailsVC.wod = selectedWOD
+            customWodDetailsVC.delegate = self
         }
     }
     
@@ -65,12 +73,16 @@ class DefaultWODTypeTableViewController: WODTypeTableViewController {
         }
         
         MBProgressHUD.showAdded(to: view, animated: true)
-        service.getResult(for: wod.id) { (result) in
+        service.getResult(for: wod) { (result) in
             MBProgressHUD.hide(for: self.view, animated: true)
             switch result {
             case let .success(results):
                 self.selectedWOD?.results = results
-                self.performSegue(withIdentifier: self.defaultWodDetailsSegueIdentifier, sender: self)
+                if self.selectedWOD?.type == .custom {
+                    self.performSegue(withIdentifier: self.customWodDetailsSegueIdentifier, sender: self)
+                } else {
+                    self.performSegue(withIdentifier: self.defaultWodDetailsSegueIdentifier, sender: self)
+                }
             case .failure(_):
                 self.handleError(result: result)
             }

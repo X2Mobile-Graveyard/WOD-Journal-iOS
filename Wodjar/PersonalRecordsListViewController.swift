@@ -42,31 +42,6 @@ class PersonalRecordsListViewController: UIViewController {
         return searchController
     }()
     
-    lazy var defaultPRs:[PersonalRecordType] = {
-        var defaultPrs = [PersonalRecordType]()
-        if let path = Bundle.main.path(forResource: "defaultPRs", ofType: "plist"),
-            let dict = NSDictionary(contentsOfFile: path) as? [String: AnyObject] {
-            if let weightPersonalRecords = dict["Weight"] as? [[String: String]] {
-                for personalRecordDict in weightPersonalRecords {
-                    let personalRecordName = personalRecordDict["name"]
-                    let updatedAt = personalRecordDict["date"]
-                    let pr = PersonalRecordType(name: personalRecordName!, present: false, defaultType: .weight, updatedAt: updatedAt!)
-                    defaultPrs.append(pr)
-                }
-            }
-            
-            if let timePersonalRecords = dict["Time"] as? [[String: String]] {
-                for personalRecordDict in timePersonalRecords {
-                    let personalRecordName = personalRecordDict["name"]
-                    let updatedAt = personalRecordDict["date"]
-                    let pr = PersonalRecordType(name: personalRecordName!, present: false, defaultType: .time, updatedAt: updatedAt!)
-                    defaultPrs.append(pr)
-                }
-            }
-        }
-        return defaultPrs
-    }()
-    
     // @Constants
     let cellIdentifier = "PersonalRecordListCellIdentifier"
     let detailsListSequeIdentifier = "goToPersonalRecordDetailsIdentifier"
@@ -79,12 +54,13 @@ class PersonalRecordsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
         getPersonalRecordTypes()
+        NotificationCenter.default.addObserver(self, selector: #selector(didLogin), name: NSNotification.Name(rawValue: "Auth"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        recordTypes = service.merge(personalRecords: recordTypes, with: defaultPRs)
         recordTypes = service.orderByUpdatedDate(recordTypes: recordTypes)
         tableView.reloadData()
     }
@@ -94,6 +70,7 @@ class PersonalRecordsListViewController: UIViewController {
     func getPersonalRecordTypes() {
         MBProgressHUD.showAdded(to: view, animated: true)
         service.getPersonalRecordTypes { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
             switch result {
             case let .success(personalRecordTypes):
                 self.recordTypes = self.service.orderByUpdatedDate(recordTypes: personalRecordTypes)
@@ -101,8 +78,6 @@ class PersonalRecordsListViewController: UIViewController {
             case let .failure(error):
                 print(error)
             }
-            
-            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     
@@ -116,6 +91,27 @@ class PersonalRecordsListViewController: UIViewController {
         
         presentLoginScreen {
             self.getPersonalRecordTypes()
+        }
+    }
+    
+    // MARK: - Service Calls
+    
+    func delete(recordType: PersonalRecordType) {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.deletePersonalRecord(with: recordType.name) { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            switch (result) {
+            case .success():
+                self.recordTypes.remove(object: recordType)
+                if self.resultSearchController.isActive {
+                    self.filteredRecordTypes.remove(object: recordType)
+                }
+                self.tableView.reloadData()
+            case .failure(_):
+                self.tableView.reloadData()
+                self.handleError(result: result)
+                
+            }
         }
     }
     
@@ -140,7 +136,8 @@ class PersonalRecordsListViewController: UIViewController {
             let personalRecordViewController = segue.destination as! PersonalRecordViewController
             personalRecordViewController.controllerMode = .createMode
             personalRecordViewController.personalRecord = PersonalRecord()
-            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService())
+            let prService = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService(), recordsNames: recordTypes.map({return $0.name!}))
+            personalRecordViewController.service = prService
             personalRecordViewController.createRecordDelegate = self
         case addFirstRecordIdentifier:
             if selectedRecordType == nil {
@@ -157,7 +154,7 @@ class PersonalRecordsListViewController: UIViewController {
                                                                          date: Date())
             personalRecordViewController.updatePersonalRecordDelegate = self
             personalRecordViewController.controllerMode = .editMode
-            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService())
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService(), recordsNames: nil)
         default:
             break
         }
@@ -212,6 +209,25 @@ extension PersonalRecordsListViewController: UITableViewDelegate {
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if !UserManager.sharedInstance.isAuthenticated() {
+            return
+        }
+        
+        if editingStyle != .delete {
+            return
+        }
+        
+        var recordType: PersonalRecordType
+        if resultSearchController.isActive {
+            recordType = filteredRecordTypes[indexPath.row]
+        } else {
+            recordType = recordTypes[indexPath.row]
+        }
+        
+        delete(recordType: recordType)
     }
 }
 

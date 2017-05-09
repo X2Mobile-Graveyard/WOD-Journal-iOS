@@ -67,4 +67,3 @@ extension CreateCustomWODViewController {
         return toolbar
     }
 }
-

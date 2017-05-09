@@ -86,6 +86,7 @@ class WODJournalResultViewController: UIViewController {
     // MARK: - Image Handle Methods
     
     func removeUserImage() {
+        pickedImagePath = nil
         userPictureView.removeFromSuperview()
         footerViewBottomConstraint.isActive = true
         viewState = .withoutImage

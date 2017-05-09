@@ -9,14 +9,33 @@
 import Foundation
 
 class PersonalRecord {
+    // @Constants
+    let noImageString = ""
+    
+    // @Variables
     var id: Int?
     var name: String? = nil
     var rx: Bool = false
     var resultType: WODCategory = .weight
-    var resultWeight: Float?
+    public private(set) var _resultWeight: Float?
+    var resultWeight: Float? {
+        set {
+            self._resultWeight = newValue
+        }
+        
+        get {
+            if self.unitType == .imperial {
+               return self._resultWeight?.convertToImperial()
+            }
+            
+            return self._resultWeight
+        }
+    }
     var resultTime: Int?
     var resultRounds: Int?
-    var unitType: UnitType = .metric
+    var unitType: UnitType {
+        return UserManager.sharedInstance.unitType
+    }
     var measurementUnit: String {
         switch resultType {
         case .weight:
@@ -43,12 +62,15 @@ class PersonalRecord {
         
         self.id = dictionary["id"] as? Int ?? nil
         self.name = dictionary["name"] as? String ?? nil
-        self.rx = dictionary["ex"] as? Bool ?? false
+        self.rx = dictionary["rx"] as? Bool ?? false
         if let resultTypeInt = dictionary["result_type"] as? Int {
             self.resultType = WODCategory.from(hashValue: resultTypeInt)
         }
         self.notes = dictionary["notes"] as? String ?? nil
         self.imageUrl = dictionary["image_url"] as? String ?? nil
+        if self.imageUrl == noImageString {
+            self.imageUrl = nil
+        }
         if let lastUpdate = dictionary["updated_at"] as? String {
             self.updatedAt = lastUpdate.getDateFromWodJournalFormatStyle()
         } else {
@@ -80,7 +102,6 @@ class PersonalRecord {
         self.name = name
         self.rx = rx
         self.resultType = resultType
-        self.unitType = unitType
         self.notes = notes
         self.imageUrl = imageUrl
         self.date = date
@@ -97,7 +118,6 @@ class PersonalRecord {
         self.resultWeight = personalRecord.resultWeight
         self.resultType = personalRecord.resultType
         self.date = personalRecord.date
-        self.unitType = personalRecord.unitType
         self.notes = personalRecord.notes
         self.imageUrl = personalRecord.imageUrl
         self.date = personalRecord.date
@@ -112,7 +132,6 @@ class PersonalRecord {
         self.resultTime = personalRecord.resultTime
         self.resultType = personalRecord.resultType
         self.date = personalRecord.date
-        self.unitType = personalRecord.unitType
         self.notes = personalRecord.notes
         self.imageUrl = personalRecord.imageUrl
         self.date = personalRecord.date
@@ -130,15 +149,19 @@ class PersonalRecord {
         
         if let url = imageUrl {
             updateDict["image_url"] = url
+        } else {
+            updateDict["image_url"] = noImageString
         }
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        updateDict["date"] = dateFormatter.string(from: self.date)
+        updateDict["date"] = self.date.getWodJournalFormatString()
         
         switch resultType {
         case .weight:
-            updateDict["result_weight"] = resultWeight!
+            if unitType == .imperial {
+                updateDict["result_weight"] = resultWeight!.convertToMetric()
+            } else {
+                updateDict["result_weight"] = resultWeight!
+            }
         case .amrap:
             updateDict["result_rounds"] = resultRounds!
         case .time:
@@ -244,4 +267,14 @@ class PersonalRecord {
         return hours * 3600 + minutes * 60 + seconds
     }
     
+}
+
+extension Float {
+    func convertToImperial() -> Float {
+        return self * 2.20462262185
+    }
+    
+    func convertToMetric() -> Float {
+        return self * 0.45359237
+    }
 }

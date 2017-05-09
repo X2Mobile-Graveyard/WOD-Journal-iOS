@@ -19,8 +19,7 @@ struct PersonalRecordListService {
             let defaultPrs = self.getDefaultPersonalRecordTypes()
             switch result {
             case let .success(userRecords):
-                let intersectedPr = self.instersect(userPersonalRecordTypes: userRecords, with: defaultPrs)
-                completion?(.success(intersectedPr))
+                completion?(.success(userRecords))
             case .failure(_):
                 completion?(.success(defaultPrs))
             }
@@ -42,6 +41,14 @@ struct PersonalRecordListService {
     
     func deletePersonalRecord(with id: Int, completion: DeletePersonalRecordCompletion?) {
         remoteService.deletePersonalRecord(with: id, completion: completion)
+    }
+    
+    func deletePersonalRecord(with name: String?, completion: DeletePersonalRecordCompletion?) {
+        guard let name = name else  {
+            completion?(.failure(NSError.localError(with: "Could not delete this record.")))
+            return
+        }
+        remoteService.deletePersonalRecord(with: name, completion: completion)
     }
     
     func deleteAllRecords(for personalRecordType: PersonalRecordType, with completion: DeleteAllRecordsCompletion?) {
@@ -66,7 +73,7 @@ struct PersonalRecordListService {
     func orderByUpdatedDate(recordTypes: [PersonalRecordType]) -> [PersonalRecordType] {
         return recordTypes.sorted { (recordType1, recordType2) -> Bool in
             
-            if recordType1.updatedAt.compare(recordType2.updatedAt) == .orderedAscending {
+            if recordType1.updatedAt.timeIntervalSince1970 < recordType2.updatedAt.timeIntervalSince1970 {
                 return false
             }
             

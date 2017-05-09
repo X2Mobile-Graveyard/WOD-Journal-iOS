@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PersonalRecordType {
+class PersonalRecordType: NSObject {
     var name: String? = "Unknown"
     var present: Bool = false
     var records: [PersonalRecord] = [PersonalRecord]() {
@@ -54,23 +54,30 @@ class PersonalRecordType {
         self.updatedAt = dateFormatter.date(from: updatedAt!)!
     }
     
-    init(with dict: [String: String]) {
-        if let date = dict["updated_at"] {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-            self.updatedAt = dateFormatter.date(from: date)!
+    init(with dict: [String: Any]) {
+        if let date = dict["updated_at"] as? String {
+            self.updatedAt = date.getDateFromWodJournalFormatStyle()
         } else {
             self.updatedAt = Date()
         }
         
-        if let name = dict["name"] {
+        if let name = dict["name"] as? String {
             self.name = name
         } else {
             self.name = "unknown"
         }
         
-        self.defaultResultType = .weight
-        self.present = true
+        if let present = dict["present"] as? Bool {
+            self.present = present
+        } else {
+            self.present = false
+        }
+        
+        if let type = dict["result_type"] as? Int {
+            self.defaultResultType = WODCategory.from(hashValue: type)
+        } else {
+            self.defaultResultType = .weight
+        }
     }
     
     func add(personalRecord: PersonalRecord) {

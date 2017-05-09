@@ -19,11 +19,6 @@ class GetWodsRequest: BaseRequest {
     }
     
     override func headerParams() -> [String : String] {
-        if UserManager.sharedInstance.isAuthenticated() {
-            return ["Authorization":"Token \(UserManager.sharedInstance.userToken!)"];
-        }
-        
-        return ["X-Api-Key":SessionManager.sharedInstance.apiKey]
+        return ["Authorization":"Token \(UserManager.sharedInstance.userToken!)"];
     }
-
 }

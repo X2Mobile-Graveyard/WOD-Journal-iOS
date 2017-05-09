@@ -18,6 +18,7 @@ target 'Wodjar' do
   pod 'XCDYouTubeKit', '~> 2.5'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'SwiftyStoreKit'
 
   target 'WodjarTests' do
     inherit! :search_paths

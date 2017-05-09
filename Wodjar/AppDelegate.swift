@@ -12,15 +12,15 @@ import AWSCore
 import Fabric
 import Crashlytics
 import AVFoundation
+import SwiftyStoreKit
 
-
-@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-       
+        completeTransaction()
+        
         let tabBarController = window?.rootViewController as! UITabBarController
         tabBarController.delegate = self
         let navigationController = tabBarController.viewControllers?[0] as! UINavigationController
@@ -32,6 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupAmazonS3Capabilities()
         Fabric.with([Crashlytics.self])
+        
+        
+        let pageControl = UIPageControl.appearance()
+        pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.currentPageIndicatorTintColor = UIColor(red: 14 / 255, green: 122 / 255, blue: 254 / 255, alpha: 1)
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
@@ -54,6 +60,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSServiceManager.default().defaultServiceConfiguration = configuration
 
     }
+    
+    private func completeTransaction() {
+        SwiftyStoreKit.completeTransactions(atomically: true) { products in
+            for product in products {
+                if product.transaction.transactionState == .purchased || product.transaction.transactionState == .restored {
+                    if product.needsFinishTransaction {
+                        if product.productId == MoreViewController.premiumMonthlySubscription {
+                            UserManager.sharedInstance.hasMonthlySubscription = true
+                        }
+                        
+                        if product.productId == MoreViewController.premiumAnualSubscription {
+                            UserManager.sharedInstance.hasYearSubscription = true
+                        }
+                        SwiftyStoreKit.finishTransaction(product.transaction)
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension AppDelegate: UITabBarControllerDelegate {
@@ -61,10 +86,9 @@ extension AppDelegate: UITabBarControllerDelegate {
         if let navController = viewController as? UINavigationController {
             if let wodsController = navController.topViewController as? WODTypesTableViewController {
                 
-                wodsController.service = WODListService(remote: WODListRemoteServiceTest())
+                wodsController.service = WODListService(listRemote: WODListRemoteServiceImpl(), wodRemote: WODRemoteServiceImpl())
 
             }
         }
     }
 }
-

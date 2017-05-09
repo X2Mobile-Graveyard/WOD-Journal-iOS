@@ -84,6 +84,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftyStoreKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>TPKeyboardAvoiding.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -102,12 +107,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>068A15EA1661D5FCC952F7F26C890AD8</key>
+		<key>332F91393FB1DE033D370B4CEDDD5FCF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>332F91393FB1DE033D370B4CEDDD5FCF</key>
+		<key>3E439F8F68E8539DF121AD809A902CA1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,6 +127,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>4D6D5F0936BB0E50A3EEEBA932A5CB00</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>593E9479C06FB200807D11AB29EB50BD</key>
 		<dict>
 			<key>primary</key>
@@ -132,22 +142,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5ACFCBB5C36270A9DF9A2D2D11708867</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>5B5AC3C06B783F8674FDB4C0F900B56A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5DB1EA4F9AE862FA9F516BB4BFDAFEED</key>
+		<key>5CBE023C5A6D168614CCBA4FCC12D082</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6F69863B5CBBD32F85FCC832292ED1FE</key>
+		<key>71F62C613B0DD316BD78BE4B5FAC58D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -157,17 +162,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>791C7487B31A6C3A288F6F6A9FD6CCC4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>7FD49A15BC28BECD1A659CB4410EED59</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9AC6D35D074001564659A0FF99D9DB36</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -182,17 +177,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B29C7BFCA93AAEF921B28BB656A6C462</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CC6ED0561AB1FABCC7AE7F4441502350</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>CF671F7E57B92905F1CC91D036D6B4A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DC4E24C14A4F6B569908B2213D9F855E</key>
+		<key>DD1DBCC1DF68514CF23AA06E1AB43A68</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F6B8D3B45E83AB07D13951D7BBF800E0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -19,6 +19,7 @@ class WODTypeTableViewController: UITableViewController {
     var isFavorite: Bool = false
     var workouts: [Workout]!
     var service: WODListService!
+    var delegate: WODTypeDelegate?
     
     // @Constants
     let workoutCellIdentifier = "WorkoutNameCellIdentifier"
@@ -47,6 +48,7 @@ class WODTypeTableViewController: UITableViewController {
         }
         
         if workouts.count == 0 {
+            wodType = .custom
             return
         }
         
@@ -66,7 +68,12 @@ class WODTypeTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: workoutCellIdentifier, for: indexPath)
-        cell.textLabel?.text = workouts[indexPath.row].name;
+        
+        if let customCell = cell as? PresonalRecordsListTableViewCell {
+            customCell.populate(with: workouts[indexPath.row].name!, present: workouts[indexPath.row].isCompleted)
+            return customCell
+        }
+        
         return cell
     }
     
@@ -120,6 +127,16 @@ class WODTypeTableViewController: UITableViewController {
         } else {
             workouts.remove(at: indexPath.row)
             self.tableView.reloadData()
+        }
+    }
+}
+
+extension WODTypeTableViewController: CustomWodUpdateDelegate {
+    func didDelete(wod: Workout) {
+        workouts.remove(object: wod)
+        tableView.reloadData()
+        if (delegate != nil) {
+            delegate?.didDelete(wod: wod)
         }
     }
 }

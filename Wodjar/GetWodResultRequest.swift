@@ -17,7 +17,7 @@ class GetWodResultRequest: BaseRequest {
     }
     
     override func requestURL() -> String {
-        return "list-wods"
+        return "list-wrs-by-wod/\(wodId)"
     }
     
     override func requestMethod() -> RequestMethod {
@@ -25,10 +25,6 @@ class GetWodResultRequest: BaseRequest {
     }
     
     override func headerParams() -> [String : String] {
-        if UserManager.sharedInstance.isAuthenticated() {
-            return ["Authorization":"Token \(UserManager.sharedInstance.userToken!)"];
-        }
-        
-        return ["X-Api-Key":SessionManager.sharedInstance.apiKey]
+        return ["Authorization":"Token \(UserManager.sharedInstance.userToken!)"];
     }
 }

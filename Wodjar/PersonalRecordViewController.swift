@@ -27,13 +27,13 @@ class PersonalRecordViewController: WODJournalResultViewController {
     @IBOutlet weak var resultTypeLabel: UILabel!
     @IBOutlet weak var resultTextField: UITextField!
     @IBOutlet weak var notesTextView: UITextView!
-    @IBOutlet weak var calendarTextField: DateTextField!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var rxSwitch: UISwitch!
     @IBOutlet weak var editTitleButton: UIButton!
     @IBOutlet var resultTypeLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet var wodTimePicker: WODTimeIntervalPicker!
+    @IBOutlet var dateButton: UIButton!
     
     // @Properties
     var pickedDateFromDatePicker: Date?
@@ -42,6 +42,11 @@ class PersonalRecordViewController: WODJournalResultViewController {
     var personalRecordCopy: PersonalRecord!
     var createRecordDelegate: PersonalRecordCreateDelegate?
     var updatePersonalRecordDelegate: UpdatePersonalRecordDelegate?
+    lazy var calendarTextField: UITextField = {
+        let hiddenTextField = UITextField()
+        self.view.addSubview(hiddenTextField)
+        return hiddenTextField
+    }()
     
     // @Constants
     let presentFullImageSegueIdentifier = "presentFullImageSegueIdentifier"
@@ -58,6 +63,7 @@ class PersonalRecordViewController: WODJournalResultViewController {
         super.viewDidLoad()
         initUI()
         createWorkingCopy()
+        pickedImagePath = personalRecord.imageUrl
     }
     
     
@@ -109,6 +115,10 @@ class PersonalRecordViewController: WODJournalResultViewController {
         }
     }
     
+    @IBAction func didTapDateButton(_ sender: Any) {
+        calendarTextField.becomeFirstResponder()
+    }
+    
     @IBAction func didTapDeleteButton(_ sender: Any) {
         showDeleteAlert(with: "Warning",
                         message: "This action will permanently delete this record.",
@@ -146,12 +156,16 @@ class PersonalRecordViewController: WODJournalResultViewController {
     }
     
     func didTapDoneOnDatePicker() {
-        calendarTextField.text = pickedDateFromDatePicker?.getDateAsWodJournalString()
+        dateButton.setTitle(pickedDateFromDatePicker?.getDateAsWodJournalString(), for: .normal)
         self.view.endEditing(true)
     }
     
     func didTapDoneOnTimePicker() {
         resultTextField.text = wodTimePicker.timeIntervalAsHoursMinutesSeconds.getFormatedString()
+        view.endEditing(true)
+    }
+    
+    func didTapDoneOnResultInputView() {
         view.endEditing(true)
     }
     

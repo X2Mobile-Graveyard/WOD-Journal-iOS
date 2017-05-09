@@ -11,15 +11,11 @@ import Result
 
 typealias GetWodsRequestCompletion = (Result<WorkoutList, NSError>) -> ()
 typealias GetResultsRequestCompletion = (Result<[WODResult], NSError>) -> ()
-typealias FavoriteCompletion = (Result<Void, NSError>) -> ()
-typealias DeleteWodCompletion = (Result<Void, NSError>) -> ()
+
 
 protocol WODListRemoteService {
     func getWodsList(with completion: GetWodsRequestCompletion?)
-    func getResults(for wodId: Int, with completion: GetResultsRequestCompletion?)
-    func addToFavorite(wodId: Int, with completion: FavoriteCompletion?)
-    func removeFromFavorite(wodId: Int, with completion: FavoriteCompletion?)
-    func deleteWod(with wodId: Int, completion: DeleteWodCompletion?)
+    func getResults(for wod: Workout, with completion: GetResultsRequestCompletion?)
 }
 
 class WODListRemoteServiceTest: WODListRemoteService {
@@ -181,8 +177,8 @@ class WODListRemoteServiceTest: WODListRemoteService {
         completion?(.success(WorkoutList(workouts: [girl1, girl2, girl3, girl4, hero1, hero2, hero3, hero4, challenge1, challenge2, challenge3, challenge4, open1, open2, open3])))
     }
     
-    func getResults(for wodId: Int, with completion: GetResultsRequestCompletion?) {
-        if wodId % 3 == 0 {
+    func getResults(for wod: Workout, with completion: GetResultsRequestCompletion?) {
+        if wod.id! % 3 == 0 {
             let result1 = WODResult(with: 1,
                                     notes: nil,
                                     resultType: .time,
@@ -224,7 +220,7 @@ class WODListRemoteServiceTest: WODListRemoteService {
                                     date: "2015-02-10T11:53:22.249Z",
                                     updated_at: "2017-04-16T22:57:51.999")
             completion?(.success([result1, result2, result3, result4]))
-        } else if wodId % 3 == 1 {
+        } else if wod.id! % 3 == 1 {
             let result1 = WODResult(with: 4,
                                     notes: nil,
                                     resultType: .time,
@@ -250,69 +246,30 @@ class WODListRemoteServiceTest: WODListRemoteService {
            completion?(.success([]))
         }
     }
-    
-    func addToFavorite(wodId: Int, with completion: FavoriteCompletion?) {
-        completion?(.success())
-    }
-    
-    func removeFromFavorite(wodId: Int, with completion: FavoriteCompletion?) {
-        completion?(.success())
-    }
-    
-    func deleteWod(with wodId: Int, completion: DeleteWodCompletion?) {
-        completion?(.success())
-    }
 }
 
 class WODListRemoteServiceImpl: WODListRemoteService {
     func getWodsList(with completion: GetWodsRequestCompletion?) {
-        let request = GetWodsRequest()
-        
-        request.success = { _, response in
-            guard let response = response as? [String: Any] else {
-                completion?(.success(WorkoutList()))
-                return
-            }
-            
-            guard let wods = response["wods"] as? [[String: Any]] else {
-                completion?(.success(WorkoutList()))
-                return
-            }
-            
-            
-            var workouts = [Workout]()
-            for wodDict in wods {
-                let newWorkout = Workout(from: wodDict)
-                workouts.append(newWorkout)
-            }
-            
-            completion?(.success(WorkoutList(workouts: workouts)))
+        if UserManager.sharedInstance.isAuthenticated() {
+            getUserWods(with: completion)
+            return
         }
         
-        request.error = { _, error in
-            completion?(.failure(error))
-        }
-        
-        request.runRequest()
+        getDefaultWods(with: completion)
     }
     
-    func getResults(for wodId: Int, with completion: GetResultsRequestCompletion?) {
-        let request = GetWodResultRequest(with: wodId)
+    func getResults(for wod: Workout, with completion: GetResultsRequestCompletion?) {
+        let request = GetWodResultRequest(with: wod.id!)
         
         request.success = { _, result in
-            guard let result = result as? [String: Any] else {
-                completion?(.success([]))
-                return
-            }
-            
-            guard let wodResults = result["wod_results"] as? [[String: Any]] else {
+            guard let resultsArray = result as? [[String: Any]] else {
                 completion?(.success([]))
                 return
             }
             
             var results = [WODResult]()
-            for resultDict in wodResults {
-                let wodResult = WODResult(from: resultDict)
+            for resultDict in resultsArray {
+                let wodResult = WODResult(from: resultDict, with: wod.category)
                 results.append(wodResult)
             }
             
@@ -326,15 +283,67 @@ class WODListRemoteServiceImpl: WODListRemoteService {
         request.runRequest()
     }
     
-    func addToFavorite(wodId: Int, with completion: FavoriteCompletion?) {
+    // MARK: - Private Methods
+    
+    private func getUserWods(with completion: GetWodsRequestCompletion?) {
+        let request = GetWodsRequest()
         
+        request.success = { _, response in
+            guard let response = response as? [String: Any] else {
+                completion?(.success(WorkoutList()))
+                return
+            }
+            
+            guard let wods = response["wods"] as? [[String: Any]] else {
+                completion?(.success(WorkoutList()))
+                return
+            }
+            
+            let workouts = self.createWorkoutArray(from: wods)
+            
+            completion?(.success(WorkoutList(workouts: workouts)))
+        }
+        
+        request.error = { _, error in
+            completion?(.failure(error))
+        }
+        
+        request.runRequest()
     }
     
-    func removeFromFavorite(wodId: Int, with completion: FavoriteCompletion?) {
+    private func getDefaultWods(with completion: GetWodsRequestCompletion?) {
+        let request = GetDefaultWodsRequest()
         
+        request.success = { _, response in
+            guard let response = response as? [String: Any] else {
+                completion?(.success(WorkoutList()))
+                return
+            }
+            
+            guard let defaultWods = response["default_wods"] as? [[String: Any]] else {
+                completion?(.success(WorkoutList()))
+                return
+            }
+            
+            let workouts = self.createWorkoutArray(from: defaultWods)
+            
+            completion?(.success(WorkoutList(workouts: workouts)))
+        }
+        
+        request.error = { _, error in
+            completion?(.failure(error))
+        }
+        
+        request.runRequest()
     }
     
-    func deleteWod(with wodId: Int, completion: DeleteWodCompletion?) {
+    private func createWorkoutArray(from wodsArray: [[String: Any]]) -> [Workout] {
+        var workouts = [Workout]()
+        for wodDict in wodsArray {
+            let newWorkout = Workout(from: wodDict)
+            workouts.append(newWorkout)
+        }
         
+        return workouts
     }
 }

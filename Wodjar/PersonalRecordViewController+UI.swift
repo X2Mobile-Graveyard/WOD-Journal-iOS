@@ -74,7 +74,10 @@ extension PersonalRecordViewController {
     
     func setupViewForRecordType() {
         resultTextField.inputView = nil
-        resultTextField.inputAccessoryView = nil
+        resultTextField.inputAccessoryView = createKeyboardToolbar(cancelButton: "Cancel",
+                                                                   with: #selector(didTapCancelPicker),
+                                                                   doneButton: "Done",
+                                                                   doneSelector: #selector(didTapDoneOnResultInputView))
         switch recordType {
         case .weight:
             resultTextField.keyboardType = .decimalPad
@@ -147,7 +150,7 @@ extension PersonalRecordViewController {
     }
     
     private func setupCalendarTextField() {
-        calendarTextField.text = personalRecord.date.getDateAsWodJournalString()
+        dateButton.setTitle(personalRecord.date.getDateAsWodJournalString(), for: .normal)
         pickedDateFromDatePicker = personalRecord.date
         
         let datePicker = UIDatePicker()
@@ -170,16 +173,13 @@ extension PersonalRecordViewController {
             return
         }
         
-        imageView.sd_setImage(with: URL(string: imageUrl)) { (setImage, error, _, _) in
-            self.addUserPictureToView()
-            self.viewState = .withImage
-            self.addPictureButton.isHidden = true
-        }
+        self.addPictureButton.isHidden = true
+        self.addUserPictureToView()
+        self.viewState = .withImage
+        imageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
     }
     
     // MARK: - Picture View Helper Methods
-    
-    
     
     private func removeSegmentedControll() {
         segmentedControl.removeFromSuperview()

@@ -10,6 +10,10 @@ import UIKit
 import SDWebImage
 import MBProgressHUD
 
+protocol CustomWodUpdateDelegate {
+    func didDelete(wod: Workout)
+}
+
 class CustomWODDetailsViewController: WODDetailsTableViewController {
 
     // @IBOutlets
@@ -19,6 +23,7 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
     var wodCopy: Workout!
     
     // @Injected
+    var delegate : CustomWodUpdateDelegate?
     var service: WODService!
     
     override func viewDidLoad() {
@@ -30,7 +35,7 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
         super.viewWillDisappear(animated)
         
         if self.isMovingFromParentViewController {
-            removeLocalImageFromCache()
+            removeImageFromCache(localOnly: true)
             wod.updateValues(from: wodCopy)
         }
     }
@@ -50,18 +55,26 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
         tableView.reloadData()
     }
     
-    func removeLocalImageFromCache() {
-        if wod.imageUrl != nil && wod.imageUrl!.isLocalFileUrl() {
-            let url = URL(fileURLWithPath: wod.imageUrl!)
-            SDImageCache.shared().removeImage(forKey:url.absoluteString, withCompletion: nil)
+    func removeImageFromCache(localOnly: Bool) {
+        if wod.imageUrl != nil {
+            var url: URL
+            if wod.imageUrl!.isLocalFileUrl() {
+                url = URL(fileURLWithPath: wod.imageUrl!)
+                SDImageCache.shared().removeImage(forKey:url.absoluteString, withCompletion: nil)
+            } else if !localOnly {
+                if let url = URL(string: wod.imageUrl!) {
+                    SDImageCache.shared().removeImage(forKey:url.absoluteString, withCompletion: nil)
+                }
+            }
+            
+            
         }
-
     }
     
     // MARK: - Buttons Actions
     
     @IBAction func didTapChangePhotoButton(_ sender: Any) {
-        removeLocalImageFromCache()
+        removeImageFromCache(localOnly: false)
         presentAlertControllerForEditingPicture()
     }
     
@@ -72,6 +85,7 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
             switch result {
             case .success():
                 self.wodCopy.updateValues(from: self.wod)
+                _ = self.navigationController?.popViewController(animated: true)
             case .failure(_):
                 self.handleError(result: result)
             }
@@ -79,10 +93,35 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
     }
     
     @IBAction func didTapAddImageButton(_ sender: Any) {
-        removeLocalImageFromCache()
+        removeImageFromCache(localOnly: false)
         presentAlertControllerForTakingPicture()
     }
+
+    @IBAction func didTapDeleteWodButton(_ sender: Any) {
+        showDeleteAlert(with: "Warning",
+                        message: "This action will permanently delete this wod. Are you sure?",
+                        actionButtonTitle: "Delete") { (_) in
+                            self.deleteWod()
+        }
+    }
     
+    // MARK: - Service Calls
+    
+    func deleteWod() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.deleteWod(with: wod.id) { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            switch result {
+            case .success(_):
+                if self.delegate != nil {
+                    self.delegate?.didDelete(wod: self.wod)
+                }
+                self.navigationController?.popViewController(animated: true)
+            case .failure(_):
+                self.handleError(result: result)
+            }
+        }
+    }
     
     // MARK: - Alert Controllers
     

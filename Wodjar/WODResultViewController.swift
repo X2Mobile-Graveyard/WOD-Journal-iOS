@@ -17,10 +17,10 @@ class WODResultViewController: WODJournalResultViewController {
     @IBOutlet weak var resultTextField: UITextField!
     @IBOutlet weak var rxSwitch: UISwitch!
     @IBOutlet weak var notesTextView: UITextView!
-    @IBOutlet weak var dateTextField: DateTextField!
     @IBOutlet weak var resultDescriptionLabel: UILabel!
     @IBOutlet var scrollView: TPKeyboardAvoidingScrollView!
     @IBOutlet var wodTimePicker: WODTimeIntervalPicker!
+    @IBOutlet var dateButton: UIButton!
     
     // @Injected
     var result: WODResult!
@@ -33,6 +33,11 @@ class WODResultViewController: WODJournalResultViewController {
     var pickedDateFromDatePicker: Date?
     var pickedTimeFromTimePicker: Time = Time()
     var wodResultDelegate: WodResultDelegate?
+    lazy var dateTextField: UITextField = {
+       let hiddenTextField = UITextField()
+        self.view.addSubview(hiddenTextField)
+        return hiddenTextField
+    }()
     
     // @Constants
     let fullImageSegueIdentifier = "DisplayFullImageSegueIdentifier"
@@ -86,6 +91,7 @@ class WODResultViewController: WODJournalResultViewController {
         view.endEditing(true)
         resultCopy.updateResult(from: resultTextField.text)
         resultCopy.notes = notesTextView.text
+        resultCopy.rx = rxSwitch.isOn
         if controllerMode == .createMode {
             createResult()
         } else {
@@ -114,7 +120,7 @@ class WODResultViewController: WODJournalResultViewController {
     }
     
     func didTapDoneOnDatePicker() {
-        dateTextField.text = pickedDateFromDatePicker?.getDateAsWodJournalString()
+        dateButton.setTitle(pickedDateFromDatePicker?.getDateAsWodJournalString(), for: .normal)
         self.view.endEditing(true)
     }
     
@@ -159,7 +165,7 @@ class WODResultViewController: WODJournalResultViewController {
     
     func createResult() {
         MBProgressHUD.showAdded(to: view, animated: true)
-        service.add(wodResult: resultCopy, with: pickedImagePath) { (result) in
+        service.add(wodResult: resultCopy, for: wod, with: pickedImagePath) { (result) in
             MBProgressHUD.hide(for: self.view, animated: true)
             switch result {
             case let .success(id):
@@ -175,7 +181,7 @@ class WODResultViewController: WODJournalResultViewController {
     
     func updateResult() {
         MBProgressHUD.showAdded(to: view, animated: true)
-        service.update(wodResult: resultCopy, with: pickedImagePath) { (result) in
+        service.update(wodResult: resultCopy, for: wod, with: pickedImagePath) { (result) in
             switch result {
             case .success():
                 self.result.updateValues(from: self.resultCopy)

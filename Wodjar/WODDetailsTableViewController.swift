@@ -35,6 +35,7 @@ class WODDetailsTableViewController: UITableViewController {
     
     // @Injected
     var wod: Workout!
+    var resultService: WODResultService!
     
     // @Properties
     var selectedResult: WODResult?
@@ -125,6 +126,26 @@ class WODDetailsTableViewController: UITableViewController {
     
     // MARK: - Table View Delegate
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let cellType = cellTypesInOrder[indexPath.row]
+        if cellType != .previousResultCell {
+            return false
+        }
+        
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            showDeleteAlert(with: "Warning",
+                            message: "This action will permanently delete this result. Do you want to continue?",
+                            actionButtonTitle: "Delete",
+                            actionHandler: { (_) in
+                                self.deleteResult(at: indexPath)
+            })
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cellType = cellTypesInOrder[indexPath.row]
         if cellType != .previousResultCell {
@@ -201,6 +222,22 @@ class WODDetailsTableViewController: UITableViewController {
         }
     }
     
+    func deleteResult(at indexPath: IndexPath) {
+        let indexToDelete = indexPath.row - cellsBeforeResult;
+        if let resultToDelete = wod.results?[indexToDelete] {
+            resultService.delete(wodResult: resultToDelete, with: { (result) in
+                switch result {
+                case .success(_):
+                    self.wod.results?.remove(at: indexToDelete)
+                    self._cellTypesInOrder = nil
+                    self.tableView.reloadData()
+                case .failure(_):
+                    self.handleError(result: result)
+                }
+            })
+        }
+    }
+    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -214,9 +251,11 @@ class WODDetailsTableViewController: UITableViewController {
             imageViewController.imageUrl = wod.imageUrl!
         case logResultSegueIdentifier:
             let resultViewController = segue.destination as! WODResultViewController
-            resultViewController.result = WODResult()
+            let newResult = WODResult()
+            newResult.resultType = wod.category!
+            resultViewController.result = newResult
             resultViewController.controllerMode = .createMode
-            resultViewController.service = WODResultService(remote: WODResultRemoteServiceTest(), s3Remote: S3RemoteService())
+            resultViewController.service = resultService
             resultViewController.wod = wod
             resultViewController.wodResultDelegate = self
         case historySegueIdentifier:
@@ -229,7 +268,7 @@ class WODDetailsTableViewController: UITableViewController {
             let resultViewController = segue.destination as! WODResultViewController
             resultViewController.result = selectedResult!
             resultViewController.controllerMode = .editMode
-            resultViewController.service = WODResultService(remote: WODResultRemoteServiceTest(), s3Remote: S3RemoteService())
+            resultViewController.service = resultService
             resultViewController.wod = wod
             resultViewController.wodResultDelegate = self
         default:
@@ -240,7 +279,7 @@ class WODDetailsTableViewController: UITableViewController {
 
 extension WODDetailsTableViewController: WodResultDelegate {
     func didCreate(result: WODResult) {
-         wod.results?.append(result)
+         wod.results?.insert(result, at: 0)
         _cellTypesInOrder = nil
     }
     

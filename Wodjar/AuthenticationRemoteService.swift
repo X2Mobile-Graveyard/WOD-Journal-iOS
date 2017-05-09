@@ -121,5 +121,3 @@ class AuthenticationRemoteServiceTest: AuthenticationRemoteService {
         completion?(.success(tuple))
     }
 }
-
-

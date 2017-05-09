@@ -25,7 +25,7 @@ class WODTypesTableViewController: UITableViewController {
     var selectedWorkouts = [Workout]()
     var selectedWorkout: Workout?
     var favoritesSelected = false
-    var workouts: WorkoutList!
+    var workouts = WorkoutList()
     
     // @Constants
     let wodTypeCellIdentifier = "WodTypeTableViewCellIdentifier"
@@ -41,6 +41,7 @@ class WODTypesTableViewController: UITableViewController {
         super.viewDidLoad()
         setupSearchController()
         getWods();
+        NotificationCenter.default.addObserver(self, selector: #selector(didLogin), name: NSNotification.Name(rawValue: "Auth"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -224,10 +225,12 @@ class WODTypesTableViewController: UITableViewController {
         case customDetailsSegueIdentifier:
             let customWodDetailViewController = segue.destination as! CustomWODDetailsViewController
             customWodDetailViewController.wod = selectedWorkout!
-            customWodDetailViewController.service = WODService(remote: WODRemoteServiceTest(), s3Remote: S3RemoteService())
+            customWodDetailViewController.service = WODService(remote: WODRemoteServiceImpl(), s3Remote: S3RemoteService())
+            customWodDetailViewController.resultService = WODResultService(remote: WODResultRemoteServiceImpl(), s3Remote: S3RemoteService())
         case defaultDetailsSegueIdetifier:
             let defaultWodDetaiViewController = segue.destination as! DefaultWODDetailsViewController
             defaultWodDetaiViewController.wod = selectedWorkout!
+            defaultWodDetaiViewController.resultService = WODResultService(remote: WODResultRemoteServiceImpl(), s3Remote: S3RemoteService())
         default:
             break
         }
@@ -261,7 +264,7 @@ class WODTypesTableViewController: UITableViewController {
         }
         
         MBProgressHUD.showAdded(to: view, animated: true)
-        service.getResult(for: workout.id) { (result) in
+        service.getResult(for: workout) { (result) in
             MBProgressHUD.hide(for: self.view, animated: true)
             switch result {
             case let .success(results):
@@ -271,6 +274,12 @@ class WODTypesTableViewController: UITableViewController {
                 self.handleError(result: result)
             }
         }
+    }
+    
+    // MARK: - Login Notification
+    
+    func didLogin() {
+        getWods()
     }
 }
 

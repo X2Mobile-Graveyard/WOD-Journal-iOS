@@ -11,6 +11,7 @@ import Foundation
 struct PersonalRecordService {
     let remoteService: PersonalRecordRemoteService
     let s3RemoteService: S3RemoteService
+    var recordsNames: [String]? = nil
     
     // MARK: - Public Methods
     
@@ -26,14 +27,21 @@ struct PersonalRecordService {
         }
         
         guard let imagePath = imagePath else {
-            remoteService.update(personalRecord: personalRecord, with: completion)
-            return
+            if personalRecord.imageUrl == nil {
+                remoteService.update(personalRecord: personalRecord, with: completion)
+                return
+            } else {
+                if let key = personalRecord.imageUrl?.components(separatedBy: "/").last {
+                    s3RemoteService.deleteImage(with: key, completion: { (result) in
+                        personalRecord.imageUrl = nil
+                        self.remoteService.update(personalRecord: personalRecord, with: completion)
+                    })
+                }
+                return
+            }
         }
         
-        guard let url = URL(string: imagePath) else {
-            remoteService.update(personalRecord: personalRecord, with: completion)
-            return
-        }
+        let url = URL(fileURLWithPath: imagePath)
         
         if personalRecord.imageUrl == nil {
             s3RemoteService.uploadImage(with: url, key: nil) { (result) in
@@ -78,6 +86,13 @@ struct PersonalRecordService {
             return
         }
         
+        if let names = recordsNames {
+            if names.contains(personalRecord.name!) {
+                completion?(.failure(NSError.localError(with: "You already have records with the same name.")))
+                return
+            }
+        }
+        
         if personalRecord.resultAsString() == nil || personalRecord.resultAsString()?.characters.count == 0 {
             completion?(.failure(NSError.localError(with: "Please enter a record")))
             return
@@ -88,11 +103,7 @@ struct PersonalRecordService {
             return
         }
         
-        guard let url = URL(string: imagePath!) else {
-            remoteService.create(personalRecord: personalRecord, with: completion)
-            return
-        }
-        
+        let url = URL(fileURLWithPath: imagePath!)
         s3RemoteService.uploadImage(with: url, key: nil) { (result) in
             switch result {
             case let .success(s3Path):

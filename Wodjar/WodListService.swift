@@ -10,28 +10,25 @@ import Foundation
 
 struct WODListService {
     
-    let remote: WODListRemoteService
+    let listRemote: WODListRemoteService
+    let wodRemote: WODRemoteService
     
     func getWods(with completion: GetWodsRequestCompletion?) {
-        remote.getWodsList(with: completion)
+        listRemote.getWodsList(with: completion)
     }
     
-    func getResult(for wodId: Int?, with completion: GetResultsRequestCompletion?) {
-        guard let wodId = wodId else {
+    func getResult(for wod: Workout?, with completion: GetResultsRequestCompletion?) {
+        guard let wod = wod else {
             completion?(.success([]))
             return
         }
         
-        remote.getResults(for: wodId) { (result) in
-            switch result {
-            case let .success(wodResults):
-                completion?(.success(self.order(wodResults: wodResults)))
-            case let .failure(error):
-                completion?(.failure(error))
-            }
+        guard wod.id != nil else {
+            completion?(.success([]))
+            return
         }
         
-//        remote.getResults(for: wodId, with: completion)
+        listRemote.getResults(for: wod, with: completion)
     }
     
     func addToFavorite(wodId: Int?, with completion: FavoriteCompletion?) {
@@ -40,7 +37,7 @@ struct WODListService {
             return
         }
         
-        remote.addToFavorite(wodId: wodId, with: completion)
+        wodRemote.addToFavorite(wodId: wodId, with: completion)
     }
     
     func removeFromFavorite(wodId: Int?, with completion: FavoriteCompletion?) {
@@ -49,7 +46,7 @@ struct WODListService {
             return
         }
         
-        remote.removeFromFavorite(wodId: wodId, with: completion)
+        wodRemote.removeFromFavorite(wodId: wodId, with: completion)
     }
     
     func deleteWod(with wodId: Int?, completion: DeleteWodCompletion?) {
@@ -58,22 +55,6 @@ struct WODListService {
             return
         }
         
-        remote.deleteWod(with: wodId, completion: completion)
-    }
-    
-    // MARK: - Private Methods
-    
-    private func order(wodResults: [WODResult]) -> [WODResult] {
-        if wodResults.count < 2 {
-            return wodResults
-        }
-        
-        return wodResults.sorted { (result1, result2) -> Bool in
-            if result1.updatedAt.compare(result2.updatedAt) == .orderedAscending {
-                return false
-            }
-            
-            return true
-        }
+        wodRemote.deleteWod(with: wodId, completion: completion)
     }
 }

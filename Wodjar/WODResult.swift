@@ -9,7 +9,9 @@
 import UIKit
 
 class WODResult: NSObject {
-    
+    // @Constants
+    let noImageString = ""
+
     var notes: String?
     var id: Int?
     var resultType: WODCategory = .weight
@@ -20,13 +22,19 @@ class WODResult: NSObject {
     var photoUrl: String?
     var date: Date = Date()
     var updatedAt: Date = Date()
+    var unitType: UnitType {
+        return UserManager.sharedInstance.unitType
+    }
     
-    convenience init(from dictionary: [String: Any]) {
+    convenience init(from dictionary: [String: Any], with type: WODCategory?) {
         self.init()
         self.id = dictionary["id"] as? Int ?? nil
         self.notes = dictionary["notes"] as? String ?? nil
         self.rx = dictionary["rx"] as? Bool ?? false
         self.photoUrl = dictionary["photo_url"] as? String ?? nil
+        if photoUrl == noImageString {
+            self.photoUrl = nil
+        }
         if let dateAsString = dictionary["date"] as? String  {
             self.date = dateAsString.getDateFromWodJournalFormatStyle()
         }
@@ -36,6 +44,10 @@ class WODResult: NSObject {
         if let resultTypeInt = dictionary["result_type"] as? Int {
             self.resultType = WODCategory.from(hashValue: resultTypeInt)
         }
+        if type != nil {
+            self.resultType = type!
+        }
+        
         switch resultType {
         case .weight:
             self.resultWeight = dictionary["result_weight"] as? Float ?? 0
@@ -191,5 +203,45 @@ class WODResult: NSObject {
         }
         
         return hours * 3600 + minutes * 60 + seconds
+    }
+    
+    func createUpdateDict(with wodId: Int, wodType: WODType) -> [String: Any] {
+        var updateDict = [String: Any]()
+        
+        if id != nil {
+            updateDict["id"] = id!
+        }
+        
+        if notes != nil {
+            updateDict["notes"] = notes!
+        }
+        
+        switch resultType {
+        case .weight:
+            if unitType == .imperial {
+                updateDict["result_weight"] = resultWeight!.convertToMetric()
+            } else {
+                updateDict["result_weight"] = resultWeight!
+            }
+        case .amrap:
+            updateDict["result_rounds"] = resultRounds!
+        case .time:
+            updateDict["result_time"] = resultTime!
+        default:
+            break
+        }
+        
+        updateDict["rx"] = rx
+        if let url = photoUrl {
+            updateDict["photo_url"] = url
+        } else {
+            updateDict["photo_url"] = noImageString
+        }
+        
+        updateDict["date"] = date.getWodJournalFormatString()
+        updateDict["wod_id"] = wodId
+        updateDict["default"] = wodType != .custom
+        
+        return updateDict
     }
 }

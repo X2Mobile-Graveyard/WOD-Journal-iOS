@@ -19,7 +19,7 @@ struct WODService {
             if let key = wodCopy.imageUrl?.components(separatedBy: "/").last {
                 if imageUrl.isLocalFileUrl() {
                     SDImageCache.shared().deleteOldFiles(completionBlock: nil)
-                    s3Remote.uploadImage(with: URL(string: imageUrl)!, key: key, completion: { (result) in
+                    s3Remote.uploadImage(with: URL(fileURLWithPath: imageUrl), key: key, completion: { (result) in
                         switch result {
                         case let .success(s3Path):
                             wod.imageUrl = s3Path
@@ -28,9 +28,11 @@ struct WODService {
                         }
                         self.remote.update(wod: wod, with: completion)
                     })
+                    
+                    return
                 }
             } else {
-                s3Remote.uploadImage(with: URL(string: imageUrl)!, key: nil, completion: { (result) in
+                s3Remote.uploadImage(with: URL(fileURLWithPath: imageUrl), key: nil, completion: { (result) in
                     switch result {
                     case let .success(s3Path):
                         wod.imageUrl = s3Path
@@ -73,11 +75,7 @@ struct WODService {
             return
         }
         
-        guard let url = URL(string: imagePath!) else {
-            remote.create(customWod: customWod, with: completion)
-            return
-        }
-        
+        let url = URL(fileURLWithPath: imagePath!)
         s3Remote.uploadImage(with: url, key: nil) { (result) in
             switch result {
             case let .success(s3Path):
@@ -88,5 +86,15 @@ struct WODService {
             
             self.remote.create(customWod: customWod, with: completion)
         }
+    }
+    
+    
+    func deleteWod(with id: Int?, completion: DeleteWodCompletion?) {
+        guard let id = id else {
+            completion?(.success())
+            return
+        }
+        
+        remote.deleteWod(with: id, completion: completion)
     }
 }

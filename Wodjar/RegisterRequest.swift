@@ -33,5 +33,4 @@ class RegisterRequest: BaseRequest {
     override func headerParams() -> [String : String] {
         return ["X-Api-Key":SessionManager.sharedInstance.apiKey]
     }
-    
 }

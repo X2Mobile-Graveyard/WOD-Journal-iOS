@@ -14,13 +14,9 @@ protocol CustomWodDelegate {
 }
 
 class CustomWODTypeTableViewController: WODTypeTableViewController {
-
     // @Constants
     let customWodDetailsSegueIdentifier = "CustomWodDetails"
     let createWodViewControllerSegueIdentifier = "CreateCustomWODSegueIdentifier"
-    
-    // @Injected
-    var delegate: WODTypeDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,11 +52,13 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
         if identifier == customWodDetailsSegueIdentifier {
             let customWodDetailsVC = segue.destination as! CustomWODDetailsViewController
             customWodDetailsVC.wod = selectedWOD
-            customWodDetailsVC.service = WODService(remote: WODRemoteServiceTest(), s3Remote: S3RemoteService())
+            customWodDetailsVC.service = WODService(remote: service.wodRemote, s3Remote: S3RemoteService())
+            customWodDetailsVC.resultService = WODResultService(remote: WODResultRemoteServiceImpl(), s3Remote: S3RemoteService())
+            customWodDetailsVC.delegate = self
         } else if identifier == createWodViewControllerSegueIdentifier {
             let createWodViewController = segue.destination as! CreateCustomWODViewController
             createWodViewController.customWod = Workout()
-            createWodViewController.service = WODService(remote: WODRemoteServiceTest(), s3Remote: S3RemoteService())
+            createWodViewController.service = WODService(remote: service.wodRemote, s3Remote: S3RemoteService())
             createWodViewController.delegate = self
         }
     }
@@ -73,11 +71,12 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
         }
         
         MBProgressHUD.showAdded(to: view, animated: true)
-        service.getResult(for: wod.id) { (result) in
+        service.getResult(for: wod) { (result) in
             MBProgressHUD.hide(for: self.view, animated: true)
             switch result {
             case let .success(results):
                 self.selectedWOD?.results = results
+                self.selectedWOD?.orderResults()
                 self.performSegue(withIdentifier: self.customWodDetailsSegueIdentifier, sender: self)
             case .failure(_):
                 self.handleError(result: result)

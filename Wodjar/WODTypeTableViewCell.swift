@@ -25,7 +25,7 @@ class WODTypeTableViewCell: UITableViewCell {
         case .custom:
             wodTypeImageView.image = #imageLiteral(resourceName: "custom")
         case .open:
-            wodTypeImageView.image = #imageLiteral(resourceName: "crossFitGamesLogo")
+            wodTypeImageView.image = #imageLiteral(resourceName: "CrossFitGamesLogo")
         }
         
         wodTypeLabel.text = wodType.rawValue

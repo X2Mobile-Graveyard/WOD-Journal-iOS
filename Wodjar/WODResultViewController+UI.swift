@@ -111,7 +111,7 @@ extension WODResultViewController {
     }
     
     private func setupCalendarTextField() {
-        dateTextField.text = result.date.getDateAsWodJournalString()
+        dateButton.setTitle(result.date.getDateAsWodJournalString(), for: .normal)
         pickedDateFromDatePicker = result.date
         
         let datePicker = UIDatePicker()
