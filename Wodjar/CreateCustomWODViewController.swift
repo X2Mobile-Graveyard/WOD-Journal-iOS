@@ -8,6 +8,7 @@
 
 import UIKit
 import TPKeyboardAvoiding
+import MBProgressHUD
 
 class CreateCustomWODViewController: WODJournalResultViewController {
     
@@ -67,7 +68,9 @@ class CreateCustomWODViewController: WODJournalResultViewController {
     
     @IBAction func didTapSaveButton(_ sender: Any) {
         customWod.name = titleTextField.text
+        MBProgressHUD.showAdded(to: view, animated: true)
         service.create(customWod: customWod, imagePath: pickedImagePath) { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
             switch result {
             case let .success(wodId):
                 self.customWod.id = wodId

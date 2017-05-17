@@ -42,6 +42,11 @@
 		D31BCB1D1E97F01E00A8FCB8 /* WODListRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BCB1C1E97F01E00A8FCB8 /* WODListRemoteService.swift */; };
 		D31BCB211E9982C100A8FCB8 /* GetWodsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BCB201E9982C100A8FCB8 /* GetWodsRequest.swift */; };
 		D31DFE471EB9F50700AE7A4A /* AddToFavoriteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DFE461EB9F50700AE7A4A /* AddToFavoriteRequest.swift */; };
+		D337E7FD1ECC62C8006916DC /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D337E7FB1ECC62C8006916DC /* Authentication.storyboard */; };
+		D337E8001ECC6325006916DC /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D337E7FF1ECC6325006916DC /* More.storyboard */; };
+		D337E8031ECC64B6006916DC /* PersonalRecords.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D337E8011ECC64B6006916DC /* PersonalRecords.storyboard */; };
+		D337E8051ECC66E5006916DC /* CustomWODs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D337E8041ECC66E5006916DC /* CustomWODs.storyboard */; };
+		D337E8081ECC6834006916DC /* DefaultWODs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D337E8061ECC6834006916DC /* DefaultWODs.storyboard */; };
 		D347A5D21E8946BA00AE888E /* WODTypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5D01E8946BA00AE888E /* WODTypesTableViewController.swift */; };
 		D347A5D31E8946BA00AE888E /* WODTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5D11E8946BA00AE888E /* WODTypeTableViewCell.swift */; };
 		D347A5D71E8946C400AE888E /* WODTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5D41E8946C400AE888E /* WODTypeTableViewController.swift */; };
@@ -181,6 +186,11 @@
 		D31BCB1C1E97F01E00A8FCB8 /* WODListRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODListRemoteService.swift; sourceTree = "<group>"; };
 		D31BCB201E9982C100A8FCB8 /* GetWodsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetWodsRequest.swift; sourceTree = "<group>"; };
 		D31DFE461EB9F50700AE7A4A /* AddToFavoriteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToFavoriteRequest.swift; sourceTree = "<group>"; };
+		D337E7FC1ECC62C8006916DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
+		D337E7FF1ECC6325006916DC /* More.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
+		D337E8021ECC64B6006916DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PersonalRecords.storyboard; sourceTree = "<group>"; };
+		D337E8041ECC66E5006916DC /* CustomWODs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomWODs.storyboard; sourceTree = "<group>"; };
+		D337E8071ECC6834006916DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DefaultWODs.storyboard; sourceTree = "<group>"; };
 		D347A5D01E8946BA00AE888E /* WODTypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypesTableViewController.swift; sourceTree = "<group>"; };
 		D347A5D11E8946BA00AE888E /* WODTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypeTableViewCell.swift; sourceTree = "<group>"; };
 		D347A5D41E8946C400AE888E /* WODTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypeTableViewController.swift; sourceTree = "<group>"; };
@@ -322,7 +332,13 @@
 				D3EB88F81E7061230028F28A /* Views */,
 				4325BEA91E67190400A0F969 /* Controllers */,
 				4325BE7B1E67185500A0F969 /* AppDelegate.swift */,
+				D337E7FE1ECC62EC006916DC /* Storyboards */,
 				4325BE7F1E67185500A0F969 /* Main.storyboard */,
+				D337E8061ECC6834006916DC /* DefaultWODs.storyboard */,
+				D337E8041ECC66E5006916DC /* CustomWODs.storyboard */,
+				D337E8011ECC64B6006916DC /* PersonalRecords.storyboard */,
+				D337E7FF1ECC6325006916DC /* More.storyboard */,
+				D337E7FB1ECC62C8006916DC /* Authentication.storyboard */,
 				4325BE821E67185500A0F969 /* Assets.xcassets */,
 				4325BE841E67185500A0F969 /* LaunchScreen.storyboard */,
 				4325BE871E67185500A0F969 /* Info.plist */,
@@ -523,6 +539,13 @@
 			name = "WOD Remote Services";
 			sourceTree = "<group>";
 		};
+		D337E7FE1ECC62EC006916DC /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		D347A5CD1E89469400AE888E /* WODDetailsController */ = {
 			isa = PBXGroup;
 			children = (
@@ -648,13 +671,13 @@
 				D34B76991EAA5CB20058D20B /* GetDefaultPersonalRecords.swift */,
 				D304A61D1EAE25DB00169AA2 /* DeletePRByNameRequest.swift */,
 				D308AB391EB8783900FD7BD8 /* GetDefaultWodsRequest.swift */,
+				D38E4B6B1EC0B14400ECCD93 /* CreateWODResultRequest.swift */,
 				D308AB3B1EB8838900FD7BD8 /* CreateWODRequest.swift */,
 				D308AB3D1EB887A300FD7BD8 /* UpdateWodRequest.swift */,
 				D31DFE461EB9F50700AE7A4A /* AddToFavoriteRequest.swift */,
 				D39570DC1EB9F5B70060E4D6 /* RemoveFavoriteRequest.swift */,
 				D39570DE1EB9F6B00060E4D6 /* DeleteWODRequest.swift */,
 				D37A7C131EBC9DE500840D73 /* LogoutRequest.swift */,
-				D38E4B6B1EC0B14400ECCD93 /* CreateWODResultRequest.swift */,
 				D38E4B6D1EC0C11200ECCD93 /* UpdateWODResultRequest.swift */,
 				D38E4B6F1EC0C38B00ECCD93 /* DeleteWODResultRequest.swift */,
 			);
@@ -887,10 +910,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D337E8031ECC64B6006916DC /* PersonalRecords.storyboard in Resources */,
 				D3BB36651E82AFCF0078CE53 /* defaultPRs.plist in Resources */,
+				D337E8001ECC6325006916DC /* More.storyboard in Resources */,
+				D337E7FD1ECC62C8006916DC /* Authentication.storyboard in Resources */,
 				BFD44D8D1E82B4E900170817 /* UnitsComponent.xib in Resources */,
 				4325BE861E67185500A0F969 /* LaunchScreen.storyboard in Resources */,
+				D337E8051ECC66E5006916DC /* CustomWODs.storyboard in Resources */,
 				BFD44D821E82A58E00170817 /* MoreComponent.xib in Resources */,
+				D337E8081ECC6834006916DC /* DefaultWODs.storyboard in Resources */,
 				4325BE831E67185500A0F969 /* Assets.xcassets in Resources */,
 				4325BE811E67185500A0F969 /* Main.storyboard in Resources */,
 			);
@@ -1215,6 +1243,30 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		D337E7FB1ECC62C8006916DC /* Authentication.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D337E7FC1ECC62C8006916DC /* Base */,
+			);
+			name = Authentication.storyboard;
+			sourceTree = "<group>";
+		};
+		D337E8011ECC64B6006916DC /* PersonalRecords.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D337E8021ECC64B6006916DC /* Base */,
+			);
+			name = PersonalRecords.storyboard;
+			sourceTree = "<group>";
+		};
+		D337E8061ECC6834006916DC /* DefaultWODs.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D337E8071ECC6834006916DC /* Base */,
+			);
+			name = DefaultWODs.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1317,7 +1369,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Wodjar/Wodjar.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 39446JG6PB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1340,7 +1392,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Wodjar/Wodjar.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 39446JG6PB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

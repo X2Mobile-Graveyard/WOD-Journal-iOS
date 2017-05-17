@@ -14,6 +14,7 @@ class RegisterViewController: UIViewController {
     // @IBOutlets
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet var passwordConfirmationTextField: UITextField!
     
     // @Injected
     var service: AuthenticationService!
@@ -24,21 +25,14 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - Buttons Actions
-    
-    @IBAction func didReleaseShowPasswordButton(_ sender: Any) {
-        passwordTextField.isSecureTextEntry = true
-    }
-    
-    @IBAction func didTapShowPasswordButton(_ sender: Any) {
-        passwordTextField.isSecureTextEntry = false
-    }
 
     @IBAction func didTapRegisterButton(_ sender: Any) {
         let enteredEmail = emailTextField.text
         let enteredPassword = passwordTextField.text
+        let confirmedPassword = passwordConfirmationTextField.text
         
         MBProgressHUD.showAdded(to: view, animated: true)
-        service.register(with: enteredEmail, password: enteredPassword) { (result) in
+        service.register(with: enteredEmail, password: enteredPassword, confirmationPassword: confirmedPassword) { (result) in
             switch result {
             case let .success(userId):
                 UserManager.sharedInstance.userId = userId

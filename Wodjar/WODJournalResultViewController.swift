@@ -18,6 +18,7 @@ class WODJournalResultViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var footerView: UIView!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet var changePictureBackgroundView: UIView!
     
     // @Properties
     var userImage: UIImage?

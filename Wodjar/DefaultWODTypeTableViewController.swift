@@ -72,12 +72,25 @@ class DefaultWODTypeTableViewController: WODTypeTableViewController {
             return
         }
         
-        MBProgressHUD.showAdded(to: view, animated: true)
+        if selectedWOD?.results != nil {
+            if selectedWOD?.type == .custom {
+                performSegue(withIdentifier: customWodDetailsSegueIdentifier, sender: self)
+            } else {
+                performSegue(withIdentifier: defaultWodDetailsSegueIdentifier, sender: self)
+            }
+            return
+        }
+        
+        MBProgressHUD.showAdded(to: viewForHud, animated: true)
         service.getResult(for: wod) { (result) in
-            MBProgressHUD.hide(for: self.view, animated: true)
+            MBProgressHUD.hide(for: self.viewForHud, animated: true)
+            if self.navigationController == nil {
+                return
+            }
             switch result {
             case let .success(results):
                 self.selectedWOD?.results = results
+                self.selectedWOD?.orderResults()
                 if self.selectedWOD?.type == .custom {
                     self.performSegue(withIdentifier: self.customWodDetailsSegueIdentifier, sender: self)
                 } else {

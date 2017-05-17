@@ -66,8 +66,6 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
                     SDImageCache.shared().removeImage(forKey:url.absoluteString, withCompletion: nil)
                 }
             }
-            
-            
         }
     }
     

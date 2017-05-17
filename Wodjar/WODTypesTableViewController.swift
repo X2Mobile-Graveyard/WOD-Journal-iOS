@@ -40,7 +40,7 @@ class WODTypesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchController()
-        getWods();
+        getWods()
         NotificationCenter.default.addObserver(self, selector: #selector(didLogin), name: NSNotification.Name(rawValue: "Auth"), object: nil)
     }
     
@@ -177,6 +177,7 @@ class WODTypesTableViewController: UITableViewController {
             selectedWorkouts = workouts.getWorkouts(for: wodType)
         case 1:
             if !UserManager.sharedInstance.isAuthenticated() {
+                tableView.deselectRow(at: indexPath, animated: true)
                 presentLoginScreen(with: {
                     self.getWods()
                 })

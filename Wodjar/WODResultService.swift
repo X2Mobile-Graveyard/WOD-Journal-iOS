@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SDWebImage
 
 struct WODResultService {
     let remote: WODResultRemoteService
@@ -54,7 +55,6 @@ struct WODResultService {
                     self.remote.update(result: wodResult, for: wod.id!, wodType: wod.type!, with: completion)
                 })
             }
-            
             return
         }
         
@@ -67,13 +67,20 @@ struct WODResultService {
                 case .failure(_):
                     break
                 }
+                self.remote.update(result: wodResult, for: wod.id!, wodType: wod.type!, with: completion)
             })
-            
+            return
+        }
+        
+        if picturePath.contains("amazonaws") {
             remote.update(result: wodResult, for: wod.id!, wodType: wod.type!, with: completion)
             return
         }
         
         if let key = wodResult.photoUrl?.components(separatedBy: "/").last {
+            if let s3URL = URL(string: wodResult.photoUrl!) {
+                SDImageCache.shared().removeImage(forKey:s3URL.absoluteString, withCompletion: nil)
+            }
             s3Remote.uploadImage(with: url, key: key) { (result) in
                 switch result {
                 case let .success(s3Path):

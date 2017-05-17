@@ -262,7 +262,12 @@ class WODListRemoteServiceImpl: WODListRemoteService {
         let request = GetWodResultRequest(with: wod.id!)
         
         request.success = { _, result in
-            guard let resultsArray = result as? [[String: Any]] else {
+            guard let resultDict = result as? [String: Any] else {
+                completion?(.success([]))
+                return
+            }
+
+            guard let resultsArray = resultDict["wod_results"] as? [[String: Any]] else {
                 completion?(.success([]))
                 return
             }

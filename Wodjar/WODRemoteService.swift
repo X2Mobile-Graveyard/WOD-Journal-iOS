@@ -17,8 +17,8 @@ typealias DeleteWodCompletion = (Result<Void, NSError>) -> ()
 protocol WODRemoteService {
     func update(wod: Workout, with: UpdateWodCompletion?)
     func create(customWod: Workout, with: CreateWodCompletion?)
-    func addToFavorite(wodId: Int, with completion: FavoriteCompletion?)
-    func removeFromFavorite(wodId: Int, with completion: FavoriteCompletion?)
+    func addToFavorite(wodId: Int, isDefault: Bool, with completion: FavoriteCompletion?)
+    func removeFromFavorite(wodId: Int, isDefault: Bool, with completion: FavoriteCompletion?)
     func deleteWod(with wodId: Int, completion: DeleteWodCompletion?)
 }
 
@@ -31,11 +31,11 @@ class WODRemoteServiceTest: WODRemoteService {
         completion?(.success(40))
     }
     
-    func addToFavorite(wodId: Int, with completion: FavoriteCompletion?) {
+    func addToFavorite(wodId: Int, isDefault: Bool, with completion: FavoriteCompletion?) {
         completion?(.success())
     }
     
-    func removeFromFavorite(wodId: Int, with completion: FavoriteCompletion?) {
+    func removeFromFavorite(wodId: Int, isDefault: Bool, with completion: FavoriteCompletion?) {
         completion?(.success())
     }
     
@@ -83,8 +83,8 @@ class WODRemoteServiceImpl: WODRemoteService {
         request.runRequest()
     }
     
-    func addToFavorite(wodId: Int, with completion: FavoriteCompletion?) {
-        let request = AddToFavoriteRequest(wodId: wodId)
+    func addToFavorite(wodId: Int, isDefault: Bool, with completion: FavoriteCompletion?) {
+        let request = AddToFavoriteRequest(wodId: wodId, isDefault: isDefault)
         
         request.success = { _, _ in
             completion?(.success())
@@ -97,8 +97,8 @@ class WODRemoteServiceImpl: WODRemoteService {
         request.runRequest()
     }
     
-    func removeFromFavorite(wodId: Int, with completion: FavoriteCompletion?) {
-        let request = RemoveFavoriteRequest(wodId: wodId)
+    func removeFromFavorite(wodId: Int, isDefault: Bool, with completion: FavoriteCompletion?) {
+        let request = RemoveFavoriteRequest(wodId: wodId, isDefault: isDefault)
         
         request.success = { _, _ in
             completion?(.success())

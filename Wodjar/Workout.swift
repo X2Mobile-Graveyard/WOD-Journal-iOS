@@ -99,7 +99,7 @@ class Workout: NSObject {
     var isFavorite: Bool = false
     var isCompleted: Bool = false
     var isDefault: Bool = true
-    var category: WODCategory?
+    var category: WODCategory? = .weight
     var videoId: String?
     var unit: UnitType?
     var results: [WODResult]?
@@ -147,6 +147,9 @@ class Workout: NSObject {
             print("ASdasd")
         }
         self.videoId = dictionary["video"] as? String ?? nil
+        if videoId == noImageString {
+            self.videoId = nil
+        }
         self.isCompleted = dictionary["completed"] as? Bool ?? false
         self.isFavorite = dictionary["favorites"] as? Bool ?? false
         self.isDefault = dictionary["default"] as? Bool ?? true

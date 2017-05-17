@@ -18,12 +18,12 @@ class UpdateRecordsNameRequest: BaseRequest {
         self.ids = ids
     }
     
-    override func param() -> Dictionary<String, Any>! {
-        return ["ids":ids, "name":name]
+    override func arrayParam() -> Any? {
+        return ids
     }
     
     override func requestURL() -> String {
-        return "update-prs"
+        return "update-prs/\(name.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
     }
     
     override func requestMethod() -> RequestMethod {

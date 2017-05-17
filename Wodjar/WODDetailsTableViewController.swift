@@ -15,14 +15,15 @@ enum WODDetailsCellType: String {
     case videoCell = "WodVideoCell"
     case logResultCell = "AddResultCell"
     case previousResultCell = "WodResultCell"
-    case premiumCell = "GoPremiumCell"
     case deleteCell = "DeleteCell"
     case addImageCell = "AddImageCell"
+    case pastRsultCell = "ResultsLabelCell"
 }
 
 protocol WodResultDelegate {
     func didCreate(result: WODResult)
     func didDelete(result: WODResult)
+    func didUpdate()
 }
 
 class WODDetailsTableViewController: UITableViewController {
@@ -76,12 +77,10 @@ class WODDetailsTableViewController: UITableViewController {
         cellsBeforeResult += 1
         
         if wod.results != nil && wod.results!.count > 0 {
-            if wod.results!.count <= 3 {
-                _cellTypesInOrder!.append(contentsOf: Array(repeating: .previousResultCell, count: wod.results!.count))
-            } else {
-                _cellTypesInOrder!.append(contentsOf: Array(repeating: .previousResultCell, count: 3))
-                _cellTypesInOrder!.append(.premiumCell)
-            }            
+            _cellTypesInOrder!.append(.pastRsultCell)
+            cellsBeforeResult += 1
+            
+            _cellTypesInOrder!.append(contentsOf: Array(repeating: .previousResultCell, count: wod.results!.count))
         }
         
         if wod.type == .custom {
@@ -99,11 +98,6 @@ class WODDetailsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 60
         tableView.tableFooterView = UIView()
         navigationItem.title = wod.name!
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
     }
     
     // MARK: - Buttons Actions
@@ -158,6 +152,12 @@ class WODDetailsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let videoCell = cell as? WODVideoTableViewCell {
+            videoCell.stopPlaying()
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -195,16 +195,8 @@ class WODDetailsTableViewController: UITableViewController {
         case .previousResultCell:
             cell.selectionStyle = .default
             (cell as! WODResultTableViewCell).populate(with: wod.results![index - cellsBeforeResult])
-        case .historyCell:
-            cell.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
-        case .deleteCell:
-            cell.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
-        case .addImageCell:
-            cell.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
-        case .logResultCell:
-            cell.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
         default:
-            break
+            cell.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
         }
     }
     
@@ -228,13 +220,20 @@ class WODDetailsTableViewController: UITableViewController {
             resultService.delete(wodResult: resultToDelete, with: { (result) in
                 switch result {
                 case .success(_):
-                    self.wod.results?.remove(at: indexToDelete)
-                    self._cellTypesInOrder = nil
-                    self.tableView.reloadData()
+                    self.handleResultDelete(at: indexToDelete)
                 case .failure(_):
                     self.handleError(result: result)
                 }
             })
+        }
+    }
+    
+    func handleResultDelete(at indexToDelete: Int) {
+        self.wod.results?.remove(at: indexToDelete)
+        self._cellTypesInOrder = nil
+        self.tableView.reloadData()
+        if wod.results?.count == 0 {
+            wod.isCompleted = false
         }
     }
     
@@ -279,14 +278,22 @@ class WODDetailsTableViewController: UITableViewController {
 
 extension WODDetailsTableViewController: WodResultDelegate {
     func didCreate(result: WODResult) {
+        if wod.results?.count == 0 {
+            wod.isCompleted = true
+        }
          wod.results?.insert(result, at: 0)
         _cellTypesInOrder = nil
+        tableView.reloadData()
     }
     
     func didDelete(result: WODResult) {
         if let indexToDelete = wod.results?.index(where: {$0.id! == result.id!}) {
-            wod.results?.remove(at: indexToDelete)
-            _cellTypesInOrder = nil
+            handleResultDelete(at: indexToDelete)
+            tableView.reloadData()
         }
+    }
+    
+    func didUpdate() {
+        tableView.reloadData()
     }
 }

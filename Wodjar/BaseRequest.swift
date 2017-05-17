@@ -49,6 +49,10 @@ class BaseRequest: NSObject {
         return ""
     }
     
+    func arrayParam() -> Any? {
+        return nil
+    }
+    
     func param() -> Dictionary<String, Any>! {
         return [:]
     }
@@ -71,13 +75,27 @@ class BaseRequest: NSObject {
         
         switch requestMethod() {
         case .RequestMethodGET:
-            requestSessionManager.get(path, parameters: self.param(), progress: nil, success: successBlock, failure: failureBlock)
+            requestSessionManager.get(path,
+                                      parameters: arrayParam() ?? param(),
+                                      progress: nil,
+                                      success: successBlock,
+                                      failure: failureBlock)
         case .RequestMethodPOST:
-            requestSessionManager.post(path, parameters: self.param(), progress: nil, success: successBlock, failure: failureBlock)
+            requestSessionManager.post(path,
+                                       parameters: arrayParam() ?? param(),
+                                       progress: nil,
+                                       success: successBlock,
+                                       failure: failureBlock)
         case .RequestMethodPUT:
-            requestSessionManager.put(path, parameters: self.param(), success: successBlock, failure: failureBlock)
+            requestSessionManager.put(path,
+                                      parameters: arrayParam() ?? param(),
+                                      success: successBlock,
+                                      failure: failureBlock)
         case .RequestMethodDELETE:
-            requestSessionManager.delete(path, parameters: self.param(), success: successBlock, failure: failureBlock)
+            requestSessionManager.delete(path,
+                                         parameters: arrayParam() ?? param(),
+                                         success: successBlock,
+                                         failure: failureBlock)
         }
     }
     

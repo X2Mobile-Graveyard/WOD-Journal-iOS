@@ -15,9 +15,9 @@ struct Time {
     
     func getFormatedString() -> String {
         if hours == 0 {
-            return "\(minutes):\(seconds)"
+            return String(format: "%02d:%02d", minutes, seconds)
         } else {
-            return "\(hours):\(minutes):\(seconds)"
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
         }
     }
 }

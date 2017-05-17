@@ -20,7 +20,11 @@ class PersonalRecord {
     public private(set) var _resultWeight: Float?
     var resultWeight: Float? {
         set {
-            self._resultWeight = newValue
+            if self.unitType == .imperial {
+                self._resultWeight = newValue?.convertToMetric()
+            } else {
+                self._resultWeight = newValue
+            }
         }
         
         get {
@@ -75,6 +79,10 @@ class PersonalRecord {
             self.updatedAt = lastUpdate.getDateFromWodJournalFormatStyle()
         } else {
             self.updatedAt = nil
+        }
+        
+        if let userDate = dictionary["date"] as? String {
+            self.date = userDate.getDateFromWodJournalFormatStyle()
         }
         
         switch resultType {
@@ -157,11 +165,7 @@ class PersonalRecord {
         
         switch resultType {
         case .weight:
-            if unitType == .imperial {
-                updateDict["result_weight"] = resultWeight!.convertToMetric()
-            } else {
-                updateDict["result_weight"] = resultWeight!
-            }
+            updateDict["result_weight"] = resultWeight!
         case .amrap:
             updateDict["result_rounds"] = resultRounds!
         case .time:
@@ -220,7 +224,7 @@ class PersonalRecord {
     
     private func timeAsString() -> String {
         guard let timeInSeconds = resultTime else {
-            return "0:0"
+            return "00:00"
         }
         
         let hours = timeInSeconds / 3600
@@ -228,10 +232,10 @@ class PersonalRecord {
         let seconds = (timeInSeconds % 3600) % 60
         
         if hours == 0 {
-            return "\(minutes):\(seconds)"
+            return String(format: "%02d:%02d", minutes, seconds)
         }
         
-        return "\(hours):\(minutes):\(seconds)"
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
     
     private func getSeconds(from time: String) -> Int {

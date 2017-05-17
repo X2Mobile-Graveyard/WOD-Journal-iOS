@@ -28,9 +28,13 @@ class WorkoutList: NSObject {
         }
     }
     var opens: [Workout] {
-        return self.workouts.filter {
+        let wodOpens = self.workouts.filter {
             return $0.type == .open
         }
+        
+        return wodOpens.sorted(by: { (wod1, wod2) -> Bool in
+            return (wod1.name?.compare(wod2.name!) == .orderedDescending)
+        })
     }
     var customs: [Workout] {
         return self.workouts.filter {

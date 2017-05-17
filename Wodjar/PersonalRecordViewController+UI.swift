@@ -46,7 +46,9 @@ extension PersonalRecordViewController {
         if personalRecord.name == nil {
             titleTextField.becomeFirstResponder()
         } else {
-            resultTextField.becomeFirstResponder()
+            if personalRecord.resultAsString() == nil {
+                resultTextField.becomeFirstResponder()
+            }
         }
     }
     
@@ -74,10 +76,7 @@ extension PersonalRecordViewController {
     
     func setupViewForRecordType() {
         resultTextField.inputView = nil
-        resultTextField.inputAccessoryView = createKeyboardToolbar(cancelButton: "Cancel",
-                                                                   with: #selector(didTapCancelPicker),
-                                                                   doneButton: "Done",
-                                                                   doneSelector: #selector(didTapDoneOnResultInputView))
+        resultTextField.inputAccessoryView = createKeyboardToolbar(with: "Done", selector: #selector(didTapCancelPicker))
         switch recordType {
         case .weight:
             resultTextField.keyboardType = .decimalPad

@@ -39,6 +39,7 @@ class PersonalRecordDetailsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTextField()
         setupTableView()
         setupTitle()
         getResultsForPersonalRecords()
@@ -46,10 +47,26 @@ class PersonalRecordDetailsListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if personalRecordType.records.count > 0 {
+            personalRecordType.records = service.sortResultsByDate(result: personalRecordType.records)
+        }
         tableView.reloadData()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        titleTextField.resignFirstResponder()
+    }
+    
     // MARK: - Initialization
+    
+    func setupTextField() {
+        let toolbar = createKeyboardToolbar(cancelButton: "Cancel",
+                                            with: #selector(didTapCancelTitleTextField),
+                                            doneButton: "Done",
+                                            doneSelector: #selector(didTapDoneOnToolbar))
+        titleTextField.inputAccessoryView = toolbar
+    }
     
     private func getResultsForPersonalRecords() {
         MBProgressHUD.showAdded(to: view, animated: true)
@@ -117,6 +134,23 @@ class PersonalRecordDetailsListViewController: UIViewController {
     
     @IBAction func didTapEditTitleButton(_ sender: Any) {
         titleTextField.becomeFirstResponder()
+    }
+    
+    func didTapCancelTitleTextField() {
+        if personalRecordType.name == nil {
+            return
+        }
+        titleTextField.text = personalRecordType.name
+        titleTextField.resignFirstResponder()
+    }
+    
+    func didTapDoneOnToolbar() {
+        if titleTextField.text?.characters.count == 0 {
+            return
+        }
+        
+        updateRecords(name: titleTextField.text!)
+        titleTextField.resignFirstResponder()
     }
     
     // MARK: - Navigation
@@ -246,20 +280,6 @@ extension PersonalRecordDetailsListViewController: UITableViewDelegate {
         selectedPersoanlRecord = personalRecordType.records[indexPath.row]
         performSegue(withIdentifier: personalRecordSegueIdentifier, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-extension PersonalRecordDetailsListViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == titleTextField {
-            if let newName = textField.text {
-                updateRecords(name: newName)
-                
-            }
-            titleTextField.resignFirstResponder()
-        }
-        
-        return true
     }
 }
 

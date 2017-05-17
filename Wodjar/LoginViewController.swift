@@ -27,14 +27,6 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Buttons Actions
-    
-    @IBAction func didTouchViewPasswordButton(_ sender: Any) {
-        passwordTextField.isSecureTextEntry = false;
-    }
-    
-    @IBAction func didReleaseViewPasswordButton(_ sender: Any) {
-        passwordTextField.isSecureTextEntry = true;
-    }
 
     @IBAction func didTapLoginWithFacebookButton(_ sender: Any) {
         MBProgressHUD.showAdded(to: view, animated: true)

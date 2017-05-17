@@ -15,6 +15,7 @@ protocol CustomWodDelegate {
 
 class CustomWODTypeTableViewController: WODTypeTableViewController {
     // @Constants
+    
     let customWodDetailsSegueIdentifier = "CustomWodDetails"
     let createWodViewControllerSegueIdentifier = "CreateCustomWODSegueIdentifier"
     
@@ -70,9 +71,17 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
             return
         }
         
-        MBProgressHUD.showAdded(to: view, animated: true)
+        if selectedWOD?.results != nil {
+            performSegue(withIdentifier: customWodDetailsSegueIdentifier, sender: self)
+            return
+        }
+        
+        MBProgressHUD.showAdded(to: viewForHud, animated: true)
         service.getResult(for: wod) { (result) in
-            MBProgressHUD.hide(for: self.view, animated: true)
+            MBProgressHUD.hide(for: self.viewForHud, animated: true)
+            if self.navigationController == nil {
+                return
+            }
             switch result {
             case let .success(results):
                 self.selectedWOD?.results = results
@@ -87,9 +96,9 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
     func deleteWod(at index: Int) {
         let wod = workouts[index]
         
-        MBProgressHUD.showAdded(to: view, animated: true)
+        MBProgressHUD.showAdded(to: viewForHud, animated: true)
         service.deleteWod(with: wod.id) { (result) in
-            MBProgressHUD.hide(for: self.view, animated: true)
+            MBProgressHUD.hide(for: self.viewForHud, animated: true)
             switch result {
             case .success():
                 self.workouts.remove(at: index)

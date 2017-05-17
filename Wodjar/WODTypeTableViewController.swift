@@ -14,6 +14,9 @@ class WODTypeTableViewController: UITableViewController {
     // @Properties
     var wodType: WODType?
     var selectedWOD: Workout?
+    var viewForHud: UIView {
+        return tableView.superview ?? view
+    }
     
     // @Injected
     var isFavorite: Bool = false
@@ -29,6 +32,11 @@ class WODTypeTableViewController: UITableViewController {
         initWodType()
         initTitle()
         tableView.tableFooterView = UIView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     // MARK: - Initialization
@@ -70,7 +78,8 @@ class WODTypeTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: workoutCellIdentifier, for: indexPath)
         
         if let customCell = cell as? PresonalRecordsListTableViewCell {
-            customCell.populate(with: workouts[indexPath.row].name!, present: workouts[indexPath.row].isCompleted)
+            let selectedWorkout = workouts[indexPath.row]
+            customCell.populate(with: selectedWorkout.name!, present: selectedWorkout.isCompleted)
             return customCell
         }
         
@@ -82,10 +91,10 @@ class WODTypeTableViewController: UITableViewController {
     func didTapFavoriteCell(action: UITableViewRowAction, at indexPath: IndexPath) {
         let wod = workouts[indexPath.row]
         
-        MBProgressHUD.showAdded(to: view, animated: true)
+        MBProgressHUD.showAdded(to: viewForHud, animated: true)
         if wod.isFavorite {
-            service.removeFromFavorite(wodId: wod.id, with: { (result) in
-                MBProgressHUD.hide(for: self.view, animated: true)
+            service.removeFromFavorite(wod: wod, with: { (result) in
+                MBProgressHUD.hide(for: self.viewForHud, animated: true)
                 switch result {
                 case .success():
                     wod.isFavorite = false
@@ -95,8 +104,8 @@ class WODTypeTableViewController: UITableViewController {
                 }
             })
         } else {
-            service.addToFavorite(wodId: wod.id, with: { (result) in
-                MBProgressHUD.hide(for: self.view, animated: true)
+            service.addToFavorite(wod: wod, with: { (result) in
+                MBProgressHUD.hide(for: self.viewForHud, animated: true)
                 switch result {
                 case .success():
                     wod.isFavorite = true

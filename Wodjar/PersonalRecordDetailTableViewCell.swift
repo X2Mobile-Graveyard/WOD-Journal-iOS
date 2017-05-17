@@ -22,11 +22,10 @@ class PersonalRecordDetailTableViewCell: UITableViewCell {
         typeOfWorkout = personalRecord.resultType.rawValue
         
         if let result = personalRecord.resultAsString() {
-           contentLabel.text = typeOfWorkout + " " + result
+           contentLabel.text = typeOfWorkout + ": " + result
         } else {
            contentLabel.text = typeOfWorkout
         }
-        
         
         rxLabel.isHidden = !personalRecord.rx
     }

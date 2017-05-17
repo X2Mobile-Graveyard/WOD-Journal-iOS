@@ -32,7 +32,21 @@ struct PersonalRecordListService {
             return
         }
         
-        remoteService.getPersonalRecords(for: name, with: completion)
+        remoteService.getPersonalRecords(for: name) { (result) in
+            switch result {
+            case let .success(prResults):
+                if prResults.count > 0 {
+                    completion?(.success(prResults.sorted(by: { (r1, r2) -> Bool in
+                        return (r1.date.compare(r2.date) == .orderedDescending)
+                    })))
+                    return
+                }
+                completion?(.success(prResults))
+            case let .failure(error):
+                completion?(.failure(error))
+            }
+
+        }
     }
     
     func merge(personalRecords: [PersonalRecordType], with defaultPersonalRecords:[PersonalRecordType]) -> [PersonalRecordType] {
@@ -52,8 +66,11 @@ struct PersonalRecordListService {
     }
     
     func deleteAllRecords(for personalRecordType: PersonalRecordType, with completion: DeleteAllRecordsCompletion?) {
-        let personalRecordsIds = personalRecordType.records.map{$0.id!}
-        remoteService.deleteRecords(with: personalRecordsIds, completion: completion)
+        guard personalRecordType.name != nil else {
+            completion?(.success())
+            return
+        }
+        remoteService.deleteRecords(with: personalRecordType.name!, completion: completion)
     }
     
     func update(personalRecordsIds:[Int], with name: String, completion: UpdateRecordsNameCompletion?) {
@@ -123,5 +140,9 @@ struct PersonalRecordListService {
         }
         
         return intersectedPrsTypes
+    }
+    
+    func sortResultsByDate(result: [PersonalRecord]) -> [PersonalRecord] {
+        return result.sorted(by: {$0.date.compare($1.date) == .orderedDescending})
     }
 }

@@ -75,7 +75,7 @@ class PersonalRecordRemoteServiceImpl: PersonalRecordRemoteService {
     }
     
     func deletePersonalRecord(with id: Int, completion: DeletePersonalRecordCompletion?) {
-        let request = DeletePersonalRecordRequest(with: [id])
+        let request = DeletePersonalRecordRequest(with: id)
         
         request.success = { _, _ in
             completion?(.success())

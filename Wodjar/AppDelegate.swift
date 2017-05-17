@@ -85,9 +85,9 @@ extension AppDelegate: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if let navController = viewController as? UINavigationController {
             if let wodsController = navController.topViewController as? WODTypesTableViewController {
-                
-                wodsController.service = WODListService(listRemote: WODListRemoteServiceImpl(), wodRemote: WODRemoteServiceImpl())
-
+                if wodsController.service == nil {
+                    wodsController.service = WODListService(listRemote: WODListRemoteServiceImpl(), wodRemote: WODRemoteServiceImpl())
+                }
             }
         }
     }

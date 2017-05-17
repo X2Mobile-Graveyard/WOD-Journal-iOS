@@ -10,18 +10,14 @@ import UIKit
 
 class DeletePersonalRecordRequest: BaseRequest {
 
-    let recordIds: [Int]
+    let recordId: Int
     
-    init(with ids:[Int]) {
-        self.recordIds = ids
+    init(with id:Int) {
+        self.recordId = id
     }
     
     override func requestURL() -> String {
-        return "delete-prs"
-    }
-    
-    override func param() -> Dictionary<String, Any>! {
-        return ["personal_records":["ids":recordIds]]
+        return "personal_records/\(recordId)"
     }
     
     override func requestMethod() -> RequestMethod {

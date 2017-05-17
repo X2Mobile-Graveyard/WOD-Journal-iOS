@@ -31,22 +31,30 @@ struct WODListService {
         listRemote.getResults(for: wod, with: completion)
     }
     
-    func addToFavorite(wodId: Int?, with completion: FavoriteCompletion?) {
-        guard let wodId = wodId else {
+    func addToFavorite(wod: Workout?, with completion: FavoriteCompletion?) {
+        guard let wod = wod else {
+            completion?(.success())
+            return
+        }
+        guard wod.id != nil else {
             completion?(.success())
             return
         }
         
-        wodRemote.addToFavorite(wodId: wodId, with: completion)
+        wodRemote.addToFavorite(wodId: wod.id!, isDefault: wod.type != .custom, with: completion)
     }
     
-    func removeFromFavorite(wodId: Int?, with completion: FavoriteCompletion?) {
-        guard let wodId = wodId else {
+    func removeFromFavorite(wod: Workout?, with completion: FavoriteCompletion?) {
+        guard let wod = wod else {
+            completion?(.success())
+            return
+        }
+        guard wod.id != nil else {
             completion?(.success())
             return
         }
         
-        wodRemote.removeFromFavorite(wodId: wodId, with: completion)
+        wodRemote.removeFromFavorite(wodId: wod.id!, isDefault: wod.type != .custom, with: completion)
     }
     
     func deleteWod(with wodId: Int?, completion: DeleteWodCompletion?) {

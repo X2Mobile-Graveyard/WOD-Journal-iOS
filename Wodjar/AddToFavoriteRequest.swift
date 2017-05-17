@@ -11,13 +11,15 @@ import UIKit
 class AddToFavoriteRequest: BaseRequest {
     
     let wodId: Int
+    let isDefault: Bool
     
-    init(wodId: Int) {
+    init(wodId: Int, isDefault: Bool) {
         self.wodId = wodId
+        self.isDefault = isDefault
     }
     
     override func requestURL() -> String {
-        return "add-favorite/\(wodId)"
+        return "wods/favorite/\(wodId)?default=\(isDefault)&favorite=\(true)"
     }
     
     override func headerParams() -> [String : String] {

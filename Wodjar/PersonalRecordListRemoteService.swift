@@ -18,7 +18,7 @@ protocol PersonalRecordListRemoteService {
     func getPersonalRecordsNames(with completion: GetPersonalRecordsNamesCompletion?)
     func getPersonalRecords(for name: String, with completion: GetPersonalRecordsResultsCompletion?)
     func deletePersonalRecord(with id: Int, completion: DeletePersonalRecordCompletion?)
-    func deleteRecords(with ids: [Int], completion: DeleteAllRecordsCompletion?)
+    func deleteRecords(with name: String, completion: DeleteAllRecordsCompletion?)
     func update(recordsIds:[Int], with: String, completion: UpdateRecordsNameCompletion?)
     func deletePersonalRecord(with name: String, completion: DeletePersonalRecordCompletion?)
 }
@@ -45,7 +45,7 @@ class PersonalRecordListRemoteServiceTest: PersonalRecordListRemoteService {
         completion?(.success())
     }
     
-    func deleteRecords(with ids: [Int], completion: DeleteAllRecordsCompletion?) {
+    func deleteRecords(with name: String, completion: DeleteAllRecordsCompletion?) {
         completion?(.success())
     }
     
@@ -95,7 +95,7 @@ class PersonalRecordListRemoteImpl: PersonalRecordListRemoteService {
     }
     
     func deletePersonalRecord(with id: Int, completion: DeletePersonalRecordCompletion?) {
-        let request = DeletePersonalRecordRequest(with: [id])
+        let request = DeletePersonalRecordRequest(with: id)
         
         request.success = { _, _ in
             completion?(.success())
@@ -109,8 +109,8 @@ class PersonalRecordListRemoteImpl: PersonalRecordListRemoteService {
         request.runRequest()
     }
     
-    func deleteRecords(with ids: [Int], completion: DeleteAllRecordsCompletion?) {
-        let request = DeletePersonalRecordRequest(with: ids)
+    func deleteRecords(with name: String, completion: DeleteAllRecordsCompletion?) {
+        let request = DeletePRByNameRequest(recordName: name)
         
         request.success = { _, _ in
             completion?(.success())

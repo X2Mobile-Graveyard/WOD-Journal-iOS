@@ -31,7 +31,7 @@ class WODResult: NSObject {
         self.id = dictionary["id"] as? Int ?? nil
         self.notes = dictionary["notes"] as? String ?? nil
         self.rx = dictionary["rx"] as? Bool ?? false
-        self.photoUrl = dictionary["photo_url"] as? String ?? nil
+        self.photoUrl = dictionary["image_url"] as? String ?? nil
         if photoUrl == noImageString {
             self.photoUrl = nil
         }
@@ -166,10 +166,10 @@ class WODResult: NSObject {
         let seconds = (timeInSeconds % 3600) % 60
         
         if hours == 0 {
-            return "\(minutes):\(seconds)"
+            return String(format: "%02d:%02d", minutes, seconds)
         }
         
-        return "\(hours):\(minutes):\(seconds)"
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
     
     private func getSeconds(from time: String) -> Int {
@@ -233,9 +233,9 @@ class WODResult: NSObject {
         
         updateDict["rx"] = rx
         if let url = photoUrl {
-            updateDict["photo_url"] = url
+            updateDict["image_url"] = url
         } else {
-            updateDict["photo_url"] = noImageString
+            updateDict["image_url"] = noImageString
         }
         
         updateDict["date"] = date.getWodJournalFormatString()

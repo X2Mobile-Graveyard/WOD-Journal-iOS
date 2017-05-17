@@ -27,6 +27,7 @@ class WODResultViewController: WODJournalResultViewController {
     var controllerMode: ControllerType!
     var service: WODResultService!
     var wod: Workout!
+    var shouldSaveChanges =  false
     
     // @Properties
     var resultCopy: WODResult!
@@ -46,11 +47,17 @@ class WODResultViewController: WODJournalResultViewController {
         super.viewDidLoad()
         initUI()
         createWorkingCopy()
+        pickedImagePath = result.photoUrl
+        if controllerMode == .createMode {
+            deleteButton.isHidden = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        resultTextField.becomeFirstResponder()
+        if controllerMode != .editMode {
+            resultTextField.becomeFirstResponder()
+        }
     }
     
     // MARK: - Helper Methods
@@ -99,6 +106,17 @@ class WODResultViewController: WODJournalResultViewController {
         }
     }
     
+    func didTapEditButton(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: { 
+            self.setupForEditMode()
+        }) { (_) in
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
+                                                                target: self,
+                                                                action: #selector(self.didTapSaveButton(_:)))
+            self.shouldSaveChanges = true
+        }
+    }
+    
     @IBAction func didTapCancelButton(_ sender: Any) {
         view.endEditing(true)
         _ = navigationController?.popViewController(animated: true)
@@ -137,11 +155,9 @@ class WODResultViewController: WODJournalResultViewController {
         }
         
         if identifier == fullImageSegueIdentifier {
-            guard let image = userImage else {
-                return
-            }
             let fullImageViewController = segue.destination as! FullSizeImageViewController
-            fullImageViewController.image = image
+            fullImageViewController.image = userImage
+            fullImageViewController.imageUrl = result.photoUrl
         }
     }
     
@@ -185,6 +201,7 @@ class WODResultViewController: WODJournalResultViewController {
             switch result {
             case .success():
                 self.result.updateValues(from: self.resultCopy)
+                self.wodResultDelegate?.didUpdate()
                 _ = self.navigationController?.popViewController(animated: true)
             case .failure(_):
                 self.handleError(result: result)

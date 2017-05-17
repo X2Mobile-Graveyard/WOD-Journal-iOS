@@ -23,6 +23,62 @@ extension WODResultViewController {
         hideKeyboardWhenTappedAround()
         setupImageView()
         setupDescription()
+        
+        if controllerMode == .editMode {
+            setupForViewMode()
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
+                                                                target: self,
+                                                                action: #selector(didTapSaveButton(_:)))
+        }
+    }
+    
+    func setupForViewMode() {
+        resultTextField.borderStyle = .none
+        resultTextField.isEnabled = false
+        resultTextField.clearButtonMode = .never
+        
+        notesTextView.layer.borderWidth = 0.0
+        notesTextView.isEditable = false
+        
+        rxSwitch.isEnabled = false
+        
+        if viewState == .withoutImage {
+            addPictureButton.isHidden = true
+        } else {
+            changePictureBackgroundView.isHidden = true
+        }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
+                                                            target: self,
+                                                            action: #selector(didTapEditButton(_:)))
+        
+        dateButton.setTitleColor(.black, for: .normal)
+        dateButton.isEnabled = false
+        
+        deleteButton.isHidden = true
+    }
+    
+    func setupForEditMode() {
+        resultTextField.borderStyle = .roundedRect
+        resultTextField.isEnabled = true
+        resultTextField.clearButtonMode = .always
+        
+        notesTextView.layer.borderWidth = 0.5
+        notesTextView.isEditable = true
+        
+        rxSwitch.isEnabled = true
+        
+        if viewState == .withoutImage {
+            addPictureButton.isHidden = false
+        } else {
+            changePictureBackgroundView.isHidden = false
+        }
+        
+        dateButton.setTitleColor(navigationController?.navigationBar.tintColor, for: .normal)
+        dateButton.isEnabled = true
+        
+        deleteButton.isHidden = false
     }
     
     func setupResultTextField() {
@@ -61,7 +117,7 @@ extension WODResultViewController {
     
     func setupViewForRecordType() {
         resultTextField.inputView = nil
-        resultTextField.inputAccessoryView = nil
+        resultTextField.inputAccessoryView = createKeyboardToolbar(with: "Done", selector: #selector(didTapCancelPicker))
         switch result.resultType {
         case .weight:
             resultTextField.keyboardType = .decimalPad
@@ -134,10 +190,9 @@ extension WODResultViewController {
             return
         }
         
-        imageView.sd_setImage(with: URL(string: imageUrl)) { (setImage, error, _, _) in
-            self.addUserPictureToView()
-            self.viewState = .withImage
-            self.addPictureButton.isHidden = true
-        }
+        self.addPictureButton.isHidden = true
+        self.addUserPictureToView()
+        self.viewState = .withImage
+        imageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
     }
 }

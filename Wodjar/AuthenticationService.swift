@@ -41,7 +41,7 @@ struct AuthenticationService {
         
     }
     
-    func register(with email: String?, password: String?, completion: RegisterCompletion?) {
+    func register(with email: String?, password: String?, confirmationPassword: String?, completion: RegisterCompletion?) {
         guard let email = email else {
             completion?(.failure(NSError.localError(with: "Please enter an email")))
             return
@@ -52,6 +52,11 @@ struct AuthenticationService {
             return
         }
         
+        guard let confirmationPassword = confirmationPassword else {
+            completion?(.failure(NSError.localError(with: "Please enter a confirmation password")))
+            return
+        }
+        
         if email.characters.count == 0 {
             completion?(.failure(NSError.localError(with: "Please enter an email")))
             return
@@ -59,6 +64,16 @@ struct AuthenticationService {
         
         if password.characters.count == 0 {
             completion?(.failure(NSError.localError(with: "Please enter a password")))
+            return
+        }
+        
+        if confirmationPassword.characters.count == 0 {
+            completion?(.failure(NSError.localError(with: "Please enter a confirmation password")))
+            return
+        }
+        
+        if confirmationPassword != password {
+            completion?(.failure(NSError.localError(with: "Password and confirmation password are not the same.")))
             return
         }
         

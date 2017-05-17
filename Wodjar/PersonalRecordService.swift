@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SDWebImage
 
 struct PersonalRecordService {
     let remoteService: PersonalRecordRemoteService
@@ -30,15 +31,15 @@ struct PersonalRecordService {
             if personalRecord.imageUrl == nil {
                 remoteService.update(personalRecord: personalRecord, with: completion)
                 return
-            } else {
-                if let key = personalRecord.imageUrl?.components(separatedBy: "/").last {
-                    s3RemoteService.deleteImage(with: key, completion: { (result) in
-                        personalRecord.imageUrl = nil
-                        self.remoteService.update(personalRecord: personalRecord, with: completion)
-                    })
-                }
-                return
             }
+            
+            if let key = personalRecord.imageUrl?.components(separatedBy: "/").last {
+                s3RemoteService.deleteImage(with: key, completion: { (result) in
+                    personalRecord.imageUrl = nil
+                    self.remoteService.update(personalRecord: personalRecord, with: completion)
+                })
+            }
+            return
         }
         
         let url = URL(fileURLWithPath: imagePath)
@@ -53,11 +54,18 @@ struct PersonalRecordService {
                 }
                 self.remoteService.update(personalRecord: personalRecord, with: completion)
             }
-            
+            return
+        }
+        
+        if imagePath.contains("amazonaws") {
+            remoteService.update(personalRecord: personalRecord, with: completion)
             return
         }
         
         if let key = personalRecord.imageUrl?.components(separatedBy: "/").last {
+            if let s3URL = URL(string: personalRecord.imageUrl!) {
+                SDImageCache.shared().removeImage(forKey:s3URL.absoluteString, withCompletion: nil)
+            }
             s3RemoteService.uploadImage(with: url, key: key) { (result) in
                 switch result {
                 case let .success(s3Path):

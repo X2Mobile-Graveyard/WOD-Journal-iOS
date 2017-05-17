@@ -10,20 +10,22 @@ import UIKit
 
 class RemoveFavoriteRequest: BaseRequest {
     let wodId: Int
+    let isDefault: Bool
     
-    init(wodId: Int) {
+    init(wodId: Int, isDefault: Bool) {
         self.wodId = wodId
+        self.isDefault = isDefault
     }
     
     override func requestURL() -> String {
-        return "remove-favorite/\(wodId)"
-    }
-    
-    override func requestMethod() -> RequestMethod {
-        return .RequestMethodPOST
+        return "wods/favorite/\(wodId)?default=\(isDefault)&favorite=\(false)"
     }
     
     override func headerParams() -> [String : String] {
         return ["Authorization":"Token \(UserManager.sharedInstance.userToken!)"];
+    }
+    
+    override func requestMethod() -> RequestMethod {
+        return .RequestMethodPOST
     }
 }

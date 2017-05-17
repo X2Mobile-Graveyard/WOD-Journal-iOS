@@ -165,10 +165,6 @@ class PersonalRecordViewController: WODJournalResultViewController {
         view.endEditing(true)
     }
     
-    func didTapDoneOnResultInputView() {
-        view.endEditing(true)
-    }
-    
     // MARK: - Gesture Recognizers
     
     func didTapPicture(recognizer: UITapGestureRecognizer) {
