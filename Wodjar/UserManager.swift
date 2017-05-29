@@ -12,6 +12,9 @@ class UserManager {
     let userIdKey = "WODJournalUserdId"
     let userTokenKey = "WODJournalUserToken"
     let unitSystemKey = "WODJournalUnitSystem"
+    let userNameKey = "WODJournalUserName"
+    let userImageKey = "WODJournalUserImageKey"
+    let userEmailKey = "WODJournalUserEmail"
     
     var userId: Int? {
         set {
@@ -61,7 +64,45 @@ class UserManager {
     var hasPremiumSubscription: Bool {
         return hasMonthlySubscription || hasYearSubscription
     }
-    var userName: String?
+    var userName: String? {
+        set {
+            if newValue == nil {
+                UserDefaults.standard.removeObject(forKey: userNameKey)
+            } else {
+                UserDefaults.standard.set(newValue, forKey: userNameKey)
+            }
+        }
+        
+        get {
+            return UserDefaults.standard.object(forKey: userNameKey) as? String
+        }
+    }
+    var imageUrl: String? {
+        set {
+            if newValue == nil {
+                UserDefaults.standard.removeObject(forKey: userImageKey)
+            } else {
+                UserDefaults.standard.set(newValue, forKey: userImageKey)
+            }
+        }
+        
+        get {
+            return UserDefaults.standard.object(forKey: userImageKey) as? String
+        }
+    }
+    var email: String? {
+        set {
+            if newValue == nil {
+                UserDefaults.standard.removeObject(forKey: userEmailKey)
+            } else {
+                UserDefaults.standard.set(newValue, forKey: userEmailKey)
+            }
+        }
+        
+        get {
+            return UserDefaults.standard.object(forKey: userEmailKey) as? String
+        }
+    }
     
     static let sharedInstance = UserManager()
     
@@ -72,5 +113,8 @@ class UserManager {
     func signOut() {
         userId = nil
         userToken = nil
+        UserDefaults.standard.removeObject(forKey: unitSystemKey)
+        userName = nil
+        imageUrl = nil
     }
 }

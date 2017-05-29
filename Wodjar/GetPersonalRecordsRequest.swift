@@ -10,8 +10,22 @@ import UIKit
 
 class GetPersonalRecordsRequest: BaseRequest {
 
+    override init() {
+        super.init()
+        #if DEBUG
+            return
+        #else
+        guard let status = Network.reachability?.status else {
+            return
+        }
+        if status == .unreachable {
+            self.useCachePolicy = true
+        }
+        #endif
+    }
+    
     override func headerParams() -> [String : String] {
-        return ["Authorization":"Token \(UserManager.sharedInstance.userToken!)"];
+        return ["Authorization":"Token \(UserManager.sharedInstance.userToken!)"]
     }
     
     override func requestURL() -> String {

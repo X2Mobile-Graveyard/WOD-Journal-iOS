@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -153,7 +157,7 @@
             </objects>
             <point key="canvasLocation" x="-329" y="2865"/>
         </scene>
-        <!--Register View Controller-->
+        <!--Register-->
         <scene sceneID="ms4-2z-l9D">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="ZuH-1L-Ejc" customClass="RegisterViewController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
@@ -169,10 +173,10 @@
                                 <rect key="frame" x="-4" y="44" width="385" height="623"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PYw-yM-vv8" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="397"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="408.5"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LXV-4Z-Al5">
-                                                <rect key="frame" x="68.5" y="186.5" width="238" height="30"/>
+                                                <rect key="frame" x="68.5" y="198" width="238" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="238" id="cEh-cW-1Ff"/>
                                                 </constraints>
@@ -180,26 +184,20 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iHf-Jl-0hr">
-                                                <rect key="frame" x="156" y="147" width="63" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NLb-Yu-pFr">
-                                                <rect key="frame" x="68.5" y="235.5" width="238" height="30"/>
+                                                <rect key="frame" x="68.5" y="247" width="238" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gLO-8D-Uv7">
-                                                <rect key="frame" x="68" y="285" width="238" height="30"/>
+                                                <rect key="frame" x="68" y="296.5" width="238" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQr-As-Vw0">
-                                                <rect key="frame" x="87" y="333" width="200" height="44"/>
+                                                <rect key="frame" x="87" y="344.5" width="200" height="44"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="SiX-Sy-pUi"/>
@@ -219,22 +217,45 @@
                                                     <action selector="didTapRegisterButton:" destination="ZuH-1L-Ejc" eventType="touchUpInside" id="rmf-t1-lGH"/>
                                                 </connections>
                                             </button>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YOY-sk-0q0">
+                                                <rect key="frame" x="68" y="149" width="238" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="238" id="lgZ-0L-pC7"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                            </textField>
+                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ios_blue_camera" translatesAutoresizingMaskIntoConstraints="NO" id="dwp-Pw-ah2">
+                                                <rect key="frame" x="137" y="30" width="100" height="100"/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="UPp-ii-heR"/>
+                                                    <constraint firstAttribute="width" secondItem="dwp-Pw-ah2" secondAttribute="height" multiplier="1:1" id="iW8-9f-kdB"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="QEt-HW-tEC" appends="YES" id="wro-BS-4Ca"/>
+                                                </connections>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="gLO-8D-Uv7" firstAttribute="top" secondItem="NLb-Yu-pFr" secondAttribute="bottom" constant="19.5" id="13q-yR-7rp"/>
                                             <constraint firstAttribute="bottom" secondItem="TQr-As-Vw0" secondAttribute="bottom" constant="20" symbolic="YES" id="59s-en-2dz"/>
-                                            <constraint firstItem="iHf-Jl-0hr" firstAttribute="top" secondItem="PYw-yM-vv8" secondAttribute="top" constant="147" id="6dQ-mj-o0x"/>
                                             <constraint firstItem="LXV-4Z-Al5" firstAttribute="centerX" secondItem="PYw-yM-vv8" secondAttribute="centerX" id="9F2-si-p5f"/>
                                             <constraint firstItem="TQr-As-Vw0" firstAttribute="centerX" secondItem="PYw-yM-vv8" secondAttribute="centerX" id="9Ho-1G-KB0"/>
-                                            <constraint firstItem="LXV-4Z-Al5" firstAttribute="top" secondItem="iHf-Jl-0hr" secondAttribute="bottom" constant="19" id="DTC-lC-ei3"/>
+                                            <constraint firstItem="LXV-4Z-Al5" firstAttribute="top" secondItem="YOY-sk-0q0" secondAttribute="bottom" constant="19" id="GhQ-zx-Wvh"/>
+                                            <constraint firstItem="YOY-sk-0q0" firstAttribute="centerX" secondItem="PYw-yM-vv8" secondAttribute="centerX" id="MIQ-y0-KRA"/>
                                             <constraint firstItem="gLO-8D-Uv7" firstAttribute="centerX" secondItem="PYw-yM-vv8" secondAttribute="centerX" id="MN6-ne-MHs"/>
+                                            <constraint firstItem="YOY-sk-0q0" firstAttribute="top" secondItem="dwp-Pw-ah2" secondAttribute="bottom" constant="19" id="R8x-fe-nTW"/>
+                                            <constraint firstItem="dwp-Pw-ah2" firstAttribute="centerX" secondItem="PYw-yM-vv8" secondAttribute="centerX" id="YPs-eL-ZBf"/>
                                             <constraint firstItem="TQr-As-Vw0" firstAttribute="top" secondItem="gLO-8D-Uv7" secondAttribute="bottom" constant="18" id="aOz-ni-LP7"/>
-                                            <constraint firstItem="iHf-Jl-0hr" firstAttribute="centerX" secondItem="PYw-yM-vv8" secondAttribute="centerX" id="ah9-2e-c6A"/>
+                                            <constraint firstItem="dwp-Pw-ah2" firstAttribute="top" secondItem="PYw-yM-vv8" secondAttribute="top" constant="30" id="f8Q-b5-Fk2"/>
                                             <constraint firstItem="NLb-Yu-pFr" firstAttribute="top" secondItem="LXV-4Z-Al5" secondAttribute="bottom" constant="19" id="fAA-EA-QUw"/>
                                             <constraint firstItem="NLb-Yu-pFr" firstAttribute="width" secondItem="LXV-4Z-Al5" secondAttribute="width" id="kpO-bZ-2Wb"/>
                                             <constraint firstItem="NLb-Yu-pFr" firstAttribute="centerX" secondItem="PYw-yM-vv8" secondAttribute="centerX" id="sDm-BQ-xgh"/>
                                             <constraint firstItem="gLO-8D-Uv7" firstAttribute="width" secondItem="NLb-Yu-pFr" secondAttribute="width" id="u6o-Ql-EJB"/>
+                                            <constraint firstItem="YOY-sk-0q0" firstAttribute="width" secondItem="LXV-4Z-Al5" secondAttribute="width" id="vHd-SP-owZ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -255,13 +276,21 @@
                             <constraint firstItem="fGI-I4-nbd" firstAttribute="leading" secondItem="wec-Q2-mIA" secondAttribute="leadingMargin" constant="-20" id="eCC-Gi-psE"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Register" id="6HC-ob-3Uk"/>
                     <connections>
                         <outlet property="emailTextField" destination="LXV-4Z-Al5" id="N7J-yj-JrK"/>
                         <outlet property="passwordConfirmationTextField" destination="gLO-8D-Uv7" id="uU7-yR-LbE"/>
                         <outlet property="passwordTextField" destination="NLb-Yu-pFr" id="6GJ-Z1-rjH"/>
+                        <outlet property="userImageView" destination="dwp-Pw-ah2" id="OMh-kH-xjH"/>
+                        <outlet property="userNameTextField" destination="YOY-sk-0q0" id="Eif-lN-ZRy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iav-aG-SyK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QEt-HW-tEC">
+                    <connections>
+                        <action selector="didTapUserImage:" destination="ZuH-1L-Ejc" id="WwP-lm-7LC"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="376.80000000000001" y="2864.617691154423"/>
         </scene>
@@ -271,7 +300,6 @@
                 <navigationController storyboardIdentifier="authenticationScreensId" automaticallyAdjustsScrollViewInsets="NO" id="hTP-MV-Z3k" customClass="WodJurnalNavigationController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item 2" id="g4e-K1-VO5"/>
                     <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4_7.fullscreen"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WoZ-0o-icG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -286,4 +314,7 @@
             <point key="canvasLocation" x="-1236" y="2862"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ios_blue_camera" width="100" height="100"/>
+    </resources>
 </document>

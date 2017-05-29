@@ -32,17 +32,17 @@ SwiftyStoreKit supports this by calling `completeTransactions()` when the app st
 ```swift
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-	SwiftyStoreKit.completeTransactions(atomically: true) { products in
+	SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
 	
-	    for product in products {
+	    for purchase in purchases {
 	
-	        if product.transaction.transactionState == .purchased || product.transaction.transactionState == .restored {
+	        if purchase.transaction.transactionState == .purchased || purchase.transaction.transactionState == .restored {
 	
-               if product.needsFinishTransaction {
+               if purchase.needsFinishTransaction {
                    // Deliver content from server, then:
-                   SwiftyStoreKit.finishTransaction(product.transaction)
+                   SwiftyStoreKit.finishTransaction(purchase.transaction)
                }
-               print("purchased: \(product)")
+               print("purchased: \(purchase)")
 	        }
 	    }
 	}
@@ -79,10 +79,10 @@ SwiftyStoreKit.retrieveProductsInfo(["com.musevisions.SwiftyStoreKit.Purchase1"]
 * **Atomic**: to be used when the content is delivered immediately.
 
 ```swift
-SwiftyStoreKit.purchaseProduct("com.musevisions.SwiftyStoreKit.Purchase1", atomically: true) { result in
+SwiftyStoreKit.purchaseProduct("com.musevisions.SwiftyStoreKit.Purchase1", quantity: 1, atomically: true) { result in
     switch result {
-    case .success(let product):
-        print("Purchase Success: \(product.productId)")
+    case .success(let purchase):
+        print("Purchase Success: \(purchase.productId)")
     case .error(let error):
         switch error.code {
         case .unknown: print("Unknown error. Please contact support")
@@ -93,6 +93,7 @@ SwiftyStoreKit.purchaseProduct("com.musevisions.SwiftyStoreKit.Purchase1", atomi
         case .storeProductNotAvailable: print("The product is not available in the current storefront")
         case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
         case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
+        case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
         }
     }
 }
@@ -101,7 +102,7 @@ SwiftyStoreKit.purchaseProduct("com.musevisions.SwiftyStoreKit.Purchase1", atomi
 * **Non-Atomic**: to be used when the content is delivered by the server.
 
 ```swift
-SwiftyStoreKit.purchaseProduct("com.musevisions.SwiftyStoreKit.Purchase1", atomically: false) { result in
+SwiftyStoreKit.purchaseProduct("com.musevisions.SwiftyStoreKit.Purchase1", quantity: 1, atomically: false) { result in
     switch result {
     case .success(let product):
         // fetch content from your server, then:
@@ -119,6 +120,7 @@ SwiftyStoreKit.purchaseProduct("com.musevisions.SwiftyStoreKit.Purchase1", atomi
         case .storeProductNotAvailable: print("The product is not available in the current storefront")
         case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
         case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
+        case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
         }
     }
 }
@@ -126,15 +128,25 @@ SwiftyStoreKit.purchaseProduct("com.musevisions.SwiftyStoreKit.Purchase1", atomi
 
 ### Restore previous purchases
 
+According to [Apple - Restoring Purchased Products](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/Restoring.html#//apple_ref/doc/uid/TP40008267-CH8-SW9):
+
+> In most cases, all your app needs to do is refresh its receipt and deliver the products in its receipt. The refreshed receipt contains a record of the user’s purchases in this app, on this device or any other device.
+
+> Restoring completed transactions creates a new transaction for every completed transaction the user made, essentially replaying history for your transaction queue observer.
+
+See the **Receipt Verification** section below for how to restore previous purchases using the receipt.
+
+This section shows how to restore completed transactions with the `restorePurchases` method instead.
+
 * **Atomic**: to be used when the content is delivered immediately.
 
 ```swift
 SwiftyStoreKit.restorePurchases(atomically: true) { results in
-    if results.restoreFailedProducts.count > 0 {
-        print("Restore Failed: \(results.restoreFailedProducts)")
+    if results.restoreFailedPurchases.count > 0 {
+        print("Restore Failed: \(results.restoreFailedPurchases)")
     }
-    else if results.restoredProducts.count > 0 {
-        print("Restore Success: \(results.restoredProducts)")
+    else if results.restoredPurchases.count > 0 {
+        print("Restore Success: \(results.restoredPurchases")
     }
     else {
         print("Nothing to Restore")
@@ -146,17 +158,17 @@ SwiftyStoreKit.restorePurchases(atomically: true) { results in
 
 ```swift
 SwiftyStoreKit.restorePurchases(atomically: false) { results in
-    if results.restoreFailedProducts.count > 0 {
-        print("Restore Failed: \(results.restoreFailedProducts)")
+    if results.restoreFailedPurchases.count > 0 {
+        print("Restore Failed: \(results.restoreFailedPurchases)")
     }
-    else if results.restoredProducts.count > 0 {
-        for product in results.restoredProducts {
+    else if results.restoredPurchases.count > 0 {
+        for purchase in results.restoredPurchases {
             // fetch content from your server, then:
-            if product.needsFinishTransaction {
-                SwiftyStoreKit.finishTransaction(product.transaction)
+            if purchase.needsFinishTransaction {
+                SwiftyStoreKit.finishTransaction(purchase.transaction)
             }
         }
-        print("Restore Success: \(results.restoredProducts)")
+        print("Restore Success: \(results.restoredPurchases)")
     }
     else {
         print("Nothing to Restore")
@@ -171,13 +183,13 @@ When you purchase a product the following things happen:
 * A payment is added to the payment queue for your IAP.
 * When the payment has been processed with Apple, the payment queue is updated so that the appropriate transaction can be handled.
 * If the transaction state is **purchased** or **restored**, the app can unlock the functionality purchased by the user.
-* The app should call `finishTransaction()` to complete the purchase.
+* The app should call `finishTransaction(_:)` to complete the purchase.
 
 This is what is [recommended by Apple](https://developer.apple.com/reference/storekit/skpaymentqueue/1506003-finishtransaction):
 
-> Your application should call finishTransaction(_:) only after it has successfully processed the transaction and unlocked the functionality purchased by the user.
+> Your application should call `finishTransaction(_:)` only after it has successfully processed the transaction and unlocked the functionality purchased by the user.
 
-* A purchase is **atomic** when the app unlocks the functionality purchased by the user immediately and call `finishTransaction()` at the same time. This is desirable if you're unlocking functionality that is already inside the app.
+* A purchase is **atomic** when the app unlocks the functionality purchased by the user immediately and call `finishTransaction(_:)` at the same time. This is desirable if you're unlocking functionality that is already inside the app.
 
 * In cases when you need to make a request to your own server in order to unlock the functionality, you can use a **non-atomic** purchase instead.
 
@@ -199,6 +211,28 @@ According to [Apple - Delivering Products](https://developer.apple.com/library/c
 
 > Information about all other kinds of purchases is added to the receipt when they’re paid for and remains in the receipt indefinitely.
 
+When an app is first installed, the app receipt is missing.
+
+As soon as a user completes a purchase or restores purchases, StoreKit creates and stores the receipt locally as a file.
+
+As the local receipt is always encrypted, a verification step is needed to get all the receipt fields in readable form.
+
+This is done with a `verifyReceipt` method which does two things:
+
+- If the receipt is missing, refresh it
+- If the receipt is available or is refreshed, validate it
+
+Receipt validation can be done remotely with Apple via the `AppleReceiptValidator` class, or with a client-supplied validator conforming to the `ReceiptValidator` protocol. 
+
+**Notes**
+
+* If the local receipt is missing when calling `verifyReceipt`, a network call is made to refresh it.
+* If the user is not logged to the App Store, StoreKit will present a popup asking to **Sign In to the iTunes Store**.
+* If the user enters valid credentials, the receipt will be refreshed and verified.
+* If the user cancels, receipt refresh will fail with a **Cannot connect to iTunes Store** error.
+* Using `AppleReceiptValidator` (see below) does remote receipt validation and also results in a network call.
+* Local receipt validation is not implemented (see [issue #101](https://github.com/bizz84/SwiftyStoreKit/issues/101) for details).
+
 
 ### Retrieve local receipt
 
@@ -213,31 +247,25 @@ let receiptString = receiptData.base64EncodedString(options: [])
 ```swift
 let appleValidator = AppleReceiptValidator(service: .production)
 SwiftyStoreKit.verifyReceipt(using: appleValidator, password: "your-shared-secret") { result in
-    if case .error(let error) = result {
-        if case .noReceiptData = error {
-            self.refreshReceipt()
-        }
-    }
-}
-
-func refreshReceipt() {
-    SwiftyStoreKit.refreshReceipt { result in
-        switch result {
-        case .success(let receiptData):
-            print("Receipt refresh success: \(receiptData.base64EncodedString)")
-        case .error(let error):
-            print("Receipt refresh failed: \(error)")
-        }
-    }
+    switch result {
+    case .success(let receipt):
+        print("Verify receipt Success: \(receipt)")
+    case .error(let error):
+        print("Verify receipt Failed: \(error)")
+	}
 }
 ```
 
-#### Notes
+## Verifying purchases and subscriptions
 
-* If the user is not logged to iTunes when `refreshReceipt` is called, StoreKit will present a popup asking to **Sign In to the iTunes Store**.
-* If the user enters valid credentials, the receipt will be refreshed.
-* If the user cancels, receipt refresh will fail with a **Cannot connect to iTunes Store** error.
+Once you have retrieved the receipt using the `verifyReceipt` method, you can verify your purchases and subscriptions by product identifier.
 
+Verifying multiple purchases and subscriptions in one call is not yet supported (see [issue #194](https://github.com/bizz84/SwiftyStoreKit/issues/194) for more details).
+
+If you need to verify multiple purchases / subscriptions, you can either:
+
+* manually parse the receipt dictionary returned by `verifyReceipt`
+* call `verifyPurchase` or `verifySubscription` multiple times with different product identifiers
 
 ### Verify Purchase
 
@@ -252,8 +280,8 @@ SwiftyStoreKit.verifyReceipt(using: appleValidator, password: "your-shared-secre
             inReceipt: receipt)
             
         switch purchaseResult {
-        case .purchased(let expiresDate):
-            print("Product is purchased.")
+        case .purchased(let receiptItem):
+            print("Product is purchased: \(receiptItem)")
         case .notPurchased:
             print("The user has never purchased this product")
         }
@@ -263,13 +291,17 @@ SwiftyStoreKit.verifyReceipt(using: appleValidator, password: "your-shared-secre
 }
 ```
 
-Note that for consumable products, the receipt will only include the information for a couples of minutes after the purchase.
+Note that for consumable products, the receipt will only include the information for a couple of minutes after the purchase.
 
 ### Verify Subscription
 
 This can be used to check if a subscription was previously purchased, and whether it is still active or if it's expired.
 
-If a subscription has been purchased multiple times, this method will return `.purchased` or `.expired` for the most recent one.
+From [Apple - Working with Subscriptions](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/Subscriptions.html#//apple_ref/doc/uid/TP40008267-CH7-SW6):
+
+> keep a record of the date that each piece of content is published. Read the Original Purchase Date and Subscription Expiration Date field from each receipt entry to determine the start and end dates of the subscription.
+
+When one or more subscriptions are found for a given product id, they are returned as a `ReceiptItem` array ordered by `expiryDate`, with the first one being the newest.
 
 ```swift
 let appleValidator = AppleReceiptValidator(service: .production)
@@ -283,10 +315,10 @@ SwiftyStoreKit.verifyReceipt(using: appleValidator, password: "your-shared-secre
             inReceipt: receipt)
             
         switch purchaseResult {
-        case .purchased(let expiresDate):
-            print("Product is valid until \(expiresDate)")
-        case .expired(let expiresDate):
-            print("Product is expired since \(expiresDate)")
+        case .purchased(let expiryDate, let receiptItems):
+            print("Product is valid until \(expiryDate)")
+        case .expired(let expiryDate, let receiptItems):
+            print("Product is expired since \(expiryDate)")
         case .notPurchased:
             print("The user has never purchased this product")
         }
@@ -298,7 +330,7 @@ SwiftyStoreKit.verifyReceipt(using: appleValidator, password: "your-shared-secre
 ```
 
 #### Auto-Renewable
-```
+```swift
 let purchaseResult = SwiftyStoreKit.verifySubscription(
             type: .autoRenewable,
             productId: "com.musevisions.SwiftyStoreKit.Subscription",
@@ -306,7 +338,7 @@ let purchaseResult = SwiftyStoreKit.verifySubscription(
 ```
 
 #### Non-Renewing
-```
+```swift
 // validDuration: time interval in seconds
 let purchaseResult = SwiftyStoreKit.verifySubscription(
             type: .nonRenewing(validDuration: 3600 * 24 * 30),
@@ -314,7 +346,10 @@ let purchaseResult = SwiftyStoreKit.verifySubscription(
             inReceipt: receipt)
 ```
 
-**Note**: When purchasing subscriptions in sandbox mode, the expiry dates are set just minutes after the purchase date for testing purposes.
+**Notes**
+
+* The expiration dates are calculated against the receipt date. This is the date of the last successful call to `verifyReceipt`.
+* When purchasing subscriptions in sandbox mode, the expiry dates are set just minutes after the purchase date for testing purposes.
 
 #### Purchasing and verifying a subscription 
 
@@ -324,10 +359,10 @@ The `verifySubscription` method can be used together with the `purchaseProduct` 
 let productId = "your-product-id"
 SwiftyStoreKit.purchaseProduct(productId, atomically: true) { result in
     
-    if case .success(let product) = result {
+    if case .success(let purchase) = result {
         // Deliver content from server, then:
-        if product.needsFinishTransaction {
-            SwiftyStoreKit.finishTransaction(product.transaction)
+        if purchase.needsFinishTransaction {
+            SwiftyStoreKit.finishTransaction(purchase.transaction)
         }
         
         let appleValidator = AppleReceiptValidator(service: .production)
@@ -340,9 +375,9 @@ SwiftyStoreKit.purchaseProduct(productId, atomically: true) { result in
                     inReceipt: receipt)
                 
                 switch purchaseResult {
-                case .purchased(let expiryDate):
+                case .purchased(let expiryDate, let receiptItems):
                     print("Product is valid until \(expiryDate)")
-                case .expired(let expiryDate):
+                case .expired(let expiryDate, let receiptItems):
                     print("Product is expired since \(expiryDate)")
                 case .notPurchased:
                     print("This product has never been purchased")
@@ -352,7 +387,6 @@ SwiftyStoreKit.purchaseProduct(productId, atomically: true) { result in
                 // receipt verification error
             }
         }
-        
     } else {
         // purchase error
     }
@@ -418,6 +452,7 @@ Note that the pre-registered in app purchases in the demo apps are for illustrat
 * [Apple - Validating Receipts Locally](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateLocally.html)
 * [Apple - Working with Subscriptions](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/Subscriptions.html#//apple_ref/doc/uid/TP40008267-CH7-SW6)
 * [Apple - Offering Subscriptions](https://developer.apple.com/app-store/subscriptions/)
+* [Apple - Restoring Purchased Products](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/Restoring.html#//apple_ref/doc/uid/TP40008267-CH8-SW9)
 * [objc.io - Receipt Validation](https://www.objc.io/issues/17-security/receipt-validation/)
 * [Apple TN 2413 - Why are my product identifiers being returned in the invalidProductIdentifiers array?](https://developer.apple.com/library/content/technotes/tn2413/_index.html#//apple_ref/doc/uid/DTS40016228-CH1-TROUBLESHOOTING-WHY_ARE_MY_PRODUCT_IDENTIFIERS_BEING_RETURNED_IN_THE_INVALIDPRODUCTIDENTIFIERS_ARRAY_)
 * [Invalid Product IDs](http://troybrant.net/blog/2010/01/invalid-product-ids/): Checklist of common mistakes
@@ -434,7 +469,7 @@ In order to make a purchase, two operations are needed:
 
 - Submit the payment and listen for updated transactions on the `SKPaymentQueue`.
 
-The framework takes care of caching SKProducts so that future requests for the same ```SKProduct``` don't need to perform a new ```SKProductRequest```.
+The framework takes care of caching SKProducts so that future requests for the same `SKProduct` don't need to perform a new `SKProductRequest`.
 
 ### Payment queue
 
@@ -457,7 +492,7 @@ The order in which transaction updates are processed is:
 2. restore purchases (transactionState: `.restored`, or `restoreCompletedTransactionsFailedWithError`, or `paymentQueueRestoreCompletedTransactionsFinished`)
 3. complete transactions (transactionState: `.purchased`, `.failed`, `.restored`, `.deferred`)
 
-Any transactions where state == `.purchasing` are ignored.
+Any transactions where state is `.purchasing` are ignored.
 
 See [this pull request](https://github.com/bizz84/SwiftyStoreKit/pull/131) for full details about how the payment flows have been implemented.
 
@@ -478,6 +513,7 @@ It would be great to showcase apps using SwiftyStoreKit here. Pull requests welc
 * [Tactus Music Player](https://itunes.apple.com/app/id557446352) - Alternative music player app
 * [Drops](https://itunes.apple.com/app/id939540371) - Language learning app
 * [Fresh Snow](https://itunes.apple.com/app/id1063000470) - Colorado Ski Report
+* [Zmeu Grand Canyon](http://grandcanyon.zmeu.guide/) - Interactive hiking map & planner
 
 
 ## License

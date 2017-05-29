@@ -30,11 +30,7 @@ class WODTypeTableViewCell: UITableViewCell {
         
         wodTypeLabel.text = wodType.rawValue
         
-        if wodType == .custom {
-            wodsCompletedLabel.text = ""
-        } else {
-            wodsCompletedLabel.text = "\(completedWods)/\(totalWods)"
-        }
+        wodsCompletedLabel.text = "\(completedWods)/\(totalWods)"
     }
     
     func populateFavorites(with wodsCount: Int) {

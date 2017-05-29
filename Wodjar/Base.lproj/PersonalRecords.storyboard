@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WUq-ht-hM7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WUq-ht-hM7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -190,11 +190,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="RTd-w4-dAa">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="j6D-qC-Khd">
-                            <connections>
-                                <action selector="didTapCancelButton:" destination="S7V-cw-Rut" id="kEr-l6-uue"/>
-                            </connections>
-                        </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="aCt-RH-cyq">
                             <rect key="frame" x="90.5" y="5.5" width="194" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -227,11 +222,6 @@
                                 <constraint firstItem="I0P-BA-4SZ" firstAttribute="centerX" secondItem="aCt-RH-cyq" secondAttribute="centerX" id="rel-kX-jhY"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="3WM-PV-VMg">
-                            <connections>
-                                <action selector="didTapSave:" destination="S7V-cw-Rut" id="Mem-uN-Z7e"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addPictureButton" destination="19a-Bz-5eD" id="QpD-jQ-E3w"/>
@@ -328,7 +318,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bsd-KT-v61" id="qoP-6K-xSY">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0P-ez-3ka">
@@ -337,26 +327,23 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="usB-ol-uN3">
-                                                    <rect key="frame" x="351" y="18" width="8" height="8"/>
-                                                    <color key="backgroundColor" red="0.29803921568627451" green="0.85098039215686272" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="8" id="9z9-js-yDb"/>
-                                                        <constraint firstAttribute="width" secondItem="usB-ol-uN3" secondAttribute="height" multiplier="1:1" id="Vjf-ze-D0Z"/>
-                                                    </constraints>
-                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdk-zk-FEl">
+                                                    <rect key="frame" x="317" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="m0P-ez-3ka" firstAttribute="centerY" secondItem="qoP-6K-xSY" secondAttribute="centerY" id="4Ij-7p-EMx"/>
-                                                <constraint firstItem="usB-ol-uN3" firstAttribute="centerY" secondItem="qoP-6K-xSY" secondAttribute="centerY" id="fi2-dB-soX"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="mdk-zk-FEl" secondAttribute="trailing" constant="8" id="MwH-PE-enC"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="m0P-ez-3ka" secondAttribute="leading" constant="-8" id="h6d-DE-QT6"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="usB-ol-uN3" secondAttribute="trailing" constant="8" id="mLW-cS-eYf"/>
-                                                <constraint firstItem="usB-ol-uN3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m0P-ez-3ka" secondAttribute="trailing" constant="8" symbolic="YES" id="yah-6x-T1w"/>
+                                                <constraint firstItem="mdk-zk-FEl" firstAttribute="centerY" secondItem="qoP-6K-xSY" secondAttribute="centerY" id="vAt-qi-Kad"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="m0P-ez-3ka" id="ohA-tt-0rr"/>
-                                            <outlet property="presentView" destination="usB-ol-uN3" id="CMT-xG-bX5"/>
+                                            <outlet property="recordLabel" destination="mdk-zk-FEl" id="hfq-Yj-CZD"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -432,7 +419,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J09-NJ-Ixo" id="ZxX-rk-ghm">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="62.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RX" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bze-TD-w1h">
@@ -579,6 +566,6 @@
         <image name="delete icon" width="15" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JYC-OU-xEj"/>
+        <segue reference="dUy-xN-pKV"/>
     </inferredMetricsTieBreakers>
 </document>

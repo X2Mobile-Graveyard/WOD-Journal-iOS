@@ -15,9 +15,6 @@ protocol CustomWodUpdateDelegate {
 }
 
 class CustomWODDetailsViewController: WODDetailsTableViewController {
-
-    // @IBOutlets
-    @IBOutlet var saveButton: UIBarButtonItem!
     
     // @Properties
     var wodCopy: Workout!
@@ -26,9 +23,16 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
     var delegate : CustomWodUpdateDelegate?
     var service: WODService!
     
+    // MARK: - View Controller Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         wodCopy = Workout(using: wod)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
+                                                            target: self,
+                                                            action: #selector(didTapEditButton(_:)))
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -37,35 +41,6 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
         if self.isMovingFromParentViewController {
             removeImageFromCache(localOnly: true)
             wod.updateValues(from: wodCopy)
-        }
-    }
-    
-    // MARK: - HelperMethods
-    
-    func removeImage() {
-        saveButton.isEnabled = true
-        wod.imageUrl = nil
-        _cellTypesInOrder = nil
-        tableView.reloadData()
-    }
-    
-    func setImage(from localPath: String) {
-        wod.imageUrl = localPath
-        _cellTypesInOrder = nil
-        tableView.reloadData()
-    }
-    
-    func removeImageFromCache(localOnly: Bool) {
-        if wod.imageUrl != nil {
-            var url: URL
-            if wod.imageUrl!.isLocalFileUrl() {
-                url = URL(fileURLWithPath: wod.imageUrl!)
-                SDImageCache.shared().removeImage(forKey:url.absoluteString, withCompletion: nil)
-            } else if !localOnly {
-                if let url = URL(string: wod.imageUrl!) {
-                    SDImageCache.shared().removeImage(forKey:url.absoluteString, withCompletion: nil)
-                }
-            }
         }
     }
     
@@ -101,6 +76,16 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
                         actionButtonTitle: "Delete") { (_) in
                             self.deleteWod()
         }
+    }
+    
+    func didTapEditButton(_ sender: Any) {
+        canEdit = true
+        _cellTypesInOrder = nil
+        tableView.reloadData()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
+                                                            target: self,
+                                                            action: #selector(didTapSaveButton(_:)))
+
     }
     
     // MARK: - Service Calls
@@ -175,13 +160,40 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
         
         return alertController
     }
+    
+    // MARK: - HelperMethods
+    
+    func removeImage() {
+        wod.imageUrl = nil
+        _cellTypesInOrder = nil
+        tableView.reloadData()
+    }
+    
+    func setImage(from localPath: String) {
+        wod.imageUrl = localPath
+        _cellTypesInOrder = nil
+        tableView.reloadData()
+    }
+    
+    func removeImageFromCache(localOnly: Bool) {
+        if wod.imageUrl != nil {
+            var url: URL
+            if wod.imageUrl!.isLocalFileUrl() {
+                url = URL(fileURLWithPath: wod.imageUrl!)
+                SDImageCache.shared().removeImage(forKey:url.absoluteString, withCompletion: nil)
+            } else if !localOnly {
+                if let url = URL(string: wod.imageUrl!) {
+                    SDImageCache.shared().removeImage(forKey:url.absoluteString, withCompletion: nil)
+                }
+            }
+        }
+    }
 }
 
 extension CustomWODDetailsViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         tableView.beginUpdates()
         tableView.endUpdates()
-        saveButton.isEnabled = true
         
         return true
     }
@@ -197,8 +209,6 @@ extension CustomWODDetailsViewController: UIImagePickerControllerDelegate, UINav
             dismiss(animated: true, completion: nil)
             return
         }
-        
-        saveButton.isEnabled = true
         
         let imageName = "example.jpg"
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as String

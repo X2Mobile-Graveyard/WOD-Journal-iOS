@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,30 +27,28 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jna-gg-NVP">
-                                            <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                            <rect key="frame" x="16" y="11" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="13w-Go-tLP">
-                                            <rect key="frame" x="359" y="17" width="8" height="8"/>
-                                            <color key="backgroundColor" red="0.29803921570000003" green="0.85098039219999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="8" id="8XX-VG-Wh8"/>
-                                                <constraint firstAttribute="width" secondItem="13w-Go-tLP" secondAttribute="height" multiplier="1:1" id="fK3-vR-FsW"/>
-                                            </constraints>
-                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLu-0G-Iib">
+                                            <rect key="frame" x="317" y="11" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="13w-Go-tLP" secondAttribute="trailing" id="IU0-I5-R7F"/>
-                                        <constraint firstAttribute="leadingMargin" secondItem="Jna-gg-NVP" secondAttribute="leading" id="ZWX-YH-dBf"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="JLu-0G-Iib" secondAttribute="trailing" constant="8" id="RFz-i0-5OA"/>
+                                        <constraint firstItem="JLu-0G-Iib" firstAttribute="centerY" secondItem="GuW-Oi-heb" secondAttribute="centerY" id="Rlt-cV-Je2"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="Jna-gg-NVP" secondAttribute="leading" constant="-8" id="ZWX-YH-dBf"/>
                                         <constraint firstItem="Jna-gg-NVP" firstAttribute="centerY" secondItem="GuW-Oi-heb" secondAttribute="centerY" id="lkD-xX-qhk"/>
-                                        <constraint firstItem="13w-Go-tLP" firstAttribute="centerY" secondItem="GuW-Oi-heb" secondAttribute="centerY" id="utv-9g-BNb"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="nameLabel" destination="Jna-gg-NVP" id="lPI-lL-vyc"/>
-                                    <outlet property="presentView" destination="13w-Go-tLP" id="Se5-nS-Pwe"/>
+                                    <outlet property="recordLabel" destination="JLu-0G-Iib" id="bu9-4v-8Al"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -63,11 +61,20 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="searchDisplayController" destination="Pce-8B-4pl" id="wTh-0o-mIo"/>
                         <segue destination="dxZ-X0-OCc" kind="show" identifier="DefaultWodDetails" id="nzL-mg-FZL"/>
                         <segue destination="kIQ-7G-Sik" kind="show" identifier="GoToCustomWodDetailsFromFavorites" id="A13-4L-vZN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYT-eI-z7k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="Pce-8B-4pl">
+                    <connections>
+                        <outlet property="delegate" destination="LJZ-He-br4" id="906-GW-BDs"/>
+                        <outlet property="searchContentsController" destination="LJZ-He-br4" id="76o-gU-kTw"/>
+                        <outlet property="searchResultsDataSource" destination="LJZ-He-br4" id="6bS-C1-z8r"/>
+                        <outlet property="searchResultsDelegate" destination="LJZ-He-br4" id="2UC-bG-lrc"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2831" y="1130"/>
         </scene>
@@ -418,9 +425,9 @@
                                     <subviews>
                                         <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Zb-Hv-c6Y">
                                             <rect key="frame" x="8" y="0.0" width="359" height="217"/>
-                                            <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.36078431372549019" green="0.38823529411764707" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="217" id="yLQ-PV-Itr"/>
+                                                <constraint firstAttribute="height" priority="999" constant="217" id="yLQ-PV-Itr"/>
                                             </constraints>
                                         </webView>
                                     </subviews>
@@ -604,6 +611,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LLf-hq-1Q1"/>
-        <segue reference="rB8-K5-aoL"/>
+        <segue reference="hLe-7L-VZs"/>
     </inferredMetricsTieBreakers>
 </document>

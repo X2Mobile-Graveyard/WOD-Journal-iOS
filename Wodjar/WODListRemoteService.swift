@@ -259,6 +259,10 @@ class WODListRemoteServiceImpl: WODListRemoteService {
     }
     
     func getResults(for wod: Workout, with completion: GetResultsRequestCompletion?) {
+        if !UserManager.sharedInstance.isAuthenticated() {
+            completion?(.success([WODResult]()))
+            return
+        }
         let request = GetWodResultRequest(with: wod.id!)
         
         request.success = { _, result in
@@ -293,8 +297,8 @@ class WODListRemoteServiceImpl: WODListRemoteService {
     private func getUserWods(with completion: GetWodsRequestCompletion?) {
         let request = GetWodsRequest()
         
-        request.success = { _, response in
-            guard let response = response as? [String: Any] else {
+        request.success = { _, recvResponse in
+            guard let response = recvResponse as? [String: Any] else {
                 completion?(.success(WorkoutList()))
                 return
             }

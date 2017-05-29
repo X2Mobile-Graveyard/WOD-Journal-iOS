@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,30 +27,28 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="onc-56-lAO">
-                                            <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                            <rect key="frame" x="16" y="11" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r3Y-WK-kVz">
-                                            <rect key="frame" x="351" y="18" width="8" height="8"/>
-                                            <color key="backgroundColor" red="0.29803921570000003" green="0.85098039219999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="r3Y-WK-kVz" secondAttribute="height" multiplier="1:1" id="Y6S-sX-klo"/>
-                                                <constraint firstAttribute="width" constant="8" id="Z8O-BA-fcj"/>
-                                            </constraints>
-                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byC-8h-rH7">
+                                            <rect key="frame" x="317" y="11.5" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="leadingMargin" secondItem="onc-56-lAO" secondAttribute="leading" id="Y9b-Mr-KmZ"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="onc-56-lAO" secondAttribute="leading" constant="-8" id="Y9b-Mr-KmZ"/>
                                         <constraint firstItem="onc-56-lAO" firstAttribute="centerY" secondItem="7fg-uY-RMT" secondAttribute="centerY" id="ali-dt-5va"/>
-                                        <constraint firstItem="r3Y-WK-kVz" firstAttribute="centerY" secondItem="7fg-uY-RMT" secondAttribute="centerY" id="jg2-BS-WVv"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="r3Y-WK-kVz" secondAttribute="trailing" constant="8" id="zMe-c7-doF"/>
+                                        <constraint firstItem="byC-8h-rH7" firstAttribute="centerY" secondItem="7fg-uY-RMT" secondAttribute="centerY" id="lrs-Aa-KZP"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="byC-8h-rH7" secondAttribute="trailing" constant="8" id="ovr-dI-Ohb"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="nameLabel" destination="onc-56-lAO" id="duq-lD-hjo"/>
-                                    <outlet property="presentView" destination="r3Y-WK-kVz" id="n4a-Pc-MIf"/>
+                                    <outlet property="recordLabel" destination="byC-8h-rH7" id="Gw1-xz-PcL"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -138,6 +136,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="changeImageView" destination="pRo-RZ-56K" id="qp6-fr-DZw"/>
                                     <outlet property="wodImageView" destination="oQh-hs-D7M" id="HO8-LB-tTK"/>
                                 </connections>
                             </tableViewCell>
@@ -375,17 +374,10 @@
                             <outlet property="delegate" destination="Jom-Sn-IFz" id="biM-gg-Sc3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="Vya-vZ-l7j">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="tpg-sK-hvx">
-                            <connections>
-                                <action selector="didTapSaveButton:" destination="Jom-Sn-IFz" id="gU8-Gh-hLr"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Title" id="Vya-vZ-l7j"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="saveButton" destination="tpg-sK-hvx" id="FRp-2I-w0H"/>
                         <segue destination="Djj-ee-065" kind="show" identifier="LogResultSegueIdentifier" id="axh-eq-1kK"/>
                         <segue destination="66O-y6-hNb" kind="presentation" identifier="ShowFullImageSegueIdentifier" modalTransitionStyle="crossDissolve" id="5Ta-cB-uT1"/>
                         <segue destination="Djj-ee-065" kind="show" identifier="EditResultSegueIdentifier" id="tgW-Px-RJH"/>

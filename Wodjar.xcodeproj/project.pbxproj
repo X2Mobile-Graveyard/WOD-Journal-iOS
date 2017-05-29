@@ -25,11 +25,12 @@
 		BFD44D8B1E82B4C500170817 /* UnitsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD44D8A1E82B4C500170817 /* UnitsComponent.swift */; };
 		BFD44D8D1E82B4E900170817 /* UnitsComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFD44D8C1E82B4E900170817 /* UnitsComponent.xib */; };
 		BFD44D991E82D08E00170817 /* UIButton+BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD44D981E82D08E00170817 /* UIButton+BackgroundColor.swift */; };
-		BFF444061E856AD8004B05AD /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFF444051E856AD8004B05AD /* StoreKit.framework */; };
 		C45451E5AE3974B6E620C067 /* Pods_WodjarUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */; };
 		D30348301E9BBE1D007E91A5 /* GetWodResultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303482F1E9BBE1D007E91A5 /* GetWodResultRequest.swift */; };
 		D30348321E9BC364007E91A5 /* String+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30348311E9BC364007E91A5 /* String+DateFormatter.swift */; };
 		D30348341E9C00B1007E91A5 /* Date+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30348331E9C00B1007E91A5 /* Date+DateFormatter.swift */; };
+		D303682C1ED4132800FCF6C9 /* UserRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303682B1ED4132800FCF6C9 /* UserRemoteService.swift */; };
+		D303682E1ED4155F00FCF6C9 /* UpdateUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303682D1ED4155F00FCF6C9 /* UpdateUserRequest.swift */; };
 		D304A61E1EAE25DB00169AA2 /* DeletePRByNameRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D304A61D1EAE25DB00169AA2 /* DeletePRByNameRequest.swift */; };
 		D308AB3A1EB8783900FD7BD8 /* GetDefaultWodsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D308AB391EB8783900FD7BD8 /* GetDefaultWodsRequest.swift */; };
 		D308AB3C1EB8838900FD7BD8 /* CreateWODRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D308AB3B1EB8838900FD7BD8 /* CreateWODRequest.swift */; };
@@ -47,6 +48,8 @@
 		D337E8031ECC64B6006916DC /* PersonalRecords.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D337E8011ECC64B6006916DC /* PersonalRecords.storyboard */; };
 		D337E8051ECC66E5006916DC /* CustomWODs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D337E8041ECC66E5006916DC /* CustomWODs.storyboard */; };
 		D337E8081ECC6834006916DC /* DefaultWODs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D337E8061ECC6834006916DC /* DefaultWODs.storyboard */; };
+		D337E80A1ECC97A3006916DC /* TestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337E8091ECC97A3006916DC /* TestTableViewController.swift */; };
+		D3463F631EDC418C00751167 /* videoEmbed.html in Resources */ = {isa = PBXBuildFile; fileRef = D3463F621EDC418C00751167 /* videoEmbed.html */; };
 		D347A5D21E8946BA00AE888E /* WODTypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5D01E8946BA00AE888E /* WODTypesTableViewController.swift */; };
 		D347A5D31E8946BA00AE888E /* WODTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5D11E8946BA00AE888E /* WODTypeTableViewCell.swift */; };
 		D347A5D71E8946C400AE888E /* WODTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A5D41E8946C400AE888E /* WODTypeTableViewController.swift */; };
@@ -74,6 +77,10 @@
 		D38521031E9CC52300AFB7C2 /* WODResultRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38521021E9CC52300AFB7C2 /* WODResultRemoteService.swift */; };
 		D38521051E9CC6CD00AFB7C2 /* WODResultViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38521041E9CC6CD00AFB7C2 /* WODResultViewController+UI.swift */; };
 		D385210E1E9D1B7500AFB7C2 /* WODJournalResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D385210D1E9D1B7500AFB7C2 /* WODJournalResultViewController.swift */; };
+		D388D6891ECDD06D0022ADFC /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388D6881ECDD06D0022ADFC /* MoreTableViewController.swift */; };
+		D388D68C1ECDD3490022ADFC /* MoreSimpleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388D68B1ECDD3490022ADFC /* MoreSimpleTextTableViewCell.swift */; };
+		D388D6901ECDD3670022ADFC /* MoreUserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388D68F1ECDD3670022ADFC /* MoreUserProfileTableViewCell.swift */; };
+		D388D6931ECF07B90022ADFC /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388D6921ECF07B90022ADFC /* UserService.swift */; };
 		D38E4B6C1EC0B14400ECCD93 /* CreateWODResultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38E4B6B1EC0B14400ECCD93 /* CreateWODResultRequest.swift */; };
 		D38E4B6E1EC0C11200ECCD93 /* UpdateWODResultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38E4B6D1EC0C11200ECCD93 /* UpdateWODResultRequest.swift */; };
 		D38E4B701EC0C38B00ECCD93 /* DeleteWODResultRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38E4B6F1EC0C38B00ECCD93 /* DeleteWODResultRequest.swift */; };
@@ -119,6 +126,8 @@
 		D3EB89131E72E00E0028F28A /* PersonalRecordsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89121E72E00E0028F28A /* PersonalRecordsListViewController.swift */; };
 		D3EB89151E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89141E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift */; };
 		D3EB89171E72EF9D0028F28A /* PersonalRecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB89161E72EF9D0028F28A /* PersonalRecordType.swift */; };
+		D3F7CED11ED85E54008AB806 /* MoreUnitTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F7CED01ED85E54008AB806 /* MoreUnitTypeTableViewCell.swift */; };
+		D3F7CED31ED89B55008AB806 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F7CED21ED89B55008AB806 /* Reachability.swift */; };
 		D3FD71411E6E00730047492D /* FullSizeImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FD71401E6E00730047492D /* FullSizeImageViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -169,11 +178,12 @@
 		BFD44D8A1E82B4C500170817 /* UnitsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnitsComponent.swift; path = Views/UnitsComponent.swift; sourceTree = "<group>"; };
 		BFD44D8C1E82B4E900170817 /* UnitsComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UnitsComponent.xib; path = Views/UnitsComponent.xib; sourceTree = "<group>"; };
 		BFD44D981E82D08E00170817 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+BackgroundColor.swift"; path = "Views/UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
-		BFF444051E856AD8004B05AD /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C1220ABC4B8853E1FB02BD04 /* Pods-WodjarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D303482F1E9BBE1D007E91A5 /* GetWodResultRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetWodResultRequest.swift; sourceTree = "<group>"; };
 		D30348311E9BC364007E91A5 /* String+DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+DateFormatter.swift"; sourceTree = "<group>"; };
 		D30348331E9C00B1007E91A5 /* Date+DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+DateFormatter.swift"; sourceTree = "<group>"; };
+		D303682B1ED4132800FCF6C9 /* UserRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRemoteService.swift; sourceTree = "<group>"; };
+		D303682D1ED4155F00FCF6C9 /* UpdateUserRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateUserRequest.swift; sourceTree = "<group>"; };
 		D304A61D1EAE25DB00169AA2 /* DeletePRByNameRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletePRByNameRequest.swift; sourceTree = "<group>"; };
 		D308AB391EB8783900FD7BD8 /* GetDefaultWodsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDefaultWodsRequest.swift; sourceTree = "<group>"; };
 		D308AB3B1EB8838900FD7BD8 /* CreateWODRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateWODRequest.swift; sourceTree = "<group>"; };
@@ -191,6 +201,8 @@
 		D337E8021ECC64B6006916DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PersonalRecords.storyboard; sourceTree = "<group>"; };
 		D337E8041ECC66E5006916DC /* CustomWODs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomWODs.storyboard; sourceTree = "<group>"; };
 		D337E8071ECC6834006916DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DefaultWODs.storyboard; sourceTree = "<group>"; };
+		D337E8091ECC97A3006916DC /* TestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTableViewController.swift; sourceTree = "<group>"; };
+		D3463F621EDC418C00751167 /* videoEmbed.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = videoEmbed.html; sourceTree = "<group>"; };
 		D347A5D01E8946BA00AE888E /* WODTypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypesTableViewController.swift; sourceTree = "<group>"; };
 		D347A5D11E8946BA00AE888E /* WODTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypeTableViewCell.swift; sourceTree = "<group>"; };
 		D347A5D41E8946C400AE888E /* WODTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODTypeTableViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +230,10 @@
 		D38521021E9CC52300AFB7C2 /* WODResultRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODResultRemoteService.swift; sourceTree = "<group>"; };
 		D38521041E9CC6CD00AFB7C2 /* WODResultViewController+UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WODResultViewController+UI.swift"; sourceTree = "<group>"; };
 		D385210D1E9D1B7500AFB7C2 /* WODJournalResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODJournalResultViewController.swift; sourceTree = "<group>"; };
+		D388D6881ECDD06D0022ADFC /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
+		D388D68B1ECDD3490022ADFC /* MoreSimpleTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreSimpleTextTableViewCell.swift; sourceTree = "<group>"; };
+		D388D68F1ECDD3670022ADFC /* MoreUserProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreUserProfileTableViewCell.swift; sourceTree = "<group>"; };
+		D388D6921ECF07B90022ADFC /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		D38E4B6B1EC0B14400ECCD93 /* CreateWODResultRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateWODResultRequest.swift; sourceTree = "<group>"; };
 		D38E4B6D1EC0C11200ECCD93 /* UpdateWODResultRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateWODResultRequest.swift; sourceTree = "<group>"; };
 		D38E4B6F1EC0C38B00ECCD93 /* DeleteWODResultRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteWODResultRequest.swift; sourceTree = "<group>"; };
@@ -263,6 +279,8 @@
 		D3EB89121E72E00E0028F28A /* PersonalRecordsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordsListViewController.swift; sourceTree = "<group>"; };
 		D3EB89141E72ED7C0028F28A /* PresonalRecordsListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresonalRecordsListTableViewCell.swift; sourceTree = "<group>"; };
 		D3EB89161E72EF9D0028F28A /* PersonalRecordType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordType.swift; sourceTree = "<group>"; };
+		D3F7CED01ED85E54008AB806 /* MoreUnitTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreUnitTypeTableViewCell.swift; sourceTree = "<group>"; };
+		D3F7CED21ED89B55008AB806 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		D3FD71401E6E00730047492D /* FullSizeImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullSizeImageViewController.swift; sourceTree = "<group>"; };
 		ECD97B1867118548A03461ED /* Pods-Wodjar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wodjar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wodjar/Pods-Wodjar.release.xcconfig"; sourceTree = "<group>"; };
 		F4F253F68B19059302B926F9 /* Pods-WodjarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarUITests/Pods-WodjarUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -274,7 +292,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7976EB68A7A18DB547AE3C58 /* Pods_Wodjar.framework in Frameworks */,
-				BFF444061E856AD8004B05AD /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +361,7 @@
 				4325BE871E67185500A0F969 /* Info.plist */,
 				D3BB36641E82AFCF0078CE53 /* defaultPRs.plist */,
 				D397B77E1EB21B4C0024989B /* main.swift */,
+				D337E8091ECC97A3006916DC /* TestTableViewController.swift */,
 			);
 			name = WodJar;
 			path = Wodjar;
@@ -385,7 +403,6 @@
 		685B67A253EF450686AB3F73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BFF444051E856AD8004B05AD /* StoreKit.framework */,
 				3BD1E7DC81B0E81B25A0CA56 /* Pods_Wodjar.framework */,
 				AE88FC34463D554CAB60CE0F /* Pods_WodjarTests.framework */,
 				6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */,
@@ -429,10 +446,12 @@
 		BFD44D841E82AC6700170817 /* MoreTab */ = {
 			isa = PBXGroup;
 			children = (
+				D388D68A1ECDD3210022ADFC /* MoreTableViewCells */,
 				BFD44D871E82ACF700170817 /* MoreViewController.swift */,
 				BF315FEA1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift */,
 				D34B76951EAA307C0058D20B /* ProSubscriptionViewController.swift */,
 				D34B76971EAA3B210058D20B /* SubscriptionDescriptionViewController.swift */,
+				D388D6881ECDD06D0022ADFC /* MoreTableViewController.swift */,
 			);
 			name = MoreTab;
 			sourceTree = "<group>";
@@ -465,6 +484,14 @@
 				98340F3818D9B7BA367DBDF6 /* Pods-WodjarUITests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D303682A1ED412D500FCF6C9 /* User Remote Service */ = {
+			isa = PBXGroup;
+			children = (
+				D303682B1ED4132800FCF6C9 /* UserRemoteService.swift */,
+			);
+			name = "User Remote Service";
 			sourceTree = "<group>";
 		};
 		D310E5E91E759EC300AD6B74 /* PersonalRecordsDetailsListController */ = {
@@ -584,6 +611,7 @@
 				D347A5DD1E8946E200AE888E /* WODVideoTableViewCell.swift */,
 				D347A5DE1E8946E200AE888E /* LogWODResultTableViewCell.swift */,
 				D347A5DF1E8946E200AE888E /* WODResultTableViewCell.swift */,
+				D3463F621EDC418C00751167 /* videoEmbed.html */,
 			);
 			name = WODDetailsCells;
 			sourceTree = "<group>";
@@ -628,6 +656,24 @@
 				D385210D1E9D1B7500AFB7C2 /* WODJournalResultViewController.swift */,
 			);
 			name = SuperClasses;
+			sourceTree = "<group>";
+		};
+		D388D68A1ECDD3210022ADFC /* MoreTableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				D388D68B1ECDD3490022ADFC /* MoreSimpleTextTableViewCell.swift */,
+				D388D68F1ECDD3670022ADFC /* MoreUserProfileTableViewCell.swift */,
+				D3F7CED01ED85E54008AB806 /* MoreUnitTypeTableViewCell.swift */,
+			);
+			name = MoreTableViewCells;
+			sourceTree = "<group>";
+		};
+		D388D6911ECF07A00022ADFC /* User Services */ = {
+			isa = PBXGroup;
+			children = (
+				D388D6921ECF07B90022ADFC /* UserService.swift */,
+			);
+			name = "User Services";
 			sourceTree = "<group>";
 		};
 		D3B8B10C1E9EA12E006CABC5 /* S3 Remote Services */ = {
@@ -680,6 +726,8 @@
 				D37A7C131EBC9DE500840D73 /* LogoutRequest.swift */,
 				D38E4B6D1EC0C11200ECCD93 /* UpdateWODResultRequest.swift */,
 				D38E4B6F1EC0C38B00ECCD93 /* DeleteWODResultRequest.swift */,
+				D303682D1ED4155F00FCF6C9 /* UpdateUserRequest.swift */,
+				D3F7CED21ED89B55008AB806 /* Reachability.swift */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -746,6 +794,7 @@
 		D3EB89011E729A590028F28A /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D388D6911ECF07A00022ADFC /* User Services */,
 				D31BCB161E97EF9700A8FCB8 /* Authentication Services */,
 				D31BCB151E97EF8D00A8FCB8 /* WOD Services */,
 				D31BCB141E97EF7900A8FCB8 /* PR Services */,
@@ -756,6 +805,7 @@
 		D3EB89041E729ABB0028F28A /* RemoteServices */ = {
 			isa = PBXGroup;
 			children = (
+				D303682A1ED412D500FCF6C9 /* User Remote Service */,
 				D3B8B10C1E9EA12E006CABC5 /* S3 Remote Services */,
 				D31BCB1B1E97F00200A8FCB8 /* WOD Remote Services */,
 				D31BCB1A1E97EFF400A8FCB8 /* Authentication Remote Services */,
@@ -864,7 +914,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Keychain = {
 								enabled = 1;
@@ -916,6 +966,7 @@
 				D337E7FD1ECC62C8006916DC /* Authentication.storyboard in Resources */,
 				BFD44D8D1E82B4E900170817 /* UnitsComponent.xib in Resources */,
 				4325BE861E67185500A0F969 /* LaunchScreen.storyboard in Resources */,
+				D3463F631EDC418C00751167 /* videoEmbed.html in Resources */,
 				D337E8051ECC66E5006916DC /* CustomWODs.storyboard in Resources */,
 				BFD44D821E82A58E00170817 /* MoreComponent.xib in Resources */,
 				D337E8081ECC6834006916DC /* DefaultWODs.storyboard in Resources */,
@@ -1100,11 +1151,13 @@
 				D3B8B10E1E9EA14A006CABC5 /* S3RemoteService.swift in Sources */,
 				D3B4876E1E8C13BD0042DE2A /* GetRecordsForNameRequest.swift in Sources */,
 				D3BB366C1E840CD80078CE53 /* UIViewController+AlertController.swift in Sources */,
+				D303682C1ED4132800FCF6C9 /* UserRemoteService.swift in Sources */,
 				BFD44D8B1E82B4C500170817 /* UnitsComponent.swift in Sources */,
 				BF315FED1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift in Sources */,
 				D38521031E9CC52300AFB7C2 /* WODResultRemoteService.swift in Sources */,
 				BFD44D881E82ACF700170817 /* MoreViewController.swift in Sources */,
 				D3E695181E7937C00060D9D2 /* WorkoutList.swift in Sources */,
+				D3F7CED11ED85E54008AB806 /* MoreUnitTypeTableViewCell.swift in Sources */,
 				BF5B42A61E8185AA001CA306 /* IBControl.swift in Sources */,
 				D37A7C141EBC9DE500840D73 /* LogoutRequest.swift in Sources */,
 				D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */,
@@ -1135,13 +1188,16 @@
 				D347A5E91E8946F100AE888E /* CustomWODDetailsViewController.swift in Sources */,
 				BFD44D991E82D08E00170817 /* UIButton+BackgroundColor.swift in Sources */,
 				D3643B9F1E93DEBB0002E98E /* WODResultViewController.swift in Sources */,
+				D388D6901ECDD3670022ADFC /* MoreUserProfileTableViewCell.swift in Sources */,
 				D308AB3E1EB887A300FD7BD8 /* UpdateWodRequest.swift in Sources */,
 				4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */,
 				D347A5D21E8946BA00AE888E /* WODTypesTableViewController.swift in Sources */,
 				D31BCB181E97EFBE00A8FCB8 /* WodListService.swift in Sources */,
 				D347A5E11E8946E200AE888E /* WODDescriptionTableViewCell.swift in Sources */,
 				D35638641E9E570600ECC714 /* WODHistoryViewController.swift in Sources */,
+				D388D68C1ECDD3490022ADFC /* MoreSimpleTextTableViewCell.swift in Sources */,
 				D31BCB211E9982C100A8FCB8 /* GetWodsRequest.swift in Sources */,
+				D337E80A1ECC97A3006916DC /* TestTableViewController.swift in Sources */,
 				BF315FEB1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift in Sources */,
 				D3EB890A1E729FD00028F28A /* PersonalRecordViewController+UI.swift in Sources */,
 				D347A5D31E8946BA00AE888E /* WODTypeTableViewCell.swift in Sources */,
@@ -1161,6 +1217,7 @@
 				D347A5E81E8946F100AE888E /* WODDetailsTableViewController.swift in Sources */,
 				D3B4876A1E8BE2ED0042DE2A /* UserManager.swift in Sources */,
 				D3C6EF041E8A90E300E1D9D1 /* AuthenticationRemoteService.swift in Sources */,
+				D388D6891ECDD06D0022ADFC /* MoreTableViewController.swift in Sources */,
 				D3A279471E9FB73A003E1ABE /* UIViewController+Toolbar.swift in Sources */,
 				D35638611E9E34D200ECC714 /* CreateCustomWODViewController+UI.swift in Sources */,
 				D3A6EA5D1E8E3CEA006CF6B1 /* UpdatePersonalRecordRequest.swift in Sources */,
@@ -1181,16 +1238,19 @@
 				D347A5E31E8946E200AE888E /* LogWODResultTableViewCell.swift in Sources */,
 				D3C6EF0A1E8A984500E1D9D1 /* RegisterRequest.swift in Sources */,
 				D3FD71411E6E00730047492D /* FullSizeImageViewController.swift in Sources */,
+				D303682E1ED4155F00FCF6C9 /* UpdateUserRequest.swift in Sources */,
 				D347A5EC1E89479800AE888E /* WODResult.swift in Sources */,
 				D308AB3A1EB8783900FD7BD8 /* GetDefaultWodsRequest.swift in Sources */,
 				D3BB36731E8446C80078CE53 /* PersonalRecordRemoteService.swift in Sources */,
 				D3C6EF061E8A982100E1D9D1 /* LoginWithFacebookRequest.swift in Sources */,
 				D3A6EA611E8E7C00006CF6B1 /* UpdateRecordsNameRequest.swift in Sources */,
 				D3B8B1091E9EA047006CABC5 /* WODService.swift in Sources */,
+				D3F7CED31ED89B55008AB806 /* Reachability.swift in Sources */,
 				D347A5E01E8946E200AE888E /* WODImageTableViewCell.swift in Sources */,
 				D38E4B701EC0C38B00ECCD93 /* DeleteWODResultRequest.swift in Sources */,
 				D3EB89131E72E00E0028F28A /* PersonalRecordsListViewController.swift in Sources */,
 				D3BB366F1E843BD10078CE53 /* BaseRequest.swift in Sources */,
+				D388D6931ECF07B90022ADFC /* UserService.swift in Sources */,
 				D3BB36671E840B120078CE53 /* NSError+LocalDomain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

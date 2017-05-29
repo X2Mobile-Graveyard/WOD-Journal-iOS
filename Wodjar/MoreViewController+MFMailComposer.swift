@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-extension MoreViewController: MFMailComposeViewControllerDelegate {
+extension MoreTableViewController: MFMailComposeViewControllerDelegate {
     
     // MARK: - MFMailComposer Delegate
     

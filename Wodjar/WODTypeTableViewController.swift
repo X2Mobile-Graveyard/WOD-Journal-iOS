@@ -17,7 +17,8 @@ class WODTypeTableViewController: UITableViewController {
     var viewForHud: UIView {
         return tableView.superview ?? view
     }
-    
+    var resultSearchController: UISearchController!
+    var filteredWorkouts = [Workout]()
     // @Injected
     var isFavorite: Bool = false
     var workouts: [Workout]!
@@ -29,6 +30,7 @@ class WODTypeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initSearchController()
         initWodType()
         initTitle()
         tableView.tableFooterView = UIView()
@@ -47,6 +49,15 @@ class WODTypeTableViewController: UITableViewController {
         } else {
             navigationItem.title = "Favorites"
         }
+    }
+    
+    func initSearchController() {
+        self.definesPresentationContext = true
+        resultSearchController = UISearchController(searchResultsController: nil)
+        resultSearchController.searchResultsUpdater = self
+        resultSearchController.dimsBackgroundDuringPresentation = false
+        resultSearchController.searchBar.sizeToFit()
+        self.tableView.tableHeaderView = resultSearchController.searchBar
     }
     
     func initWodType() {
@@ -71,6 +82,9 @@ class WODTypeTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if resultSearchController.isActive {
+            return filteredWorkouts.count
+        }
         return workouts.count
     }
     
@@ -78,8 +92,13 @@ class WODTypeTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: workoutCellIdentifier, for: indexPath)
         
         if let customCell = cell as? PresonalRecordsListTableViewCell {
-            let selectedWorkout = workouts[indexPath.row]
-            customCell.populate(with: selectedWorkout.name!, present: selectedWorkout.isCompleted)
+            var selectedWorkout: Workout
+            if resultSearchController.isActive {
+                selectedWorkout = filteredWorkouts[indexPath.row]
+            } else {
+                selectedWorkout = workouts[indexPath.row]
+            }
+            customCell.populate(with: selectedWorkout.name!, bestRecord: selectedWorkout.bestResult)
             return customCell
         }
         
@@ -137,6 +156,28 @@ class WODTypeTableViewController: UITableViewController {
             workouts.remove(at: indexPath.row)
             self.tableView.reloadData()
         }
+    }
+}
+
+extension WODTypeTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filteredWorkouts.removeAll(keepingCapacity: false)
+        
+        guard let textToSearchFor = searchController.searchBar.text else {
+            return
+        }
+        
+        filteredWorkouts = workouts.filter {
+            if $0.name == nil {
+                return false
+            }
+            
+            let contains = $0.name!.lowercased().contains(textToSearchFor.lowercased())
+            
+            return contains
+        }
+        
+        tableView.reloadData()
     }
 }
 

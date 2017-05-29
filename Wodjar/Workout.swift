@@ -13,7 +13,7 @@ enum WODType: String {
     case hero = "Heroes"
     case challenge = "Challenges"
     case open = "Opens"
-    case custom = "Customs"
+    case custom = "Custom"
     
     static func from(hashValue: Int) -> WODType {
         switch hashValue {
@@ -89,7 +89,55 @@ enum UnitType: Int {
 class Workout: NSObject {
     // @Constants
     let noImageString = ""
-    
+    public private(set) var _bestResultWeight: Float?
+    var bestResultWeight: Float? {
+        set {
+            self._bestResultWeight = newValue
+        }
+        
+        get {
+            if self.unit == .imperial {
+                return self._bestResultWeight?.convertToImperial()
+            }
+            
+            return self._bestResultWeight
+        }
+    }
+    var bestResultTime: Int?
+    var bestResultRounds: Int?
+    var bestResult: String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.maximumFractionDigits = 2
+        switch category! {
+        case .weight:
+            if bestResultWeight != nil {
+                let resultNumber = NSNumber(value: bestResultWeight!)
+                if unit == .imperial {
+                    return "Weight: \(numberFormatter.string(from: resultNumber)!) lbs"
+                } else {
+                    return "Weight: \(numberFormatter.string(from: resultNumber)!) kg"
+                }
+            }
+            return nil
+        case .amrap:
+            if bestResultRounds != nil {
+                return "Rounds: \(bestResultRounds!)"
+            }
+            return nil
+        case .time:
+            if bestResultTime != nil {
+                let timeString = timeAsString()
+                return timeString == "00:00" ? nil : "Time: \(timeString)"
+            }
+            return nil
+        default:
+            break
+        }
+        
+        return nil
+    }
     var id: Int?
     var wodDescription: String?
     var imageUrl: String?
@@ -153,6 +201,17 @@ class Workout: NSObject {
         self.isCompleted = dictionary["completed"] as? Bool ?? false
         self.isFavorite = dictionary["favorites"] as? Bool ?? false
         self.isDefault = dictionary["default"] as? Bool ?? true
+        
+        switch category! {
+        case .weight:
+            _bestResultWeight = dictionary["best_result"] as? Float
+        case .amrap:
+            self.bestResultRounds = dictionary["best_result"] as? Int
+        case .time:
+            self.bestResultTime = dictionary["best_result"] as? Int
+        default:
+            break
+        }
     }
     
     convenience init(using wod: Workout) {
@@ -225,6 +284,61 @@ class Workout: NSObject {
                 return false
             }
             return true
+        }
+    }
+    
+    private func timeAsString() -> String {
+        guard let timeInSeconds = bestResultTime else {
+            return "00:00"
+        }
+        
+        let hours = timeInSeconds / 3600
+        let minutes = (timeInSeconds % 3600) / 60
+        let seconds = (timeInSeconds % 3600) % 60
+        
+        if hours == 0 {
+            return String(format: "%02d:%02d", minutes, seconds)
+        }
+        
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    func initBestRecord(with wodResult: WODResult) {
+        switch category! {
+        case .weight:
+            if _bestResultWeight == nil {
+                _bestResultWeight = wodResult._resultWeight
+            } else if _bestResultWeight! < wodResult._resultWeight! {
+                _bestResultWeight = wodResult._resultWeight
+            }
+        case .amrap:
+            if bestResultRounds == nil {
+                self.bestResultRounds = wodResult.resultRounds
+            } else if bestResultRounds! < wodResult.resultRounds! {
+                self.bestResultRounds = wodResult.resultRounds
+            }
+        case .time:
+            if bestResultTime == nil {
+                self.bestResultTime = wodResult.resultTime
+            } else if bestResultTime! > wodResult.resultTime! {
+                self.bestResultTime = wodResult.resultTime
+            }
+        default:
+            break
+        }
+    }
+    
+    func updateBestRecord() {
+        _bestResultWeight = nil
+        bestResultTime = nil
+        bestResultRounds = nil
+        
+        if results == nil {
+            return
+        }
+        
+        for result in results! {
+            initBestRecord(with: result)
         }
     }
 }

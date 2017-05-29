@@ -13,6 +13,7 @@ import FacebookCore
 struct AuthenticationService {
     
     let remote: AuthenticationRemoteService
+    let s3Remote: S3RemoteService
     
     // MARK: - Public Methods
     
@@ -41,7 +42,17 @@ struct AuthenticationService {
         
     }
     
-    func register(with email: String?, password: String?, confirmationPassword: String?, completion: RegisterCompletion?) {
+    func register(with email: String?,
+                  password: String?,
+                  confirmationPassword: String?,
+                  name: String?,
+                  imageUrl: String?,
+                  completion: RegisterCompletion?) {
+        guard let name = name else {
+            completion?(.failure(NSError.localError(with: "Please enter your name")))
+            return
+        }
+        
         guard let email = email else {
             completion?(.failure(NSError.localError(with: "Please enter an email")))
             return
@@ -54,6 +65,11 @@ struct AuthenticationService {
         
         guard let confirmationPassword = confirmationPassword else {
             completion?(.failure(NSError.localError(with: "Please enter a confirmation password")))
+            return
+        }
+        
+        if name.characters.count == 0 {
+            completion?(.failure(NSError.localError(with: "Please enter your name")))
             return
         }
         
@@ -77,7 +93,27 @@ struct AuthenticationService {
             return
         }
         
-        remote.registerUser(with: email, password: password, completion: completion)
+        if imageUrl == nil {
+            remote.registerUser(with: email, password: password, name: name, imageUrl: imageUrl, completion: completion)
+            return
+        }
+        
+        let url = URL(fileURLWithPath: imageUrl!)
+        
+        s3Remote.uploadImage(with: url, key: email) { (result) in
+            switch result {
+            case let .success(s3Path):
+                UserManager.sharedInstance.imageUrl = s3Path
+            case .failure(_):
+                break
+            }
+            
+            self.remote.registerUser(with: email,
+                                     password: password,
+                                     name: name,
+                                     imageUrl: UserManager.sharedInstance.imageUrl,
+                                     completion: completion)
+        }
     }
     
     func facebookLogin(on viewController: UIViewController, with completion: FacebookLoginCompletion?) {

@@ -27,7 +27,6 @@ class WODResultViewController: WODJournalResultViewController {
     var controllerMode: ControllerType!
     var service: WODResultService!
     var wod: Workout!
-    var shouldSaveChanges =  false
     
     // @Properties
     var resultCopy: WODResult!
@@ -51,6 +50,10 @@ class WODResultViewController: WODJournalResultViewController {
         if controllerMode == .createMode {
             deleteButton.isHidden = true
         }
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(changedUnitType),
+                                               name: NSNotification.Name(rawValue: "UnitType"),
+                                               object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,6 +61,10 @@ class WODResultViewController: WODJournalResultViewController {
         if controllerMode != .editMode {
             resultTextField.becomeFirstResponder()
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Helper Methods
@@ -113,7 +120,6 @@ class WODResultViewController: WODJournalResultViewController {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
                                                                 target: self,
                                                                 action: #selector(self.didTapSaveButton(_:)))
-            self.shouldSaveChanges = true
         }
     }
     
@@ -198,6 +204,7 @@ class WODResultViewController: WODJournalResultViewController {
     func updateResult() {
         MBProgressHUD.showAdded(to: view, animated: true)
         service.update(wodResult: resultCopy, for: wod, with: pickedImagePath) { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
             switch result {
             case .success():
                 self.result.updateValues(from: self.resultCopy)
@@ -209,6 +216,12 @@ class WODResultViewController: WODJournalResultViewController {
         }
     }
     
+    // MARK: - Helper Methods
+    
+    func changedUnitType() {
+        setupResultTextField()
+        setupResultTypeLabel()
+    }
 }
 
 extension WODResultViewController: UITextViewDelegate {

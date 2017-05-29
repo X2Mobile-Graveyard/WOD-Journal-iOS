@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        completeTransaction()
+//        completeTransaction()
         
         let tabBarController = window?.rootViewController as! UITabBarController
         tabBarController.delegate = self
@@ -37,6 +37,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let pageControl = UIPageControl.appearance()
         pageControl.pageIndicatorTintColor = .lightGray
         pageControl.currentPageIndicatorTintColor = UIColor(red: 14 / 255, green: 122 / 255, blue: 254 / 255, alpha: 1)
+        
+        do {
+            Network.reachability = try Reachability(hostname: "www.google.com")
+            do {
+                try Network.reachability?.start()
+            } catch let error as Network.Error {
+                print(error)
+            } catch {
+                print(error)
+            }
+        } catch {
+            print(error)
+        }
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -87,6 +100,14 @@ extension AppDelegate: UITabBarControllerDelegate {
             if let wodsController = navController.topViewController as? WODTypesTableViewController {
                 if wodsController.service == nil {
                     wodsController.service = WODListService(listRemote: WODListRemoteServiceImpl(), wodRemote: WODRemoteServiceImpl())
+                }
+                
+                return
+            }
+            
+            if let moreController = navController.topViewController as? MoreTableViewController {
+                if moreController.service == nil {
+                    moreController.service = UserService(s3RemoteService: S3RemoteService(), remoteService: UserRemoteServiceImpl())
                 }
             }
         }

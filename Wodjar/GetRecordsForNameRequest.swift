@@ -14,6 +14,18 @@ class GetRecordsForNameRequest: BaseRequest {
     
     init(with name: String) {
         personalRecordName = name
+        super.init()
+        
+        #if DEBUG
+            return
+        #else
+        guard let status = Network.reachability?.status else {
+            return
+        }
+        if status == .unreachable {
+            self.useCachePolicy = true
+        }
+        #endif
     }
     
     override func requestMethod() -> RequestMethod {

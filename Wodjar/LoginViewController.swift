@@ -33,8 +33,8 @@ class LoginViewController: UIViewController {
         service.facebookLogin(on: self) { (result) in
             MBProgressHUD.hide(for: self.view, animated: true)
             switch result {
-            case let .success((id, accessToken)):
-                self.successLogin(with: id, accessToken: accessToken)
+            case .success():
+                self.successLogin()
             case .failure(_):
                 self.handleError(result: result)
             }
@@ -46,8 +46,8 @@ class LoginViewController: UIViewController {
         service.login(with: emailTextField.text, password: passwordTextField.text) { (result) in
             MBProgressHUD.hide(for: self.view, animated: true)
             switch result {
-            case let .success((id, accessToken)):
-                self.successLogin(with: id, accessToken: accessToken)
+            case .success():
+                self.successLogin()
             case .failure(_):
                 self.handleError(result: result)
             }
@@ -59,10 +59,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Helper Methods
     
-    private func successLogin(with userId: Int, accessToken: String) {
-        UserManager.sharedInstance.userId = userId
-        UserManager.sharedInstance.userToken = accessToken
-        
+    private func successLogin() {
         self.dismiss(animated: true, completion: completion)
     }
 

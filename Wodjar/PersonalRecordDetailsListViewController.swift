@@ -12,6 +12,7 @@ import MBProgressHUD
 protocol UpdatePersonalRecordDelegate {
     func didAdd(personalRecord: PersonalRecord)
     func didDelete(personalRecord: PersonalRecord)
+    func didUpdate(personalRecord: PersonalRecord)
 }
 
 class PersonalRecordDetailsListViewController: UIViewController {
@@ -214,6 +215,7 @@ class PersonalRecordDetailsListViewController: UIViewController {
             switch result {
             case .success():
                 self.personalRecordType.records.remove(at: index)
+                self.personalRecordType.updateBestRecord()
                 self.tableView.reloadData()
             case .failure(_):
                 self.handleError(result: result)
@@ -287,10 +289,16 @@ extension PersonalRecordDetailsListViewController: UpdatePersonalRecordDelegate 
     func didDelete(personalRecord: PersonalRecord) {
         if let indexToDelete = personalRecordType.records.index(where: {$0.id! == personalRecord.id!}) {
             personalRecordType.records.remove(at: indexToDelete)
+            personalRecordType.updateBestRecord()
         }
     }
     
     func didAdd(personalRecord: PersonalRecord) {
         personalRecordType.add(personalRecord: personalRecord)
+        personalRecordType.initBestRecord(with: personalRecord)
+    }
+    
+    func didUpdate(personalRecord: PersonalRecord) {
+        personalRecordType.initBestRecord(with: personalRecord)
     }
 }

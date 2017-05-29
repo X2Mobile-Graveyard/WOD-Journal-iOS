@@ -22,8 +22,23 @@ class WODVideoTableViewCell: UITableViewCell {
             else {
                 return
         }
+        
+        videoWebView.scrollView.isScrollEnabled = false
+        videoWebView.scrollView.bounces = false
         videoWebView.allowsInlineMediaPlayback = true
-        videoWebView.loadHTMLString("<iframe webkit-playsinline width=\"\(videoWebView.frame.width)\" height=\"\(videoWebView.frame.height)\" src=\"\(youtubeURL)?feature=player_detailpage&playsinline=1\" frameborder=\"0\"></iframe>", baseURL: nil)
+        let embedHTML = "<html>" +
+            "<body style='margin:0px;padding:0px;'>" +
+            "<script type='text/javascript' src='http://www.youtube.com/iframe_api'></script>" +
+            "<script type='text/javascript'>" +
+            "function onYouTubeIframeAPIReady()" +
+            "{" +
+            "    ytplayer=new YT.Player('playerId',{events:{onReady:onPlayerReady}})" +
+            "}" +
+            "</script>" +
+            "   <iframe id='playerId' type='text/html' width='100%%\(videoWebView.frame.width)' height='100%%\(videoWebView.frame.height)' src='\(youtubeURL)?enablejsapi=1&rel=0&playsinline=1' frameborder='0'>" +
+            "        </body>" +
+        "</html>"
+        videoWebView.loadHTMLString(embedHTML, baseURL:Bundle.main.resourceURL!)
     }
     
     func stopPlaying() {

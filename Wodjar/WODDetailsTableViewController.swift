@@ -39,6 +39,7 @@ class WODDetailsTableViewController: UITableViewController {
     var resultService: WODResultService!
     
     // @Properties
+    var canEdit = false
     var selectedResult: WODResult?
     var cellsBeforeResult = 0
     var _cellTypesInOrder: [WODDetailsCellType]?
@@ -53,7 +54,7 @@ class WODDetailsTableViewController: UITableViewController {
         if wod.imageUrl != nil {
             _cellTypesInOrder!.append(.imageCell)
             cellsBeforeResult += 1
-        } else if wod.type == .custom {
+        } else if wod.type == .custom && canEdit {
             _cellTypesInOrder?.append(.addImageCell)
             cellsBeforeResult += 1
         }
@@ -83,7 +84,7 @@ class WODDetailsTableViewController: UITableViewController {
             _cellTypesInOrder!.append(contentsOf: Array(repeating: .previousResultCell, count: wod.results!.count))
         }
         
-        if wod.type == .custom {
+        if wod.type == .custom && canEdit {
             _cellTypesInOrder!.append(.deleteCell)
         }
         
@@ -98,6 +99,11 @@ class WODDetailsTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 60
         tableView.tableFooterView = UIView()
         navigationItem.title = wod.name!
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     // MARK: - Buttons Actions
@@ -183,13 +189,16 @@ class WODDetailsTableViewController: UITableViewController {
         cell.selectionStyle = .none
         switch type {
         case .imageCell:
-            (cell as! WODImageTableViewCell).populate(with: wod.imageUrl!)
+            (cell as! WODImageTableViewCell).populate(with: wod.imageUrl!, editType: canEdit)
         case .descriptionCell:
             var toolBar: UIToolbar? = nil
-            if wod.type == .custom {
+            if wod.type == .custom && canEdit {
                 toolBar = createKeyboardToolbar(with: "Done", selector: #selector(didChangeDescription))
             }
-            (cell as! WODDescriptionTableViewCell).populate(with: wod.wodDescription!, for: wod.type!, toolbar: toolBar)
+            (cell as! WODDescriptionTableViewCell).populate(with: wod.wodDescription!,
+                                                            for: wod.type!,
+                                                            editMode: canEdit,
+                                                            toolbar: toolBar)
         case .videoCell:
             (cell as! WODVideoTableViewCell).populate(with: wod.videoId!)
         case .previousResultCell:
@@ -230,6 +239,7 @@ class WODDetailsTableViewController: UITableViewController {
     
     func handleResultDelete(at indexToDelete: Int) {
         self.wod.results?.remove(at: indexToDelete)
+        self.wod.updateBestRecord()
         self._cellTypesInOrder = nil
         self.tableView.reloadData()
         if wod.results?.count == 0 {
@@ -281,7 +291,8 @@ extension WODDetailsTableViewController: WodResultDelegate {
         if wod.results?.count == 0 {
             wod.isCompleted = true
         }
-         wod.results?.insert(result, at: 0)
+        wod.initBestRecord(with: result)
+        wod.results?.insert(result, at: 0)
         _cellTypesInOrder = nil
         tableView.reloadData()
     }
@@ -294,6 +305,7 @@ extension WODDetailsTableViewController: WodResultDelegate {
     }
     
     func didUpdate() {
+        wod.updateBestRecord()
         tableView.reloadData()
     }
 }

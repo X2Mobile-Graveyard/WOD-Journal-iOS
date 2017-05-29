@@ -12,13 +12,14 @@ class PresonalRecordsListTableViewCell: UITableViewCell {
     
     // @IBOutlets
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var presentView: UIView!
+    @IBOutlet var recordLabel: UILabel!
 
-    func populate(with name: String, present: Bool) {
-        presentView.isHidden = !present
-        presentView.layer.cornerRadius = presentView.frame.size.height / 2
-        presentView.layer.masksToBounds = true
+    func populate(with name: String, bestRecord: String?) {
         nameLabel.text = name
+        if bestRecord != nil {
+            recordLabel.text = bestRecord
+        } else {
+            recordLabel.text = ""
+        }
     }
-
 }

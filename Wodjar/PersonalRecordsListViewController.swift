@@ -57,6 +57,11 @@ class PersonalRecordsListViewController: UIViewController {
         tableView.tableFooterView = UIView()
         getPersonalRecordTypes()
         NotificationCenter.default.addObserver(self, selector: #selector(didLogin), name: NSNotification.Name(rawValue: "Auth"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changedUnitType), name: NSNotification.Name(rawValue: "UnitType"), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -170,6 +175,10 @@ class PersonalRecordsListViewController: UIViewController {
             self.getPersonalRecordTypes()
         }
     }
+    
+    func changedUnitType() {
+        tableView.reloadData()
+    }
 }
 
 extension PersonalRecordsListViewController: UISearchResultsUpdating {
@@ -254,7 +263,7 @@ extension PersonalRecordsListViewController: UITableViewDataSource {
             recordType = recordTypes[indexPath.row]
         }
         
-        personalRecordCell.populate(with: recordType.name! , present: recordType.present)
+        personalRecordCell.populate(with: recordType.name! , bestRecord: recordType.bestResult)
         
         return cell
     }
@@ -264,6 +273,7 @@ extension PersonalRecordsListViewController: PersonalRecordCreateDelegate {
     func didCreate(personalRecord: PersonalRecord) {
         let newPersonalRecordType = PersonalRecordType(name: personalRecord.name!, present: true, defaultType: personalRecord.resultType, updatedAt: nil)
         newPersonalRecordType.records.append(personalRecord)
+        newPersonalRecordType.initBestRecord(with: personalRecord)
         recordTypes.append(newPersonalRecordType)
     }
 }
@@ -278,12 +288,17 @@ extension PersonalRecordsListViewController: PersonalRecordTypeDeleteDelegate {
 }
 
 extension PersonalRecordsListViewController: UpdatePersonalRecordDelegate {
+    func didUpdate(personalRecord: PersonalRecord) {
+        return
+    }
+
     func didAdd(personalRecord: PersonalRecord) {
         guard let selectedType = selectedRecordType else {
             return
         }
         
         selectedType.add(personalRecord: personalRecord)
+        selectedType.initBestRecord(with: personalRecord)
         selectedType.updatedAt = Date()
     }
     

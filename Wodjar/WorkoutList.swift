@@ -13,19 +13,24 @@ class WorkoutList: NSObject {
     var wodTypesOrder: [WODType] = [.girl, .hero, .challenge, .open]
     var workouts: [Workout] = []
     var girls: [Workout] {
-        return self.workouts.filter {
+        let wodGirls = self.workouts.filter {
             return $0.type == .girl
         }
+        return orderAlphabetically(wods: wodGirls)
     }
     var heroes: [Workout] {
-        return self.workouts.filter {
+        let wodHeroes = self.workouts.filter {
             return $0.type == .hero
         }
+        
+        return orderAlphabetically(wods: wodHeroes)
     }
     var chalanges: [Workout] {
-        return self.workouts.filter {
+        let wodChalanges = self.workouts.filter {
             return $0.type == .challenge
         }
+        
+        return orderAlphabetically(wods: wodChalanges)
     }
     var opens: [Workout] {
         let wodOpens = self.workouts.filter {
@@ -151,6 +156,12 @@ class WorkoutList: NSObject {
         }
         
         return completed.count
+    }
+    
+    private func orderAlphabetically(wods: [Workout]) -> [Workout] {
+        return wods.sorted(by: { (wod1, wod2) -> Bool in
+            return (wod1.name?.compare(wod2.name!) == .orderedAscending)
+        })
     }
     
 }

@@ -139,7 +139,7 @@ extension WODResultViewController {
         setupResultTypeLabel()
     }
     
-    private func setupResultTypeLabel() {
+    func setupResultTypeLabel() {
         switch result.resultType {
         case .weight:
             if UserManager.sharedInstance.unitType == .imperial {

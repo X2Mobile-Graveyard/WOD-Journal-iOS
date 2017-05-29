@@ -26,6 +26,67 @@ extension PersonalRecordViewController {
         setupGestureRecognizer()
         hideKeyboardWhenTappedAround()
         setupImageView()
+        
+        if controllerMode == .editMode && personalRecord.resultAsString() != nil {
+            setupForViewMode()
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
+                                                                target: self,
+                                                                action: #selector(didTapSave(_:)))
+        }
+    }
+    
+    func setupForViewMode() {
+        resultTextField.borderStyle = .none
+        resultTextField.isEnabled = false
+        resultTextField.clearButtonMode = .never
+        
+        notesTextView.layer.borderWidth = 0.0
+        notesTextView.isEditable = false
+        
+        rxSwitch.isEnabled = false
+        
+        if viewState == .withoutImage {
+            addPictureButton.isHidden = true
+        } else {
+            changePictureBackgroundView.isHidden = true
+        }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
+                                                            target: self,
+                                                            action: #selector(didTapEditPRButton(_:)))
+        dateButton.setTitleColor(.black, for: .normal)
+        dateButton.isEnabled = false
+        
+        deleteButton.isHidden = true
+        
+        titleTextField.isEnabled = false
+        editTitleButton.isHidden = true
+    }
+    
+    func setupForEditMode() {
+        resultTextField.borderStyle = .roundedRect
+        resultTextField.isEnabled = true
+        resultTextField.clearButtonMode = .always
+        
+        notesTextView.layer.borderWidth = 0.5
+        notesTextView.isEditable = true
+        
+        rxSwitch.isEnabled = true
+        
+        if viewState == .withoutImage {
+            addPictureButton.isHidden = false
+        } else {
+            changePictureBackgroundView.isHidden = false
+        }
+        
+        dateButton.setTitleColor(navigationController?.navigationBar.tintColor, for: .normal)
+        dateButton.isEnabled = true
+        
+        deleteButton.isHidden = false
+        
+        titleTextField.isEnabled = true
+        editTitleButton.isHidden = false
     }
     
     func setupResultTextField() {
@@ -98,7 +159,7 @@ extension PersonalRecordViewController {
         setupResultTypeLabel()
     }
     
-    private func setupResultTypeLabel() {
+    func setupResultTypeLabel() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             if personalRecord.unitType == .imperial {

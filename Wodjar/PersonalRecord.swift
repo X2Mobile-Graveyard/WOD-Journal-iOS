@@ -20,11 +20,7 @@ class PersonalRecord {
     public private(set) var _resultWeight: Float?
     var resultWeight: Float? {
         set {
-            if self.unitType == .imperial {
-                self._resultWeight = newValue?.convertToMetric()
-            } else {
-                self._resultWeight = newValue
-            }
+            self._resultWeight = newValue
         }
         
         get {
@@ -123,7 +119,7 @@ class PersonalRecord {
         self.rx = personalRecord.rx
         self.resultTime = personalRecord.resultTime
         self.resultRounds = personalRecord.resultRounds
-        self.resultWeight = personalRecord.resultWeight
+        self._resultWeight = personalRecord._resultWeight
         self.resultType = personalRecord.resultType
         self.date = personalRecord.date
         self.notes = personalRecord.notes
@@ -135,7 +131,7 @@ class PersonalRecord {
         self.id = personalRecord.id
         self.name = personalRecord.name
         self.rx = personalRecord.rx
-        self.resultWeight = personalRecord.resultWeight
+        self._resultWeight = personalRecord._resultWeight
         self.resultRounds = personalRecord.resultRounds
         self.resultTime = personalRecord.resultTime
         self.resultType = personalRecord.resultType
@@ -165,7 +161,7 @@ class PersonalRecord {
         
         switch resultType {
         case .weight:
-            updateDict["result_weight"] = resultWeight!
+            updateDict["result_weight"] = _resultWeight!
         case .amrap:
             updateDict["result_rounds"] = resultRounds!
         case .time:
@@ -183,9 +179,15 @@ class PersonalRecord {
         }
         
         let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
         switch resultType {
         case .weight:
-            resultWeight = numberFormatter.number(from: result)?.floatValue
+            let weightInType = numberFormatter.number(from: result)?.floatValue
+            if unitType == .imperial {
+                resultWeight = weightInType?.convertToMetric()
+            } else {
+                resultWeight = weightInType
+            }
         case .amrap:
             resultRounds = numberFormatter.number(from: result)?.intValue
         case .time:
@@ -198,6 +200,8 @@ class PersonalRecord {
     func resultAsString() -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.maximumFractionDigits = 2
         switch resultType {
         case .weight:
             if resultWeight != nil {
@@ -212,7 +216,8 @@ class PersonalRecord {
             return nil
         case .time:
             if resultTime != nil {
-                return timeAsString()
+                let timeString = timeAsString()
+                return timeString == "00:00" ? nil : timeString
             }
             return nil
         default:

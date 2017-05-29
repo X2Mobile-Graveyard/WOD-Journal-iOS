@@ -19,6 +19,7 @@ target 'Wodjar' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'SwiftyStoreKit'
+  pod 'RSKImageCropper'
 
   target 'WodjarTests' do
     inherit! :search_paths

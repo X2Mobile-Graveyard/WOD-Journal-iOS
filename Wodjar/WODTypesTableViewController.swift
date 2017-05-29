@@ -80,7 +80,7 @@ class WODTypesTableViewController: UITableViewController {
             if section == 0 {
                 return 4
             } else {
-                return 2
+                return 1
             }
         }
     }
@@ -91,7 +91,7 @@ class WODTypesTableViewController: UITableViewController {
             let sectionType = filteredWorkouts.filteredSections()[indexPath.section]
             let workout = filteredWorkouts.workout(with: sectionType, at: indexPath.row)
             
-            cell.populate(with: workout.name!, present: workout.isCompleted)
+            cell.populate(with: workout.name!, bestRecord: workout.bestResult)
             
             return cell
         }
@@ -106,8 +106,6 @@ class WODTypesTableViewController: UITableViewController {
             cell.populate(with: wodType, completedWods: completed, totalWods: totalWoods)
         case 1:
             if indexPath.row == 0 {
-                cell.populateFavorites(with: workouts.favorites.count)
-            } else {
                 let completed = workouts.completedWods(for: .custom)
                 cell.populate(with: .custom, completedWods: completed, totalWods: workouts.customs.count)
             }
@@ -185,9 +183,6 @@ class WODTypesTableViewController: UITableViewController {
             }
             
             if indexPath.row == 0 {
-                selectedWorkouts = workouts.favorites
-                favoritesSelected = true
-            } else {
                 selectedWorkouts = workouts.getWorkouts(for: .custom)
                 isCustom = true
             }

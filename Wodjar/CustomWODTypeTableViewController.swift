@@ -26,7 +26,12 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
     // MARK: - TableView Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedWOD = workouts[indexPath.row]
+        if resultSearchController.isActive {
+            selectedWOD = filteredWorkouts[indexPath.row]
+        } else {
+            selectedWOD = workouts[indexPath.row]
+        }
+        
         getResultsAndGoToDetails()
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -34,13 +39,11 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
     // MARK: - TableView Data Source
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let wod = workouts[indexPath.row]
-        let favoriteAction = createFavoriteCellRowAction(for: wod)
         let deleteAction = UITableViewRowAction.init(style: .destructive, title: "Delete") { (acton, indexPath) in
             self.deleteWod(at: indexPath.row)
         }
         
-        return [deleteAction, favoriteAction]
+        return [deleteAction]
     }
     
     // MARK: - Navigation
@@ -68,11 +71,6 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
     
     func getResultsAndGoToDetails() {
         guard let wod = selectedWOD else {
-            return
-        }
-        
-        if selectedWOD?.results != nil {
-            performSegue(withIdentifier: customWodDetailsSegueIdentifier, sender: self)
             return
         }
         

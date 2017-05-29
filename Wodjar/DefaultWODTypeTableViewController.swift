@@ -23,21 +23,14 @@ class DefaultWODTypeTableViewController: WODTypeTableViewController {
     // MARK: - TableView Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedWOD = workouts[indexPath.row]
-        getResultsAndGoToDetails()
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    // MARK: - TableView Data Source
-    
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if !UserManager.sharedInstance.isAuthenticated() {
-            return []
+        if resultSearchController.isActive {
+            selectedWOD = filteredWorkouts[indexPath.row]
+        } else {
+            selectedWOD = workouts[indexPath.row]
         }
         
-        let wod = workouts[indexPath.row]
-        let favoriteAction = createFavoriteCellRowAction(for: wod)
-        return [favoriteAction]
+        getResultsAndGoToDetails()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Navigation
@@ -64,20 +57,6 @@ class DefaultWODTypeTableViewController: WODTypeTableViewController {
     
     func getResultsAndGoToDetails() {
         guard let wod = selectedWOD else {
-            return
-        }
-        
-        if !UserManager.sharedInstance.isAuthenticated() {
-            self.performSegue(withIdentifier: self.defaultWodDetailsSegueIdentifier, sender: self)
-            return
-        }
-        
-        if selectedWOD?.results != nil {
-            if selectedWOD?.type == .custom {
-                performSegue(withIdentifier: customWodDetailsSegueIdentifier, sender: self)
-            } else {
-                performSegue(withIdentifier: defaultWodDetailsSegueIdentifier, sender: self)
-            }
             return
         }
         

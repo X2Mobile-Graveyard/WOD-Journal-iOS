@@ -21,7 +21,7 @@ extension UIViewController {
             return
         }
         let loginController = navController.topViewController as! LoginViewController
-        loginController.service = AuthenticationService(remote: AuthenticationRemoteServiceImpl())
+        loginController.service = AuthenticationService(remote: AuthenticationRemoteServiceImpl(), s3Remote: S3RemoteService())
         loginController.completion = completion
         
         modalTransitionStyle = .crossDissolve

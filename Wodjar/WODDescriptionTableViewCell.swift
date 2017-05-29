@@ -12,12 +12,12 @@ class WODDescriptionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var textView: UITextView!
     
-    func populate(with wodDescription: String, for type: WODType, toolbar: UIToolbar?) {
+    func populate(with wodDescription: String, for type: WODType, editMode: Bool, toolbar: UIToolbar?) {
         self.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
         
         textView.text = wodDescription
         textView.isEditable = false
-        if type == .custom {
+        if type == .custom && editMode {
             textView.isEditable = true
         }
         

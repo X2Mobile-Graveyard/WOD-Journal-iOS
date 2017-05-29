@@ -16,7 +16,21 @@ class WODResult: NSObject {
     var id: Int?
     var resultType: WODCategory = .weight
     var resultTime: Int?
-    var resultWeight: Float?
+    public private(set) var _resultWeight: Float?
+    var resultWeight: Float? {
+        set {
+            self._resultWeight = newValue
+        }
+        
+        get {
+            if self.unitType == .imperial {
+                return self._resultWeight?.convertToImperial()
+            }
+            
+            return self._resultWeight
+        }
+    }
+
     var resultRounds: Int?
     var rx: Bool = false
     var photoUrl: String?
@@ -89,7 +103,7 @@ class WODResult: NSObject {
         self.rx = wodResult.rx
         self.resultTime = wodResult.resultTime
         self.resultRounds = wodResult.resultRounds
-        self.resultWeight = wodResult.resultWeight
+        self._resultWeight = wodResult._resultWeight
         self.resultType = wodResult.resultType
         self.date = wodResult.date
         self.notes = wodResult.notes
@@ -102,7 +116,7 @@ class WODResult: NSObject {
         self.rx = wodResult.rx
         self.resultTime = wodResult.resultTime
         self.resultRounds = wodResult.resultRounds
-        self.resultWeight = wodResult.resultWeight
+        self._resultWeight = wodResult._resultWeight
         self.resultType = wodResult.resultType
         self.date = wodResult.date
         self.notes = wodResult.notes
@@ -113,6 +127,8 @@ class WODResult: NSObject {
     func resultAsString() -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.maximumFractionDigits = 2
         switch resultType {
         case .weight:
             if resultWeight != nil {
@@ -143,9 +159,15 @@ class WODResult: NSObject {
         }
         
         let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
         switch resultType {
         case .weight:
-            resultWeight = numberFormatter.number(from: result)?.floatValue
+            let weightInType = numberFormatter.number(from: result)?.floatValue
+            if unitType == .imperial {
+                resultWeight = weightInType?.convertToMetric()
+            } else {
+                resultWeight = weightInType
+            }
         case .amrap:
             resultRounds = numberFormatter.number(from: result)?.intValue
         case .time:

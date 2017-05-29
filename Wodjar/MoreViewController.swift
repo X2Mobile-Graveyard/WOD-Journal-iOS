@@ -63,6 +63,7 @@ class MoreViewController: UIViewController {
         
         if UserManager.sharedInstance.isAuthenticated() {
             UserManager.sharedInstance.unitType = UnitType(rawValue: index)!
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "UnitType"), object: nil)
         }
     }
     
@@ -70,7 +71,8 @@ class MoreViewController: UIViewController {
         switch sender.tag {
         case 1:
             // send feedback email
-            sendMail()
+//            sendMail()
+            break
         case 2:
             MBProgressHUD.showAdded(to: view, animated: true)
             MoreViewController.store.requestProducts(completionHandler: { (success, products) in
@@ -87,17 +89,17 @@ class MoreViewController: UIViewController {
             // restore premium subscription
             print("restore purchases")
             SwiftyStoreKit.restorePurchases(atomically: false) { results in
-                if results.restoreFailedProducts.count > 0 {
-                    print("Restore Failed: \(results.restoreFailedProducts)")
+                if results.restoreFailedPurchases.count > 0 {
+                    print("Restore Failed: \(results.restoreFailedPurchases)")
                 }
-                else if results.restoredProducts.count > 0 {
-                    for product in results.restoredProducts {
+                else if results.restoredPurchases.count > 0 {
+                    for product in results.restoredPurchases {
                         // fetch content from your server, then:
                         if product.needsFinishTransaction {
                             SwiftyStoreKit.finishTransaction(product.transaction)
                         }
                     }
-                    print("Restore Success: \(results.restoredProducts)")
+                    print("Restore Success: \(results.restoredPurchases)")
                 }
                 else {
                     print("Nothing to Restore")
@@ -160,21 +162,8 @@ class MoreViewController: UIViewController {
     // MARK: - Service Calls
     
     func signOut() {
-        MBProgressHUD.showAdded(to: view, animated: true)
-        let request = LogoutRequest()
-        
-        request.success = { _, _ in
-            MBProgressHUD.hide(for: self.view, animated: true)
-            UserManager.sharedInstance.signOut()
-            self.authenticationButton.setTitle("Login", for: .normal)
-            self.resetViewControllers()
-        }
-        
-        request.error = { _, error in
-            MBProgressHUD.hide(for: self.view, animated: true)
-            self.handle(error)
-        }
-        
-        request.runRequest()
+        UserManager.sharedInstance.signOut()
+        self.authenticationButton.setTitle("Login", for: .normal)
+        self.resetViewControllers()
     }
 }

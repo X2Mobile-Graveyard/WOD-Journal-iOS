@@ -10,6 +10,20 @@ import UIKit
 
 class GetWodsRequest: BaseRequest {
     
+    override init() {
+        super.init()
+        #if DEBUG
+            return
+        #else
+        guard let status = Network.reachability?.status else {
+            return
+        }
+        if status == .unreachable {
+            self.useCachePolicy = true
+        }
+        #endif
+    }
+    
     override func requestURL() -> String {
         return "list-wods"
     }
@@ -19,6 +33,6 @@ class GetWodsRequest: BaseRequest {
     }
     
     override func headerParams() -> [String : String] {
-        return ["Authorization":"Token \(UserManager.sharedInstance.userToken!)"];
+        return ["Authorization":"Token \(UserManager.sharedInstance.userToken!)"]
     }
 }

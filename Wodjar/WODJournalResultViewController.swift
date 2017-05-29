@@ -24,6 +24,8 @@ class WODJournalResultViewController: UIViewController {
     var userImage: UIImage?
     var viewState: ViewControllerState = .withoutImage
     var pickedImagePath: String?
+    var pickedImageCompletion: (()->Void)?
+    
     
     // @Constants
     let viewInset: CGFloat = 16
@@ -188,6 +190,11 @@ extension WODJournalResultViewController: UIImagePickerControllerDelegate, UINav
         pickedImagePath = localPath
         
         userImage = image
+        if pickedImageCompletion != nil {
+            dismiss(animated: true, completion: pickedImageCompletion)
+            return
+        }
+        
         setUserImage()
         
         dismiss(animated: true, completion: nil)

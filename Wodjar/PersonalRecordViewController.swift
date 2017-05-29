@@ -64,8 +64,12 @@ class PersonalRecordViewController: WODJournalResultViewController {
         initUI()
         createWorkingCopy()
         pickedImagePath = personalRecord.imageUrl
+        NotificationCenter.default.addObserver(self, selector: #selector(changedUnitType), name: NSNotification.Name(rawValue: "UnitType"), object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -112,6 +116,16 @@ class PersonalRecordViewController: WODJournalResultViewController {
             } else {
                 updateRecord()
             }
+        }
+    }
+    
+    func didTapEditPRButton(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.setupForEditMode()
+        }) { (_) in
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
+                                                                target: self,
+                                                                action: #selector(self.didTapSave(_:)))
         }
     }
     
@@ -189,6 +203,7 @@ class PersonalRecordViewController: WODJournalResultViewController {
             switch result {
             case .success():
                 self.personalRecord.updateValues(from: self.personalRecordCopy)
+                self.updatePersonalRecordDelegate?.didUpdate(personalRecord: self.personalRecord)
                 _ = self.navigationController?.popViewController(animated: true)
             case .failure(_):
                 self.handleError(result: result)
@@ -238,11 +253,9 @@ class PersonalRecordViewController: WODJournalResultViewController {
         }
         
         if identifier == presentFullImageSegueIdentifier {
-            guard let image = userImage else {
-                return
-            }
             if let fullImageViewController = segue.destination as? FullSizeImageViewController {
-                fullImageViewController.image = image
+                fullImageViewController.image = userImage
+                fullImageViewController.imageUrl = personalRecord.imageUrl
             }
         }
     }
@@ -260,6 +273,10 @@ class PersonalRecordViewController: WODJournalResultViewController {
         personalRecordCopy = PersonalRecord(personalRecord: personalRecord)
     }
     
+    func changedUnitType() {
+        setupResultTextField()
+        setupResultTypeLabel()
+    }
 }
 
 extension PersonalRecordViewController: UITextViewDelegate {

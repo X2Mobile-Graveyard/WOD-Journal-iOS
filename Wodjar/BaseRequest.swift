@@ -30,6 +30,7 @@ typealias RequestExceptionBlock = (AnyObject, NSException) -> (Void)
 class BaseRequest: NSObject {
     var showsProgressIndicator: Bool = true
     var hasCustomDisplayErrorMessage: Bool = false
+    var useCachePolicy = false
     
     var success: RequestSuccessBlock!
     var error: RequestErrorBlock!
@@ -69,6 +70,10 @@ class BaseRequest: NSObject {
         return [:]
     }
     
+    func save(etag: String) {
+        return
+    }
+    
     func sendRequestWithPath(path: String,
                              successBlock: @escaping (URLSessionDataTask, Any?) -> (),
                              failureBlock: ((URLSessionDataTask?, Error) -> Void)?) {
@@ -101,12 +106,13 @@ class BaseRequest: NSObject {
     
     func runRequest() {
         self.requestSessionManager = AFHTTPSessionManager.init()
-        
         self.requestSessionManager.responseSerializer = AFJSONResponseSerializer()
         self.requestSessionManager.requestSerializer = AFJSONRequestSerializer()
-        
-        setHeaderParams()
+        if useCachePolicy {
+            self.requestSessionManager.requestSerializer.cachePolicy = .returnCacheDataDontLoad
+        }
 
+        setHeaderParams()
         
         let path = self.serverBase().appending((self.requestURL()))
         
@@ -123,7 +129,6 @@ class BaseRequest: NSObject {
                 _weakSelf.error(_weakSelf, error as NSError)
             }
         }
-        
         self.sendRequestWithPath(path: path, successBlock: successBlock, failureBlock: failureBlock)
     }
     
