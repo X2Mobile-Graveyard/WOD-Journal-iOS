@@ -15,9 +15,7 @@ class GetWodResultRequest: BaseRequest {
     init(with wodId: Int) {
         self.wodId = wodId
         super.init()
-        #if DEBUG
-            return
-        #else
+        #if !(TARGET_OS_SIMULATOR)
         guard let status = Network.reachability?.status else {
             return
         }

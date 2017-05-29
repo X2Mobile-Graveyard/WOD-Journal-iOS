@@ -114,6 +114,23 @@ class AuthenticationRemoteServiceImpl: AuthenticationRemoteService {
             UserManager.sharedInstance.userId = userId
             UserManager.sharedInstance.userToken = token
             
+            if let imageUrl = response["user_image_url"] as? String {
+                UserManager.sharedInstance.imageUrl = imageUrl
+            }
+            
+            if UserManager.sharedInstance.imageUrl == "" {
+                UserManager.sharedInstance.imageUrl = nil
+            }
+            
+            if let name = response["user_name"] as? String {
+                UserManager.sharedInstance.userName = name
+            }
+            
+            if let email = response["user_email"] as? String {
+                UserManager.sharedInstance.email = email
+            }
+
+            
             completion?(.success())
         }
         

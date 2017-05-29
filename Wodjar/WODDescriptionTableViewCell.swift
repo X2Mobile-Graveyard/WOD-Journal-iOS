@@ -12,10 +12,15 @@ class WODDescriptionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var textView: UITextView!
     
-    func populate(with wodDescription: String, for type: WODType, editMode: Bool, toolbar: UIToolbar?) {
+    func populate(with wod: Workout, for type: WODType, editMode: Bool, toolbar: UIToolbar?) {
         self.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0)
         
-        textView.text = wodDescription
+        if wod.unit == .imperial {
+            textView.text = wod.wodDescription!
+        } else {
+            textView.text = wod.metricDescription ?? wod.wodDescription
+        }
+        
         textView.isEditable = false
         if type == .custom && editMode {
             textView.isEditable = true

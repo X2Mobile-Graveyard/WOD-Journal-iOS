@@ -90,12 +90,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="309.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oQh-hs-D7M">
+                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oQh-hs-D7M" customClass="UIImageViewAligned" customModule="UIImageViewAlignedSwift">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="281.5"/>
                                             <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="oQh-hs-D7M" secondAttribute="height" multiplier="4:3" id="3uB-Sl-ou8"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="alignTop" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <outletCollection property="gestureRecognizers" destination="ShO-Mw-w06" appends="YES" id="P9n-Qs-ZOg"/>
                                             </connections>
@@ -137,7 +140,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="changeImageView" destination="pRo-RZ-56K" id="qp6-fr-DZw"/>
-                                    <outlet property="wodImageView" destination="oQh-hs-D7M" id="HO8-LB-tTK"/>
+                                    <outlet property="wodImageView" destination="oQh-hs-D7M" id="dC6-K6-Xbc"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeroHistoryCell" rowHeight="23" id="QuQ-vX-TJv">

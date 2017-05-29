@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import XCDYouTubeKit
 
 class WODVideoTableViewCell: UITableViewCell {
     

@@ -40,21 +40,21 @@ class PersonalRecordType: NSObject {
             if bestResultWeight != nil {
                 let resultNumber = NSNumber(value: bestResultWeight!)
                 if unitType == .imperial {
-                    return "Weight: \(numberFormatter.string(from: resultNumber)!) lbs"
+                    return "\(numberFormatter.string(from: resultNumber)!) lbs"
                 } else {
-                     return "Weight: \(numberFormatter.string(from: resultNumber)!) kg"
+                     return "\(numberFormatter.string(from: resultNumber)!) kg"
                 }
             }
             return nil
         case .amrap:
             if bestResultRounds != nil {
-                return "Rounds: \(bestResultRounds!)"
+                return "\(bestResultRounds!) Rnds"
             }
             return nil
         case .time:
             if bestResultTime != nil {
                 let timeString = timeAsString()
-                return timeString == "00:00" ? nil : "Time: \(timeString)"
+                return timeString == "00:00" ? nil : "\(timeString)"
             }
             return nil
         default:

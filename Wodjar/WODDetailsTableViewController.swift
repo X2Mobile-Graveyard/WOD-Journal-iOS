@@ -195,7 +195,7 @@ class WODDetailsTableViewController: UITableViewController {
             if wod.type == .custom && canEdit {
                 toolBar = createKeyboardToolbar(with: "Done", selector: #selector(didChangeDescription))
             }
-            (cell as! WODDescriptionTableViewCell).populate(with: wod.wodDescription!,
+            (cell as! WODDescriptionTableViewCell).populate(with: wod,
                                                             for: wod.type!,
                                                             editMode: canEdit,
                                                             toolbar: toolBar)

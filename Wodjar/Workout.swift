@@ -115,21 +115,21 @@ class Workout: NSObject {
             if bestResultWeight != nil {
                 let resultNumber = NSNumber(value: bestResultWeight!)
                 if unit == .imperial {
-                    return "Weight: \(numberFormatter.string(from: resultNumber)!) lbs"
+                    return "\(numberFormatter.string(from: resultNumber)!) lbs"
                 } else {
-                    return "Weight: \(numberFormatter.string(from: resultNumber)!) kg"
+                    return "\(numberFormatter.string(from: resultNumber)!) kg"
                 }
             }
             return nil
         case .amrap:
             if bestResultRounds != nil {
-                return "Rounds: \(bestResultRounds!)"
+                return "\(bestResultRounds!) Rnds"
             }
             return nil
         case .time:
             if bestResultTime != nil {
                 let timeString = timeAsString()
-                return timeString == "00:00" ? nil : "Time: \(timeString)"
+                return timeString == "00:00" ? nil : "\(timeString)"
             }
             return nil
         default:
@@ -140,6 +140,7 @@ class Workout: NSObject {
     }
     var id: Int?
     var wodDescription: String?
+    var metricDescription: String?
     var imageUrl: String?
     var history: String?
     var type: WODType?
@@ -149,7 +150,9 @@ class Workout: NSObject {
     var isDefault: Bool = true
     var category: WODCategory? = .weight
     var videoId: String?
-    var unit: UnitType?
+    var unit: UnitType {
+        return UserManager.sharedInstance.unitType
+    }
     var results: [WODResult]?
     var lastResults: [WODResult]? {
         if results == nil {
@@ -212,6 +215,8 @@ class Workout: NSObject {
         default:
             break
         }
+        
+        self.metricDescription = dictionary["metric_description"] as? String
     }
     
     convenience init(using wod: Workout) {
@@ -226,7 +231,6 @@ class Workout: NSObject {
         self.isCompleted = wod.isCompleted
         self.category = wod.category
         self.videoId = wod.videoId
-        self.unit = wod.unit
         self.results = wod.results
         self.isDefault = wod.isDefault
     }
@@ -242,7 +246,6 @@ class Workout: NSObject {
         self.isCompleted = wod.isCompleted
         self.category = wod.category
         self.videoId = wod.videoId
-        self.unit = wod.unit
         self.results = wod.results
         self.isDefault = wod.isDefault
     }
@@ -253,7 +256,6 @@ class Workout: NSObject {
         self.history = history
         self.category = category
         self.videoId = video
-        self.unit = unit
     }
     
     func createUpdateDict() -> [String: Any] {

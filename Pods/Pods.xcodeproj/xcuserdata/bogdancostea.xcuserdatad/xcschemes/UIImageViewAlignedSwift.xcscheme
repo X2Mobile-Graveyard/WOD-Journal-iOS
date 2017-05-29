@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'AC40CD8256F9C64457C415CC4377C3A7'
-               BlueprintName = 'SDWebImage'
+               BlueprintIdentifier = '0B0356A31EB260BECAF43863D7CC1C8D'
+               BlueprintName = 'UIImageViewAlignedSwift'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SDWebImage.framework'>
+               BuildableName = 'UIImageViewAlignedSwift.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

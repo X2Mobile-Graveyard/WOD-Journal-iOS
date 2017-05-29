@@ -34,22 +34,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FBSDKShareKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>FacebookCore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>FacebookLogin.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FacebookShare.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -99,12 +89,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>UITextView+Placeholder.xcscheme</key>
+		<key>UIImageViewAlignedSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>XCDYouTubeKit.xcscheme</key>
+		<key>UITextView+Placeholder.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -112,22 +102,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>12AEFBF5026E5AD4E504F2AF769EFC52</key>
+		<key>0B0356A31EB260BECAF43863D7CC1C8D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>12CE3CA356F8B4A45977E7A9AA6BE218</key>
+		<key>1A079D101B4FFB7A0F1F30ABA18CB074</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>22919371C8A46D0680FD41DB9FFC8C6B</key>
+		<key>2443DAEBA1CDCC1A0881A7C02CF77E56</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>332F91393FB1DE033D370B4CEDDD5FCF</key>
+		<key>2B0A432E2B4CD5A5B83EF3B631B65423</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -138,11 +128,6 @@
 			<true/>
 		</dict>
 		<key>44CAD6CE523055ED339E87154473A254</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>50A0716C66AA06F4063A5CCF80D47C91</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -162,7 +147,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6B1FF00728592BF0395FF2AA2ECEE941</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>7335E9C9689F3B8A16F063A884748533</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>765AABBE3FCD73C50EDAF41CC0AC8B4E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -172,12 +167,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8BD8C15B994EEA7ACE5044A1265A5888</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8ED04C9708F7F1DC54FD817588703233</key>
+		<key>8BF940F214414037430F464D706F446B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -187,12 +177,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A7FEAA14E89971698ACA148F7F7202F2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B35A9BAE5E524244A7910EF86D7859BB</key>
+		<key>AC40CD8256F9C64457C415CC4377C3A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -208,11 +193,6 @@
 			<true/>
 		</dict>
 		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F638862AA4751402AF8A0DA259ABAF44</key>
 		<dict>
 			<key>primary</key>
 			<true/>

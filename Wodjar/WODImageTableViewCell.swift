@@ -8,10 +8,11 @@
 
 import UIKit
 import SDWebImage
+import UIImageViewAlignedSwift
 
 class WODImageTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var wodImageView: UIImageView!
+    @IBOutlet var wodImageView: UIImageViewAligned!
     @IBOutlet var changeImageView: UIView!
     
     func populate(with imageURL: String, editType: Bool) {
