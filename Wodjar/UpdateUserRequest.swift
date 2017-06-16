@@ -19,7 +19,7 @@ class UpdateUserRequest: BaseRequest {
     }
     
     override func headerParams() -> [String : String] {
-        return ["X-Api-Key":SessionManager.sharedInstance.apiKey]
+        return ["Authorization":"Token \(UserManager.sharedInstance.userToken!)"]
     }
 
     override func requestMethod() -> RequestMethod {

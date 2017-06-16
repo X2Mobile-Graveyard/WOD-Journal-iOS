@@ -15,13 +15,13 @@ class GetRecordsForNameRequest: BaseRequest {
     init(with name: String) {
         personalRecordName = name
         super.init()
-        #if !(TARGET_OS_SIMULATOR)
-        guard let status = Network.reachability?.status else {
-            return
-        }
-        if status == .unreachable {
-            self.useCachePolicy = true
-        }
+        #if !((arch(i386) || arch(x86_64)) && os(iOS))
+            guard let status = Network.reachability?.status else {
+                return
+            }
+            if status == .unreachable {
+                self.useCachePolicy = true
+            }
         #endif
     }
     

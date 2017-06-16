@@ -64,6 +64,7 @@ class PersonalRecordViewController: WODJournalResultViewController {
         initUI()
         createWorkingCopy()
         pickedImagePath = personalRecord.imageUrl
+        wodTimePicker.addTarget(self, action: #selector(didTapDoneOnTimePicker), for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(changedUnitType), name: NSNotification.Name(rawValue: "UnitType"), object: nil)
     }
     
@@ -163,6 +164,7 @@ class PersonalRecordViewController: WODJournalResultViewController {
     func didPickDate(datePicker: UIDatePicker) {
         pickedDateFromDatePicker = datePicker.date
         personalRecordCopy.date = pickedDateFromDatePicker!
+        dateButton.setTitle(pickedDateFromDatePicker?.getDateAsWodJournalString(), for: .normal)
     }
     
     func didTapCancelPicker() {
@@ -176,7 +178,6 @@ class PersonalRecordViewController: WODJournalResultViewController {
     
     func didTapDoneOnTimePicker() {
         resultTextField.text = wodTimePicker.timeIntervalAsHoursMinutesSeconds.getFormatedString()
-        view.endEditing(true)
     }
     
     // MARK: - Gesture Recognizers

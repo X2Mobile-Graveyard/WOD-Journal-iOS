@@ -126,10 +126,7 @@ extension WODResultViewController {
                 wodTimePicker.timeInterval = TimeInterval(resultTime)
             }
             resultTextField.inputView = wodTimePicker
-            resultTextField.inputAccessoryView = createKeyboardToolbar(cancelButton: "Cancel",
-                                                                       with: #selector(didTapCancelPicker),
-                                                                       doneButton: "Done",
-                                                                       doneSelector: #selector(didTapDoneOnTimePicker))
+            resultTextField.inputAccessoryView = createKeyboardToolbar(with: "Done", selector: #selector(didTapCancelPicker))
         case .amrap:
             resultTextField.keyboardType = .numberPad
         default:
@@ -174,10 +171,7 @@ extension WODResultViewController {
         datePicker.datePickerMode = .date
         dateTextField.inputView = datePicker
         datePicker.addTarget(self, action: #selector(didPickDate(datePicker:)), for: .valueChanged)
-        dateTextField.inputAccessoryView = createKeyboardToolbar(cancelButton: "Cancel",
-                                                                 with: #selector(didTapCancelPicker),
-                                                                 doneButton: "Done",
-                                                                 doneSelector: #selector(didTapDoneOnDatePicker))
+        dateTextField.inputAccessoryView = createKeyboardToolbar(with: "Done", selector: #selector(didTapCancelPicker))
     }
     
     private func hideKeyboardWhenTappedAround() {

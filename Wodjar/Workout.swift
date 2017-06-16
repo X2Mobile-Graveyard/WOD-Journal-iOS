@@ -194,8 +194,6 @@ class Workout: NSObject {
         self.history = dictionary["history"] as? String ?? nil
         if let category = dictionary["category"] as? Int {
             self.category = WODCategory.from(hashValue: category)
-        } else {
-            print("ASdasd")
         }
         self.videoId = dictionary["video"] as? String ?? nil
         if videoId == noImageString {

@@ -50,6 +50,7 @@ class WODResultViewController: WODJournalResultViewController {
         if controllerMode == .createMode {
             deleteButton.isHidden = true
         }
+        wodTimePicker.addTarget(self, action: #selector(didTapDoneOnTimePicker), for: .valueChanged)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(changedUnitType),
                                                name: NSNotification.Name(rawValue: "UnitType"),
@@ -133,6 +134,7 @@ class WODResultViewController: WODJournalResultViewController {
     func didPickDate(datePicker: UIDatePicker) {
         pickedDateFromDatePicker = datePicker.date
         resultCopy.date = pickedDateFromDatePicker!
+        dateButton.setTitle(pickedDateFromDatePicker?.getDateAsWodJournalString(), for: .normal)
     }
     
     func didTapOutsideTextField() {
@@ -143,14 +145,8 @@ class WODResultViewController: WODJournalResultViewController {
         self.view.endEditing(true)
     }
     
-    func didTapDoneOnDatePicker() {
-        dateButton.setTitle(pickedDateFromDatePicker?.getDateAsWodJournalString(), for: .normal)
-        self.view.endEditing(true)
-    }
-    
     func didTapDoneOnTimePicker() {
         resultTextField.text = wodTimePicker.timeIntervalAsHoursMinutesSeconds.getFormatedString()
-        view.endEditing(true)
     }
     
     // MARK: - Navigation

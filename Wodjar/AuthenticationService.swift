@@ -120,7 +120,6 @@ struct AuthenticationService {
         let loginManager = LoginManager()
         UIApplication.shared.statusBarStyle = .default  // remove this line if not required
         loginManager.logIn([ .publicProfile,.email ], viewController: viewController) { loginResult in
-            print(loginResult)
             let request = GraphRequest(graphPath: "me", parameters: ["fields":"email,name,gender,picture"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: FacebookCore.GraphAPIVersion.defaultVersion)
             request.start { (response, result) in
                 switch result {
