@@ -14,6 +14,7 @@ class PersonalRecordType: NSObject {
     var unitType: UnitType {
         return UserManager.sharedInstance.unitType
     }
+    var id: Int
     public private(set) var _bestResultWeight: Float?
     var bestResultWeight: Float? {
         set {
@@ -78,6 +79,7 @@ class PersonalRecordType: NSObject {
     var updatedAt: Date
     
     init(name: String, present: Bool, updatedAt: String?) {
+        self.id = 1
         self.name = name
         self.present = present
         
@@ -91,7 +93,8 @@ class PersonalRecordType: NSObject {
         self.updatedAt = dateFormatter.date(from: updatedAt!)!
     }
     
-    init(name: String, present: Bool, defaultType: WODCategory, updatedAt: String?) {
+    init(id: Int, name: String, present: Bool, defaultType: WODCategory, updatedAt: String?) {
+        self.id = id
         self.name = name
         self.present = present
         self.defaultResultType = defaultType
@@ -112,6 +115,8 @@ class PersonalRecordType: NSObject {
         } else {
             self.updatedAt = Date()
         }
+        
+        self.id = dict["id"] as? Int ?? 9999
         
         if let name = dict["name"] as? String {
             self.name = name

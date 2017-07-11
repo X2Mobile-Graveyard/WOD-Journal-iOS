@@ -11,29 +11,30 @@ import Result
 
 typealias GetPersonalRecordsNamesCompletion = (Result<[PersonalRecordType], NSError>) -> ()
 typealias GetPersonalRecordsResultsCompletion = (Result<[PersonalRecord], NSError>) -> ()
-typealias DeleteAllRecordsCompletion = (Result<Void, NSError>) -> ()
-typealias UpdateRecordsNameCompletion = (Result<Void, NSError>) -> ()
 
 protocol PersonalRecordListRemoteService {
     func getPersonalRecordsNames(with completion: GetPersonalRecordsNamesCompletion?)
-    func getPersonalRecords(for name: String, with completion: GetPersonalRecordsResultsCompletion?)
-    func deletePersonalRecord(with id: Int, completion: DeletePersonalRecordCompletion?)
-    func deleteRecords(with name: String, completion: DeleteAllRecordsCompletion?)
-    func update(recordsIds:[Int], with: String, completion: UpdateRecordsNameCompletion?)
-    func deletePersonalRecord(with name: String, completion: DeletePersonalRecordCompletion?)
+    func getPersonalRecords(for id: Int, with completion: GetPersonalRecordsResultsCompletion?)
+    func deletePersonalRecord(with id: Int, completion: VoidRequestCompletion?)
+    func deletePersonalRecordResult(with id: Int, completion: VoidRequestCompletion?)
+    func update(personalRecordTypeId: Int, with name: String, completion: VoidRequestCompletion?)
 }
 
 class PersonalRecordListRemoteServiceTest: PersonalRecordListRemoteService {
+    func deletePersonalRecordResult(with id: Int, completion: VoidRequestCompletion?) {
+        completion?(.success())
+    }
+    
     func getPersonalRecordsNames(with completion: GetPersonalRecordsNamesCompletion?) {
         let persRecord1 = PersonalRecordType(name: "Frecari pe cap", present: true, updatedAt: "2015-01-10")
         let persRecord2 = PersonalRecordType(name: "Deadlift", present: true, updatedAt: "2015-01-10")
         completion?(.success([persRecord1, persRecord2]))
     }
     
-    func getPersonalRecords(for name: String, with completion: GetPersonalRecordsResultsCompletion?) {
-        let persRecord1 = PersonalRecord(name: name, rx: true, result: "23", resultType: .weight, unitType: .imperial, notes: "", imageUrl: nil, date: Date())
-        let persRecord2 = PersonalRecord(name: name, rx: true, result: "54", resultType: .weight, unitType: .imperial, notes: "", imageUrl: nil, date: Date())
-        let persRecord3 = PersonalRecord(name: name, rx: true, result: "67", resultType: .weight, unitType: .imperial, notes: "", imageUrl: nil, date: Date())
+    func getPersonalRecords(for id: Int, with completion: GetPersonalRecordsResultsCompletion?) {
+        let persRecord1 = PersonalRecord(name: "asf", rx: true, result: "23", resultType: .weight, unitType: .imperial, notes: "", imageUrl: nil, date: Date())
+        let persRecord2 = PersonalRecord(name: "ASf", rx: true, result: "54", resultType: .weight, unitType: .imperial, notes: "", imageUrl: nil, date: Date())
+        let persRecord3 = PersonalRecord(name: "Asfaf", rx: true, result: "67", resultType: .weight, unitType: .imperial, notes: "", imageUrl: nil, date: Date())
         persRecord1.id = 1
         persRecord2.id = 2
         persRecord3.id = 3
@@ -41,39 +42,41 @@ class PersonalRecordListRemoteServiceTest: PersonalRecordListRemoteService {
         completion?(.success([persRecord1, persRecord2, persRecord3]))
     }
     
-    func deletePersonalRecord(with id: Int, completion: DeletePersonalRecordCompletion?) {
+    func deletePersonalRecord(with id: Int, completion: VoidRequestCompletion?) {
         completion?(.success())
     }
     
-    func deleteRecords(with name: String, completion: DeleteAllRecordsCompletion?) {
-        completion?(.success())
-    }
-    
-    func update(recordsIds: [Int], with: String, completion: UpdateRecordsNameCompletion?) {
-        completion?(.success())
-    }
-    
-    func deletePersonalRecord(with name: String, completion: DeletePersonalRecordCompletion?) {
+    func update(personalRecordTypeId: Int, with name: String, completion: VoidRequestCompletion?) {
         completion?(.success())
     }
 }
 
 class PersonalRecordListRemoteImpl: PersonalRecordListRemoteService {
-    func getPersonalRecords(for name: String, with completion: GetPersonalRecordsResultsCompletion?) {
+    
+    func deletePersonalRecordResult(with id: Int, completion: VoidRequestCompletion?) {
+        let request = DeletePersonalRecordResultRequest(with: id)
+        
+        request.success = { _, _ in
+            completion?(.success())
+        }
+        
+        request.error = { _, error in
+            completion?(.failure(error))
+        }
+        
+        request.runRequest()
+    }
+    
+    func getPersonalRecords(for id: Int, with completion: GetPersonalRecordsResultsCompletion?) {
         if !UserManager.sharedInstance.isAuthenticated() {
             completion?(.success([]))
             return
         }
         
-        let request = GetRecordsForNameRequest(with: name)
+        let request = GetPersonalRecordsResultsRequest(with: id)
         
         request.success = { _, result in
-            guard let result = result as? [String: Any] else {
-                completion?(.success([]))
-                return
-            }
-            
-            guard let recordsArray = result["personal_records"] as? [[String: Any]] else {
+            guard let recordsArray = result as? [[String: Any]] else {
                 completion?(.success([]))
                 return
             }
@@ -94,7 +97,7 @@ class PersonalRecordListRemoteImpl: PersonalRecordListRemoteService {
         request.runRequest()
     }
     
-    func deletePersonalRecord(with id: Int, completion: DeletePersonalRecordCompletion?) {
+    func deletePersonalRecord(with id: Int, completion: VoidRequestCompletion?) {
         let request = DeletePersonalRecordRequest(with: id)
         
         request.success = { _, _ in
@@ -108,35 +111,6 @@ class PersonalRecordListRemoteImpl: PersonalRecordListRemoteService {
         
         request.runRequest()
     }
-    
-    func deleteRecords(with name: String, completion: DeleteAllRecordsCompletion?) {
-        let request = DeletePRByNameRequest(recordName: name)
-        
-        request.success = { _, _ in
-            completion?(.success())
-        }
-        
-        request.error = { _, error in
-            completion?(.failure(error))
-        }
-        
-        
-        request.runRequest()
-    }
-
-    func deletePersonalRecord(with name: String, completion: DeletePersonalRecordCompletion?) {
-        let request = DeletePRByNameRequest(recordName: name)
-        
-        request.success = { _, _ in
-            completion?(.success())
-        }
-        
-        request.error = { _, error in
-            completion?(.failure(error))
-        }
-        
-        request.runRequest()
-    }
 
     func getPersonalRecordsNames(with completion: GetPersonalRecordsNamesCompletion?) {
         if !UserManager.sharedInstance.isAuthenticated() {
@@ -147,16 +121,10 @@ class PersonalRecordListRemoteImpl: PersonalRecordListRemoteService {
         let request = GetPersonalRecordsRequest()
         
         request.success = { _, result in
-            guard let dict = result as? [String: Any] else {
+            guard let prs = result as? [[String: Any]] else {
                 completion?(.failure(NSError.localError(with: "Invalid JSON")))
                 return
             }
-            
-            guard let prs = dict["personal_records"] as? [[String: Any]] else {
-                completion?(.failure(NSError.localError(with: "Invalid JSON")))
-                return
-            }
-            
             
             var prTypes = [PersonalRecordType]()
             for prTypeDict in prs {
@@ -174,8 +142,8 @@ class PersonalRecordListRemoteImpl: PersonalRecordListRemoteService {
         request.runRequest()
     }
     
-    func update(recordsIds: [Int], with name: String, completion: UpdateRecordsNameCompletion?) {
-        let request = UpdateRecordsNameRequest(with: recordsIds, name: name)
+    func update(personalRecordTypeId: Int, with name: String, completion: VoidRequestCompletion?) {
+        let request = UpdateRecordsNameRequest(with: personalRecordTypeId, name: name)
         
         request.success = { _, _ in
             completion?(.success())

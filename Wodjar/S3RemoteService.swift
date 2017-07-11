@@ -50,7 +50,7 @@ class S3RemoteService {
         })
     }
     
-    func deleteImage(with key: String, completion: DeleteImageRequestCompletion?) {
+    func deleteImage(with key: String, completion: VoidRequestCompletion?) {
         let s3 = AWSS3.default()
         let deleteObjectRequest = AWSS3DeleteObjectRequest()
         deleteObjectRequest?.bucket = "workoutoftheday-images"

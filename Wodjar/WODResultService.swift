@@ -37,7 +37,7 @@ struct WODResultService {
         }
     }
     
-    func update(wodResult: WODResult, for wod: Workout, with picturePath: String?, completion: UpdateResultCompletion?) {
+    func update(wodResult: WODResult, for wod: Workout, with picturePath: String?, completion: VoidRequestCompletion?) {
         if wodResult.resultAsString() == nil || wodResult.resultAsString()?.characters.count == 0 {
             completion?(.failure(NSError.localError(with: "Please enter a result.")))
             return
@@ -103,7 +103,7 @@ struct WODResultService {
         }
     }
     
-    func delete(wodResult: WODResult, with completion: DeleteResultCompletion?) {
+    func delete(wodResult: WODResult, with completion: VoidRequestCompletion?) {
         if wodResult.id == nil {
             completion?(.success())
             return
@@ -120,4 +120,9 @@ struct WODResultService {
             })
         }
     }
+    
+    func getResult(for wod: Workout, with completion: GetResultsRequestCompletion?) {
+        remote.getResults(for: wod, with: completion)
+    }
+
 }

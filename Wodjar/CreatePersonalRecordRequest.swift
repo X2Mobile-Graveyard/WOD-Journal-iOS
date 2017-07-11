@@ -17,7 +17,7 @@ class CreatePersonalRecordRequest: BaseRequest {
     }
     
     override func param() -> Dictionary<String, Any>! {
-        return personalRecord.createUpdateDict()
+        return personalRecord.createDict()
     }
     
     override func requestMethod() -> RequestMethod {
@@ -25,7 +25,7 @@ class CreatePersonalRecordRequest: BaseRequest {
     }
     
     override func requestURL() -> String {
-        return "personal_records"
+        return "create-pr-result/\(personalRecord.name!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
     }
     
     override func headerParams() -> [String : String] {

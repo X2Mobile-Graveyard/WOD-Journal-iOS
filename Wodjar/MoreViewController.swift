@@ -123,21 +123,6 @@ class MoreViewController: UIViewController {
         }
     }
     
-    private func resetViewControllers() {
-        for viewController in (tabBarController?.viewControllers)! {
-            if let navController = viewController as? UINavigationController {
-                if navController == navigationController {
-                    continue
-                }
-                
-                navController.popToRootViewController(animated: false)
-            }
-        }
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Auth"), object: nil)
-
-    }
-    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

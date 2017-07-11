@@ -17,7 +17,7 @@ class UpdatePersonalRecordRequest: BaseRequest {
     }
     
     override func param() -> Dictionary<String, Any>! {
-        return ["personal_record":self.personalRecord.createUpdateDict()]
+        return ["personal_record":self.personalRecord.updateDict()]
     }
     
     override func requestURL() -> String {

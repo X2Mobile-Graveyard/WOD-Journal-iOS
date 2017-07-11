@@ -26,13 +26,8 @@ struct PersonalRecordListService {
         })
     }
     
-    func getPersonalRecordResult(for name: String?, with completion: GetPersonalRecordsResultsCompletion?) {
-        guard let name = name else {
-            completion?(.failure(NSError.localError(with: "Name of the Personal Record is invalid!")))
-            return
-        }
-        
-        remoteService.getPersonalRecords(for: name) { (result) in
+    func getPersonalRecordResult(for id: Int, with completion: GetPersonalRecordsResultsCompletion?) {
+        remoteService.getPersonalRecords(for: id) { (result) in
             switch result {
             case let .success(prResults):
                 if prResults.count > 0 {
@@ -53,27 +48,19 @@ struct PersonalRecordListService {
         return self.instersect(userPersonalRecordTypes: personalRecords, with: defaultPersonalRecords)
     }
     
-    func deletePersonalRecord(with id: Int, completion: DeletePersonalRecordCompletion?) {
+    func deletePersonalRecord(with id: Int, completion: VoidRequestCompletion?) {
         remoteService.deletePersonalRecord(with: id, completion: completion)
     }
     
-    func deletePersonalRecord(with name: String?, completion: DeletePersonalRecordCompletion?) {
-        guard let name = name else  {
-            completion?(.failure(NSError.localError(with: "Could not delete this record.")))
-            return
-        }
-        remoteService.deletePersonalRecord(with: name, completion: completion)
+    func deletePersonalRecordResult(with id: Int, completion: VoidRequestCompletion?) {
+        remoteService.deletePersonalRecordResult(with: id, completion: completion)
     }
     
-    func deleteAllRecords(for personalRecordType: PersonalRecordType, with completion: DeleteAllRecordsCompletion?) {
-        guard personalRecordType.name != nil else {
-            completion?(.success())
-            return
-        }
-        remoteService.deleteRecords(with: personalRecordType.name!, completion: completion)
+    func deleteAllRecords(for personalRecordType: PersonalRecordType, with completion: VoidRequestCompletion?) {
+        remoteService.deletePersonalRecord(with: personalRecordType.id, completion: completion)
     }
     
-    func update(personalRecordsIds:[Int], with name: String, completion: UpdateRecordsNameCompletion?) {
+    func update(personalRecordTypeId:Int, with name: String, completion: VoidRequestCompletion?) {
         if !UserManager.sharedInstance.isAuthenticated() {
             completion?(.failure(NSError.localError(with: "Unable to complete operation. Please login")))
             return
@@ -84,7 +71,7 @@ struct PersonalRecordListService {
             return
         }
         
-        remoteService.update(recordsIds: personalRecordsIds, with: name, completion: completion)
+        remoteService.update(personalRecordTypeId: personalRecordTypeId, with: name, completion: completion)
     }
     
     func orderByUpdatedDate(recordTypes: [PersonalRecordType]) -> [PersonalRecordType] {
@@ -108,7 +95,11 @@ struct PersonalRecordListService {
                 for personalRecordDict in weightPersonalRecords {
                     let personalRecordName = personalRecordDict["name"]
                     let updatedAt = personalRecordDict["date"]
-                    let pr = PersonalRecordType(name: personalRecordName!, present: false, defaultType: .weight, updatedAt: updatedAt!)
+                    let pr = PersonalRecordType(id: 2,
+                                                name: personalRecordName!,
+                                                present: false,
+                                                defaultType: .weight,
+                                                updatedAt: updatedAt!)
                     defaultPrs.append(pr)
                 }
             }
@@ -117,7 +108,11 @@ struct PersonalRecordListService {
                 for personalRecordDict in timePersonalRecords {
                     let personalRecordName = personalRecordDict["name"]
                     let updatedAt = personalRecordDict["date"]
-                    let pr = PersonalRecordType(name: personalRecordName!, present: false, defaultType: .time, updatedAt: updatedAt!)
+                    let pr = PersonalRecordType(id: 2,
+                                                name: personalRecordName!,
+                                                present: false,
+                                                defaultType: .time,
+                                                updatedAt: updatedAt!)
                     defaultPrs.append(pr)
                 }
             }

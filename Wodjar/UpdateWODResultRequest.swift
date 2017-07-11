@@ -30,6 +30,4 @@ class UpdateWODResultRequest: BaseRequest {
     override func headerParams() -> [String : String] {
         return ["Authorization":"Token \(UserManager.sharedInstance.userToken!)"];
     }
-
-    
 }

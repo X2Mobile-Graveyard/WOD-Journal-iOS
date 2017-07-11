@@ -15,10 +15,9 @@ class CreateCustomWODViewController: WODJournalResultViewController {
     // @IBOutlets
     @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var editTitleButton: UIButton!
-    @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet var footerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var dateButton: UIButton!
     
     // @Injected
     var customWod: Workout!
@@ -26,6 +25,12 @@ class CreateCustomWODViewController: WODJournalResultViewController {
     
     // @Properties
     var delegate: CustomWodDelegate?
+    lazy var dateTextField: UITextField = {
+        let hiddenTextField = UITextField()
+        self.view.addSubview(hiddenTextField)
+        return hiddenTextField
+    }()
+    var pickedDateFromDatePicker: Date?
     
     // @Constant
     let presentFullImageSegueIdentifier = "GoToFullImageViewController"
@@ -35,21 +40,15 @@ class CreateCustomWODViewController: WODJournalResultViewController {
         super.viewDidLoad()
         initUI()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        titleTextField.becomeFirstResponder()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        endEditing()
-    }
 
     // MARK: - Buttons Actions
     
+    @IBAction func didTapChangeDateButton(_ sender: Any) {
+        dateTextField.becomeFirstResponder()
+    }
+    
     @IBAction func didTapDeleteButton(_ sender: Any) {
-        endEditing()
+        view.endEditing(true)
         showDeleteAlert(with: "Warning",
                         message: "This action cannot be undone.",
                         actionButtonTitle: "Delete") { (alert) in
@@ -58,7 +57,7 @@ class CreateCustomWODViewController: WODJournalResultViewController {
     }
     
     @IBAction func didTapAddPictureButton(_ sender: Any) {
-        endEditing()
+        view.endEditing(true)
         presentAlertControllerForTakingPicture()
     }
     
@@ -67,7 +66,7 @@ class CreateCustomWODViewController: WODJournalResultViewController {
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {
-        customWod.name = titleTextField.text
+        customWod.wodDescription = descriptionTextView.text
         MBProgressHUD.showAdded(to: view, animated: true)
         service.create(customWod: customWod, imagePath: pickedImagePath) { (result) in
             MBProgressHUD.hide(for: self.view, animated: true)
@@ -83,16 +82,12 @@ class CreateCustomWODViewController: WODJournalResultViewController {
     }
     
     @IBAction func didTapChangePictureButton(_ sender: Any) {
-        endEditing()
+        view.endEditing(true)
         presentAlertControllerForEditingPicture()
     }
     
     @IBAction func didTapOnImageView(_ sender: Any) {
         performSegue(withIdentifier: presentFullImageSegueIdentifier, sender: self)
-    }
-    
-    @IBAction func didTapEditTitleButton(_ sender: Any) {
-        titleTextField.becomeFirstResponder()
     }
     
     // MARK: - Other Actions
@@ -108,30 +103,17 @@ class CreateCustomWODViewController: WODJournalResultViewController {
         default:
             customWod.category = .weight
         }
-        endEditing()
-    }
-    
-    func didTapOutsideTextField() {
-        if !titleTextField.isFirstResponder {
-            view.endEditing(true)
-            return
-        }
-        if (titleTextField.text?.characters.count)! > 0 {
-            titleTextField.resignFirstResponder()
-        }
-    }
-    
-    func didTapDoneOnToolbar() {
         view.endEditing(true)
     }
     
-    // MARK: - Helper Methods
-    
-    func endEditing() {
+    func didTapCancel() {
         view.endEditing(true)
-        if titleTextField.isFirstResponder {
-            titleTextField.resignFirstResponder()
-        }
+    }
+    
+    func didPickDate(datePicker: UIDatePicker) {
+        pickedDateFromDatePicker = datePicker.date
+        customWod.date = pickedDateFromDatePicker!
+        dateButton.setTitle(pickedDateFromDatePicker?.getDateAsWodJournalString(), for: .normal)
     }
     
     // MARK: - Navigation

@@ -11,6 +11,17 @@ import Result
 import AFNetworking
 
 extension UIViewController {
+    
+    func resetViewControllers() {
+        for viewController in (tabBarController?.viewControllers)! {
+            if let navController = viewController as? UINavigationController {
+                navController.popToRootViewController(animated: true)
+            }
+        }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Auth"), object: nil)
+    }
+    
     func handleError<T>(result: Result<T, NSError>) {
         switch result {
         case .success(_): break
@@ -25,6 +36,26 @@ extension UIViewController {
             }
             
             if (error.code == -1011) {
+                if let respose = error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] as? HTTPURLResponse {
+                    let statusCode = respose.statusCode
+                    let url = respose.url!.absoluteString
+                    if statusCode == 401 && !url.contains("sign-in") && !url.contains("users") {
+                        UserManager.sharedInstance.signOut()
+                        showAlert(with: "Warning",
+                                  message: "You have been logged out. Please login.",
+                                  actionButtonTitle: "Login",
+                                  actionHandler: { (alert) in
+                                    self.showLogin(with: {
+                                        self.resetViewControllers()
+                                    })
+                        },
+                                  cancelButtonTitle: "Cancel",
+                                  cancelHandler: { (alert) in
+                                    self.resetViewControllers()
+                        })
+                        return
+                    }
+                }
                 let errorMessage = handleInternalServer(error: error)
                 showError(with: errorMessage)
             } else {

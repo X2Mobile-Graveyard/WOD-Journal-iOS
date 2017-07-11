@@ -12,11 +12,10 @@ import SDWebImage
 struct PersonalRecordService {
     let remoteService: PersonalRecordRemoteService
     let s3RemoteService: S3RemoteService
-    var recordsNames: [String]? = nil
     
     // MARK: - Public Methods
     
-    func update(personalRecord: PersonalRecord, with imagePath: String?, completion: UpdatePersonalRecordCompletion?) {
+    func update(personalRecord: PersonalRecord, with imagePath: String?, completion: VoidRequestCompletion?) {
         if personalRecord.name == nil || personalRecord.name?.characters.count == 0 {
             completion?(.failure(NSError.localError(with: "The PR must have a name")))
             return
@@ -88,17 +87,42 @@ struct PersonalRecordService {
         }
     }
     
-    func create(personalRecord: PersonalRecord, with imagePath: String?,  completion: CreatePersonalRecordCompletion?) {
-        if personalRecord.name == nil || personalRecord.name?.characters.count == 0 {
-            completion?(.failure(NSError.localError(with: "You must enter a name")))
+    func createPersonalRecordResult(with personalRecordType: PersonalRecordType?,
+                                    personalRecord: PersonalRecord,
+                                    imagePath: String?,
+                                    completion: CreatePersonalRecordResultCompletion?) {
+        if personalRecord.resultAsString() == nil || personalRecord.resultAsString()?.characters.count == 0 {
+            completion?(.failure(NSError.localError(with: "Please enter a record")))
             return
         }
         
-        if let names = recordsNames {
-            if names.contains(personalRecord.name!) {
-                completion?(.failure(NSError.localError(with: "You already have records with the same name.")))
-                return
+        if imagePath == nil {
+            self.remoteService.createResult(result: personalRecord,
+                                            for: personalRecordType!,
+                                            with: completion)
+            return
+        }
+        
+        let url = URL(fileURLWithPath: imagePath!)
+        s3RemoteService.uploadImage(with: url, key: nil) { (result) in
+            switch result {
+            case let .success(s3Path):
+                personalRecord.imageUrl = s3Path
+            case .failure(_):
+                break
             }
+            
+            self.remoteService.createResult(result: personalRecord,
+                                            for: personalRecordType!,
+                                            with: completion)
+        }
+
+    }
+    
+    func create(personalRecord: PersonalRecord, with imagePath: String?,  completion: CreatePersonalRecordTypeCompletion?) {
+        if personalRecord.name == nil || personalRecord.name?.characters.count == 0 {
+            completion?(.failure(NSError.localError(with: "You must enter a name")))
+            return
         }
         
         if personalRecord.resultAsString() == nil || personalRecord.resultAsString()?.characters.count == 0 {
@@ -124,7 +148,7 @@ struct PersonalRecordService {
         }
     }
     
-    func delete(personalRecord: PersonalRecord, with completion: DeletePersonalRecordCompletion?) {
+    func delete(personalRecord: PersonalRecord, with completion: VoidRequestCompletion?) {
         if personalRecord.id == nil {
             completion?(.success())
             return

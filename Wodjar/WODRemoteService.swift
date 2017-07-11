@@ -11,15 +11,13 @@ import Result
 
 typealias UpdateWodCompletion = (Result<Void, NSError>) -> ()
 typealias CreateWodCompletion = (Result<Int, NSError>) -> ()
-typealias FavoriteCompletion = (Result<Void, NSError>) -> ()
-typealias DeleteWodCompletion = (Result<Void, NSError>) -> ()
 
 protocol WODRemoteService {
     func update(wod: Workout, with: UpdateWodCompletion?)
     func create(customWod: Workout, with: CreateWodCompletion?)
-    func addToFavorite(wodId: Int, isDefault: Bool, with completion: FavoriteCompletion?)
-    func removeFromFavorite(wodId: Int, isDefault: Bool, with completion: FavoriteCompletion?)
-    func deleteWod(with wodId: Int, completion: DeleteWodCompletion?)
+    func addToFavorite(wodId: Int, isDefault: Bool, with completion: VoidRequestCompletion?)
+    func removeFromFavorite(wodId: Int, isDefault: Bool, with completion: VoidRequestCompletion?)
+    func deleteWod(with wodId: Int, completion: VoidRequestCompletion?)
 }
 
 class WODRemoteServiceTest: WODRemoteService {
@@ -31,15 +29,15 @@ class WODRemoteServiceTest: WODRemoteService {
         completion?(.success(40))
     }
     
-    func addToFavorite(wodId: Int, isDefault: Bool, with completion: FavoriteCompletion?) {
+    func addToFavorite(wodId: Int, isDefault: Bool, with completion: VoidRequestCompletion?) {
         completion?(.success())
     }
     
-    func removeFromFavorite(wodId: Int, isDefault: Bool, with completion: FavoriteCompletion?) {
+    func removeFromFavorite(wodId: Int, isDefault: Bool, with completion: VoidRequestCompletion?) {
         completion?(.success())
     }
     
-    func deleteWod(with wodId: Int, completion: DeleteWodCompletion?) {
+    func deleteWod(with wodId: Int, completion: VoidRequestCompletion?) {
         completion?(.success())
     }
 }
@@ -83,7 +81,7 @@ class WODRemoteServiceImpl: WODRemoteService {
         request.runRequest()
     }
     
-    func addToFavorite(wodId: Int, isDefault: Bool, with completion: FavoriteCompletion?) {
+    func addToFavorite(wodId: Int, isDefault: Bool, with completion: VoidRequestCompletion?) {
         let request = AddToFavoriteRequest(wodId: wodId, isDefault: isDefault)
         
         request.success = { _, _ in
@@ -97,7 +95,7 @@ class WODRemoteServiceImpl: WODRemoteService {
         request.runRequest()
     }
     
-    func removeFromFavorite(wodId: Int, isDefault: Bool, with completion: FavoriteCompletion?) {
+    func removeFromFavorite(wodId: Int, isDefault: Bool, with completion: VoidRequestCompletion?) {
         let request = RemoveFavoriteRequest(wodId: wodId, isDefault: isDefault)
         
         request.success = { _, _ in
@@ -111,10 +109,10 @@ class WODRemoteServiceImpl: WODRemoteService {
         request.runRequest()
     }
     
-    func deleteWod(with wodId: Int, completion: DeleteWodCompletion?) {
+    func deleteWod(with wodId: Int, completion: VoidRequestCompletion?) {
         let request = DeleteWODRequest(wodId: wodId)
         
-        request.success = { _, _ in
+        request.success = { response, _ in
             completion?(.success())
         }
         

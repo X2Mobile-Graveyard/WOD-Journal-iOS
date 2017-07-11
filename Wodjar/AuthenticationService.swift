@@ -17,7 +17,7 @@ struct AuthenticationService {
     
     // MARK: - Public Methods
     
-    func login(with email: String?, password: String?, completion: RegularLoginCompletion?) {
+    func login(with email: String?, password: String?, completion: VoidRequestCompletion?) {
         guard let email = email else {
             completion?(.failure(NSError.localError(with: "Please enter an email")))
             return
@@ -116,7 +116,7 @@ struct AuthenticationService {
         }
     }
     
-    func facebookLogin(on viewController: UIViewController, with completion: FacebookLoginCompletion?) {
+    func facebookLogin(on viewController: UIViewController, with completion: VoidRequestCompletion?) {
         let loginManager = LoginManager()
         UIApplication.shared.statusBarStyle = .default  // remove this line if not required
         loginManager.logIn([ .publicProfile,.email ], viewController: viewController) { loginResult in
@@ -134,7 +134,7 @@ struct AuthenticationService {
     
     // MARK: - Private Methods
     
-    private func checkFacebookCredentials(from dictionary: [String: Any]?, completion: FacebookLoginCompletion?) {
+    private func checkFacebookCredentials(from dictionary: [String: Any]?, completion: VoidRequestCompletion?) {
         guard let dictionary = dictionary else {
             completion?(.failure(NSError.localError(with: "Invalid login. Please try again.")))
             return

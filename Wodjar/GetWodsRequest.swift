@@ -10,20 +10,13 @@ import UIKit
 
 class GetWodsRequest: BaseRequest {
     
-    override init() {
-        super.init()
-        #if !((arch(i386) || arch(x86_64)) && os(iOS))
-            guard let status = Network.reachability?.status else {
-                return
-            }
-            if status == .unreachable {
-                self.useCachePolicy = true
-            }
-        #endif
+    let type: WODType
+    init(with wodType: WODType) {
+        type = wodType
     }
     
     override func requestURL() -> String {
-        return "list-wods"
+        return "list-wods/\(type.hash())"
     }
     
     override func requestMethod() -> RequestMethod {

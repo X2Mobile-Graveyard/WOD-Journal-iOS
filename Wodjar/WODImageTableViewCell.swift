@@ -30,9 +30,9 @@ class WODImageTableViewCell: UITableViewCell {
         }
         
         if imageURL.isLocalFileUrl() {
-            wodImageView.sd_setImage(with:(URL(fileURLWithPath: imageURL)))
+            wodImageView.sd_setImage(with: URL(fileURLWithPath: imageURL), placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
         } else {
-            wodImageView.sd_setImage(with: url)
+            wodImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
         }
     }
 }

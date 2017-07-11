@@ -9,14 +9,12 @@
 import Foundation
 import Result
 
-typealias UpdateUserRequestCompletion = (Result<Void, NSError>) -> ()
-
 protocol UserRemoteService {
-    func updateUser(with name: String, pictureUrl: String?, completion: UpdateUserRequestCompletion?);
+    func updateUser(with name: String?, pictureUrl: String?, completion: VoidRequestCompletion?);
 }
 
 class UserRemoteServiceImpl: UserRemoteService {
-    func updateUser(with name: String, pictureUrl: String?, completion: UpdateUserRequestCompletion?) {
+    func updateUser(with name: String?, pictureUrl: String?, completion: VoidRequestCompletion?) {
         let request = UpdateUserRequest(with: name, imageURL: pictureUrl)
         
         request.success = { _, _ in

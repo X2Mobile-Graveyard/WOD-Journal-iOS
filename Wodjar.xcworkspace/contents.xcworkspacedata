@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Wodjar.xcodeproj">
+      location = "group:/Users/bogdancostea/Work/WorkoutOfTheDay/swift version/Wodjar/WodJournal.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

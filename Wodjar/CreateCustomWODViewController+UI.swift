@@ -16,8 +16,8 @@ extension CreateCustomWODViewController {
     func initUI() {
         setupSegmentedControl()
         setupScrollView()
-        hideKeyboardWhenTappedAround()
         setupDescriptionTextView()
+        setupCalendarTextField()
     }
     
     func changeUIForEditMode() {
@@ -33,17 +33,23 @@ extension CreateCustomWODViewController {
         descriptionTextView.inputAccessoryView = createKeyboardToolbarForDescription()
     }
     
+    private func setupCalendarTextField() {
+        dateButton.setTitle(Date().getDateAsWodJournalString(), for: .normal)
+        pickedDateFromDatePicker = Date()
+        customWod.date = Date()
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        dateTextField.inputView = datePicker
+        datePicker.addTarget(self, action: #selector(didPickDate(datePicker:)), for: .valueChanged)
+        dateTextField.inputAccessoryView = createKeyboardToolbar(with: "Done", selector: #selector(didTapCancel))
+    }
+    
     private func setupScrollView() {
         scrollView.alwaysBounceVertical = true
     }
     
     private func setupSegmentedControl() {
         segmentedControl.addTarget(self, action: #selector(didChangeSegmentControl(segmentControl:)), for: .valueChanged)
-    }
-    
-    private func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOutsideTextField))
-        view.addGestureRecognizer(tap)
     }
     
     private func createKeyboardToolbar(with hiddingOtion: String) -> UIToolbar {
@@ -54,7 +60,7 @@ extension CreateCustomWODViewController {
         let hideKeyboardItem = UIBarButtonItem(title: hiddingOtion,
                                                style: .plain,
                                                target: self,
-                                               action: #selector(didTapDoneOnToolbar))
+                                               action: #selector(didTapCancel))
         toolbar.items = [flexibelSpaceItem, hideKeyboardItem]
         toolbar.sizeToFit()
         

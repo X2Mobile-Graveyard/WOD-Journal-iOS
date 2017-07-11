@@ -10,8 +10,13 @@ import UIKit
 
 class GetDefaultWodsRequest: BaseRequest {
 
+    let type: WODType
+    init(with wodType: WODType) {
+        type = wodType
+    }
+    
     override func requestURL() -> String {
-        return "default-wods"
+        return "list-default-wods/\(type.hash())"
     }
     
     override func requestMethod() -> RequestMethod {

@@ -11,9 +11,9 @@ import UIKit
 class UpdateUserRequest: BaseRequest {
 
     let imageURL: String?
-    let name: String
+    let name: String?
     
-    init(with name: String, imageURL: String?) {
+    init(with name: String?, imageURL: String?) {
         self.imageURL = imageURL
         self.name = name
     }
@@ -27,11 +27,15 @@ class UpdateUserRequest: BaseRequest {
     }
     
     override func param() -> Dictionary<String, Any>! {
-        if imageURL != nil {
-            return ["image_url":imageURL!, "name":name]
+        if imageURL != nil && name != nil {
+            return ["image_url":imageURL!, "name":name!]
         }
-        return ["name":name]
         
+        if imageURL == nil {
+            return ["name":name!]
+        }
+        
+        return ["image_url": imageURL!]
     }
     
     override func requestURL() -> String {

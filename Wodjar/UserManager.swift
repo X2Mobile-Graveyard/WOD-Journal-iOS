@@ -116,5 +116,6 @@ class UserManager {
         UserDefaults.standard.removeObject(forKey: unitSystemKey)
         userName = nil
         imageUrl = nil
+        SessionManager.sharedInstance.deleteAllUserDefaults()
     }
 }

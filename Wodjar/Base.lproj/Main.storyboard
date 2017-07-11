@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y79-wF-8Xr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y79-wF-8Xr">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,38 +60,6 @@
                                     <outlet property="wodsCompletedLabel" destination="tZk-xv-2FI" id="Qy7-Pf-HuU"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WodResultTableViewCellIdentifier" id="nP3-Wb-RNd" customClass="PresonalRecordsListTableViewCell" customModule="Wodjar" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nP3-Wb-RNd" id="Dzf-FO-ECf">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DbJ-iR-8J0">
-                                            <rect key="frame" x="16" y="11" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YY-eb-fFF">
-                                            <rect key="frame" x="317" y="11" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="DbJ-iR-8J0" firstAttribute="centerY" secondItem="Dzf-FO-ECf" secondAttribute="centerY" id="goX-cR-0Pj"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="3YY-eb-fFF" secondAttribute="trailing" constant="8" id="mV0-hR-DP7"/>
-                                        <constraint firstItem="3YY-eb-fFF" firstAttribute="centerY" secondItem="Dzf-FO-ECf" secondAttribute="centerY" id="mXD-Cs-z1x"/>
-                                        <constraint firstAttribute="leadingMargin" secondItem="DbJ-iR-8J0" secondAttribute="leading" constant="-8" id="uUY-sS-zc1"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="nameLabel" destination="DbJ-iR-8J0" id="KRF-xv-ghf"/>
-                                    <outlet property="recordLabel" destination="3YY-eb-fFF" id="Kcd-9r-YI2"/>
-                                </connections>
-                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="1bH-Cv-amF" id="G9D-ha-bgI"/>
@@ -102,8 +70,6 @@
                     <connections>
                         <segue destination="cTN-i7-DiS" kind="show" identifier="CustomWodTypeViewControllerIdentifier" id="jgu-kr-l9T"/>
                         <segue destination="zbX-H8-EIY" kind="show" identifier="DefaultWodTypeViewControllerIdentifier" id="qOQ-ai-L3w"/>
-                        <segue destination="Q99-yo-6EQ" kind="show" identifier="goToDefaultWodsIdentifier" id="9g4-tZ-KCv"/>
-                        <segue destination="kIQ-7G-Sik" kind="show" identifier="goToCustomWodsIdentifier" id="1Ln-DG-YJv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uqs-su-Pfe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -269,15 +235,7 @@
                 <viewControllerPlaceholder storyboardName="CustomWODs" referencedIdentifier="CustomWODsTVC" id="cTN-i7-DiS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Z7-mX-GAe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1257" y="-290"/>
-        </scene>
-        <!--CustomWODsDetailsTVC-->
-        <scene sceneID="Sc1-D7-Q7T">
-            <objects>
-                <viewControllerPlaceholder storyboardName="CustomWODs" referencedIdentifier="CustomWODsDetailsTVC" id="kIQ-7G-Sik" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v3e-VZ-QRL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1290" y="-147"/>
+            <point key="canvasLocation" x="1142" y="-79"/>
         </scene>
         <!--UITableViewController-LJZ-He-br4-->
         <scene sceneID="Y3T-pj-nDI">
@@ -285,15 +243,7 @@
                 <viewControllerPlaceholder storyboardName="DefaultWODs" referencedIdentifier="UITableViewController-LJZ-He-br4" id="zbX-H8-EIY" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lm7-Dz-aGQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1341" y="263"/>
-        </scene>
-        <!--UITableViewController-dxZ-X0-OCc-->
-        <scene sceneID="wNM-ZK-UKa">
-            <objects>
-                <viewControllerPlaceholder storyboardName="DefaultWODs" referencedIdentifier="UITableViewController-dxZ-X0-OCc" id="Q99-yo-6EQ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PPF-zm-KHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1344" y="95"/>
+            <point key="canvasLocation" x="1219" y="81"/>
         </scene>
     </scenes>
     <resources>

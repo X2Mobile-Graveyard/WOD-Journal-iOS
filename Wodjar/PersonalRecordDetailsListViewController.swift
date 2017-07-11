@@ -71,7 +71,7 @@ class PersonalRecordDetailsListViewController: UIViewController {
     
     private func getResultsForPersonalRecords() {
         MBProgressHUD.showAdded(to: view, animated: true)
-        service.getPersonalRecordResult(for: personalRecordType.name) { (result) in
+        service.getPersonalRecordResult(for: personalRecordType.id) { (result) in
             MBProgressHUD.hide(for: self.view, animated: true)
             switch result {
             case let .success(prResults):
@@ -150,7 +150,7 @@ class PersonalRecordDetailsListViewController: UIViewController {
             return
         }
         
-        updateRecords(name: titleTextField.text!)
+        updatePersonalRecordType(name: titleTextField.text!)
         titleTextField.resignFirstResponder()
     }
     
@@ -173,7 +173,9 @@ class PersonalRecordDetailsListViewController: UIViewController {
             personalRecordViewController.personalRecord = selectedPersoanlRecord
             personalRecordViewController.controllerMode = .editMode
             personalRecordViewController.updatePersonalRecordDelegate = self
-            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService(), recordsNames: nil)
+            personalRecordViewController.personalRecordType = personalRecordType
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(),
+                                                                         s3RemoteService: S3RemoteService())
         } else if identifier == newPersonalRecordSegueIdentifier {
             let personalRecordViewController = segue.destination as! PersonalRecordViewController
             personalRecordViewController.personalRecord = PersonalRecord(name: personalRecordType.name,
@@ -186,7 +188,9 @@ class PersonalRecordDetailsListViewController: UIViewController {
                                                                          date: Date())
             personalRecordViewController.updatePersonalRecordDelegate = self
             personalRecordViewController.controllerMode = .editMode
-            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService(), recordsNames: nil)
+            personalRecordViewController.personalRecordType = personalRecordType
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(),
+                                                                         s3RemoteService: S3RemoteService())
         }
     }
     
@@ -198,8 +202,6 @@ class PersonalRecordDetailsListViewController: UIViewController {
             switch result {
             case .success():
                 self.deleteTypeDelegate?.didDelete(personalRecordType: self.personalRecordType)
-                self.personalRecordType.records = [PersonalRecord]()
-                self.tableView.reloadData()
                 _ = self.navigationController?.popViewController(animated: true)
             case .failure(_):
                 self.handleError(result: result)
@@ -208,10 +210,10 @@ class PersonalRecordDetailsListViewController: UIViewController {
         }
     }
     
-    func deletePersonalRecord(at index: Int) {
+    func deletePersonalRecordResult(at index: Int) {
         let personalRecordToDelete = personalRecordType.records[index]
         MBProgressHUD.showAdded(to: view, animated: true)
-        service.deletePersonalRecord(with: personalRecordToDelete.id!) { (result) in
+        service.deletePersonalRecordResult(with: personalRecordToDelete.id!) { (result) in
             switch result {
             case .success():
                 self.personalRecordType.records.remove(at: index)
@@ -224,10 +226,10 @@ class PersonalRecordDetailsListViewController: UIViewController {
         }
     }
     
-    func updateRecords(name: String) {
-        let recordsIds = personalRecordType.records.map { return $0.id!}
+    func updatePersonalRecordType(name: String) {
         MBProgressHUD.showAdded(to: view, animated: true)
-        service.update(personalRecordsIds: recordsIds, with: name) { (result) in
+        service.update(personalRecordTypeId: personalRecordType.id, with: name) { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
             switch result {
             case .success():
                 self.personalRecordType.name = name
@@ -236,7 +238,6 @@ class PersonalRecordDetailsListViewController: UIViewController {
                 self.handleError(result: result)
                 self.titleTextField.text = self.personalRecordType.name
             }
-            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
 
@@ -273,8 +274,7 @@ extension PersonalRecordDetailsListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            deletePersonalRecord(at: indexPath.row)
-            
+            deletePersonalRecordResult(at: indexPath.row)
         }
     }
     

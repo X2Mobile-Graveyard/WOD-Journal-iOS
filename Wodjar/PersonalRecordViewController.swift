@@ -9,6 +9,7 @@
 import UIKit
 import UITextView_Placeholder
 import MBProgressHUD
+import FacebookShare
 
 enum ViewControllerState {
     case withImage
@@ -51,8 +52,8 @@ class PersonalRecordViewController: WODJournalResultViewController {
     // @Constants
     let presentFullImageSegueIdentifier = "presentFullImageSegueIdentifier"
 
-    
     // @Injected
+    var personalRecordType: PersonalRecordType?
     var personalRecord: PersonalRecord!
     var controllerMode: ControllerType!
     var service: PersonalRecordService!
@@ -113,9 +114,9 @@ class PersonalRecordViewController: WODJournalResultViewController {
             createRecord()
         } else {
             if personalRecord.id == nil {
-                createRecord()
+                createResult()
             } else {
-                updateRecord()
+                updateResult()
             }
         }
     }
@@ -198,7 +199,7 @@ class PersonalRecordViewController: WODJournalResultViewController {
     
     // MARK: - Service Calls
     
-    func updateRecord() {
+    func updateResult() {
         MBProgressHUD.showAdded(to: view, animated: true)
         service.update(personalRecord: personalRecordCopy, with: pickedImagePath) { (result) in
             switch result {
@@ -213,15 +214,32 @@ class PersonalRecordViewController: WODJournalResultViewController {
         }
     }
     
+    func createResult() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.createPersonalRecordResult(with: personalRecordType,
+                                           personalRecord: personalRecordCopy,
+                                           imagePath: pickedImagePath) { (result) in
+                                            MBProgressHUD.hide(for: self.view, animated: true)
+                                            switch result {
+                                            case let .success(id):
+                                                self.personalRecordCopy.id = id
+                                                self.personalRecord.updateValues(from: self.personalRecordCopy)
+                                                self.updatePersonalRecordDelegate?.didAdd(personalRecord: self.personalRecord)
+                                                _ = self.navigationController?.popViewController(animated: true)
+                                            case .failure(_):
+                                                self.handleError(result: result)
+                                            }
+        }
+    }
+    
     func createRecord() {
         MBProgressHUD.showAdded(to: view, animated: true)
         service.create(personalRecord: personalRecordCopy, with: pickedImagePath) { (result) in
             switch result {
-            case let .success(id):
+            case let .success(id, prID):
                 self.personalRecordCopy.id = id
                 self.personalRecord.updateValues(from: self.personalRecordCopy)
-                self.createRecordDelegate?.didCreate(personalRecord: self.personalRecord)
-                self.updatePersonalRecordDelegate?.didAdd(personalRecord: self.personalRecord)
+                self.createRecordDelegate?.didCreatePersonalRecordType(withId: prID, result: self.personalRecord)
                 _ = self.navigationController?.popViewController(animated: true)
             case .failure(_):
                 self.handleError(result: result)
@@ -277,6 +295,28 @@ class PersonalRecordViewController: WODJournalResultViewController {
     func changedUnitType() {
         setupResultTextField()
         setupResultTypeLabel()
+    }
+    
+    // MARK: - Share Content
+    
+    func shareContent() {
+        if let descriptionImage = imageFromText() {
+            let photo = Photo(image: descriptionImage, userGenerated: false)
+            let content = PhotoShareContent(photos: [photo])
+            _ = try? ShareDialog.show(from: self, content: content)
+        }
+    }
+    
+    func imageFromText() -> UIImage? {
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.black]
+        let string: NSString = "asfasf test test \ntest tes"
+        let size = string.size(attributes: attributes)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        string.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height), withAttributes: attributes)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image
     }
 }
 
@@ -336,4 +376,7 @@ extension PersonalRecordViewController: UITextFieldDelegate {
         
         return true
     }
+}
+
+extension OpenGraphShareContent : ContentProtocol {
 }

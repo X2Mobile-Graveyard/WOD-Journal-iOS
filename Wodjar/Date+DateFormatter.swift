@@ -14,4 +14,16 @@ extension Date {
         dateFormatter.dateFormat = "MMM dd, yyyy"
         return dateFormatter.string(from: self)
     }
+    
+    func getMonthAndDay() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd"
+        return dateFormatter.string(from: self)
+    }
+    
+    func getWodJournalFormatString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return dateFormatter.string(from: self)
+    }
 }

@@ -12,67 +12,68 @@ import MBProgressHUD
 class WODTypeTableViewController: UITableViewController {
     
     // @Properties
-    var wodType: WODType?
-    var selectedWOD: Workout?
+    var selectedWOD: Workout!
     var viewForHud: UIView {
         return tableView.superview ?? view
     }
-    var resultSearchController: UISearchController!
-    var filteredWorkouts = [Workout]()
+    var resultSearchController: UISearchController?
+    var filteredWorkouts: [Workout]?
+    var canTap = true
+    
     // @Injected
-    var isFavorite: Bool = false
-    var workouts: [Workout]!
     var service: WODListService!
-    var delegate: WODTypeDelegate?
+    var wodType: WODType!
+    var workouts: [Workout]?
+    var dataSource: WodTypesDataSource?
+    var wodTypeDelegate: WodTypesDelegate?
     
     // @Constants
     let workoutCellIdentifier = "WorkoutNameCellIdentifier"
+    let defaultWodDetailsSegueIdentifier = "DefaultWodDetails"
+    let customWodDetailsSegueIdentifier = "CustomWodDetails"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initSearchController()
-        initWodType()
-        initTitle()
+        navigationItem.title = wodType!.rawValue
         tableView.tableFooterView = UIView()
+        getWods()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     // MARK: - Initialization
     
-    func initTitle() {
-        if wodType != nil {
-            navigationItem.title = wodType!.rawValue
-        } else {
-            navigationItem.title = "Favorites"
-        }
-    }
-    
     func initSearchController() {
         self.definesPresentationContext = true
         resultSearchController = UISearchController(searchResultsController: nil)
-        resultSearchController.searchResultsUpdater = self
-        resultSearchController.dimsBackgroundDuringPresentation = false
-        resultSearchController.searchBar.sizeToFit()
-        self.tableView.tableHeaderView = resultSearchController.searchBar
+        resultSearchController?.searchResultsUpdater = self
+        resultSearchController?.dimsBackgroundDuringPresentation = false
+        resultSearchController?.searchBar.sizeToFit()
+        self.tableView.tableHeaderView = resultSearchController?.searchBar
     }
     
-    func initWodType() {
-        if isFavorite {
-            wodType = nil
+    // MARK: - Service Calls
+    
+    func getWods() {
+        if self.workouts != nil {
             return
         }
-        
-        if workouts.count == 0 {
-            wodType = .custom
-            return
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.getWods(with: wodType) { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            switch result {
+            case let .success(wods):
+                self.workouts = wods
+                self.dataSource?.set(workouts: wods, forType: self.wodType)
+                self.tableView.reloadData()
+            case .failure(_):
+                self.handleError(result: result)
+            }
         }
-        
-        let firstWorkout = workouts[0]
-        wodType = firstWorkout.type
     }
 
     // MARK: - Table view data source
@@ -82,92 +83,94 @@ class WODTypeTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if resultSearchController.isActive {
-            return filteredWorkouts.count
+        if resultSearchController != nil && resultSearchController!.isActive {
+            return filteredWorkouts?.count ?? 0
         }
-        return workouts.count
+        return workouts?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: workoutCellIdentifier, for: indexPath)
         
-        if let customCell = cell as? PresonalRecordsListTableViewCell {
+        if let customCell = cell as? WodListTableViewCell {
             var selectedWorkout: Workout
-            if resultSearchController.isActive {
-                selectedWorkout = filteredWorkouts[indexPath.row]
+            if resultSearchController != nil && resultSearchController!.isActive {
+                selectedWorkout = filteredWorkouts![indexPath.row]
             } else {
-                selectedWorkout = workouts[indexPath.row]
+                selectedWorkout = workouts![indexPath.row]
             }
-            customCell.populate(with: selectedWorkout.name!, bestRecord: selectedWorkout.bestResult)
+            customCell.populate(with: selectedWorkout)
             return customCell
         }
         
         return cell
     }
     
-    // MARK: - Helper Methods
+    // MARK: - TableView Delegate
     
-    func didTapFavoriteCell(action: UITableViewRowAction, at indexPath: IndexPath) {
-        let wod = workouts[indexPath.row]
-        
-        MBProgressHUD.showAdded(to: viewForHud, animated: true)
-        if wod.isFavorite {
-            service.removeFromFavorite(wod: wod, with: { (result) in
-                MBProgressHUD.hide(for: self.viewForHud, animated: true)
-                switch result {
-                case .success():
-                    wod.isFavorite = false
-                    self.didChangeFavoriteStatus(at: indexPath)
-                case .failure(_):
-                    self.handleError(result: result)
-                }
-            })
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !canTap {
+            return
+        }
+        if resultSearchController != nil && resultSearchController!.isActive {
+            selectedWOD = filteredWorkouts![indexPath.row]
         } else {
-            service.addToFavorite(wod: wod, with: { (result) in
-                MBProgressHUD.hide(for: self.viewForHud, animated: true)
-                switch result {
-                case .success():
-                    wod.isFavorite = true
-                    self.didChangeFavoriteStatus(at: indexPath)
-                case .failure(_):
-                    self.handleError(result: result)
-                }
-            })
+            selectedWOD = workouts![indexPath.row]
+        }
+        
+        showDetails()
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    // MARK: - Service Calls
+    
+    func showDetails() {
+        guard let wod = selectedWOD else {
+            return
+        }
+        
+        if wod.results != nil {
+            goToDetailsViewController()
+            return
+        }
+        
+        getDetails(for: wod)
+    }
+    
+    func getDetails(for wod: Workout) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        canTap = false
+        service.getDetails(for: wod) { (result) in
+            self.canTap = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            switch result {
+            case let .success(newWod):
+                self.selectedWOD.updateValues(from: newWod)
+                self.goToDetailsViewController()
+            case .failure(_):
+                self.handleError(result: result)
+            }
         }
     }
     
-    func createFavoriteCellRowAction(for wod: Workout) -> UITableViewRowAction {
-        let favoriteAction = UITableViewRowAction.init(style: .normal, title: "Favorite") { (action, indexPath) in
-            self.didTapFavoriteCell(action: action, at: indexPath)
-        }
-        if wod.isFavorite {
-            favoriteAction.backgroundColor = UIColor.orange
+    func goToDetailsViewController() {
+        if self.selectedWOD?.type == .custom {
+            self.performSegue(withIdentifier: self.customWodDetailsSegueIdentifier, sender: self)
         } else {
-            favoriteAction.backgroundColor = UIColor.lightGray
-        }
-        
-        return favoriteAction
-    }
-    
-    func didChangeFavoriteStatus(at indexPath: IndexPath) {
-        if !isFavorite {
-            self.tableView.reloadRows(at: [indexPath], with: .none)
-        } else {
-            workouts.remove(at: indexPath.row)
-            self.tableView.reloadData()
+            self.performSegue(withIdentifier: self.defaultWodDetailsSegueIdentifier, sender: self)
         }
     }
 }
 
 extension WODTypeTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        filteredWorkouts.removeAll(keepingCapacity: false)
+        filteredWorkouts?.removeAll(keepingCapacity: false)
         
         guard let textToSearchFor = searchController.searchBar.text else {
             return
         }
         
-        filteredWorkouts = workouts.filter {
+        filteredWorkouts = workouts?.filter {
             if $0.name == nil {
                 return false
             }
@@ -183,10 +186,8 @@ extension WODTypeTableViewController: UISearchResultsUpdating {
 
 extension WODTypeTableViewController: CustomWodUpdateDelegate {
     func didDelete(wod: Workout) {
-        workouts.remove(object: wod)
+        workouts?.remove(object: wod)
+        self.wodTypeDelegate?.didDelete(wod: wod)
         tableView.reloadData()
-        if (delegate != nil) {
-            delegate?.didDelete(wod: wod)
-        }
     }
 }

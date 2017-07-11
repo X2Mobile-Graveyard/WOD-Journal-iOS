@@ -40,6 +40,7 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
         
         if self.isMovingFromParentViewController {
             removeImageFromCache(localOnly: true)
+            wodCopy.results = wod.results
             wod.updateValues(from: wodCopy)
         }
     }
@@ -52,6 +53,7 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {
+        wodCopy.results = wod.results
         MBProgressHUD.showAdded(to: view, animated: true)
         service.update(wodCopy: wodCopy, with: wod) { (result) in
             MBProgressHUD.hide(for: self.view, animated: true)

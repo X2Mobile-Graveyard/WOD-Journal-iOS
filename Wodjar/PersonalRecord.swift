@@ -141,7 +141,38 @@ class PersonalRecord {
         self.date = personalRecord.date
     }
     
-    func createUpdateDict() -> [String: Any] {
+    func createDict() -> [String: Any] {
+        var updateDict = [String: Any]()
+        
+        updateDict["rx"] = self.rx
+        updateDict["result_type"] = self.resultType.hash()
+        if let notes = self.notes {
+            updateDict["notes"] = notes
+        }
+        
+        if let url = imageUrl {
+            updateDict["image_url"] = url
+        } else {
+            updateDict["image_url"] = noImageString
+        }
+        
+        updateDict["date"] = self.date.getWodJournalFormatString()
+        
+        switch resultType {
+        case .weight:
+            updateDict["result_weight"] = _resultWeight!
+        case .amrap:
+            updateDict["result_rounds"] = resultRounds!
+        case .time:
+            updateDict["result_time"] = resultTime!
+        case .other:
+            break
+        }
+        
+        return updateDict
+    }
+    
+    func updateDict() -> [String: Any] {
         var updateDict = [String: Any]()
         
         updateDict["name"] = self.name!

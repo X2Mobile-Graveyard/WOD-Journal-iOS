@@ -33,6 +33,25 @@ class WODTypeTableViewCell: UITableViewCell {
         wodsCompletedLabel.text = "\(completedWods)/\(totalWods)"
     }
     
+    func populate(with wodType: WODTypeDetails) {
+        switch wodType.type {
+        case .hero:
+            wodTypeImageView.image = #imageLiteral(resourceName: "heroes")
+        case .challenge:
+            wodTypeImageView.image = #imageLiteral(resourceName: "challenge")
+        case .girl:
+            wodTypeImageView.image = #imageLiteral(resourceName: "girl")
+        case .custom:
+            wodTypeImageView.image = #imageLiteral(resourceName: "custom")
+        case .open:
+            wodTypeImageView.image = #imageLiteral(resourceName: "CrossFitGamesLogo")
+        }
+        
+        wodTypeLabel.text = wodType.type.rawValue
+        
+        wodsCompletedLabel.text = wodType.getFormattedString()
+    }
+    
     func populateFavorites(with wodsCount: Int) {
         wodTypeImageView.image = #imageLiteral(resourceName: "favorites")
         wodTypeLabel.text = "Favorites"

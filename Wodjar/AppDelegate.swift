@@ -19,37 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//        completeTransaction()
-        
+    
         let tabBarController = window?.rootViewController as! UITabBarController
         tabBarController.delegate = self
-        let navigationController = tabBarController.viewControllers?[0] as! UINavigationController
-        let listController = navigationController.topViewController as! PersonalRecordsListViewController
-        let service = PersonalRecordListService(remoteService: PersonalRecordListRemoteImpl())
+        tabBarController.selectedIndex = 1
+        let navigationController = tabBarController.viewControllers?[1] as! UINavigationController
+        let listController = navigationController.topViewController as! WODTypesTableViewController
+        let service = WODListService(listRemote: WODListRemoteServiceImpl(), wodRemote: WODRemoteServiceImpl())
         listController.service = service
         
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         
         setupAmazonS3Capabilities()
         Fabric.with([Crashlytics.self])
-        
-        
-        let pageControl = UIPageControl.appearance()
-        pageControl.pageIndicatorTintColor = .lightGray
-        pageControl.currentPageIndicatorTintColor = UIColor(red: 14 / 255, green: 122 / 255, blue: 254 / 255, alpha: 1)
-        
-        do {
-            Network.reachability = try Reachability(hostname: "www.google.com")
-            do {
-                try Network.reachability?.start()
-            } catch let error as Network.Error {
-                print(error)
-            } catch {
-                print(error)
-            }
-        } catch {
-            print(error)
-        }
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -73,25 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSServiceManager.default().defaultServiceConfiguration = configuration
 
     }
-    
-    private func completeTransaction() {
-        SwiftyStoreKit.completeTransactions(atomically: true) { products in
-            for product in products {
-                if product.transaction.transactionState == .purchased || product.transaction.transactionState == .restored {
-                    if product.needsFinishTransaction {
-                        if product.productId == MoreViewController.premiumMonthlySubscription {
-                            UserManager.sharedInstance.hasMonthlySubscription = true
-                        }
-                        
-                        if product.productId == MoreViewController.premiumAnualSubscription {
-                            UserManager.sharedInstance.hasYearSubscription = true
-                        }
-                        SwiftyStoreKit.finishTransaction(product.transaction)
-                    }
-                }
-            }
-        }
-    }
 }
 
 extension AppDelegate: UITabBarControllerDelegate {
@@ -100,6 +63,14 @@ extension AppDelegate: UITabBarControllerDelegate {
             if let wodsController = navController.topViewController as? WODTypesTableViewController {
                 if wodsController.service == nil {
                     wodsController.service = WODListService(listRemote: WODListRemoteServiceImpl(), wodRemote: WODRemoteServiceImpl())
+                }
+                
+                return
+            }
+            
+            if let prController = navController.topViewController as? PersonalRecordsListViewController {
+                if prController.service == nil {
+                    prController.service = PersonalRecordListService(remoteService: PersonalRecordListRemoteImpl())
                 }
                 
                 return

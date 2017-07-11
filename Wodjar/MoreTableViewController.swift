@@ -17,7 +17,7 @@ enum MoreTableViewCellType: String {
 }
 
 protocol UpdateUserDelegate {
-    func updateUser(with name: String?)
+    func updateUserName(name: String?)
 }
 
 class MoreTableViewController: UITableViewController {
@@ -57,6 +57,7 @@ class MoreTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        imageUrl = UserManager.sharedInstance.imageUrl
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +67,8 @@ class MoreTableViewController: UITableViewController {
                                                                 style: .plain,
                                                                 target: self,
                                                                 action: #selector(didTapLogoutButton(_:)))
+        } else {
+            navigationItem.rightBarButtonItem = nil
         }
         _cellTypesInOrder = nil
         tableView.reloadData()
@@ -116,8 +119,11 @@ class MoreTableViewController: UITableViewController {
             cell.selectionStyle = .default
             (cell as! MoreSimpleTextTableViewCell).populate(with: indexPath.section == 0 ? "Login" : "Feedback")
         case .userProfileCell:
-            (cell as! MoreUserProfileTableViewCell).populateCell()
-            (cell as! MoreUserProfileTableViewCell).delegate = self
+            if let userProfileCell = cell as? MoreUserProfileTableViewCell {
+                userProfileCell.populateCell()
+                userProfileCell.delegate = self
+                return userProfileCell
+            }
         case .unitsCell:
             (cell as! MoreUnitTypeTableViewCell).populate()
         }
@@ -213,20 +219,6 @@ class MoreTableViewController: UITableViewController {
     
     // MARK: - Helper Methods
     
-    private func resetViewControllers() {
-        for viewController in (tabBarController?.viewControllers)! {
-            if let navController = viewController as? UINavigationController {
-                if navController == navigationController {
-                    continue
-                }
-                
-                navController.popToRootViewController(animated: false)
-            }
-        }
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Auth"), object: nil)
-    }
-    
     private func didLogin() {
         self.resetViewControllers()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout",
@@ -239,7 +231,6 @@ class MoreTableViewController: UITableViewController {
     
     private func signOut() {
         UserManager.sharedInstance.signOut()
-        SessionManager.sharedInstance.deleteAllUserDefaults()
         self.resetViewControllers()
         navigationItem.rightBarButtonItem = nil
         self._cellTypesInOrder = nil
@@ -248,18 +239,18 @@ class MoreTableViewController: UITableViewController {
     
     func setImage(from localPath: String) {
         imageUrl = localPath
-        updateUser(with: nil)
+        updateUserName(name: nil)
         
     }
     
     private func removeImage() {
         imageUrl = nil
-        updateUser(with: nil)
+        updateUserName(name: nil)
     }
 }
 
 extension MoreTableViewController: UpdateUserDelegate {
-    func updateUser(with name: String?) {
+    func updateUserName(name: String?) {
         MBProgressHUD.showAdded(to: view, animated: true)
         service.updateUser(with: name ?? UserManager.sharedInstance.userName,
                            imageUrl: imageUrl) { (result) in

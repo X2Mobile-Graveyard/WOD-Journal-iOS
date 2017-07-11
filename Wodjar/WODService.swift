@@ -49,17 +49,7 @@ struct WODService {
         self.remote.update(wod: wod, with: completion)
     }
     
-    func create(customWod: Workout, imagePath: String?, completion: CreateWodCompletion?) {
-        guard let wodName = customWod.name else {
-            completion?(.failure(NSError.localError(with: "The WOD must have a name.")))
-            return
-        }
-        
-        if wodName.characters.count == 0 {
-            completion?(.failure(NSError.localError(with: "The WOD must have a name.")))
-            return
-        }
-        
+    func create(customWod: Workout, imagePath: String?, completion: CreateWodCompletion?) {        
         guard let wodDescription = customWod.wodDescription else {
             completion?(.failure(NSError.localError(with: "The WOD must have a description.")))
             return
@@ -89,7 +79,7 @@ struct WODService {
     }
     
     
-    func deleteWod(with id: Int?, completion: DeleteWodCompletion?) {
+    func deleteWod(with id: Int?, completion: VoidRequestCompletion?) {
         guard let id = id else {
             completion?(.success())
             return

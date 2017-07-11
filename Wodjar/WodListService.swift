@@ -13,51 +13,19 @@ struct WODListService {
     let listRemote: WODListRemoteService
     let wodRemote: WODRemoteService
     
-    func getWods(with completion: GetWodsRequestCompletion?) {
-        listRemote.getWodsList(with: completion)
+    func getWods(with type: WODType, with completion: GetWodsRequestCompletion?) {
+        listRemote.getWodsList(with: type, completion: completion)
     }
     
-    func getResult(for wod: Workout?, with completion: GetResultsRequestCompletion?) {
-        guard let wod = wod else {
-            completion?(.success([]))
-            return
-        }
-        
-        guard wod.id != nil else {
-            completion?(.success([]))
-            return
-        }
-        
-        listRemote.getResults(for: wod, with: completion)
+    func getWodsTypes(with completion: GetWodsTypesCompletion?) {
+        listRemote.getWodsTypes(with: completion)
     }
     
-    func addToFavorite(wod: Workout?, with completion: FavoriteCompletion?) {
-        guard let wod = wod else {
-            completion?(.success())
-            return
-        }
-        guard wod.id != nil else {
-            completion?(.success())
-            return
-        }
-        
-        wodRemote.addToFavorite(wodId: wod.id!, isDefault: wod.type != .custom, with: completion)
+    func getDetails(for wod: Workout, with completion: GetWodDetailsCompletion?) {
+        listRemote.getDetails(for: wod, with: completion)
     }
     
-    func removeFromFavorite(wod: Workout?, with completion: FavoriteCompletion?) {
-        guard let wod = wod else {
-            completion?(.success())
-            return
-        }
-        guard wod.id != nil else {
-            completion?(.success())
-            return
-        }
-        
-        wodRemote.removeFromFavorite(wodId: wod.id!, isDefault: wod.type != .custom, with: completion)
-    }
-    
-    func deleteWod(with wodId: Int?, completion: DeleteWodCompletion?) {
+    func deleteWod(with wodId: Int?, completion: VoidRequestCompletion?) {
         guard let wodId = wodId else {
             completion?(.success())
             return

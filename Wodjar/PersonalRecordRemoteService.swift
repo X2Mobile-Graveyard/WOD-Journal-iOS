@@ -9,35 +9,53 @@
 import Foundation
 import Result
 
-typealias CreatePersonalRecordCompletion = (Result<Int, NSError>) -> ()
-typealias UpdatePersonalRecordCompletion = (Result<Void, NSError>) -> ()
-typealias DeletePersonalRecordCompletion = (Result<Void, NSError>) -> ()
+typealias CreatePersonalRecordTypeCompletion = (Result<(Int, Int), NSError>) -> ()
+typealias CreatePersonalRecordResultCompletion = (Result<Int, NSError>) -> ()
 typealias UploadImageRequestCompletion = (Result<String, NSError>) -> ()
-typealias DeleteImageRequestCompletion = (Result<Void, NSError>) -> ()
+typealias VoidRequestCompletion = (Result<Void, NSError>) -> ()
 
 protocol PersonalRecordRemoteService {
-    func update(personalRecord: PersonalRecord, with completion: UpdatePersonalRecordCompletion?)
-    func create(personalRecord: PersonalRecord, with completion: CreatePersonalRecordCompletion?)
-    func deletePersonalRecord(with id: Int, completion: DeletePersonalRecordCompletion?)
+    func update(personalRecord: PersonalRecord,
+                with completion: VoidRequestCompletion?)
+    
+    func create(personalRecord: PersonalRecord,
+                with completion: CreatePersonalRecordTypeCompletion?)
+    
+    func deletePersonalRecord(with id: Int,
+                              completion: VoidRequestCompletion?)
+    
+    func createResult(result: PersonalRecord,
+                      for personalRecordType: PersonalRecordType,
+                      with completion: CreatePersonalRecordResultCompletion?)
 }
 
 class PersonalRecordRemoteServiceTest: PersonalRecordRemoteService {
-    func update(personalRecord: PersonalRecord, with completion: UpdatePersonalRecordCompletion?) {
+    func update(personalRecord: PersonalRecord,
+                with completion: VoidRequestCompletion?) {
         completion?(.success())
     }
     
-    func create(personalRecord: PersonalRecord, with completion: CreatePersonalRecordCompletion?) {
+    func create(personalRecord: PersonalRecord,
+                with completion: CreatePersonalRecordTypeCompletion?) {
+        completion?(.success((5,5)))
+    }
+    
+    func deletePersonalRecord(with id: Int,
+                              completion: VoidRequestCompletion?) {
+        completion?(.success())
+    }
+    
+    func createResult(result: PersonalRecord,
+                      for personalRecordType: PersonalRecordType,
+                      with completion: CreatePersonalRecordResultCompletion?) {
         completion?(.success(5))
-    }
-    
-    func deletePersonalRecord(with id: Int, completion: DeletePersonalRecordCompletion?) {
-        completion?(.success())
     }
 }
 
 class PersonalRecordRemoteServiceImpl: PersonalRecordRemoteService {
-    func update(personalRecord: PersonalRecord, with completion: UpdatePersonalRecordCompletion?) {
-        let request = UpdatePersonalRecordRequest(with: personalRecord)
+    func update(personalRecord: PersonalRecord,
+                with completion: VoidRequestCompletion?) {
+        let request = UpdatePersonalRecordResultRequest(with: personalRecord)
         
         request.success = { _, _ in
             completion?(.success())
@@ -50,8 +68,10 @@ class PersonalRecordRemoteServiceImpl: PersonalRecordRemoteService {
         request.runRequest()
     }
     
-    func create(personalRecord: PersonalRecord, with completion: CreatePersonalRecordCompletion?) {
-        let request = CreatePersonalRecordRequest(with: personalRecord)
+    func createResult(result: PersonalRecord,
+                      for personalRecordType: PersonalRecordType,
+                      with completion: CreatePersonalRecordResultCompletion?) {
+        let request = CreatePersonalRecordResultRequest(with: result, prID: personalRecordType.id)
         
         request.success = { _, response in
             guard let response = response as? [String: Any] else {
@@ -74,8 +94,39 @@ class PersonalRecordRemoteServiceImpl: PersonalRecordRemoteService {
         request.runRequest()
     }
     
-    func deletePersonalRecord(with id: Int, completion: DeletePersonalRecordCompletion?) {
-        let request = DeletePersonalRecordRequest(with: id)
+    func create(personalRecord: PersonalRecord,
+                with completion: CreatePersonalRecordTypeCompletion?) {
+        let request = CreatePersonalRecordRequest(with: personalRecord)
+        
+        request.success = { _, response in
+            guard let response = response as? [String: Any] else {
+                completion?(.failure(NSError.localError(with: "Error. Please try again.")))
+                return
+            }
+            
+            guard let id = response["id"] as? Int else {
+                completion?(.failure(NSError.localError(with: "Error. Please try again.")))
+                return
+            }
+            
+            guard let prID = response["personal_record_id"] as? Int else {
+                completion?(.failure(NSError.localError(with: "Error. Please try again.")))
+                return
+            }
+            
+            completion?(.success((id, prID)))
+        }
+        
+        request.error = { _, error in
+            completion?(.failure(error))
+        }
+        
+        request.runRequest()
+    }
+    
+    func deletePersonalRecord(with id: Int,
+                              completion: VoidRequestCompletion?) {
+        let request = DeletePersonalRecordResultRequest(with: id)
         
         request.success = { _, _ in
             completion?(.success())

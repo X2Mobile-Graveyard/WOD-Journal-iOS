@@ -11,19 +11,19 @@ import UIKit
 class UpdateRecordsNameRequest: BaseRequest {
     
     let name: String
-    let ids: [Int]
+    let id: Int
     
-    init(with ids:[Int], name: String) {
+    init(with id:Int, name: String) {
         self.name = name
-        self.ids = ids
+        self.id = id
     }
     
     override func arrayParam() -> Any? {
-        return ids
+        return ["name":name]
     }
     
     override func requestURL() -> String {
-        return "update-prs/\(name.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+        return "personal_records/\(id)"
     }
     
     override func requestMethod() -> RequestMethod {

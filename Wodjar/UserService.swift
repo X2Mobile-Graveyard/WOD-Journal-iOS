@@ -13,22 +13,29 @@ struct UserService {
     let s3RemoteService: S3RemoteService
     let remoteService: UserRemoteService
     
-    func updateUser(with name: String?, imageUrl: String?, completion: UpdateUserRequestCompletion?) {
-        guard name != nil && (name?.characters.count)! > 0 else {
+    func updateUser(with newName: String?, imageUrl: String?, completion: VoidRequestCompletion?) {
+        if (newName == nil || newName!.characters.count == 0) &&
+            (UserManager.sharedInstance.userName != nil && (UserManager.sharedInstance.userName?.characters.count)! > 0) {
             completion?(.failure(NSError.localError(with: "Please enter your name")))
             return
         }
         
+        let name = newName
+        
         guard let imageUrl = imageUrl else {
             if UserManager.sharedInstance.imageUrl == nil {
-                remoteService.updateUser(with: name!, pictureUrl: nil, completion: completion)
+                if name == nil {
+                    completion?(.success())
+                    return
+                }
+                remoteService.updateUser(with: name, pictureUrl: nil, completion: completion)
                 return
             }
             
             if let key = UserManager.sharedInstance.imageUrl?.components(separatedBy: "/").last {
                 s3RemoteService.deleteImage(with: key, completion: { (result) in
                     UserManager.sharedInstance.imageUrl = nil
-                    self.remoteService.updateUser(with: name!, pictureUrl: "", completion: completion)
+                    self.remoteService.updateUser(with: name, pictureUrl: "", completion: completion)
                 })
             }
             
@@ -36,16 +43,18 @@ struct UserService {
         }
         
         if !imageUrl.contains("example") {
-            remoteService.updateUser(with: name!, pictureUrl: nil, completion: completion)
+            if name == nil {
+                completion?(.success())
+                return
+            }
+            remoteService.updateUser(with: name, pictureUrl: nil, completion: completion)
             return
         }
         
         let url = URL(fileURLWithPath: imageUrl)
         
         if let key = UserManager.sharedInstance.imageUrl?.components(separatedBy: "/").last {
-            if let s3URL = URL(string: UserManager.sharedInstance.imageUrl!) {
-                SDImageCache.shared().removeImage(forKey:s3URL.absoluteString, withCompletion: nil)
-            }
+            SDImageCache.shared().removeImage(forKey: UserManager.sharedInstance.imageUrl!, withCompletion: nil)
             s3RemoteService.uploadImage(with: url, key: key) { (result) in
                 switch result {
                 case let .success(s3Path):
@@ -53,7 +62,7 @@ struct UserService {
                 case .failure(_):
                     break
                 }
-                self.remoteService.updateUser(with: name!, pictureUrl: UserManager.sharedInstance.imageUrl, completion: completion)
+                self.remoteService.updateUser(with: name, pictureUrl: UserManager.sharedInstance.imageUrl, completion: completion)
             }
         } else {
             s3RemoteService.uploadImage(with: url, key: UserManager.sharedInstance.email) { (result) in
@@ -63,7 +72,7 @@ struct UserService {
                 case .failure(_):
                     break
                 }
-                self.remoteService.updateUser(with: name!, pictureUrl: UserManager.sharedInstance.imageUrl, completion: completion)
+                self.remoteService.updateUser(with: name, pictureUrl: UserManager.sharedInstance.imageUrl, completion: completion)
             }
         }
     }

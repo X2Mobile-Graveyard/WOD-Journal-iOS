@@ -14,26 +14,16 @@ protocol CustomWodDelegate {
 }
 
 class CustomWODTypeTableViewController: WODTypeTableViewController {
-    // @Constants
     
-    let customWodDetailsSegueIdentifier = "CustomWodDetails"
+    // @Constants
     let createWodViewControllerSegueIdentifier = "CreateCustomWODSegueIdentifier"
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    // MARK: - TableView Delegate
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if resultSearchController.isActive {
-            selectedWOD = filteredWorkouts[indexPath.row]
-        } else {
-            selectedWOD = workouts[indexPath.row]
-        }
+    override func initSearchController() {
         
-        getResultsAndGoToDetails()
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - TableView Data Source
@@ -44,6 +34,19 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
         }
         
         return [deleteAction]
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: workoutCellIdentifier, for: indexPath)
+        
+        if let customCell = cell as? CustomWodTypeTableViewCell {
+            var selectedWorkout: Workout
+            selectedWorkout = workouts![indexPath.row]
+            customCell.populate(with: selectedWorkout)
+            return customCell
+        }
+        
+        return cell
     }
     
     // MARK: - Navigation
@@ -69,38 +72,18 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
     
     // MARK: - Service Calls
     
-    func getResultsAndGoToDetails() {
-        guard let wod = selectedWOD else {
+    func deleteWod(at index: Int) {
+        guard let wod = workouts?[index] else {
             return
         }
-        
-        MBProgressHUD.showAdded(to: viewForHud, animated: true)
-        service.getResult(for: wod) { (result) in
-            MBProgressHUD.hide(for: self.viewForHud, animated: true)
-            if self.navigationController == nil {
-                return
-            }
-            switch result {
-            case let .success(results):
-                self.selectedWOD?.results = results
-                self.selectedWOD?.orderResults()
-                self.performSegue(withIdentifier: self.customWodDetailsSegueIdentifier, sender: self)
-            case .failure(_):
-                self.handleError(result: result)
-            }
-        }
-    }
-    
-    func deleteWod(at index: Int) {
-        let wod = workouts[index]
         
         MBProgressHUD.showAdded(to: viewForHud, animated: true)
         service.deleteWod(with: wod.id) { (result) in
             MBProgressHUD.hide(for: self.viewForHud, animated: true)
             switch result {
             case .success():
-                self.workouts.remove(at: index)
-                self.delegate?.didDelete(wod: wod)
+                self.workouts?.remove(at: index)
+                self.wodTypeDelegate?.didDelete(wod: wod)
                 self.tableView.reloadData()
             case .failure(_):
                 self.handleError(result: result)
@@ -112,8 +95,8 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
 extension CustomWODTypeTableViewController: CustomWodDelegate {
     func didCreate(customWod: Workout) {
         customWod.type = .custom
-        workouts.append(customWod)
+        workouts?.append(customWod)
         tableView.reloadData()
-        delegate?.didAdd(wod: customWod)
+        wodTypeDelegate?.didCreate(wod: customWod)
     }
 }

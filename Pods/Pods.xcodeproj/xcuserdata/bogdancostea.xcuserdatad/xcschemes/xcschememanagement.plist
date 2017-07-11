@@ -34,12 +34,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FBSDKShareKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FacebookCore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>FacebookLogin.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FacebookShare.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -102,22 +112,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0B0356A31EB260BECAF43863D7CC1C8D</key>
+		<key>1AE9ABC0484D5D1C007B4A9A848F7306</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1A079D101B4FFB7A0F1F30ABA18CB074</key>
+		<key>330CC68B283C5AA92987FFB2F88A64BC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2443DAEBA1CDCC1A0881A7C02CF77E56</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2B0A432E2B4CD5A5B83EF3B631B65423</key>
+		<key>332F91393FB1DE033D370B4CEDDD5FCF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,7 +152,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6B1FF00728592BF0395FF2AA2ECEE941</key>
+		<key>664F313689E475C248B549903B26C224</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>689B6D839D21F01F50CE6BE55DE2FDB1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -157,7 +167,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>765AABBE3FCD73C50EDAF41CC0AC8B4E</key>
+		<key>753518FE11EC47E037C66E8D0B5FDCBD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>78DCAF2BE6930D6772CFD3DC30327E77</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -167,17 +182,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8BF940F214414037430F464D706F446B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>9F7098779713B711F6C591B62A41F242</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AC40CD8256F9C64457C415CC4377C3A7</key>
+		<key>A7FEAA14E89971698ACA148F7F7202F2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ABEB4C1F340316BC855E61AC7720BF36</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -193,6 +208,11 @@
 			<true/>
 		</dict>
 		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E2F3FA90C713C2EB2028E490EDDC19AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

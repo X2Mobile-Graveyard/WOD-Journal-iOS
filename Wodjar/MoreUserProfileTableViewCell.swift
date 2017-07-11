@@ -12,8 +12,8 @@ class MoreUserProfileTableViewCell: UITableViewCell {
 
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var userNameTextField: UITextField!
+    var delegate: UpdateUserDelegate?
     
-    var delegate: UpdateUserDelegate!
     func populateCell() {
         userNameTextField.delegate = self
         userNameTextField.inputAccessoryView = createKeyboardToolbar(cancelButton: "Cancel",
@@ -21,7 +21,7 @@ class MoreUserProfileTableViewCell: UITableViewCell {
                                                                      doneButton: "Done",
                                                                      doneSelector: #selector(didTapDone))
         if UserManager.sharedInstance.userName == nil {
-            userNameTextField.text = "Your name here"
+            userNameTextField.placeholder = "Your name here"
         } else {
             userNameTextField.text = UserManager.sharedInstance.userName!
         }
@@ -50,7 +50,7 @@ class MoreUserProfileTableViewCell: UITableViewCell {
         }
         
         userNameTextField.resignFirstResponder()
-        delegate.updateUser(with: userNameTextField.text)
+        delegate?.updateUserName(name: userNameTextField.text)
     }
     
     private func createKeyboardToolbar(with hiddingOtion: String, selector: Selector?) -> UIToolbar {
@@ -95,7 +95,7 @@ class MoreUserProfileTableViewCell: UITableViewCell {
 extension MoreUserProfileTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        delegate.updateUser(with: textField.text)
+        delegate?.updateUserName(name: textField.text)
         return true
     }
 }

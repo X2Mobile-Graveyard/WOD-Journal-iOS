@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 
 protocol PersonalRecordCreateDelegate {
-    func didCreate(personalRecord: PersonalRecord)
+    func didCreatePersonalRecordType(withId id: Int, result: PersonalRecord)
 }
 
 protocol PersonalRecordTypeDeleteDelegate  {
@@ -56,8 +56,14 @@ class PersonalRecordsListViewController: UIViewController {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
         getPersonalRecordTypes()
-        NotificationCenter.default.addObserver(self, selector: #selector(didLogin), name: NSNotification.Name(rawValue: "Auth"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(changedUnitType), name: NSNotification.Name(rawValue: "UnitType"), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didLogin),
+                                               name: NSNotification.Name(rawValue: "Auth"),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(changedUnitType),
+                                               name: NSNotification.Name(rawValue: "UnitType"),
+                                               object: nil)
     }
     
     deinit {
@@ -103,7 +109,7 @@ class PersonalRecordsListViewController: UIViewController {
     
     func delete(recordType: PersonalRecordType) {
         MBProgressHUD.showAdded(to: view, animated: true)
-        service.deletePersonalRecord(with: recordType.name) { (result) in
+        service.deletePersonalRecord(with: recordType.id) { (result) in
             MBProgressHUD.hide(for: self.view, animated: true)
             switch (result) {
             case .success():
@@ -141,7 +147,8 @@ class PersonalRecordsListViewController: UIViewController {
             let personalRecordViewController = segue.destination as! PersonalRecordViewController
             personalRecordViewController.controllerMode = .createMode
             personalRecordViewController.personalRecord = PersonalRecord()
-            let prService = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService(), recordsNames: recordTypes.map({return $0.name!}))
+            let prService = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(),
+                                                  s3RemoteService: S3RemoteService())
             personalRecordViewController.service = prService
             personalRecordViewController.createRecordDelegate = self
         case addFirstRecordIdentifier:
@@ -158,8 +165,10 @@ class PersonalRecordsListViewController: UIViewController {
                                                                          imageUrl: nil,
                                                                          date: Date())
             personalRecordViewController.updatePersonalRecordDelegate = self
+            personalRecordViewController.personalRecordType = selectedRecordType!
             personalRecordViewController.controllerMode = .editMode
-            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(), s3RemoteService: S3RemoteService(), recordsNames: nil)
+            personalRecordViewController.service = PersonalRecordService(remoteService: PersonalRecordRemoteServiceImpl(),
+                                                                         s3RemoteService: S3RemoteService())
         default:
             break
         }
@@ -270,17 +279,21 @@ extension PersonalRecordsListViewController: UITableViewDataSource {
 }
 
 extension PersonalRecordsListViewController: PersonalRecordCreateDelegate {
-    func didCreate(personalRecord: PersonalRecord) {
-        let newPersonalRecordType = PersonalRecordType(name: personalRecord.name!, present: true, defaultType: personalRecord.resultType, updatedAt: nil)
-        newPersonalRecordType.records.append(personalRecord)
-        newPersonalRecordType.initBestRecord(with: personalRecord)
+    func didCreatePersonalRecordType(withId id: Int, result: PersonalRecord) {
+        let newPersonalRecordType = PersonalRecordType(id: id,
+                                                       name: result.name!,
+                                                       present: true,
+                                                       defaultType: result.resultType,
+                                                       updatedAt: nil)
+        newPersonalRecordType.records.append(result)
+        newPersonalRecordType.initBestRecord(with: result)
         recordTypes.append(newPersonalRecordType)
     }
 }
 
 extension PersonalRecordsListViewController: PersonalRecordTypeDeleteDelegate {
     func didDelete(personalRecordType: PersonalRecordType) {
-        if let indexToDelete = recordTypes.index(where: {$0.name! == personalRecordType.name!}) {
+        if let indexToDelete = recordTypes.index(where: {$0.id == personalRecordType.id}) {
             recordTypes.remove(at: indexToDelete)
             tableView.reloadData()
         }

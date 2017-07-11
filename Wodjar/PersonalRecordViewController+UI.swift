@@ -27,6 +27,11 @@ extension PersonalRecordViewController {
         hideKeyboardWhenTappedAround()
         setupImageView()
         
+        if controllerMode == .createMode {
+            deleteButton.isHidden = true
+            deleteButton.isEnabled = false
+        }
+        
         if controllerMode == .editMode && personalRecord.resultAsString() != nil {
             setupForViewMode()
         } else {
@@ -115,7 +120,7 @@ extension PersonalRecordViewController {
     
     private func setupTitleTextField() {
         if controllerMode == .editMode {
-            titleTextField.text = personalRecord.name!
+            titleTextField.text = personalRecordType?.name!
             titleTextField.isUserInteractionEnabled = false
             editTitleButton.isHidden = true
             editTitleButton.isUserInteractionEnabled = false

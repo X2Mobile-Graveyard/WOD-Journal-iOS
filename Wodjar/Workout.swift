@@ -13,7 +13,7 @@ enum WODType: String {
     case hero = "Heroes"
     case challenge = "Challenges"
     case open = "Opens"
-    case custom = "Custom"
+    case custom = "My WODs"
     
     static func from(hashValue: Int) -> WODType {
         switch hashValue {
@@ -169,15 +169,7 @@ class Workout: NSObject {
         
         return Array((results!.prefix(3)))
     }
-    
-    convenience init(id: Int, type: WODType, name: String, favorite: Bool, completed: Bool)   {
-        self.init()
-        self.id = id
-        self.type = type
-        self.name = name
-        self.isFavorite = favorite
-        self.isCompleted = completed
-    }
+    var date: Date?
     
     convenience init(from dictionary: [String: Any]) {
         self.init()
@@ -215,6 +207,9 @@ class Workout: NSObject {
         }
         
         self.metricDescription = dictionary["metric_description"] as? String
+        if let dateAsString = dictionary["date"] as? String {
+            self.date = dateAsString.getDateFromWodJournalFormatStyle()
+        }
     }
     
     convenience init(using wod: Workout) {
@@ -231,6 +226,7 @@ class Workout: NSObject {
         self.videoId = wod.videoId
         self.results = wod.results
         self.isDefault = wod.isDefault
+        self.date = wod.date
     }
     
     func updateValues(from wod: Workout) {
@@ -246,20 +242,12 @@ class Workout: NSObject {
         self.videoId = wod.videoId
         self.results = wod.results
         self.isDefault = wod.isDefault
-    }
-    
-    func set(description: String, image: String?, history: String?, category: WODCategory, video: String?, unit: UnitType) {
-        self.wodDescription = description
-        self.imageUrl = image
-        self.history = history
-        self.category = category
-        self.videoId = video
+        self.date = wod.date
     }
     
     func createUpdateDict() -> [String: Any] {
         var updateDict = [String: Any]()
         
-        updateDict["name"] = self.name!
         updateDict["wod_type"] = self.type?.hash()
         updateDict["description"] = self.wodDescription
         if let url = imageUrl {
@@ -268,6 +256,11 @@ class Workout: NSObject {
             updateDict["image"] = noImageString
         }
         updateDict["category"] = self.category?.hash()
+        
+        if self.date != nil {
+            updateDict["date"] = self.date?.getWodJournalFormatString()
+        }
+        
         return updateDict
     }
     

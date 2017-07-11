@@ -40,6 +40,7 @@ class WODDetailsTableViewController: UITableViewController {
     
     // @Properties
     var canEdit = false
+    var fetchingResults = true
     var selectedResult: WODResult?
     var cellsBeforeResult = 0
     var _cellTypesInOrder: [WODDetailsCellType]?
@@ -98,7 +99,8 @@ class WODDetailsTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
         tableView.tableFooterView = UIView()
-        navigationItem.title = wod.name!
+        navigationItem.title = wod.name ?? "Custom WOD"
+        populateResults()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -185,6 +187,45 @@ class WODDetailsTableViewController: UITableViewController {
     
     // MARK: - Helper Methods
     
+    func populateResults() {
+        if wod.results != nil {
+            self.addResultToTable()
+            return
+        }
+        
+        addSpinnerForResults()
+        getResults()
+    }
+    
+    func addSpinnerForResults() {
+        if fetchingResults {
+            let spinner = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
+            spinner.startAnimating()
+            spinner.frame = CGRect(x: 0, y: 0, width: 320, height: 44)
+            tableView.tableFooterView = spinner
+        }
+    }
+    
+    func getResults() {
+        resultService.getResult(for: wod) { (result) in
+            self.fetchingResults = false
+            self.tableView.tableFooterView = UIView()
+            switch result {
+            case let .success(results):
+                self.wod.results = results
+                self.wod.orderResults()
+                self.addResultToTable()
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
+    func addResultToTable() {
+        _cellTypesInOrder = nil
+        tableView.reloadData()
+    }
+    
     func populate(cell: UITableViewCell, for type: WODDetailsCellType, at index: Int) {
         cell.selectionStyle = .none
         switch type {
@@ -216,7 +257,6 @@ class WODDetailsTableViewController: UITableViewController {
     func returnToFirstScreen() {
         for controller in (navigationController?.viewControllers)! {
             if let typesController = controller as? WODTypesTableViewController {
-                typesController.getWods()
                 navigationController?.popToViewController(typesController, animated: true)
                 return
             }

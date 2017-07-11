@@ -9,14 +9,12 @@
 import Foundation
 import Result
 
-typealias RegularLoginCompletion = (Result<Void, NSError>) -> ()
-typealias FacebookLoginCompletion = (Result<Void, NSError>) -> ()
 typealias RegisterCompletion = (Result<Int, NSError>) -> ()
 
 protocol AuthenticationRemoteService {
     func registerUser(with email: String, password: String, name: String, imageUrl: String?, completion: RegisterCompletion?)
-    func facebookLogin(with token: String, completion: FacebookLoginCompletion?)
-    func regularLogin(with email: String, password: String, completion: RegularLoginCompletion?)
+    func facebookLogin(with token: String, completion: VoidRequestCompletion?)
+    func regularLogin(with email: String, password: String, completion: VoidRequestCompletion?)
 }
 
 class AuthenticationRemoteServiceImpl: AuthenticationRemoteService {
@@ -44,7 +42,7 @@ class AuthenticationRemoteServiceImpl: AuthenticationRemoteService {
         registerRequest.runRequest()
     }
     
-    func regularLogin(with email: String, password: String, completion: RegularLoginCompletion?) {
+    func regularLogin(with email: String, password: String, completion: VoidRequestCompletion?) {
         let loginRequest = LoginRequest(email: email, password: password)
         
         loginRequest.success = { _, response in
@@ -92,7 +90,7 @@ class AuthenticationRemoteServiceImpl: AuthenticationRemoteService {
         loginRequest.runRequest()
     }
     
-    func facebookLogin(with token: String, completion: FacebookLoginCompletion?) {
+    func facebookLogin(with token: String, completion: VoidRequestCompletion?) {
         let facebookRequest = LoginWithFacebookRequest(with: token)
         
         facebookRequest.success = { _, response in
@@ -143,7 +141,7 @@ class AuthenticationRemoteServiceImpl: AuthenticationRemoteService {
 }
 
 class AuthenticationRemoteServiceTest: AuthenticationRemoteService {
-    func regularLogin(with email: String, password: String, completion: RegularLoginCompletion?) {
+    func regularLogin(with email: String, password: String, completion: VoidRequestCompletion?) {
         completion?(.success())
     }
     
@@ -151,7 +149,7 @@ class AuthenticationRemoteServiceTest: AuthenticationRemoteService {
         completion?(.success(5))
     }
     
-    func facebookLogin(with token: String, completion: FacebookLoginCompletion?) {
+    func facebookLogin(with token: String, completion: VoidRequestCompletion?) {
         completion?(.success())
     }
 }
