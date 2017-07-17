@@ -35,6 +35,8 @@ extension PersonalRecordViewController {
         if controllerMode == .editMode && personalRecord.resultAsString() != nil {
             setupForViewMode()
         } else {
+            deleteButton.isHidden = true
+            deleteButton.isEnabled = false
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
                                                                 target: self,
                                                                 action: #selector(didTapSave(_:)))
@@ -50,10 +52,11 @@ extension PersonalRecordViewController {
         notesTextView.isEditable = false
         
         rxSwitch.isEnabled = false
+
+        addPictureButton.setImage(#imageLiteral(resourceName: "blue_share"), for: .normal)
+        addPictureButton.setTitle("", for: .normal)
         
-        if viewState == .withoutImage {
-            addPictureButton.isHidden = true
-        } else {
+        if viewState == .withImage {
             changePictureBackgroundView.isHidden = true
         }
         
@@ -80,8 +83,10 @@ extension PersonalRecordViewController {
         rxSwitch.isEnabled = true
         
         if viewState == .withoutImage {
-            addPictureButton.isHidden = false
+            addPictureButton.setImage(#imageLiteral(resourceName: "black_camer"), for: .normal)
+            addPictureButton.setTitle("Add Picture", for: .normal)
         } else {
+            addPictureButton.isHidden = true
             changePictureBackgroundView.isHidden = false
         }
         

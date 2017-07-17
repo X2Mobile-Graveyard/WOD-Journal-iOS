@@ -189,7 +189,13 @@ class WODTypesTableViewController: UITableViewController {
     
     func getWods() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        if workoutsTypes.count == 0 {
+            MBProgressHUD.showAdded(to: view, animated: true)
+        }
         service.getWodsTypes { (result) in
+            if self.workoutsTypes.count == 0 {
+                MBProgressHUD.hide(for: self.view, animated: true)
+            }
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             switch result {
             case let .success(wodTypes):
@@ -232,5 +238,8 @@ extension WODTypesTableViewController: WodTypesDelegate {
     
     func didCreate(wod: Workout) {
         customs?.append(wod)
+        customs?.sort(by: { (wod1, wod2) -> Bool in
+            return wod1.date!.compare(wod2.date!) == .orderedDescending
+        })
     }
 }

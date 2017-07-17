@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FacebookShare
 
 enum WODDetailsCellType: String {
     case imageCell = "WodPictureCell"
@@ -40,6 +41,7 @@ class WODDetailsTableViewController: UITableViewController {
     
     // @Properties
     var canEdit = false
+    var showPrevResultsLabel = false
     var fetchingResults = true
     var selectedResult: WODResult?
     var cellsBeforeResult = 0
@@ -78,10 +80,12 @@ class WODDetailsTableViewController: UITableViewController {
         _cellTypesInOrder!.append(.logResultCell)
         cellsBeforeResult += 1
         
-        if wod.results != nil && wod.results!.count > 0 {
+        if showPrevResultsLabel {
             _cellTypesInOrder!.append(.pastRsultCell)
             cellsBeforeResult += 1
-            
+        }
+        
+        if wod.results != nil && wod.results!.count > 0 {
             _cellTypesInOrder!.append(contentsOf: Array(repeating: .previousResultCell, count: wod.results!.count))
         }
         
@@ -126,6 +130,9 @@ class WODDetailsTableViewController: UITableViewController {
         performSegue(withIdentifier: logResultSegueIdentifier, sender: self)
     }
     
+    @IBAction func didTapShare(_ sender: Any) {
+        shareContent()
+    }
     // MARK: - Table View Delegate
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -139,12 +146,18 @@ class WODDetailsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            showDeleteAlert(with: "Warning",
-                            message: "This action will permanently delete this result. Do you want to continue?",
-                            actionButtonTitle: "Delete",
-                            actionHandler: { (_) in
-                                self.deleteResult(at: indexPath)
-            })
+            let indexToDelete = indexPath.row - cellsBeforeResult;
+            if let deletedResult = handleResultDelete(at: indexToDelete) {
+                delete(wodResult: deletedResult)
+            }
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .left)
+            if wod.results?.count == 0 {
+                showPrevResultsLabel = false
+                _cellTypesInOrder = nil
+                tableView.deleteRows(at: [IndexPath(row:indexPath.row - 1, section:indexPath.section)], with: .left)
+            }
+            tableView.endUpdates()
         }
     }
     
@@ -222,6 +235,11 @@ class WODDetailsTableViewController: UITableViewController {
     }
     
     func addResultToTable() {
+        if wod.results!.count > 0 {
+            showPrevResultsLabel = true
+        } else {
+            showPrevResultsLabel = false
+        }
         _cellTypesInOrder = nil
         tableView.reloadData()
     }
@@ -263,28 +281,24 @@ class WODDetailsTableViewController: UITableViewController {
         }
     }
     
-    func deleteResult(at indexPath: IndexPath) {
-        let indexToDelete = indexPath.row - cellsBeforeResult;
-        if let resultToDelete = wod.results?[indexToDelete] {
-            resultService.delete(wodResult: resultToDelete, with: { (result) in
-                switch result {
-                case .success(_):
-                    self.handleResultDelete(at: indexToDelete)
-                case .failure(_):
-                    self.handleError(result: result)
-                }
-            })
-        }
+    func delete(wodResult: WODResult) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        resultService.delete(wodResult: wodResult, with: { (result) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        })
     }
     
-    func handleResultDelete(at indexToDelete: Int) {
+    func handleResultDelete(at indexToDelete: Int) -> WODResult? {
+        let deletedResult = wod.results?[indexToDelete]
         self.wod.results?.remove(at: indexToDelete)
         self.wod.updateBestRecord()
         self._cellTypesInOrder = nil
-        self.tableView.reloadData()
         if wod.results?.count == 0 {
             wod.isCompleted = false
+            showPrevResultsLabel = false
         }
+        
+        return deletedResult
     }
     
     // MARK: - Navigation
@@ -324,12 +338,48 @@ class WODDetailsTableViewController: UITableViewController {
             break
         }
     }
+    
+    // MARK: - Share
+    
+    func shareContent() {
+        if let descriptionImage = textToImage(drawText:"asasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\n\(wod.wodDescription!)\n\nResult: 55Kg" as NSString, inImage: #imageLiteral(resourceName: "Blackboard"), atPoint: CGPoint(x: 18, y: 20)) {
+            let photo = Photo(image: descriptionImage, userGenerated: false)
+            let content = PhotoShareContent(photos: [photo])
+            _ = try? ShareDialog.show(from: self, content: content)
+        }
+    }
+    
+    func textToImage(drawText text: NSString, inImage image: UIImage, atPoint point: CGPoint) -> UIImage? {
+        let textColor = UIColor.white
+        let textFont = UIFont(name: "Chalkduster", size: 25)!
+        
+        let textSize = text.size(attributes: [NSFontAttributeName:textFont, NSForegroundColorAttributeName: textColor])
+        
+        let size = CGSize(width: image.size.width, height: textSize.height + 50)
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        let textFontAttributes = [
+            NSFontAttributeName: textFont,
+            NSForegroundColorAttributeName: textColor,
+            ] as [String : Any]
+        image.draw(in: CGRect(origin: CGPoint.zero, size: size))
+        
+        let rect = CGRect(origin: point, size: size)
+        text.draw(in: rect, withAttributes: textFontAttributes)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
 }
 
 extension WODDetailsTableViewController: WodResultDelegate {
     func didCreate(result: WODResult) {
         if wod.results?.count == 0 {
             wod.isCompleted = true
+            showPrevResultsLabel = true
         }
         wod.initBestRecord(with: result)
         wod.results?.insert(result, at: 0)
@@ -339,7 +389,7 @@ extension WODDetailsTableViewController: WodResultDelegate {
     
     func didDelete(result: WODResult) {
         if let indexToDelete = wod.results?.index(where: {$0.id! == result.id!}) {
-            handleResultDelete(at: indexToDelete)
+            _ = handleResultDelete(at: indexToDelete)
             tableView.reloadData()
         }
     }

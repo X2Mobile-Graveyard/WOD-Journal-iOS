@@ -79,6 +79,19 @@ enum WODCategory: String {
             return 3
         }
     }
+    
+    func getText() -> String {
+        switch self {
+        case .weight:
+            return "For load:"
+        case .amrap:
+            return "AMRAP:"
+        case .time:
+            return "For time:"
+        case .other:
+            return "For time:"
+        }
+    }
 }
 
 enum UnitType: Int {
@@ -128,8 +141,9 @@ class Workout: NSObject {
             return nil
         case .time:
             if bestResultTime != nil {
-                let timeString = timeAsString()
-                return timeString == "00:00" ? nil : "\(timeString)"
+                if let timeString = timeAsString() {
+                    return "\(timeString)"
+                }
             }
             return nil
         default:
@@ -216,6 +230,7 @@ class Workout: NSObject {
         self.init()
         self.id = wod.id
         self.wodDescription = wod.wodDescription
+        self.metricDescription = wod.metricDescription
         self.imageUrl = wod.imageUrl
         self.history = wod.history
         self.type = wod.type
@@ -232,6 +247,7 @@ class Workout: NSObject {
     func updateValues(from wod: Workout) {
         self.id = wod.id
         self.wodDescription = wod.wodDescription
+        self.metricDescription = wod.metricDescription
         self.imageUrl = wod.imageUrl
         self.history = wod.history
         self.type = wod.type
@@ -280,9 +296,9 @@ class Workout: NSObject {
         }
     }
     
-    private func timeAsString() -> String {
+    private func timeAsString() -> String? {
         guard let timeInSeconds = bestResultTime else {
-            return "00:00"
+            return nil
         }
         
         let hours = timeInSeconds / 3600

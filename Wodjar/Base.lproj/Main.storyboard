@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y79-wF-8Xr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13156.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y79-wF-8Xr">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13137.5"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,13 +13,13 @@
         <!--WODs-->
         <scene sceneID="Uiu-Z5-RPE">
             <objects>
-                <tableViewController id="1bH-Cv-amF" customClass="WODTypesTableViewController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="1bH-Cv-amF" customClass="WODTypesTableViewController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="XK4-z4-DQh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WodTypeTableViewCellIdentifier" id="7hi-Co-me1" customClass="WODTypeTableViewCell" customModule="Wodjar" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WodTypeTableViewCellIdentifier" id="7hi-Co-me1" customClass="WODTypeTableViewCell" customModule="WodJournal" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7hi-Co-me1" id="rKr-Gl-ukO">
@@ -32,7 +33,7 @@
                                                 <constraint firstAttribute="height" constant="20" id="v3a-M8-1CN"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPA-Z0-PaO">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPA-Z0-PaO">
                                             <rect key="frame" x="43" y="11" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -48,6 +49,7 @@
                                     <constraints>
                                         <constraint firstItem="FPA-Z0-PaO" firstAttribute="leading" secondItem="9RJ-8N-yLj" secondAttribute="trailing" constant="6" id="Lfo-LP-d5r"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="tZk-xv-2FI" secondAttribute="trailing" id="O9s-ga-a8K"/>
+                                        <constraint firstItem="tZk-xv-2FI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FPA-Z0-PaO" secondAttribute="trailing" constant="8" symbolic="YES" id="Yiu-Fh-IxZ"/>
                                         <constraint firstItem="tZk-xv-2FI" firstAttribute="centerY" secondItem="rKr-Gl-ukO" secondAttribute="centerY" id="a5s-yc-6J9"/>
                                         <constraint firstItem="9RJ-8N-yLj" firstAttribute="centerY" secondItem="rKr-Gl-ukO" secondAttribute="centerY" id="brh-Fw-k2G"/>
                                         <constraint firstItem="9RJ-8N-yLj" firstAttribute="leading" secondItem="rKr-Gl-ukO" secondAttribute="leadingMargin" constant="9" id="eBg-Sf-ohi"/>
@@ -79,7 +81,7 @@
         <!--WODs-->
         <scene sceneID="AMO-vw-jWk">
             <objects>
-                <navigationController id="xhN-J5-csB" customClass="WodJurnalNavigationController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="xhN-J5-csB" customClass="WodJurnalNavigationController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="WODs" image="cattlebell" id="Yqg-P5-PFU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CoD-o7-AkK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -96,7 +98,7 @@
         <!--Wod Jurnal Tab Bar Controller-->
         <scene sceneID="y7w-7r-KB7">
             <objects>
-                <tabBarController id="Y79-wF-8Xr" customClass="WodJurnalTabBarController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="Y79-wF-8Xr" customClass="WodJurnalTabBarController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="jCI-aX-QkU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -115,7 +117,7 @@
         <!--Full Size Image View Controller-->
         <scene sceneID="ETH-go-EQt">
             <objects>
-                <viewController storyboardIdentifier="FullImageViewController" id="Mf8-M2-oqg" customClass="FullSizeImageViewController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FullImageViewController" id="Mf8-M2-oqg" customClass="FullSizeImageViewController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RCG-7f-DX9"/>
                         <viewControllerLayoutGuide type="bottom" id="YRe-yi-L6k"/>
@@ -164,7 +166,7 @@
         <!--History View Controller-->
         <scene sceneID="Ine-KB-b2a">
             <objects>
-                <viewController storyboardIdentifier="HistoryViewController" id="Den-gv-h1S" customClass="WODHistoryViewController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryViewController" id="Den-gv-h1S" customClass="WODHistoryViewController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5nd-Qg-dKg"/>
                         <viewControllerLayoutGuide type="bottom" id="Qtv-52-hiv"/>

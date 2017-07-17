@@ -28,12 +28,17 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
     
     // MARK: - TableView Data Source
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction.init(style: .destructive, title: "Delete") { (acton, indexPath) in
-            self.deleteWod(at: indexPath.row)
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle != .delete {
+            return
         }
         
-        return [deleteAction]
+        if let wodToDelete = workouts?[indexPath.row] {
+            workouts?.remove(at: indexPath.row)
+            wodTypeDelegate?.didDelete(wod: wodToDelete)
+            deleteCustom(wod: wodToDelete)
+        }
+        tableView.deleteRows(at: [indexPath], with: .left)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,22 +77,10 @@ class CustomWODTypeTableViewController: WODTypeTableViewController {
     
     // MARK: - Service Calls
     
-    func deleteWod(at index: Int) {
-        guard let wod = workouts?[index] else {
-            return
-        }
-        
-        MBProgressHUD.showAdded(to: viewForHud, animated: true)
-        service.deleteWod(with: wod.id) { (result) in
-            MBProgressHUD.hide(for: self.viewForHud, animated: true)
-            switch result {
-            case .success():
-                self.workouts?.remove(at: index)
-                self.wodTypeDelegate?.didDelete(wod: wod)
-                self.tableView.reloadData()
-            case .failure(_):
-                self.handleError(result: result)
-            }
+    func deleteCustom(wod: Workout) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        service.deleteWod(with: wod.id) { (_) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
     }
 }
@@ -96,6 +89,9 @@ extension CustomWODTypeTableViewController: CustomWodDelegate {
     func didCreate(customWod: Workout) {
         customWod.type = .custom
         workouts?.append(customWod)
+        workouts?.sort(by: { (wod1, wod2) -> Bool in
+            return wod1.date!.compare(wod2.date!) == .orderedDescending
+        })
         tableView.reloadData()
         wodTypeDelegate?.didCreate(wod: customWod)
     }

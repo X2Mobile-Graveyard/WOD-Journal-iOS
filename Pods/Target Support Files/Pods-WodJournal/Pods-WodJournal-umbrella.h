@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_WodjarVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_WodjarVersionString[];
+FOUNDATION_EXPORT double Pods_WodJournalVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_WodJournalVersionString[];
 

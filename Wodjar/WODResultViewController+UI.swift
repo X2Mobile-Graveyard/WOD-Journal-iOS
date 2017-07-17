@@ -43,9 +43,10 @@ extension WODResultViewController {
         
         rxSwitch.isEnabled = false
         
-        if viewState == .withoutImage {
-            addPictureButton.isHidden = true
-        } else {
+        addPictureButton.setImage(#imageLiteral(resourceName: "blue_share"), for: .normal)
+        addPictureButton.setTitle("", for: .normal)
+        
+        if viewState == .withImage {
             changePictureBackgroundView.isHidden = true
         }
         
@@ -70,8 +71,10 @@ extension WODResultViewController {
         rxSwitch.isEnabled = true
         
         if viewState == .withoutImage {
-            addPictureButton.isHidden = false
+            addPictureButton.setImage(#imageLiteral(resourceName: "black_camer"), for: .normal)
+            addPictureButton.setTitle("Add Result Picture", for: .normal)
         } else {
+            addPictureButton.isHidden = true
             changePictureBackgroundView.isHidden = false
         }
         

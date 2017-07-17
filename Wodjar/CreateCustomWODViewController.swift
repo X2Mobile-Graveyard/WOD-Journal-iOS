@@ -31,10 +31,12 @@ class CreateCustomWODViewController: WODJournalResultViewController {
         return hiddenTextField
     }()
     var pickedDateFromDatePicker: Date?
+    var shareImage: UIImage?
     
     // @Constant
     let presentFullImageSegueIdentifier = "GoToFullImageViewController"
     let footerHeight: CGFloat = 29
+    let shareImageSegueIdentifier = "shareImageSegueIdentifier"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +76,7 @@ class CreateCustomWODViewController: WODJournalResultViewController {
             case let .success(wodId):
                 self.customWod.id = wodId
                 self.delegate?.didCreate(customWod: self.customWod)
-                _ = self.navigationController?.popViewController(animated: true)
+                self.handleShare()
             case .failure(_):
                 self.handleError(result: result)
             }
@@ -130,6 +132,12 @@ class CreateCustomWODViewController: WODJournalResultViewController {
             
             let fullImageViewController = segue.destination as! FullSizeImageViewController
             fullImageViewController.image = image
+        } else if identifier == shareImageSegueIdentifier {
+            let lastViewIndex = navigationController?.viewControllers.count
+            if let shareViewController = segue.destination as? ShareImageViewController {
+                shareViewController.image = shareImage!
+                shareViewController.goBackViewController = navigationController?.viewControllers[lastViewIndex! - 2]
+            }
         }
     }
     
@@ -144,6 +152,20 @@ class CreateCustomWODViewController: WODJournalResultViewController {
         footerViewHeightConstraint.constant = 0.1
         super.setUserImage()
     }
+    
+    // MARK: - Share
+    
+    func handleShare() {
+        let text = "\(customWod.category!.getText())\n\(customWod.wodDescription!)"
+        guard let imageToShare = text.createShareImage() else {
+            _ = navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        shareImage = imageToShare
+        performSegue(withIdentifier: shareImageSegueIdentifier, sender: self)
+    }
+    
 }
 
 extension CreateCustomWODViewController: UITextFieldDelegate {

@@ -38,9 +38,11 @@ class WODResultViewController: WODJournalResultViewController {
         self.view.addSubview(hiddenTextField)
         return hiddenTextField
     }()
+    var shareImage: UIImage?
     
     // @Constants
     let fullImageSegueIdentifier = "DisplayFullImageSegueIdentifier"
+    let shareImageSegueIdentifier = "shareImageSegueIdentifier"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +80,10 @@ class WODResultViewController: WODJournalResultViewController {
     
     @IBAction func didTapAddPictureButton(_ sender: Any) {
         view.endEditing(true)
+        if controllerMode == .editMode && result.resultAsString() != nil {
+            shareContent()
+            return
+        }
         presentAlertControllerForTakingPicture()
     }
     
@@ -115,6 +121,7 @@ class WODResultViewController: WODJournalResultViewController {
     }
     
     func didTapEditButton(_ sender: Any) {
+        controllerMode = .updateMode
         UIView.animate(withDuration: 0.3, animations: { 
             self.setupForEditMode()
         }) { (_) in
@@ -160,6 +167,12 @@ class WODResultViewController: WODJournalResultViewController {
             let fullImageViewController = segue.destination as! FullSizeImageViewController
             fullImageViewController.image = userImage
             fullImageViewController.imageUrl = result.photoUrl
+        } else if identifier == shareImageSegueIdentifier {
+            if let shareViewController = segue.destination as? ShareImageViewController {
+                shareViewController.image = shareImage
+                let lastVCIndex = navigationController?.viewControllers.count
+                shareViewController.goBackViewController = navigationController?.viewControllers[lastVCIndex! - 2]
+            }
         }
     }
     
@@ -190,7 +203,7 @@ class WODResultViewController: WODJournalResultViewController {
                 self.resultCopy.id = id
                 self.result.updateValues(from: self.resultCopy)
                 self.wodResultDelegate?.didCreate(result: self.result)
-                _ = self.navigationController?.popViewController(animated: true)
+                self.handleShare()
             case .failure(_):
                 self.handleError(result: result)
             }
@@ -205,7 +218,7 @@ class WODResultViewController: WODJournalResultViewController {
             case .success():
                 self.result.updateValues(from: self.resultCopy)
                 self.wodResultDelegate?.didUpdate()
-                _ = self.navigationController?.popViewController(animated: true)
+                self.handleShare()
             case .failure(_):
                 self.handleError(result: result)
             }
@@ -217,6 +230,29 @@ class WODResultViewController: WODJournalResultViewController {
     func changedUnitType() {
         setupResultTextField()
         setupResultTypeLabel()
+    }
+    
+    func handleShare() {
+        let text = "\(wod.wodDescription!)\n\nResult: \(result.resultAsString()!)"
+        guard let imageToShare = text.createShareImage() else {
+            _ = navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        shareImage = imageToShare
+        performSegue(withIdentifier: shareImageSegueIdentifier, sender: self)
+    }
+    
+    // MARK: - Share
+    
+    func shareContent() {
+        let textToShare = "\(wod.wodDescription!)\n\nResult: \(result.resultAsString()!)"
+        guard let shareImage = textToShare.createShareImage() else {
+            return
+        }
+        
+        let activityViewController = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
+        navigationController?.present(activityViewController, animated: true, completion: nil)
     }
 }
 

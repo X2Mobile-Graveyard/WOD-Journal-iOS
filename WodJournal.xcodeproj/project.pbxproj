@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012DECE142A01EDD6F37897E /* Pods_WodJournal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F13FBECD49B5CE4A2F0E025 /* Pods_WodJournal.framework */; };
 		4325BE7C1E67185500A0F969 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE7B1E67185500A0F969 /* AppDelegate.swift */; };
 		4325BE811E67185500A0F969 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4325BE7F1E67185500A0F969 /* Main.storyboard */; };
 		4325BE831E67185500A0F969 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4325BE821E67185500A0F969 /* Assets.xcassets */; };
 		4325BE861E67185500A0F969 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4325BE841E67185500A0F969 /* LaunchScreen.storyboard */; };
 		4325BE911E67185500A0F969 /* WodjarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE901E67185500A0F969 /* WodjarTests.swift */; };
 		4325BE9C1E67185500A0F969 /* WodjarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325BE9B1E67185500A0F969 /* WodjarUITests.swift */; };
-		7976EB68A7A18DB547AE3C58 /* Pods_Wodjar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD1E7DC81B0E81B25A0CA56 /* Pods_Wodjar.framework */; };
+		52FE448A3C40A8CBBC27AB11 /* Pods_WodJournalUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD41D774FE03A186AD01CB1 /* Pods_WodJournalUITests.framework */; };
+		9781CB9A999355B7AAD28A6C /* Pods_WodJournalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48D890F7A9B886F5CA60C0A3 /* Pods_WodJournalTests.framework */; };
 		AE5985C73D8B16D340D78CDF /* Pods_WodjarTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE88FC34463D554CAB60CE0F /* Pods_WodjarTests.framework */; };
 		BF315FEB1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF315FEA1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift */; };
 		BF315FED1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF315FEC1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift */; };
@@ -38,6 +40,7 @@
 		D310E5ED1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */; };
 		D310E5F01E76C7C000AD6B74 /* WodJurnalNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5EF1E76C7C000AD6B74 /* WodJurnalNavigationController.swift */; };
 		D310E5F21E76C7DA00AD6B74 /* WodJurnalTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310E5F11E76C7DA00AD6B74 /* WodJurnalTabBarController.swift */; };
+		D31691141F1CFED100D4D3E7 /* ShareImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31691131F1CFED100D4D3E7 /* ShareImageViewController.swift */; };
 		D31BCB181E97EFBE00A8FCB8 /* WodListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BCB171E97EFBE00A8FCB8 /* WodListService.swift */; };
 		D31BCB1D1E97F01E00A8FCB8 /* WODListRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BCB1C1E97F01E00A8FCB8 /* WODListRemoteService.swift */; };
 		D31BCB211E9982C100A8FCB8 /* GetWodsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31BCB201E9982C100A8FCB8 /* GetWodsRequest.swift */; };
@@ -159,8 +162,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		26030A9548D7EEFFD71BEFA3 /* Pods-Wodjar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wodjar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wodjar/Pods-Wodjar.debug.xcconfig"; sourceTree = "<group>"; };
+		07F5F62CB12E26481B9FB08A /* Pods-WodJournalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodJournalTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WodJournalTests/Pods-WodJournalTests.release.xcconfig"; sourceTree = "<group>"; };
 		3BD1E7DC81B0E81B25A0CA56 /* Pods_Wodjar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wodjar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F13FBECD49B5CE4A2F0E025 /* Pods_WodJournal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WodJournal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4325BE781E67185500A0F969 /* WodJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WodJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4325BE7B1E67185500A0F969 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4325BE801E67185500A0F969 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -174,10 +178,12 @@
 		4325BE9B1E67185500A0F969 /* WodjarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WodjarUITests.swift; sourceTree = "<group>"; };
 		4325BE9D1E67185500A0F969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		436736931E686C0E001659D7 /* Wodjar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Wodjar.entitlements; sourceTree = "<group>"; };
+		48D890F7A9B886F5CA60C0A3 /* Pods_WodJournalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WodJournalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DD41D774FE03A186AD01CB1 /* Pods_WodJournalUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WodJournalUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WodjarUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		98340F3818D9B7BA367DBDF6 /* Pods-WodjarUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarUITests/Pods-WodjarUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A31D2706441DEC7984EAF1F6 /* Pods-WodJournal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodJournal.release.xcconfig"; path = "Pods/Target Support Files/Pods-WodJournal/Pods-WodJournal.release.xcconfig"; sourceTree = "<group>"; };
 		AE88FC34463D554CAB60CE0F /* Pods_WodjarTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WodjarTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BCE78EDCCB4B31E473D07182 /* Pods-WodjarTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests.release.xcconfig"; sourceTree = "<group>"; };
+		AF0FE82ACCC321FB725DC4CA /* Pods-WodJournalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodJournalUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WodJournalUITests/Pods-WodJournalUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BF315FEA1E82E934001C6E45 /* MoreViewController+MFMailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoreViewController+MFMailComposer.swift"; sourceTree = "<group>"; };
 		BF315FEC1E82EA6D001C6E45 /* UIViewController+ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ErrorHandler.swift"; sourceTree = "<group>"; };
 		BF5B42A51E8185AA001CA306 /* IBControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IBControl.swift; path = Views/IBControl.swift; sourceTree = "<group>"; };
@@ -188,7 +194,7 @@
 		BFD44D8A1E82B4C500170817 /* UnitsComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnitsComponent.swift; path = Views/UnitsComponent.swift; sourceTree = "<group>"; };
 		BFD44D8C1E82B4E900170817 /* UnitsComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UnitsComponent.xib; path = Views/UnitsComponent.xib; sourceTree = "<group>"; };
 		BFD44D981E82D08E00170817 /* UIButton+BackgroundColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+BackgroundColor.swift"; path = "Views/UIButton+BackgroundColor.swift"; sourceTree = "<group>"; };
-		C1220ABC4B8853E1FB02BD04 /* Pods-WodjarTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C7CE9305C087EE12A506A7C7 /* Pods-WodJournal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodJournal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WodJournal/Pods-WodJournal.debug.xcconfig"; sourceTree = "<group>"; };
 		D303482F1E9BBE1D007E91A5 /* GetWodResultRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetWodResultRequest.swift; sourceTree = "<group>"; };
 		D30348311E9BC364007E91A5 /* String+DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+DateFormatter.swift"; sourceTree = "<group>"; };
 		D30348331E9C00B1007E91A5 /* Date+DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+DateFormatter.swift"; sourceTree = "<group>"; };
@@ -201,6 +207,7 @@
 		D310E5EC1E759FDF00AD6B74 /* PersonalRecordDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalRecordDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D310E5EF1E76C7C000AD6B74 /* WodJurnalNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WodJurnalNavigationController.swift; sourceTree = "<group>"; };
 		D310E5F11E76C7DA00AD6B74 /* WodJurnalTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WodJurnalTabBarController.swift; sourceTree = "<group>"; };
+		D31691131F1CFED100D4D3E7 /* ShareImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareImageViewController.swift; sourceTree = "<group>"; };
 		D31BCB171E97EFBE00A8FCB8 /* WodListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WodListService.swift; sourceTree = "<group>"; };
 		D31BCB1C1E97F01E00A8FCB8 /* WODListRemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WODListRemoteService.swift; sourceTree = "<group>"; };
 		D31BCB201E9982C100A8FCB8 /* GetWodsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetWodsRequest.swift; sourceTree = "<group>"; };
@@ -302,8 +309,8 @@
 		D3F7CED01ED85E54008AB806 /* MoreUnitTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreUnitTypeTableViewCell.swift; sourceTree = "<group>"; };
 		D3FD71401E6E00730047492D /* FullSizeImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullSizeImageViewController.swift; sourceTree = "<group>"; };
 		D3FE5ED21F0A8F8200D012AF /* WodListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WodListTableViewCell.swift; sourceTree = "<group>"; };
-		ECD97B1867118548A03461ED /* Pods-Wodjar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wodjar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wodjar/Pods-Wodjar.release.xcconfig"; sourceTree = "<group>"; };
-		F4F253F68B19059302B926F9 /* Pods-WodjarUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodjarUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WodjarUITests/Pods-WodjarUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DB198FC2E11457709D3601EA /* Pods-WodJournalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodJournalTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WodJournalTests/Pods-WodJournalTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DFF50C6A650D790001D89F66 /* Pods-WodJournalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WodJournalUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WodJournalUITests/Pods-WodJournalUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,7 +318,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7976EB68A7A18DB547AE3C58 /* Pods_Wodjar.framework in Frameworks */,
+				012DECE142A01EDD6F37897E /* Pods_WodJournal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE5985C73D8B16D340D78CDF /* Pods_WodjarTests.framework in Frameworks */,
+				9781CB9A999355B7AAD28A6C /* Pods_WodJournalTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C45451E5AE3974B6E620C067 /* Pods_WodjarUITests.framework in Frameworks */,
+				52FE448A3C40A8CBBC27AB11 /* Pods_WodJournalUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +431,9 @@
 				3BD1E7DC81B0E81B25A0CA56 /* Pods_Wodjar.framework */,
 				AE88FC34463D554CAB60CE0F /* Pods_WodjarTests.framework */,
 				6019E54336EEF566A2917D5B /* Pods_WodjarUITests.framework */,
+				3F13FBECD49B5CE4A2F0E025 /* Pods_WodJournal.framework */,
+				48D890F7A9B886F5CA60C0A3 /* Pods_WodJournalTests.framework */,
+				5DD41D774FE03A186AD01CB1 /* Pods_WodJournalUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -492,12 +504,12 @@
 		C9FB49C48F4DE12AAD481917 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				26030A9548D7EEFFD71BEFA3 /* Pods-Wodjar.debug.xcconfig */,
-				ECD97B1867118548A03461ED /* Pods-Wodjar.release.xcconfig */,
-				C1220ABC4B8853E1FB02BD04 /* Pods-WodjarTests.debug.xcconfig */,
-				BCE78EDCCB4B31E473D07182 /* Pods-WodjarTests.release.xcconfig */,
-				F4F253F68B19059302B926F9 /* Pods-WodjarUITests.debug.xcconfig */,
-				98340F3818D9B7BA367DBDF6 /* Pods-WodjarUITests.release.xcconfig */,
+				C7CE9305C087EE12A506A7C7 /* Pods-WodJournal.debug.xcconfig */,
+				A31D2706441DEC7984EAF1F6 /* Pods-WodJournal.release.xcconfig */,
+				DB198FC2E11457709D3601EA /* Pods-WodJournalTests.debug.xcconfig */,
+				07F5F62CB12E26481B9FB08A /* Pods-WodJournalTests.release.xcconfig */,
+				AF0FE82ACCC321FB725DC4CA /* Pods-WodJournalUITests.debug.xcconfig */,
+				DFF50C6A650D790001D89F66 /* Pods-WodJournalUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -812,6 +824,7 @@
 				D310E5E91E759EC300AD6B74 /* PersonalRecordsDetailsListController */,
 				D3EB890F1E72D0560028F28A /* PersonalRecordsListController */,
 				D3EB89081E729F8D0028F28A /* PersonalRecordViewController */,
+				D31691131F1CFED100D4D3E7 /* ShareImageViewController.swift */,
 			);
 			name = PersonalRecord;
 			sourceTree = "<group>";
@@ -969,7 +982,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = X2Mobile;
 				TargetAttributes = {
 					4325BE771E67185500A0F969 = {
@@ -1113,7 +1126,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodjarUITests/Pods-WodjarUITests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodJournalUITests/Pods-WodJournalUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		781482562D9C555F95A0A6F4 /* [CP] Embed Pods Frameworks */ = {
@@ -1128,7 +1141,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Wodjar/Pods-Wodjar-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodJournal/Pods-WodJournal-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8ADCBC19EC170C4CBC210A7E /* [CP] Embed Pods Frameworks */ = {
@@ -1143,7 +1156,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodJournalTests/Pods-WodJournalTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A95B4658F6B1A0AEE5B7BB19 /* [CP] Embed Pods Frameworks */ = {
@@ -1158,7 +1171,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodjarUITests/Pods-WodjarUITests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodJournalUITests/Pods-WodJournalUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C679F0BD38D5419889A9E83B /* [CP] Copy Pods Resources */ = {
@@ -1173,7 +1186,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodjarTests/Pods-WodjarTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodJournalTests/Pods-WodJournalTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D385210F1E9D50BA00AFB7C2 /* ShellScript */ = {
@@ -1201,7 +1214,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Wodjar/Pods-Wodjar-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WodJournal/Pods-WodJournal-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1249,6 +1262,7 @@
 				D31BCB1D1E97F01E00A8FCB8 /* WODListRemoteService.swift in Sources */,
 				D347A5EA1E8946F100AE888E /* DefaultWODDetailsViewController.swift in Sources */,
 				D3B4876C1E8BF81A0042DE2A /* UIViewController+LoginPresenter.swift in Sources */,
+				D31691141F1CFED100D4D3E7 /* ShareImageViewController.swift in Sources */,
 				D31DFE471EB9F50700AE7A4A /* AddToFavoriteRequest.swift in Sources */,
 				D347A5E91E8946F100AE888E /* CustomWODDetailsViewController.swift in Sources */,
 				BFD44D991E82D08E00170817 /* UIButton+BackgroundColor.swift in Sources */,
@@ -1413,7 +1427,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1421,7 +1437,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1462,7 +1482,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1470,7 +1492,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1497,20 +1523,20 @@
 		};
 		4325BEA11E67185500A0F969 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 26030A9548D7EEFFD71BEFA3 /* Pods-Wodjar.debug.xcconfig */;
+			baseConfigurationReference = C7CE9305C087EE12A506A7C7 /* Pods-WodJournal.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Wodjar/Wodjar.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 39446JG6PB;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Wodjar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.x2mobile.WodJournal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.x2mobile.WodJar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1520,20 +1546,20 @@
 		};
 		4325BEA21E67185500A0F969 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECD97B1867118548A03461ED /* Pods-Wodjar.release.xcconfig */;
+			baseConfigurationReference = A31D2706441DEC7984EAF1F6 /* Pods-WodJournal.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Wodjar/Wodjar.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 39446JG6PB;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Wodjar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.x2mobile.WodJournal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.x2mobile.WodJar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1543,7 +1569,7 @@
 		};
 		4325BEA41E67185500A0F969 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1220ABC4B8853E1FB02BD04 /* Pods-WodjarTests.debug.xcconfig */;
+			baseConfigurationReference = DB198FC2E11457709D3601EA /* Pods-WodJournalTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1559,7 +1585,7 @@
 		};
 		4325BEA51E67185500A0F969 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BCE78EDCCB4B31E473D07182 /* Pods-WodjarTests.release.xcconfig */;
+			baseConfigurationReference = 07F5F62CB12E26481B9FB08A /* Pods-WodJournalTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1575,7 +1601,7 @@
 		};
 		4325BEA71E67185500A0F969 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4F253F68B19059302B926F9 /* Pods-WodjarUITests.debug.xcconfig */;
+			baseConfigurationReference = AF0FE82ACCC321FB725DC4CA /* Pods-WodJournalUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 39446JG6PB;
@@ -1590,7 +1616,7 @@
 		};
 		4325BEA81E67185500A0F969 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98340F3818D9B7BA367DBDF6 /* Pods-WodjarUITests.release.xcconfig */;
+			baseConfigurationReference = DFF50C6A650D790001D89F66 /* Pods-WodJournalUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 39446JG6PB;

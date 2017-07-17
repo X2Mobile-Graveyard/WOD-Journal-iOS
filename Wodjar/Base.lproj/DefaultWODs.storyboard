@@ -13,20 +13,20 @@
         <!--Heroes-->
         <scene sceneID="lVu-3p-col">
             <objects>
-                <tableViewController storyboardIdentifier="UITableViewController-LJZ-He-br4" id="LJZ-He-br4" customClass="DefaultWODTypeTableViewController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="UITableViewController-LJZ-He-br4" id="LJZ-He-br4" customClass="DefaultWODTypeTableViewController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="xxH-zB-oUe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutNameCellIdentifier" rowHeight="88" id="6pi-NO-yxj" customClass="WodListTableViewCell" customModule="Wodjar" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkoutNameCellIdentifier" rowHeight="88" id="6pi-NO-yxj" customClass="WodListTableViewCell" customModule="WodJournal" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="88"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6pi-NO-yxj" id="GuW-Oi-heb">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="87.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jna-gg-NVP">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jna-gg-NVP">
                                             <rect key="frame" x="16" y="8" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -49,6 +49,7 @@
                                     <constraints>
                                         <constraint firstAttribute="topMargin" secondItem="JLu-0G-Iib" secondAttribute="top" id="1kh-jq-YRo"/>
                                         <constraint firstItem="Jna-gg-NVP" firstAttribute="leading" secondItem="GuW-Oi-heb" secondAttribute="leadingMargin" constant="8" id="4yM-HP-cpw"/>
+                                        <constraint firstItem="JLu-0G-Iib" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jna-gg-NVP" secondAttribute="trailing" constant="8" symbolic="YES" id="AaE-wK-fqR"/>
                                         <constraint firstItem="qxk-DR-SOp" firstAttribute="top" secondItem="Jna-gg-NVP" secondAttribute="bottom" id="Q8n-gM-2zt"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="JLu-0G-Iib" secondAttribute="trailing" constant="8" id="RFz-i0-5OA"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="qxk-DR-SOp" secondAttribute="trailing" constant="8" id="UH8-H6-Ly5"/>
@@ -93,7 +94,7 @@
         <!--Result View Controller-->
         <scene sceneID="EPt-kK-bCu">
             <objects>
-                <viewController storyboardIdentifier="WODResultsViewController" automaticallyAdjustsScrollViewInsets="NO" id="kQD-Rg-Roa" customClass="WODResultViewController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WODResultsViewController" automaticallyAdjustsScrollViewInsets="NO" id="kQD-Rg-Roa" customClass="WODResultViewController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y9v-Wp-Abg"/>
                         <viewControllerLayoutGuide type="bottom" id="aqI-9V-rLL"/>
@@ -130,7 +131,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Notes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cu2-y4-Rih">
-                                                <rect key="frame" x="16" y="169" width="47" height="16"/>
+                                                <rect key="frame" x="16" y="169" width="339" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <color key="textColor" red="0.054901960780000002" green="0.47843137250000001" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -160,6 +161,7 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="0ZI-Mf-Eq4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WOl-lP-hi9" secondAttribute="trailing" constant="8" symbolic="YES" id="2Y6-5o-2vR"/>
                                                     <constraint firstItem="WOl-lP-hi9" firstAttribute="leading" secondItem="iAt-37-92D" secondAttribute="leading" id="6ij-VF-REI"/>
                                                     <constraint firstAttribute="bottom" secondItem="WOl-lP-hi9" secondAttribute="bottom" id="VY2-HA-cfp"/>
                                                     <constraint firstItem="WOl-lP-hi9" firstAttribute="top" secondItem="iAt-37-92D" secondAttribute="top" id="fOb-4p-5Rl"/>
@@ -178,9 +180,8 @@
                                                 </connections>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4x-Oe-ak3">
-                                                <rect key="frame" x="131" y="297" width="112" height="30"/>
+                                                <rect key="frame" x="141.5" y="297" width="91" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="112" id="JnV-oQ-i5O"/>
                                                     <constraint firstAttribute="height" constant="30" id="MIr-nr-Cn3"/>
                                                 </constraints>
                                                 <state key="normal" title="Delete Result">
@@ -195,6 +196,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="O8c-Ne-EFH" secondAttribute="trailing" constant="17" id="2Lt-cM-t4L"/>
                                             <constraint firstAttribute="trailing" secondItem="iAt-37-92D" secondAttribute="trailing" constant="16" id="5Xf-Oo-qMs"/>
+                                            <constraint firstItem="Gar-fC-rVH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b2e-vc-65q" secondAttribute="leading" constant="20" symbolic="YES" id="5tT-t9-db9"/>
                                             <constraint firstItem="iAt-37-92D" firstAttribute="top" secondItem="O8c-Ne-EFH" secondAttribute="bottom" constant="17" id="AWf-Yc-iU0"/>
                                             <constraint firstItem="ull-ry-20f" firstAttribute="centerY" secondItem="Gar-fC-rVH" secondAttribute="centerY" id="EGn-7s-Oaa"/>
                                             <constraint firstItem="W4x-Oe-ak3" firstAttribute="centerX" secondItem="b2e-vc-65q" secondAttribute="centerX" id="Ed8-I7-Nxr"/>
@@ -204,11 +206,13 @@
                                             <constraint firstItem="Cu2-y4-Rih" firstAttribute="leading" secondItem="b2e-vc-65q" secondAttribute="leading" constant="16" id="Ouw-uc-h9Q"/>
                                             <constraint firstItem="W4x-Oe-ak3" firstAttribute="top" secondItem="WOl-lP-hi9" secondAttribute="bottom" constant="25" id="R9j-jp-I0Q"/>
                                             <constraint firstItem="eUr-LZ-g1l" firstAttribute="leading" secondItem="b2e-vc-65q" secondAttribute="leading" constant="16" id="W26-sq-gdM"/>
+                                            <constraint firstAttribute="trailing" secondItem="Cu2-y4-Rih" secondAttribute="trailing" constant="20" symbolic="YES" id="ZTH-LC-NbA"/>
                                             <constraint firstAttribute="bottom" secondItem="W4x-Oe-ak3" secondAttribute="bottom" constant="19" id="cnL-gJ-fVv"/>
                                             <constraint firstItem="2KY-i8-Qyw" firstAttribute="top" secondItem="eUr-LZ-g1l" secondAttribute="bottom" constant="8" symbolic="YES" id="fO5-6I-945"/>
                                             <constraint firstItem="2KY-i8-Qyw" firstAttribute="leading" secondItem="b2e-vc-65q" secondAttribute="leading" constant="16" id="ibS-s5-gW3"/>
                                             <constraint firstItem="O8c-Ne-EFH" firstAttribute="leading" secondItem="b2e-vc-65q" secondAttribute="leading" constant="16" id="jKN-54-jKA"/>
                                             <constraint firstAttribute="trailing" secondItem="2KY-i8-Qyw" secondAttribute="trailing" constant="16" id="jp7-e7-74d"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eUr-LZ-g1l" secondAttribute="trailing" constant="20" symbolic="YES" id="jte-fh-rTK"/>
                                             <constraint firstItem="ull-ry-20f" firstAttribute="leading" secondItem="Gar-fC-rVH" secondAttribute="trailing" constant="8" id="mO4-Os-QLE"/>
                                             <constraint firstItem="ull-ry-20f" firstAttribute="top" secondItem="2KY-i8-Qyw" secondAttribute="bottom" constant="8" symbolic="YES" id="o6x-MI-AcE"/>
                                             <constraint firstAttribute="trailing" secondItem="ull-ry-20f" secondAttribute="trailing" constant="16" id="tbm-Zr-sY8"/>
@@ -238,6 +242,7 @@
                                     <constraint firstItem="GXg-N0-gIy" firstAttribute="leading" secondItem="B7G-uM-LZ3" secondAttribute="leading" constant="16" id="l7b-Kl-jTt"/>
                                     <constraint firstAttribute="trailing" secondItem="w13-68-MXM" secondAttribute="trailing" constant="17" id="mk0-Vj-QB4"/>
                                     <constraint firstItem="w13-68-MXM" firstAttribute="leading" secondItem="B7G-uM-LZ3" secondAttribute="leading" constant="16" id="qbf-bg-njQ"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GXg-N0-gIy" secondAttribute="trailing" constant="20" symbolic="YES" id="tNZ-cZ-kHE"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -270,10 +275,11 @@
                         <outlet property="userPictureView" destination="y99-DK-I9v" id="Nmv-Mp-X5f"/>
                         <outlet property="wodTimePicker" destination="5u7-dE-5jC" id="p2y-9K-hA3"/>
                         <segue destination="whb-d4-HaG" kind="presentation" identifier="DisplayFullImageSegueIdentifier" modalTransitionStyle="crossDissolve" id="rB8-K5-aoL"/>
+                        <segue destination="MGe-41-uNH" kind="show" identifier="shareImageSegueIdentifier" id="mZn-uZ-bwj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HgL-8x-idK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="5u7-dE-5jC" customClass="WODTimeIntervalPicker" customModule="Wodjar" customModuleProvider="target">
+                <view contentMode="scaleToFill" id="5u7-dE-5jC" customClass="WODTimeIntervalPicker" customModule="WodJournal" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="311" height="234"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -333,16 +339,24 @@
             </objects>
             <point key="canvasLocation" x="6919" y="1416"/>
         </scene>
+        <!--ShareImageViewController-->
+        <scene sceneID="cnZ-2R-Ywx">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PersonalRecords" referencedIdentifier="ShareImageViewController" id="MGe-41-uNH" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="voW-5m-aHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7787" y="1415"/>
+        </scene>
         <!--DefaultWOD Details View Controller-->
         <scene sceneID="TUj-dK-8Ju">
             <objects>
-                <tableViewController storyboardIdentifier="UITableViewController-dxZ-X0-OCc" id="dxZ-X0-OCc" customClass="DefaultWODDetailsViewController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="UITableViewController-dxZ-X0-OCc" id="dxZ-X0-OCc" customClass="DefaultWODDetailsViewController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="LbB-ve-obz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WodPictureCell" rowHeight="310" id="RId-Qb-v5T" customClass="WODImageTableViewCell" customModule="Wodjar" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WodPictureCell" rowHeight="310" id="RId-Qb-v5T" customClass="WODImageTableViewCell" customModule="WodJournal" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="310"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RId-Qb-v5T" id="w7s-gA-mwU">
@@ -382,10 +396,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Dl-Zo-agh">
-                                            <rect key="frame" x="312" y="0.0" width="55" height="19"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="55" id="IMb-S7-whG"/>
-                                            </constraints>
+                                            <rect key="frame" x="323" y="0.0" width="44" height="19"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <state key="normal" title="History"/>
                                             <connections>
@@ -394,13 +405,14 @@
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="4Dl-Zo-agh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1kk-kD-4YB" secondAttribute="leading" constant="20" symbolic="YES" id="HNK-Je-DoU"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="4Dl-Zo-agh" secondAttribute="bottom" constant="-5" id="SdG-LZ-Guj"/>
                                         <constraint firstItem="4Dl-Zo-agh" firstAttribute="top" secondItem="1kk-kD-4YB" secondAttribute="top" id="eWO-hg-gwr"/>
                                         <constraint firstAttribute="trailing" secondItem="4Dl-Zo-agh" secondAttribute="trailing" constant="8" id="yvG-qc-Zpb"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WodDescriptionCell" rowHeight="97" id="TDT-jT-F97" customClass="WODDescriptionTableViewCell" customModule="Wodjar" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WodDescriptionCell" rowHeight="97" id="TDT-jT-F97" customClass="WODDescriptionTableViewCell" customModule="WodJournal" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="361" width="375" height="97"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TDT-jT-F97" id="3Qy-JU-V5d">
@@ -431,7 +443,7 @@
                                     <outlet property="textView" destination="27a-jX-oaa" id="8TI-8f-y2Q"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WodVideoCell" rowHeight="217" id="nEf-xC-sGh" customClass="WODVideoTableViewCell" customModule="Wodjar" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WodVideoCell" rowHeight="217" id="nEf-xC-sGh" customClass="WODVideoTableViewCell" customModule="WodJournal" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="458" width="375" height="217"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nEf-xC-sGh" id="C3Q-cf-kQu">
@@ -457,7 +469,7 @@
                                     <outlet property="videoWebView" destination="5Zb-Hv-c6Y" id="6Lj-u2-w2A"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddResultCell" rowHeight="110" id="Xiv-4f-KXK" customClass="LogWODResultTableViewCell" customModule="Wodjar" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddResultCell" rowHeight="110" id="Xiv-4f-KXK" customClass="LogWODResultTableViewCell" customModule="WodJournal" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="675" width="375" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xiv-4f-KXK" id="pPt-Ex-kgK">
@@ -468,7 +480,7 @@
                                             <rect key="frame" x="87.5" y="23" width="200" height="63.5"/>
                                             <color key="backgroundColor" red="0.054901960780000002" green="0.47843137250000001" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="200" id="jj8-ID-TRO"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="jj8-ID-TRO"/>
                                                 <constraint firstAttribute="height" priority="999" constant="44" id="xc8-Pj-VN6"/>
                                             </constraints>
                                             <state key="normal" title="Log result">
@@ -511,17 +523,18 @@
                                         <constraint firstItem="e63-IP-e5B" firstAttribute="leading" secondItem="mKd-gd-ce6" secondAttribute="leadingMargin" constant="8" id="a5V-aV-kSL"/>
                                         <constraint firstItem="e63-IP-e5B" firstAttribute="top" secondItem="mKd-gd-ce6" secondAttribute="top" constant="4.5" id="fa4-OW-QSe"/>
                                         <constraint firstAttribute="bottom" secondItem="e63-IP-e5B" secondAttribute="bottom" constant="4.5" id="oaL-yu-fKX"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="e63-IP-e5B" secondAttribute="trailing" constant="20" symbolic="YES" id="sGp-ap-OKe"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WodResultCell" rowHeight="44" id="rlJ-Wn-DbO" customClass="WODResultTableViewCell" customModule="Wodjar" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WodResultCell" rowHeight="44" id="rlJ-Wn-DbO" customClass="WODResultTableViewCell" customModule="WodJournal" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="811" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rlJ-Wn-DbO" id="Gq3-ch-Xc3">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mar 03, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYc-84-pDu">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Mar 03, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYc-84-pDu">
                                             <rect key="frame" x="16" y="11" width="101" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -539,6 +552,7 @@
                                         <constraint firstItem="Cfn-0h-Y1b" firstAttribute="top" secondItem="Gq3-ch-Xc3" secondAttribute="topMargin" constant="6" id="DCC-9O-HSb"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Cfn-0h-Y1b" secondAttribute="trailing" constant="8" id="JYL-QK-cwP"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Cfn-0h-Y1b" secondAttribute="bottom" constant="6" id="Mjj-TH-PYa"/>
+                                        <constraint firstItem="Cfn-0h-Y1b" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OYc-84-pDu" secondAttribute="trailing" constant="8" symbolic="YES" id="Y8C-nd-8dl"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="OYc-84-pDu" secondAttribute="bottom" constant="4" id="YzS-SA-mAv"/>
                                         <constraint firstItem="OYc-84-pDu" firstAttribute="top" secondItem="Gq3-ch-Xc3" secondAttribute="topMargin" constant="3" id="sDU-j9-DYs"/>
                                     </constraints>
@@ -592,7 +606,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="5342" y="1130"/>
+            <point key="canvasLocation" x="5341.6000000000004" y="1129.385307346327"/>
         </scene>
         <!--CustomWODsDetailsTVC-->
         <scene sceneID="Sc1-D7-Q7T">

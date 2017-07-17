@@ -26,7 +26,6 @@ class WODJournalResultViewController: UIViewController {
     var pickedImagePath: String?
     var pickedImageCompletion: (()->Void)?
     
-    
     // @Constants
     let viewInset: CGFloat = 16
     let imageRatio: CGFloat = 0.75

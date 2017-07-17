@@ -1,0 +1,6 @@
+framework module Pods_WodJournalUITests {
+  umbrella header "Pods-WodJournalUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -19,6 +19,7 @@ enum ViewControllerState {
 enum ControllerType {
     case editMode
     case createMode
+    case updateMode
 }
 
 class PersonalRecordViewController: WODJournalResultViewController {
@@ -48,9 +49,12 @@ class PersonalRecordViewController: WODJournalResultViewController {
         self.view.addSubview(hiddenTextField)
         return hiddenTextField
     }()
+    var shareImage: UIImage?
     
     // @Constants
     let presentFullImageSegueIdentifier = "presentFullImageSegueIdentifier"
+    let minimumImageSize: CGFloat = 300
+    let shareViewControllerSegueIdentifier = "goToShareViewController"
 
     // @Injected
     var personalRecordType: PersonalRecordType?
@@ -83,6 +87,11 @@ class PersonalRecordViewController: WODJournalResultViewController {
         removeSegmentedControlIfNeeded()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        titleTextField.resignFirstResponder()
+    }
+    
     // MARK: - Buttons Actions
     
     @IBAction func didTapEditButton(_ sender: Any) {
@@ -92,6 +101,10 @@ class PersonalRecordViewController: WODJournalResultViewController {
     
     @IBAction func didTapTakeAPictureButton(_ sender: Any) {
         endEditing()
+        if controllerMode == .editMode && personalRecord.resultAsString() != nil {
+            shareContent()
+            return
+        }
         presentAlertControllerForTakingPicture()
     }
     
@@ -122,6 +135,7 @@ class PersonalRecordViewController: WODJournalResultViewController {
     }
     
     func didTapEditPRButton(_ sender: Any) {
+        controllerMode = .updateMode
         UIView.animate(withDuration: 0.3, animations: {
             self.setupForEditMode()
         }) { (_) in
@@ -206,7 +220,7 @@ class PersonalRecordViewController: WODJournalResultViewController {
             case .success():
                 self.personalRecord.updateValues(from: self.personalRecordCopy)
                 self.updatePersonalRecordDelegate?.didUpdate(personalRecord: self.personalRecord)
-                _ = self.navigationController?.popViewController(animated: true)
+                self.handleShare()
             case .failure(_):
                 self.handleError(result: result)
             }
@@ -225,7 +239,7 @@ class PersonalRecordViewController: WODJournalResultViewController {
                                                 self.personalRecordCopy.id = id
                                                 self.personalRecord.updateValues(from: self.personalRecordCopy)
                                                 self.updatePersonalRecordDelegate?.didAdd(personalRecord: self.personalRecord)
-                                                _ = self.navigationController?.popViewController(animated: true)
+                                                self.handleShare()
                                             case .failure(_):
                                                 self.handleError(result: result)
                                             }
@@ -240,7 +254,7 @@ class PersonalRecordViewController: WODJournalResultViewController {
                 self.personalRecordCopy.id = id
                 self.personalRecord.updateValues(from: self.personalRecordCopy)
                 self.createRecordDelegate?.didCreatePersonalRecordType(withId: prID, result: self.personalRecord)
-                _ = self.navigationController?.popViewController(animated: true)
+                self.handleShare()
             case .failure(_):
                 self.handleError(result: result)
             }
@@ -276,10 +290,28 @@ class PersonalRecordViewController: WODJournalResultViewController {
                 fullImageViewController.image = userImage
                 fullImageViewController.imageUrl = personalRecord.imageUrl
             }
+        } else if identifier == shareViewControllerSegueIdentifier {
+            if let shareViewController = segue.destination as? ShareImageViewController {
+                shareViewController.image = shareImage!
+                let viewControllersCount = navigationController?.viewControllers.count
+                shareViewController.goBackViewController = navigationController?.viewControllers[viewControllersCount! - 2]
+            }
         }
     }
     
     // MARK: - Helper Methods
+    
+    func handleShare() {
+        let textToShare = "Personal Record for \(personalRecordCopy.name!): \(personalRecord.resultAsString()!)"
+        guard let imageToShare = textToShare.createShareImage() else {
+            _ = navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        shareImage = imageToShare
+        
+        performSegue(withIdentifier: shareViewControllerSegueIdentifier, sender: self)
+    }
     
     func endEditing() {
         view.endEditing(true)
@@ -297,26 +329,16 @@ class PersonalRecordViewController: WODJournalResultViewController {
         setupResultTypeLabel()
     }
     
-    // MARK: - Share Content
+    // MARK: - Share
     
     func shareContent() {
-        if let descriptionImage = imageFromText() {
-            let photo = Photo(image: descriptionImage, userGenerated: false)
-            let content = PhotoShareContent(photos: [photo])
-            _ = try? ShareDialog.show(from: self, content: content)
+        let textToShare = "Personal Record for \(personalRecordType!.name!): \(personalRecord.resultAsString()!)"
+        guard let shareImage = textToShare.createShareImage() else {
+            return
         }
-    }
-    
-    func imageFromText() -> UIImage? {
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: UIColor.black]
-        let string: NSString = "asfasf test test \ntest tes"
-        let size = string.size(attributes: attributes)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        string.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height), withAttributes: attributes)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return image
+
+        let activityViewController = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
+        navigationController?.present(activityViewController, animated: true, completion: nil)
     }
 }
 
@@ -376,7 +398,4 @@ extension PersonalRecordViewController: UITextFieldDelegate {
         
         return true
     }
-}
-
-extension OpenGraphShareContent : ContentProtocol {
 }

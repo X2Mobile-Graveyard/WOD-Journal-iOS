@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JL9-ZY-NLD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13156.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JL9-ZY-NLD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13137.5"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,13 +13,13 @@
         <!--More-->
         <scene sceneID="Ahn-xB-Cf1">
             <objects>
-                <tableViewController id="YrX-CZ-248" customClass="MoreTableViewController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="YrX-CZ-248" customClass="MoreTableViewController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="SMN-8Y-5s3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SimpleTextCell" id="1nR-3t-aQg" customClass="MoreSimpleTextTableViewCell" customModule="Wodjar" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SimpleTextCell" id="1nR-3t-aQg" customClass="MoreSimpleTextTableViewCell" customModule="WodJournal" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1nR-3t-aQg" id="6jp-re-u2c">
@@ -33,6 +34,7 @@
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jl6-uV-chJ" secondAttribute="trailing" constant="20" symbolic="YES" id="4WI-lo-Wa5"/>
                                         <constraint firstItem="jl6-uV-chJ" firstAttribute="centerY" secondItem="6jp-re-u2c" secondAttribute="centerY" id="beY-co-VLf"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="jl6-uV-chJ" secondAttribute="leading" constant="-8" id="fzG-mF-gvG"/>
                                     </constraints>
@@ -41,7 +43,7 @@
                                     <outlet property="simpleTextLabel" destination="jl6-uV-chJ" id="fpq-QP-afs"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UnitSystemCell" rowHeight="64" id="7Hf-fF-06o" customClass="MoreUnitTypeTableViewCell" customModule="Wodjar" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UnitSystemCell" rowHeight="64" id="7Hf-fF-06o" customClass="MoreUnitTypeTableViewCell" customModule="WodJournal" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="99.5" width="375" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Hf-fF-06o" id="YIW-cD-dIb">
@@ -72,6 +74,7 @@
                                         </segmentedControl>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="A90-K4-AnF" secondAttribute="trailing" constant="20" symbolic="YES" id="8gc-8V-Wzp"/>
                                         <constraint firstItem="Ng2-r5-qGF" firstAttribute="centerY" secondItem="YIW-cD-dIb" secondAttribute="centerY" id="A7P-xu-8Dr"/>
                                         <constraint firstItem="A90-K4-AnF" firstAttribute="top" secondItem="YIW-cD-dIb" secondAttribute="topMargin" constant="-5" id="GrJ-Ft-KEW"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Tuf-un-sZX" secondAttribute="trailing" constant="8" id="O7K-NZ-X4I"/>
@@ -85,7 +88,7 @@
                                     <outlet property="segmentControl" destination="Tuf-un-sZX" id="p2w-7t-1tL"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserInfoCell" rowHeight="133" id="aQq-i2-lh6" customClass="MoreUserProfileTableViewCell" customModule="Wodjar" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserInfoCell" rowHeight="133" id="aQq-i2-lh6" customClass="MoreUserProfileTableViewCell" customModule="WodJournal" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="163.5" width="375" height="133"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aQq-i2-lh6" id="EEQ-k6-f2c">
@@ -151,7 +154,7 @@
         <!--Wod Jurnal Navigation Controller-->
         <scene sceneID="Rsj-XM-PTi">
             <objects>
-                <navigationController storyboardIdentifier="MoreNavigationController" id="JL9-ZY-NLD" customClass="WodJurnalNavigationController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MoreNavigationController" id="JL9-ZY-NLD" customClass="WodJurnalNavigationController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="more" id="dO2-bB-eD1"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ghc-Gt-hdD">

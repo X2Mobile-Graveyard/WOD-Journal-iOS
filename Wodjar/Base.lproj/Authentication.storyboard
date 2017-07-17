@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13156.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13137.5"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,7 +14,7 @@
         <!--Login-->
         <scene sceneID="gOa-ca-FGe">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="O8j-vS-Sk7" customClass="LoginViewController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="O8j-vS-Sk7" customClass="LoginViewController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uNc-1L-pbz"/>
                         <viewControllerLayoutGuide type="bottom" id="0ot-Jx-2gL"/>
@@ -47,7 +48,7 @@
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="4fh-AM-qFh"/>
-                                                    <constraint firstAttribute="width" constant="200" id="G0a-Hz-rtq"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="G0a-Hz-rtq"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="Login">
@@ -67,7 +68,7 @@
                                                 <rect key="frame" x="87.5" y="299" width="200" height="44"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="D3L-er-kC3"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="D3L-er-kC3"/>
                                                     <constraint firstAttribute="height" constant="44" id="m2T-2f-jlZ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -85,7 +86,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to login in order to add any records" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1F-cd-fge">
-                                                <rect key="frame" x="46" y="80" width="284.5" height="45"/>
+                                                <rect key="frame" x="61" y="80" width="253" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="RE3-U0-3U7"/>
                                                 </constraints>
@@ -160,7 +161,7 @@
         <!--Register-->
         <scene sceneID="ms4-2z-l9D">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ZuH-1L-Ejc" customClass="RegisterViewController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ZuH-1L-Ejc" customClass="RegisterViewController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bb9-U5-oMp"/>
                         <viewControllerLayoutGuide type="bottom" id="K9E-LA-1zx"/>
@@ -200,7 +201,7 @@
                                                 <rect key="frame" x="87" y="344.5" width="200" height="44"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="SiX-Sy-pUi"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="SiX-Sy-pUi"/>
                                                     <constraint firstAttribute="height" constant="44" id="VpG-sH-yMn"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -297,7 +298,7 @@
         <!--Item 2-->
         <scene sceneID="Pvw-GM-27Q">
             <objects>
-                <navigationController storyboardIdentifier="authenticationScreensId" automaticallyAdjustsScrollViewInsets="NO" id="hTP-MV-Z3k" customClass="WodJurnalNavigationController" customModule="Wodjar" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="authenticationScreensId" automaticallyAdjustsScrollViewInsets="NO" id="hTP-MV-Z3k" customClass="WodJurnalNavigationController" customModule="WodJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item 2" id="g4e-K1-VO5"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WoZ-0o-icG">

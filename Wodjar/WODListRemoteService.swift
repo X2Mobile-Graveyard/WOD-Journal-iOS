@@ -209,7 +209,7 @@ class WODListRemoteServiceImpl: WODListRemoteService {
             
             let workouts = self.createWorkoutArray(from: wods)
             
-            completion?(.success(workouts))
+            completion?(.success(self.orderByDate(wods: workouts)))
         }
         
         request.error = { _, error in
@@ -274,6 +274,12 @@ class WODListRemoteServiceImpl: WODListRemoteService {
     private func orderAlphabetically(wods: [Workout]) -> [Workout] {
         return wods.sorted(by: { (wod1, wod2) -> Bool in
             return (wod1.name?.compare(wod2.name!) == .orderedAscending)
+        })
+    }
+    
+    private func orderByDate(wods: [Workout]) -> [Workout] {
+        return wods.sorted(by: { (wod1, wod2) -> Bool in
+            return wod1.date!.compare(wod2.date!) == .orderedDescending
         })
     }
 }

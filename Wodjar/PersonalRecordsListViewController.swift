@@ -26,7 +26,7 @@ class PersonalRecordsListViewController: UIViewController {
     // @IBOutlest
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var searchBarContainer: UIView!
-    
+    @IBOutlet weak var searchBarContainerHeightConstraint: NSLayoutConstraint!
     // @Properties
     var filteredRecordTypes = [PersonalRecordType]()
     var selectedRecordType: PersonalRecordType?
@@ -36,6 +36,7 @@ class PersonalRecordsListViewController: UIViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
+        self.searchBarContainerHeightConstraint.constant = searchController.searchBar.frame.size.height
         searchController.searchBar.sizeToFit()
         self.searchBarContainer.addSubview(searchController.searchBar)
         
@@ -108,21 +109,9 @@ class PersonalRecordsListViewController: UIViewController {
     // MARK: - Service Calls
     
     func delete(recordType: PersonalRecordType) {
-        MBProgressHUD.showAdded(to: view, animated: true)
-        service.deletePersonalRecord(with: recordType.id) { (result) in
-            MBProgressHUD.hide(for: self.view, animated: true)
-            switch (result) {
-            case .success():
-                self.recordTypes.remove(object: recordType)
-                if self.resultSearchController.isActive {
-                    self.filteredRecordTypes.remove(object: recordType)
-                }
-                self.tableView.reloadData()
-            case .failure(_):
-                self.tableView.reloadData()
-                self.handleError(result: result)
-                
-            }
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        service.deletePersonalRecord(with: recordType.id) { (_) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
     }
     
@@ -229,23 +218,28 @@ extension PersonalRecordsListViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if UserManager.sharedInstance.isAuthenticated() {
+            return true
+        }
+        return false
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if !UserManager.sharedInstance.isAuthenticated() {
-            return
+        if editingStyle == .delete {
+            var selectedRecord: PersonalRecordType
+            if self.resultSearchController.isActive {
+                selectedRecord = self.filteredRecordTypes[indexPath.row]
+            } else {
+                selectedRecord = self.recordTypes[indexPath.row]
+            }
+            self.recordTypes.remove(object: selectedRecord)
+            if self.resultSearchController.isActive {
+                self.filteredRecordTypes.remove(object: selectedRecord)
+            }
+            self.tableView.deleteRows(at: [indexPath], with: .left)
+            self.delete(recordType: selectedRecord)
         }
-        
-        if editingStyle != .delete {
-            return
-        }
-        
-        var recordType: PersonalRecordType
-        if resultSearchController.isActive {
-            recordType = filteredRecordTypes[indexPath.row]
-        } else {
-            recordType = recordTypes[indexPath.row]
-        }
-        
-        delete(recordType: recordType)
     }
 }
 

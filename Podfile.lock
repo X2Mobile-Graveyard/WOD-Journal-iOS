@@ -23,9 +23,9 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Crashlytics (3.8.4):
+  - Crashlytics (3.8.5):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.11)
+  - Fabric (1.6.12)
   - FacebookCore (0.2.0):
     - Bolts (~> 1.8)
     - FBSDKCoreKit (~> 4.15)
@@ -39,15 +39,15 @@ PODS:
     - FacebookCore (~> 0.2)
     - FBSDKCoreKit (~> 4.15)
     - FBSDKShareKit (~> 4.15)
-  - FBSDKCoreKit (4.23.0):
+  - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.23.0):
+  - FBSDKLoginKit (4.24.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.23.0):
+  - FBSDKShareKit (4.24.0):
     - FBSDKCoreKit
   - MBProgressHUD (1.0.0)
   - Result (3.2.3)
-  - RSKImageCropper (1.6.2)
+  - RSKImageCropper (1.6.3)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -78,23 +78,23 @@ SPEC CHECKSUMS:
   AWSCore: cf101c44d2cc5da32abc27d5529cddc63c010415
   AWSS3: addf558f9cf2368e7fb520440867fea5596db0fb
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
-  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  Crashlytics: dfbae35ef22ca189240d230ad501feea4ee85d2d
+  Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FacebookShare: 8e9ee8ea06505e6a1d3d719b0cc63e840fb8aaeb
-  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
-  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
-  FBSDKShareKit: 65751c3b9937ab9d594e6c37611ecc115ceeb448
+  FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
+  FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
+  FBSDKShareKit: a2ed9d7781a4eda9ac20d7404305e795b10251ac
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
-  RSKImageCropper: 3e579d0000945a8be1c0efdad728fd9e25c2fd79
+  RSKImageCropper: 356e36fc58c57c371b5d8b23d603936d6a73df6c
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SwiftyStoreKit: 91c41fb7c09b2937078936054db7b4eb908ed02a
   TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
   UIImageViewAlignedSwift: e72ef2a85a75a01d19b4509ac92a3bdb872cd73c
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
-PODFILE CHECKSUM: d5488e7316a9219078d4077a285083035eee422e
+PODFILE CHECKSUM: be82cffc91e97c57957c28bcee802e3e61525f3b
 
 COCOAPODS: 1.2.0

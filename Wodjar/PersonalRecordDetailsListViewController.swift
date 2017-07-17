@@ -210,19 +210,10 @@ class PersonalRecordDetailsListViewController: UIViewController {
         }
     }
     
-    func deletePersonalRecordResult(at index: Int) {
-        let personalRecordToDelete = personalRecordType.records[index]
-        MBProgressHUD.showAdded(to: view, animated: true)
-        service.deletePersonalRecordResult(with: personalRecordToDelete.id!) { (result) in
-            switch result {
-            case .success():
-                self.personalRecordType.records.remove(at: index)
-                self.personalRecordType.updateBestRecord()
-                self.tableView.reloadData()
-            case .failure(_):
-                self.handleError(result: result)
-            }
-            MBProgressHUD.hide(for: self.view, animated: true)
+    func deletePersonal(recordResult: PersonalRecord) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        service.deletePersonalRecordResult(with: recordResult.id!) { (result) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
     }
     
@@ -273,9 +264,14 @@ extension PersonalRecordDetailsListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            deletePersonalRecordResult(at: indexPath.row)
+        if editingStyle != .delete {
+            return
         }
+        let personalRecordToDelete = personalRecordType.records[indexPath.row]
+        personalRecordType.records.remove(at: indexPath.row)
+        personalRecordType.updateBestRecord()
+        deletePersonal(recordResult: personalRecordToDelete)
+        tableView.deleteRows(at: [indexPath], with: .left)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

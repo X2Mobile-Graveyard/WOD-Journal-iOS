@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7FD49A15BC28BECD1A659CB4410EED59"
-               BuildableName = "Pods_WodjarTests.framework"
-               BlueprintName = "Pods-WodjarTests"
+               BlueprintIdentifier = "2AD069F02728D84BC1B30EA5BB384F0C"
+               BuildableName = "Pods_WodJournalUITests.framework"
+               BlueprintName = "Pods-WodJournalUITests"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7FD49A15BC28BECD1A659CB4410EED59"
-            BuildableName = "Pods_WodjarTests.framework"
-            BlueprintName = "Pods-WodjarTests"
+            BlueprintIdentifier = "2AD069F02728D84BC1B30EA5BB384F0C"
+            BuildableName = "Pods_WodJournalUITests.framework"
+            BlueprintName = "Pods-WodJournalUITests"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
