@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MoreUserProfileTableViewCell: UITableViewCell {
 
@@ -32,6 +33,7 @@ class MoreUserProfileTableViewCell: UITableViewCell {
         if UserManager.sharedInstance.imageUrl == nil {
             userImageView.image = #imageLiteral(resourceName: "add-user")
         } else {
+            SDImageCache.shared().removeImage(forKey: UserManager.sharedInstance.imageUrl!, withCompletion: nil)
             userImageView.sd_setImage(with: URL(string: UserManager.sharedInstance.imageUrl!),
                                       placeholderImage: #imageLiteral(resourceName: "placeholder_image_rounded"))
         }

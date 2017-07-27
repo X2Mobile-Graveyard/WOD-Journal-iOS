@@ -167,6 +167,7 @@ class CustomWODDetailsViewController: WODDetailsTableViewController {
     
     func removeImage() {
         wod.imageUrl = nil
+        removeImageFromCache(localOnly: true)
         _cellTypesInOrder = nil
         tableView.reloadData()
     }

@@ -37,6 +37,7 @@ class CreateCustomWODViewController: WODJournalResultViewController {
     let presentFullImageSegueIdentifier = "GoToFullImageViewController"
     let footerHeight: CGFloat = 29
     let shareImageSegueIdentifier = "shareImageSegueIdentifier"
+    let createResultSegueIdentifier = "CreateResultSegueIdentifier"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,12 +50,19 @@ class CreateCustomWODViewController: WODJournalResultViewController {
         dateTextField.becomeFirstResponder()
     }
     
-    @IBAction func didTapDeleteButton(_ sender: Any) {
-        view.endEditing(true)
-        showDeleteAlert(with: "Warning",
-                        message: "This action cannot be undone.",
-                        actionButtonTitle: "Delete") { (alert) in
-                            _ = self.navigationController?.popViewController(animated: true)
+    @IBAction func didTapLogResultButton(_ sender: Any) {
+        customWod.wodDescription = descriptionTextView.text
+        MBProgressHUD.showAdded(to: view, animated: true)
+        service.create(customWod: customWod, imagePath: pickedImagePath) { (result) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            switch result {
+            case let .success(wodId):
+                self.customWod.id = wodId
+                self.delegate?.didCreate(customWod: self.customWod)
+                self.performSegue(withIdentifier: self.createResultSegueIdentifier, sender: self)
+            case .failure(_):
+                self.handleError(result: result)
+            }
         }
     }
     
@@ -125,32 +133,32 @@ class CreateCustomWODViewController: WODJournalResultViewController {
             return
         }
         
-        if identifier == presentFullImageSegueIdentifier {
+        switch identifier {
+        case presentFullImageSegueIdentifier:
             guard let image = userImage else {
                 return
             }
             
             let fullImageViewController = segue.destination as! FullSizeImageViewController
             fullImageViewController.image = image
-        } else if identifier == shareImageSegueIdentifier {
+        case shareImageSegueIdentifier:
             let lastViewIndex = navigationController?.viewControllers.count
             if let shareViewController = segue.destination as? ShareImageViewController {
                 shareViewController.image = shareImage!
                 shareViewController.goBackViewController = navigationController?.viewControllers[lastViewIndex! - 2]
             }
+        case createResultSegueIdentifier:
+            if let newResultViewController = segue.destination as? WODResultViewController {
+                newResultViewController.service = WODResultService(remote: WODResultRemoteServiceImpl(), s3Remote: S3RemoteService())
+                let newResult = WODResult()
+                newResult.resultType = customWod.category!
+                newResultViewController.result = newResult
+                newResultViewController.controllerMode = .createMode
+                newResultViewController.wod = customWod
+            }
+        default:
+            break
         }
-    }
-    
-    // MARK: - UI Overrides
-    
-    override func removeUserImage() {
-        footerViewHeightConstraint.constant = footerHeight
-        super.removeUserImage()
-    }
-    
-    override func setUserImage() {
-        footerViewHeightConstraint.constant = 0.1
-        super.setUserImage()
     }
     
     // MARK: - Share

@@ -99,7 +99,11 @@ extension WODResultViewController {
             return
         }
         
-        descriptionTextView.text = wod.wodDescription!
+        if wod.unit == .imperial {
+            descriptionTextView.text = wod.wodDescription!
+        } else {
+            descriptionTextView.text = wod.metricDescription ?? wod.wodDescription
+        }
     }
     
     func changeUIForEditMode() {

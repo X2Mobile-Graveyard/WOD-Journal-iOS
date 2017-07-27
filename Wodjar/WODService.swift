@@ -19,6 +19,8 @@ struct WODService {
             if let key = wodCopy.imageUrl?.components(separatedBy: "/").last {
                 if imageUrl.isLocalFileUrl() {
                     SDImageCache.shared().deleteOldFiles(completionBlock: nil)
+                    let url = URL(fileURLWithPath: imageUrl)
+                    SDImageCache.shared().removeImage(forKey:url.absoluteString, withCompletion: nil)
                     s3Remote.uploadImage(with: URL(fileURLWithPath: imageUrl), key: key, completion: { (result) in
                         switch result {
                         case let .success(s3Path):
@@ -28,13 +30,14 @@ struct WODService {
                         }
                         self.remote.update(wod: wod, with: completion)
                     })
-                    
                     return
                 }
             } else {
                 s3Remote.uploadImage(with: URL(fileURLWithPath: imageUrl), key: nil, completion: { (result) in
                     switch result {
                     case let .success(s3Path):
+                        let url = URL(fileURLWithPath: imageUrl)
+                        SDImageCache.shared().removeImage(forKey:url.absoluteString, withCompletion: nil)
                         wod.imageUrl = s3Path
                     case .failure(_):
                         break
@@ -42,7 +45,6 @@ struct WODService {
                     self.remote.update(wod: wod, with: completion)
                 })
             }
-            self.remote.update(wod: wod, with: completion)
             return
         }
         

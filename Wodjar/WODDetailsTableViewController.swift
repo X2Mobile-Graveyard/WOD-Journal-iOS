@@ -121,18 +121,13 @@ class WODDetailsTableViewController: UITableViewController {
     @IBAction func didTapLogResultButton(_ sender: Any) {
         if !UserManager.sharedInstance.isAuthenticated() {
             presentLoginScreen(with: { 
-                self.returnToFirstScreen()
+                self.resetViewControllers()
             })
-            
             return
         }
-        
         performSegue(withIdentifier: logResultSegueIdentifier, sender: self)
     }
     
-    @IBAction func didTapShare(_ sender: Any) {
-        shareContent()
-    }
     // MARK: - Table View Delegate
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -152,12 +147,13 @@ class WODDetailsTableViewController: UITableViewController {
             }
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .left)
+            tableView.endUpdates()
+            
             if wod.results?.count == 0 {
                 showPrevResultsLabel = false
                 _cellTypesInOrder = nil
-                tableView.deleteRows(at: [IndexPath(row:indexPath.row - 1, section:indexPath.section)], with: .left)
+                tableView.reloadData()
             }
-            tableView.endUpdates()
         }
     }
     
@@ -272,15 +268,6 @@ class WODDetailsTableViewController: UITableViewController {
         view.endEditing(true)
     }
     
-    func returnToFirstScreen() {
-        for controller in (navigationController?.viewControllers)! {
-            if let typesController = controller as? WODTypesTableViewController {
-                navigationController?.popToViewController(typesController, animated: true)
-                return
-            }
-        }
-    }
-    
     func delete(wodResult: WODResult) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         resultService.delete(wodResult: wodResult, with: { (result) in
@@ -295,7 +282,6 @@ class WODDetailsTableViewController: UITableViewController {
         self._cellTypesInOrder = nil
         if wod.results?.count == 0 {
             wod.isCompleted = false
-            showPrevResultsLabel = false
         }
         
         return deletedResult
@@ -336,16 +322,6 @@ class WODDetailsTableViewController: UITableViewController {
             resultViewController.wodResultDelegate = self
         default:
             break
-        }
-    }
-    
-    // MARK: - Share
-    
-    func shareContent() {
-        if let descriptionImage = textToImage(drawText:"asasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\nasasf\ndfdff\ndfdf\nddfdffdf\ndfdfdf\nsdfsdgsgd\n\(wod.wodDescription!)\n\nResult: 55Kg" as NSString, inImage: #imageLiteral(resourceName: "Blackboard"), atPoint: CGPoint(x: 18, y: 20)) {
-            let photo = Photo(image: descriptionImage, userGenerated: false)
-            let content = PhotoShareContent(photos: [photo])
-            _ = try? ShareDialog.show(from: self, content: content)
         }
     }
     

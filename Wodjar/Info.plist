@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.7</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -49,6 +49,7 @@
 	<string>WODjar</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>fb</string>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>

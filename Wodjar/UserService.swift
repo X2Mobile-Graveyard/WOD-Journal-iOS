@@ -34,6 +34,7 @@ struct UserService {
             
             if let key = UserManager.sharedInstance.imageUrl?.components(separatedBy: "/").last {
                 s3RemoteService.deleteImage(with: key, completion: { (result) in
+                    self.removeImageFromCache(localURL: nil)
                     UserManager.sharedInstance.imageUrl = nil
                     self.remoteService.updateUser(with: name, pictureUrl: "", completion: completion)
                 })
@@ -47,6 +48,7 @@ struct UserService {
                 completion?(.success())
                 return
             }
+            removeImageFromCache(localURL: nil)
             remoteService.updateUser(with: name, pictureUrl: nil, completion: completion)
             return
         }
@@ -54,7 +56,7 @@ struct UserService {
         let url = URL(fileURLWithPath: imageUrl)
         
         if let key = UserManager.sharedInstance.imageUrl?.components(separatedBy: "/").last {
-            SDImageCache.shared().removeImage(forKey: UserManager.sharedInstance.imageUrl!, withCompletion: nil)
+            removeImageFromCache(localURL: url)
             s3RemoteService.uploadImage(with: url, key: key) { (result) in
                 switch result {
                 case let .success(s3Path):
@@ -65,6 +67,7 @@ struct UserService {
                 self.remoteService.updateUser(with: name, pictureUrl: UserManager.sharedInstance.imageUrl, completion: completion)
             }
         } else {
+            removeImageFromCache(localURL: url)
             s3RemoteService.uploadImage(with: url, key: UserManager.sharedInstance.email) { (result) in
                 switch result {
                 case let .success(s3Path):
@@ -74,6 +77,16 @@ struct UserService {
                 }
                 self.remoteService.updateUser(with: name, pictureUrl: UserManager.sharedInstance.imageUrl, completion: completion)
             }
+        }
+    }
+    
+    private func removeImageFromCache(localURL: URL?) {
+        if let userImage = UserManager.sharedInstance.imageUrl {
+            let s3Url = URL(string: userImage)
+            SDImageCache.shared().removeImage(forKey: s3Url!.absoluteString, withCompletion: nil)
+        }
+        if let localURL = localURL {
+            SDImageCache.shared().removeImage(forKey: localURL.absoluteString, withCompletion: nil)
         }
     }
 }

@@ -9,11 +9,13 @@
 import UIKit
 import RSKImageCropper
 import MBProgressHUD
+import SDWebImage
 
 enum MoreTableViewCellType: String {
     case simpleCell = "SimpleTextCell"
     case unitsCell = "UnitSystemCell"
     case userProfileCell = "UserInfoCell"
+    case facebookCell = "FacebookCell"
 }
 
 protocol UpdateUserDelegate {
@@ -47,6 +49,8 @@ class MoreTableViewController: UITableViewController {
         _cellTypesInOrder?.append(.unitsCell)
         cellHeightsInOrder?.append(64)
         _cellTypesInOrder?.append(.simpleCell)
+        cellHeightsInOrder?.append(44)
+        _cellTypesInOrder?.append(.facebookCell)
         cellHeightsInOrder?.append(44)
 
         return _cellTypesInOrder!
@@ -102,19 +106,19 @@ class MoreTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return cellTypesInOrder.count
+        return cellTypesInOrder.count - 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return section == 2 ? 2 : 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellTypesInOrder[indexPath.section].rawValue, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellTypesInOrder[indexPath.section + indexPath.row].rawValue, for: indexPath)
         
         cell.selectionStyle = .none
         
-        switch cellTypesInOrder[indexPath.section] {
+        switch cellTypesInOrder[indexPath.section + indexPath.row] {
         case .simpleCell:
             cell.selectionStyle = .default
             (cell as! MoreSimpleTextTableViewCell).populate(with: indexPath.section == 0 ? "Login" : "Feedback")
@@ -126,6 +130,8 @@ class MoreTableViewController: UITableViewController {
             }
         case .unitsCell:
             (cell as! MoreUnitTypeTableViewCell).populate()
+        case .facebookCell:
+            cell.selectionStyle = .default
         }
         
         return cell
@@ -142,19 +148,23 @@ class MoreTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if cellTypesInOrder[indexPath.section] != .simpleCell {
+        if cellTypesInOrder[indexPath.section + indexPath.row] == .simpleCell {
+            if indexPath.section == 0 {
+                showLogin {
+                    self.didLogin()
+                }
+            } else {
+                sendMail()
+            }
+            
+            tableView.deselectRow(at: indexPath, animated: true)
             return
         }
         
-        if indexPath.section == 0 {
-            showLogin {
-                self.didLogin()
-            }
-        } else {
-            sendMail()
+        if cellTypesInOrder[indexPath.section + indexPath.row] == .facebookCell {
+            openFacebookPage()
+            tableView.deselectRow(at: indexPath, animated: true)
         }
-        
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -193,11 +203,13 @@ class MoreTableViewController: UITableViewController {
         alertController.addAction(cancelAction)
         
         let takePictureAction = UIAlertAction(title: "Take \(anotherString)Photo", style: .default) { (action) in
+            self.removeImageFromCache()
             self.presentImagePickerFor(type: .camera)
         }
         alertController.addAction(takePictureAction)
         
         let chooseFromLibraryAction = UIAlertAction(title: "Choose \(anotherString)Photo", style: .default) { (action) in
+            self.removeImageFromCache()
             self.presentImagePickerFor(type: .photoLibrary)
         }
         alertController.addAction(chooseFromLibraryAction)
@@ -237,15 +249,38 @@ class MoreTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    private func openFacebookPage() {
+        let facebookURL = URL(string: "fb://profile/280828692387242")!
+        if UIApplication.shared.canOpenURL(facebookURL) {
+            UIApplication.shared.openURL(facebookURL)
+        } else {
+            UIApplication.shared.openURL(URL(string: "https://www.facebook.com/WODJournalApp")!)
+        }
+    }
+    
     func setImage(from localPath: String) {
         imageUrl = localPath
         updateUserName(name: nil)
-        
     }
     
     private func removeImage() {
+        removeImageFromCache()
         imageUrl = nil
         updateUserName(name: nil)
+    }
+    
+    private func removeImageFromCache() {
+        guard let imageUrl = imageUrl else {
+            return
+        }
+        
+        if imageUrl.isLocalFileUrl() {
+            let url = URL(fileURLWithPath: imageUrl)
+            SDImageCache.shared().removeImage(forKey: url.absoluteString, withCompletion: nil)
+        } else {
+            let url = URL(string: imageUrl)
+            SDImageCache.shared().removeImage(forKey: url?.absoluteString, withCompletion: nil)
+        }
     }
 }
 

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13156.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JL9-ZY-NLD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JL9-ZY-NLD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13137.5"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -132,6 +131,30 @@
                                 <connections>
                                     <outlet property="userImageView" destination="SLu-O6-dzZ" id="WFn-Qt-G8C"/>
                                     <outlet property="userNameTextField" destination="WcC-Lh-5ag" id="eRh-4m-e1M"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FacebookCell" id="3Od-XE-cNx" customClass="MoreSimpleTextTableViewCell" customModule="WodJournal" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="296.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Od-XE-cNx" id="Uhn-wM-tQK">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find us on Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTe-LK-gBE">
+                                            <rect key="frame" x="16" y="11" width="158" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="yTe-LK-gBE" firstAttribute="centerY" secondItem="Uhn-wM-tQK" secondAttribute="centerY" id="V3O-LG-Bc3"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="yTe-LK-gBE" secondAttribute="leading" constant="-8" id="oRa-8B-7Md"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yTe-LK-gBE" secondAttribute="trailing" constant="20" symbolic="YES" id="tBl-Na-pl1"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="simpleTextLabel" destination="yTe-LK-gBE" id="jVa-Lo-4mL"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

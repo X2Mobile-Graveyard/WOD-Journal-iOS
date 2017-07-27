@@ -46,6 +46,7 @@ class WODResultViewController: WODJournalResultViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        removeCreateWODController()
         initUI()
         createWorkingCopy()
         pickedImagePath = result.photoUrl
@@ -74,6 +75,13 @@ class WODResultViewController: WODJournalResultViewController {
     
     func createWorkingCopy() {
         resultCopy = WODResult(wodResult: result)
+    }
+    
+    func removeCreateWODController() {
+        let lastViewControllerIndex = (navigationController?.viewControllers.count)! - 1
+        if let _ = navigationController?.viewControllers[lastViewControllerIndex - 1] as? CreateCustomWODViewController {
+            navigationController?.viewControllers.remove(at: lastViewControllerIndex - 1)
+        }
     }
     
     // MARK: - Buttons Actions
@@ -202,7 +210,7 @@ class WODResultViewController: WODJournalResultViewController {
             case let .success(id):
                 self.resultCopy.id = id
                 self.result.updateValues(from: self.resultCopy)
-                self.wodResultDelegate?.didCreate(result: self.result)
+                self.addResult()
                 self.handleShare()
             case .failure(_):
                 self.handleError(result: result)
@@ -230,10 +238,17 @@ class WODResultViewController: WODJournalResultViewController {
     func changedUnitType() {
         setupResultTextField()
         setupResultTypeLabel()
+        setupDescription()
     }
     
     func handleShare() {
-        let text = "\(wod.wodDescription!)\n\nResult: \(result.resultAsString()!)"
+        let description: String
+        if wod.unit == .imperial {
+            description = wod.wodDescription!
+        } else {
+            description = wod.metricDescription ?? wod.wodDescription!
+        }
+        let text = "\(description)\n\nResult: \(result.resultAsString()!)"
         guard let imageToShare = text.createShareImage() else {
             _ = navigationController?.popViewController(animated: true)
             return
@@ -241,6 +256,19 @@ class WODResultViewController: WODJournalResultViewController {
         
         shareImage = imageToShare
         performSegue(withIdentifier: shareImageSegueIdentifier, sender: self)
+    }
+    
+    func addResult() {
+        if wodResultDelegate != nil {
+            self.wodResultDelegate?.didCreate(result: self.result)
+            return
+        }
+        
+        if wod.results?.count == 0 {
+            wod.isCompleted = true
+        }
+        wod.initBestRecord(with: result)
+        wod.results?.insert(result, at: 0)
     }
     
     // MARK: - Share

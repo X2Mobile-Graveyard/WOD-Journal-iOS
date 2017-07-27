@@ -40,13 +40,14 @@ extension String {
         var textSize: CGSize
         var textFont: UIFont
         var fontSize: CGFloat = 40
+        let wrappedText = wrapText()
         repeat {
             textFont = UIFont(name: "Chalkduster", size: fontSize)!
             fontSize -= 1
-            textSize = self.size(attributes: [NSFontAttributeName:textFont, NSForegroundColorAttributeName: textColor])
-        }while(backgroundImage.size.width < textSize.width)
+            textSize = wrappedText.size(attributes: [NSFontAttributeName:textFont, NSForegroundColorAttributeName: textColor])
+        }while(backgroundImage.size.width - 40 < textSize.width)
         
-        let imageSize = CGSize(width: backgroundImage.size.width,
+        let imageSize = CGSize(width: backgroundImage.size.width - 40,
                                height: textSize.height + 50 > 300 ? textSize.height + 50 : 300)
         
         UIGraphicsBeginImageContextWithOptions(imageSize, false, 0.0)
@@ -61,11 +62,67 @@ extension String {
         let widthDiff = imageSize.width - textSize.width
         let pointForText = CGPoint(x: widthDiff / 2, y: heightDiff / 2)
         let rect = CGRect(origin: pointForText, size: textSize)
-        self.draw(in: rect, withAttributes: textFontAttributes)
+        wrappedText.draw(in: rect, withAttributes: textFontAttributes)
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         return newImage
+    }
+    
+    func wrapText(for width: Int = 50) -> String {
+        if self.characters.count <= width {
+            return self
+        }
+        
+        let scanner = Scanner(string: self)
+        var sentence: NSString?
+        var processedText = ""
+        
+        while scanner.scanUpToCharacters(from: .newlines, into: &sentence) {
+            guard let trimmedSentence = sentence?.trimmingCharacters(in: .whitespaces) else {
+                continue
+            }
+            
+            if trimmedSentence.characters.count <= width {
+                processedText.append(trimmedSentence + "\n")
+                if scanner.scanLocation < self.characters.count - 1 {
+                    let index = self.index(self.startIndex, offsetBy: scanner.scanLocation + 1)
+                    if self[index] == "\n" {
+                        processedText.append("\n")
+                    }
+                }
+                continue
+            }
+            
+            
+            var word: NSString?
+            let sentenceScanner = Scanner(string: trimmedSentence)
+            var lineText = ""
+            while sentenceScanner.scanUpToCharacters(from: .whitespaces, into: &word) {
+                if let word = word as String! {
+                    lineText.append(word)
+                    if lineText.characters.count >= width {
+                        processedText.append(lineText + "\n")
+                        lineText = ""
+                    } else {
+                        lineText.append(" ")
+                    }
+                }
+            }
+            
+            if lineText != "" {
+                processedText.append(lineText + "\n")
+            }
+            
+            if scanner.scanLocation < self.characters.count - 1 {
+                let index = self.index(self.startIndex, offsetBy: scanner.scanLocation + 1)
+                if self[index] == "\n" {
+                    processedText.append("\n")
+                }
+            }
+        }
+        
+        return processedText
     }
 }

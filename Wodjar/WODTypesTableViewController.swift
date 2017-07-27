@@ -123,7 +123,7 @@ class WODTypesTableViewController: UITableViewController {
             if !UserManager.sharedInstance.isAuthenticated() {
                 tableView.deselectRow(at: indexPath, animated: true)
                 presentLoginScreen(with: {
-                    self.getWods()
+                    self.resetViewControllers()
                 })
                 return
             }
@@ -211,6 +211,11 @@ class WODTypesTableViewController: UITableViewController {
     
     func didLogin() {
         getWods()
+        girls = nil
+        heroes = nil
+        opens = nil
+        customs = nil
+        challenges = nil
     }
 }
 

@@ -102,7 +102,7 @@ class PersonalRecordsListViewController: UIViewController {
         }
         
         presentLoginScreen {
-            self.getPersonalRecordTypes()
+            self.resetViewControllers()
         }
     }
     
@@ -170,7 +170,7 @@ class PersonalRecordsListViewController: UIViewController {
         }
         
         presentLoginScreen { 
-            self.getPersonalRecordTypes()
+            self.resetViewControllers()
         }
     }
     

@@ -22,7 +22,11 @@ class FullSizeImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if imageUrl != nil {
-            imageView.sd_setImage(with: URL(string: imageUrl!))
+            if imageUrl!.isLocalFileUrl() {
+                imageView.sd_setImage(with: URL(fileURLWithPath: imageUrl!))
+            } else {
+                imageView.sd_setImage(with: URL(string: imageUrl!))
+            }
         } else {
             imageView.image = image
         }
